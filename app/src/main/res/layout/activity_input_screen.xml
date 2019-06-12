@@ -30,12 +30,12 @@
             <Button
                 android:id="@+id/user_log_in"
                 android:layout_width="240dp"
-                android:layout_height="45dp"
+                android:layout_height="55dp"
                 android:text="Log In"
                 android:textSize="20sp"
 
                 android:textAlignment="center"
-                android:textColor="#FAF7F7"
+                android:textColor="#0E0D0D"
                 android:background="@drawable/rounded_shape"
              android:layout_margin="15dp"
 
@@ -45,11 +45,11 @@
 
                 android:id="@+id/sign_up"
                 android:layout_width="240dp"
-                android:layout_height="45dp"
+                android:layout_height="55dp"
                 android:text="Sign Up"
                 android:textSize="20sp"
                 android:layout_margin="15dp"
-                android:textColor="#FAF7F7"
+                android:textColor="#1A0F0F"
             android:background="@drawable/rounded_shape"
                 android:textAlignment="center" />
 
