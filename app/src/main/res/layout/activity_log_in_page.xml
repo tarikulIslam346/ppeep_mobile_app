@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEB3B"
+    android:background="#FECE00"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="20dp">
@@ -14,7 +14,12 @@
         android:layout_height="140dp"
         android:src="@drawable/iconppeep2"
         android:layout_marginBottom="80dp"/>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical"
+        android:gravity="center">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,44 +35,8 @@ android:paddingBottom="20dp"
         android:textColorHint="#0A0A0A"
         android:textColorHighlight="#090202"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
 
-        android:paddingTop="10dp"
-        android:paddingBottom="20dp"
-        android:background="@drawable/button_shadow"
-        android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
-        android:drawablePadding="10dp"
-        android:hint="Password"
-        android:textColor="#111010"
-        android:textColorHint="#0A0909"
-        android:textColorHighlight="#090808"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:gravity="right">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Forget Password"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="0dp"
-            android:textColor="#090000"
-            android:textSize="15sp"
-            android:drawableLeft="@drawable/ic_lock_open_black_24dp"
-            android:drawablePadding="6dp"
-            android:padding="4dp"/>
-
-
-    </RelativeLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/user_log_in"
