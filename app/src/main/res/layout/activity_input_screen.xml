@@ -35,7 +35,9 @@
                 android:textSize="20sp"
 
                 android:textAlignment="center"
+
                 android:textColor="#0E0D0D"
+
                 android:background="@drawable/rounded_shape"
              android:layout_margin="15dp"
 
@@ -49,7 +51,9 @@
                 android:text="Sign Up"
                 android:textSize="20sp"
                 android:layout_margin="15dp"
+
                 android:textColor="#1A0F0F"
+
             android:background="@drawable/rounded_shape"
                 android:textAlignment="center" />
 
