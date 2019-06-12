@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SignUpPage"></activity>
-        <activity android:name=".LogInPage" />
+        <activity android:name="com.example.ppeepfinal.LogInPage" />
         <activity android:name=".InputScreen" />
         <activity android:name=".MainActivity">
             <intent-filter>
