@@ -45,7 +45,7 @@
 
             <Button
 
-                android:id="@+id/sign_up"
+                android:id="@+id/user_sign_up"
                 android:layout_width="240dp"
                 android:layout_height="55dp"
                 android:text="Sign Up"
