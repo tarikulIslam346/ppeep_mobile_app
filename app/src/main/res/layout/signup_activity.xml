@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFEB3B"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp">
+
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/iconppeep2" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:background="@drawable/button_shadow"
+        android:drawableLeft="@drawable/ic_contact_phone_black_24dp"
+        android:drawablePadding="10dp"
+        android:hint="Phone Number"
+        android:textColor="#0E0D0D"
+        android:textColorHint="#0A0A0A"
+        android:textColorHighlight="#090202"/>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:gravity="center">
+
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Agree to Our Terms &amp; Conditions"
+            android:id="@+id/checkbox"
+            android:layout_margin="15dp" />
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/user_log_in"
+        android:layout_width="240dp"
+        android:layout_height="75dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/rounded_shape"
+
+        android:text="Sign Up"
+        android:textAlignment="center"
+        android:textColor="#090808"
+        android:textSize="25sp"
+
+        />
+
+    <TextView
+        android:text="Have an Account? Sign In Here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:id="@+id/textView"
+        android:gravity="center"
+        android:textColor="#352B2B"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+
+
+
+</LinearLayout>
