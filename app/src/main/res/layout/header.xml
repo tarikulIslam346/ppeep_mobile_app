@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:orientation="vertical"
+    android:background="#4D8A50"
+     android:padding="20dp"
+
+    >
+
+
+    <ImageView
+        android:src="@drawable/ppeeplogo3"
+        android:layout_width="110dp"
+        android:layout_height="80dp"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nayeem Hasnat"
+        android:textSize="20sp"
+        android:textColor="#031722"
+        android:textStyle="bold"
+        android:paddingTop="8dp"
+
+        />
+
+
+
+</LinearLayout>

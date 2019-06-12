@@ -10,9 +10,9 @@
     android:padding="20dp">
 
     <ImageView
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:src="@drawable/iconppeep2"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:src="@drawable/ppeeplogo3"
         android:layout_marginBottom="80dp"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@ android:paddingBottom="20dp"
     </LinearLayout>
 
     <Button
-        android:id="@+id/user_log_in"
+        android:id="@+id/log_in_confirm"
         android:layout_width="240dp"
         android:layout_height="75dp"
         android:layout_margin="15dp"

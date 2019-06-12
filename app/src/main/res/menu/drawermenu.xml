@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    
+
+        <item
+            android:id="@+id/profile"
+            android:title="Profile"
+            android:icon="@drawable/ic_account_circle_black_24dp" />
+        <item
+            android:id="@+id/history"
+            android:title="History"
+            android:icon="@drawable/ic_history_black_24dp"/>
+        <item
+            android:id="@+id/settings"
+            android:title="Settings"
+            android:icon="@drawable/ic_settings_black_24dp" />
+        <item
+            android:id="@+id/help"
+            android:title="Help"
+            android:icon="@drawable/ic_help_black_24dp"/>
+        <item
+            android:id="@+id/language"
+            android:title="Language"
+            android:icon="@drawable/ic_language_black_24dp"/>
+        <item
+            android:id="@+id/policies"
+            android:title="Policies"
+            android:icon="@drawable/ic_description_black_24dp"/>
+        <item
+            android:id="@+id/logout"
+            android:title="Log Out"
+            android:icon="@drawable/ic_input_black_24dp"/>
+
+
+
+
+</menu>

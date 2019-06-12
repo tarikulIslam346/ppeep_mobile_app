@@ -10,10 +10,10 @@
     android:padding="20dp">
 
     <ImageView
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/iconppeep2" />
+        android:src="@drawable/ppeeplogo3" />
 
     <EditText
         android:layout_width="match_parent"
