@@ -13,7 +13,7 @@
         android:layout_width="220dp"
         android:layout_height="220dp"
         android:src="@drawable/ppeeplogo3"
-        android:layout_marginBottom="80dp"/>
+        android:layout_marginBottom="60dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,10 +41,9 @@ android:paddingBottom="20dp"
     <Button
         android:id="@+id/log_in_confirm"
         android:layout_width="240dp"
-        android:layout_height="75dp"
+        android:layout_height="65dp"
         android:layout_margin="15dp"
         android:background="@drawable/rounded_shape"
-
         android:text="Log In"
         android:textAlignment="center"
         android:textColor="#090808"
@@ -52,17 +51,36 @@ android:paddingBottom="20dp"
 
         />
 
-    <TextView
-        android:text="No Account? Create One"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
-        android:id="@+id/textView"
-        android:textColor="#352B2B"
-        android:textSize="20dp"
-        android:textStyle="bold"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:text="No Account?"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerHorizontal="true"
+            android:paddingRight="10dp"
+            android:gravity="center"
+            android:textColor="#352B2B"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:text="@string/sign_up_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/create_one_button"
+            android:textColor="#352B2B"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
 
 
 

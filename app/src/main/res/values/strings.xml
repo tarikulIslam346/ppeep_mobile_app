@@ -3,4 +3,7 @@
     <string name="nav_close">Close</string>
     <string name="pPeep">P-PEEP</string>
     <string name="app_name">PpeepAPP</string>
+
+    <string name="log_in_text"><u>Log In Here</u></string>
+    <string name="sign_up_text"><u>Create One</u></string>
 </resources>

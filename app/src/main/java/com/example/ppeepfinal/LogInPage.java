@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class LogInPage extends AppCompatActivity {
 Button LoginConfirm;
+TextView CreateOneButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,10 +20,24 @@ Button LoginConfirm;
         LoginConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginIntent = new Intent(LogInPage.this,HomePage.class);
+                Intent loginIntent = new Intent(LogInPage.this,OTPpage.class);
                 startActivity(loginIntent);
             }
         });
+
+
+
+     CreateOneButton=(TextView) findViewById(R.id.create_one_button);
+
+
+        CreateOneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createoneIntent = new Intent(LogInPage.this,SignUpPage.class);
+                startActivity(createoneIntent);
+            }
+        });
+
 
     }
 }
