@@ -13,17 +13,30 @@
 
         android:id="@+id/layout_header"
         android:layout_width="match_parent"
-        android:layout_height="44sp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
   >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="44sp"
             android:gravity="center"
-            android:text="Enter One Time Password"
-            android:textColor="#0E0C0C"
+            android:text="Verification Code"
             android:textStyle="bold"
+            android:textColor="#0E0C0C"
+
             android:textSize="30sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="Please Enter The Verification Code "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="Sent To +8801844462227"/>
 
     </LinearLayout>
     <LinearLayout
@@ -82,19 +95,7 @@
             android:layout_height="42sp"
             android:inputType="numberPassword"
             android:maxLength="1"/>
-        <EditText
-            android:id="@+id/editTextseven"
-            android:layout_width="40sp"
-            android:layout_height="42sp"
-            android:inputType="numberPassword"
-            android:maxLength="1"/>
 
-        <EditText
-            android:id="@+id/editTexteight"
-            android:layout_width="40sp"
-            android:layout_height="42sp"
-            android:inputType="numberPassword"
-            android:maxLength="1"/>
 
     </LinearLayout>
 

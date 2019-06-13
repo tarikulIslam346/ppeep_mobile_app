@@ -27,6 +27,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.nav_open, R.string.nav_close);
 
         mDrawerLayout.addDrawerListener(mToggle);
+
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

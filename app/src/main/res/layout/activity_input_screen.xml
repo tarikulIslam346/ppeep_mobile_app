@@ -1,65 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FECE00"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/ppeeplogo3" />
+
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FECE00"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:background="@drawable/button_shadow"
+        android:drawableLeft="@drawable/ic_contact_phone_black_24dp"
+        android:drawablePadding="10dp"
+        android:hint="Phone Number"
+        android:textColor="#0E0D0D"
+        android:textColorHint="#1A1313"
+        android:textColorHighlight="#4B4747"/>
+
+
+<!--
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:gravity="center"
-        android:orientation="vertical"
-        tools:context=".InputScreen">
-
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            app:srcCompat="@drawable/ppeeplogo3" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        android:paddingTop="20dp">
+        <CheckBox
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:elevation="15dp"
-            android:layout_gravity="center_horizontal">
-
-
-            <Button
-                android:id="@+id/user_log_in"
-                android:layout_width="240dp"
-                android:layout_height="55dp"
-                android:text="Log In"
-                android:textSize="20sp"
-
-                android:textAlignment="center"
-
-                android:textColor="#0E0D0D"
-
-                android:background="@drawable/rounded_shape"
-             android:layout_margin="15dp"
-
-                />
-
-            <Button
-
-                android:id="@+id/user_sign_up"
-                android:layout_width="240dp"
-                android:layout_height="55dp"
-                android:text="Sign Up"
-                android:textSize="20sp"
-                android:layout_margin="15dp"
-
-                android:textColor="#1A0F0F"
-
-            android:background="@drawable/rounded_shape"
-                android:textAlignment="center" />
-
+            android:text="Agree to Our "
+            android:textSize="20sp"
+            android:id="@+id/checkbox2"
             />
 
-
-        </LinearLayout>
+        <TextView
+            android:text="@string/termsCondition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TermsConditionId"
+            android:textColor="#352B2B"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
+
+-->
+
+
+    <Button
+        android:id="@+id/enterletGo"
+        android:layout_width="240dp"
+        android:layout_height="65dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/rounded_shape"
+
+        android:text="Next"
+        android:textAlignment="center"
+        android:textColor="#090808"
+        android:textSize="25sp"
+
+        />
+
+
+
+
+</LinearLayout>

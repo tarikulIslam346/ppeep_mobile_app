@@ -5,10 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button loginButton, SignUpButton;
+    Button LetsGoEnter, SignUpButton;
+    TextView TermsConditions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,24 +18,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_input_screen);
 
 
-        loginButton = (Button) findViewById(R.id.user_log_in);
+        LetsGoEnter = (Button) findViewById(R.id.enterletGo);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        LetsGoEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginIntent = new Intent(MainActivity.this,LogInPage.class);
-                startActivity(loginIntent);
+                Intent letsGoIntent = new Intent(MainActivity.this,OTPpage.class);
+                startActivity(letsGoIntent);
             }
         });
+/*
 
-        SignUpButton = (Button) findViewById(R.id.user_sign_up);
+        TermsConditions = (TextView) findViewById(R.id.TermsConditionId);
 
-        SignUpButton.setOnClickListener(new View.OnClickListener() {
+        TermsConditions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signupIntent = new Intent(MainActivity.this,SignUpPage.class);
-                startActivity(signupIntent);
+                Intent termsConditionsIntent = new Intent(MainActivity.this,TermsConditions.class);
+                startActivity(termsConditionsIntent);
             }
         });
+*/
     }
 }

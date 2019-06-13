@@ -19,7 +19,7 @@ Button SubmitButton;
         SubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent submitIntent = new Intent(OTPpage.this,HomePage.class);
+                Intent submitIntent = new Intent(OTPpage.this,VerificationComplete.class);
                 startActivity(submitIntent);
             }
         });

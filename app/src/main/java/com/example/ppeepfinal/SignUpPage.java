@@ -16,7 +16,7 @@ Button SignUpReg;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_activity);
 
-LogInHere = (TextView) findViewById(R.id.logInHere);
+//LogInHere = (TextView) findViewById(R.id.logInHere);
 
 
 

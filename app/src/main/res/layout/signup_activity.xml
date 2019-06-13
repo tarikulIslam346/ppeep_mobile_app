@@ -32,23 +32,32 @@
 
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:gravity="center">
-
-
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="20dp">
         <CheckBox
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Agree to Our "
             android:textSize="20sp"
-            android:text="Agree to Our Terms &amp; Conditions"
-            android:id="@+id/checkbox"
-            android:layout_margin="15dp" />
+            android:id="@+id/checkbox2"
+            />
+
+        <TextView
+            android:text="@string/termsCondition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TermsConditionId"
+            android:textColor="#352B2B"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
 
 
-    </RelativeLayout>
 
     <Button
         android:id="@+id/sign_up_reg"
@@ -63,34 +72,6 @@
         android:textSize="25sp"
 
         />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center"
-    android:paddingTop="20dp">
-
-    <TextView
-        android:text="Have an Account?"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_centerHorizontal="true"
-   android:paddingRight="10dp"
-        android:gravity="center"
-        android:textColor="#352B2B"
-        android:textSize="20dp"
-        android:textStyle="bold"/>
-    <TextView
-      android:text="@string/log_in_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/logInHere"
-        android:textColor="#352B2B"
-        android:textSize="20dp"
-        android:textStyle="bold"/>
-
-</LinearLayout>
 
 
 
