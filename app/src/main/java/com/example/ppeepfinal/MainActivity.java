@@ -14,6 +14,7 @@ import com.facebook.accountkit.Account;
 import com.facebook.accountkit.AccountKit;
 import com.facebook.accountkit.AccountKitCallback;
 import com.facebook.accountkit.AccountKitError;
+
 import com.facebook.accountkit.AccountKitLoginResult;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                             phoneLogin(v);
 
 
@@ -45,27 +47,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(letsGoIntent);*/
             }
 
-
-
-
-
         });
 
-/*
-
-        TermsConditions = (TextView) findViewById(R.id.TermsConditionId);
-
-        TermsConditions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent termsConditionsIntent = new Intent(MainActivity.this,TermsConditions.class);
-                startActivity(termsConditionsIntent);
-            }
-        });
-*/
 
     }
-    public void  phoneLogin(final View view) {
+
+    public void phoneLogin(View view) {
         final Intent intent = new Intent(MainActivity.this, AccountKitActivity.class);
         AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder =
                 new AccountKitConfiguration.AccountKitConfigurationBuilder(
@@ -76,25 +63,40 @@ public class MainActivity extends AppCompatActivity {
                 AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION,
                 configurationBuilder.build());
         startActivityForResult(intent, APP_REQUEST_CODE);
-       AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
-           @Override
-           public void onSuccess(Account account) {
-              /* Intent letsGoIntent = new Intent(getApplicationContext(),HomePage.class);
-               startActivity(letsGoIntent);*/
-           }
-
-           @Override
-           public void onError(AccountKitError accountKitError) {
-
-           }
-       });
-
-
     }
 
 
-   /* public void goToMyLoggedInActivity()
-    {
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-    }*/
+        if (requestCode == APP_REQUEST_CODE) {
+            goToProfileInActivity();
+
+            /*AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
+            String toastMessage;
+            if (loginResult.getError() != null) {
+                toastMessage = loginResult.getError().getErrorType().getMessage();
+               // goToProfileInActivity();
+            } else if (loginResult.wasCancelled()) {
+                toastMessage = "Login Cancelled";
+            } else {
+                toastMessage = "Success:" + loginResult.getAccessToken().getAccountId();
+               // goToProfileInActivity();
+            }
+
+            Toast.makeText(
+                    this,
+                    toastMessage,
+                    Toast.LENGTH_LONG)
+                    .show();*/
+        }
+    }
+
+    public  void goToProfileInActivity(){
+        Intent letsGoIntent = new Intent(MainActivity.this,HomePage.class);
+        startActivity(letsGoIntent);
+    }
+
+
 }
