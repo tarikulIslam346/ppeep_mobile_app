@@ -16,20 +16,7 @@
         android:layout_marginBottom="30dp"
         android:src="@drawable/ppeeplogo3" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
 
-        android:paddingTop="10dp"
-        android:paddingBottom="20dp"
-        android:background="@drawable/button_shadow"
-        android:drawableLeft="@drawable/ic_contact_phone_black_24dp"
-        android:drawablePadding="10dp"
-        android:hint="Phone Number"
-        android:textColor="#0E0D0D"
-        android:textColorHint="#1A1313"
-        android:textColorHighlight="#4B4747"/>
 
 
 <!--
@@ -64,15 +51,16 @@
 
     <Button
         android:id="@+id/enterletGo"
-        android:layout_width="240dp"
+        android:layout_width="wrap_content"
         android:layout_height="65dp"
-        android:layout_margin="15dp"
+        android:layout_margin="10dp"
+
         android:background="@drawable/rounded_shape"
 
-        android:text="Next"
+        android:text="Connect with phone number"
         android:textAlignment="center"
-        android:textColor="#090808"
-        android:textSize="25sp"
+        android:textColor="#3F3B2B"
+        android:textSize="20sp"
 
         />
 
