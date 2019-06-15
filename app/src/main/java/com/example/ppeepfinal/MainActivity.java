@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public  void goToProfileInActivity(){
-        Intent letsGoIntent = new Intent(MainActivity.this,HomePage.class);
+        Intent letsGoIntent = new Intent(MainActivity.this,InputDetails.class);
         startActivity(letsGoIntent);
     }
 

@@ -48,7 +48,7 @@ android:layout_margin="50dp"
 
 </LinearLayout>
     <Button
-        android:id="@+id/provider_log_in"
+        android:id="@+id/input_details"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
