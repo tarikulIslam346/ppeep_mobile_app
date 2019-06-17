@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FECE00"
+    android:background="#FFCC00"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="20dp"
@@ -52,14 +52,14 @@
     <Button
         android:id="@+id/enterletGo"
         android:layout_width="wrap_content"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
 
         android:background="@drawable/rounded_shape"
 
-        android:text="Connect with phone number"
+        android:text="Enter with phone number"
         android:textAlignment="center"
-        android:textColor="#3F3B2B"
+        android:textColor="#070000"
         android:textSize="20sp"
 
         />

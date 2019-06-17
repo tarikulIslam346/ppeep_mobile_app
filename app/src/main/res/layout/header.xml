@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="160dp"
     android:orientation="vertical"
-    android:background="#4D8A50"
-     android:padding="20dp"
+    android:background="#ffcc00"
+    android:padding="20dp"
 
     >
 
 
     <ImageView
-        android:src="@drawable/ppeeplogo3"
-        android:layout_width="110dp"
+        android:src="@drawable/iconppeep2"
+        android:layout_width="wrap_content"
         android:layout_height="80dp"
 
         />
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="Nayeem Hasnat"
         android:textSize="20sp"
-        android:textColor="#031722"
+        android:textColor="#090C0E"
         android:textStyle="bold"
         android:paddingTop="8dp"
 

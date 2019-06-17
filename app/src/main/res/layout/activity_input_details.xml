@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FECE00"
+    android:background="#FFCC00"
 android:gravity="center"
     android:orientation="vertical"
     tools:context=".SignUpPage">
@@ -33,7 +33,7 @@ android:layout_margin="50dp"
     android:text="Enter Your Name"
     android:textSize="30sp"
     android:textStyle="bold"
-    android:textColor="#090808"
+    android:textColor="#0C0C0C"
     android:layout_marginBottom="10dp"
   />
 
@@ -42,7 +42,8 @@ android:layout_margin="50dp"
         android:layout_height="60dp"
 
         android:hint="Full Name"
-
+android:textCursorDrawable="@drawable/color_cursor"
+        android:backgroundTint="#030303"
         android:inputType="text"
         android:textSize="20sp" />
 
@@ -56,7 +57,7 @@ android:layout_margin="50dp"
 
         android:text="finish"
         android:textAlignment="center"
-        android:textColor="#BB0D0D"
+        android:textColor="#0F0F0F"
         android:textSize="25sp"
 
         />
