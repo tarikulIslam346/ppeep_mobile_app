@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InputDetails"></activity>
+        <activity android:name=".WebViewClass"></activity>
+        <activity android:name=".InputDetails" />
         <activity android:name=".VerificationComplete" />
         <activity android:name=".TermsConditions" />
         <activity android:name=".OTPpage" />
@@ -34,7 +35,7 @@
         <activity
             android:name=".HomePage"
             android:label="@string/pPeep"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+            android:theme="@style/AppTheme2" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

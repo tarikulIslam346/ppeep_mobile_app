@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:background="@color/backgroundfragment">
+<!--
+        <! 1st line
+
+        <at.markushi.ui.CircleButton
+            android:layout_width="75dip"
+            android:layout_height="75dip"
+            app:cb_color="#3F51B5"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="15dp"
+            app:cb_pressedRingWidth="8dip" />
+
+
+
+        <at.markushi.ui.CircleButton
+            android:layout_width="75dip"
+            android:layout_height="75dip"
+            app:cb_color="#673AB7"
+            android:layout_marginLeft="108dp"
+            android:layout_marginTop="15dp"
+            app:cb_pressedRingWidth="8dip" />
+        <at.markushi.ui.CircleButton
+            android:layout_width="75dip"
+            android:layout_height="75dip"
+            app:cb_color="#FF5722"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="205dp"
+            app:cb_pressedRingWidth="8dip" />
+
+        <at.markushi.ui.CircleButton
+            android:layout_width="75dip"
+            android:layout_height="75dip"
+            app:cb_color="#065009"
+            android:layout_alignParentRight="true"
+            android:layout_margin="15dp"
+            app:cb_pressedRingWidth="8dip" />
+
+        2nd line
+        <at.markushi.ui.CircleButton
+            android:layout_width="85dip"
+            android:layout_height="85dip"
+            app:cb_color="#3F51B5"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="100dp"
+            app:cb_pressedRingWidth="8dip" />
+
+
+
+        <at.markushi.ui.CircleButton
+            android:layout_width="85dip"
+            android:layout_height="85dip"
+            app:cb_color="#673AB7"
+            android:layout_marginLeft="108dp"
+            android:layout_marginTop="100dp"
+            app:cb_pressedRingWidth="8dip" />
+
+
+        <at.markushi.ui.CircleButton
+            android:layout_width="85dip"
+            android:layout_height="85dip"
+            app:cb_color="#FF5722"
+            android:layout_marginLeft="205dp"
+            android:layout_marginTop="100dp"
+            app:cb_pressedRingWidth="8dip" />
+
+        <at.markushi.ui.CircleButton
+            android:layout_width="85dip"
+            android:layout_height="85dip"
+            app:cb_color="#065009"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="100dp"
+            app:cb_pressedRingWidth="8dip" />
+
+        3rd line
+        <at.markushi.ui.CircleButton
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            app:cb_color="#3F51B5"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            app:cb_pressedRingWidth="8dip" />
+
+
+
+        <at.markushi.ui.CircleButton
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            app:cb_color="#673AB7"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="108dp"
+            app:cb_pressedRingWidth="8dip" />
+
+        <at.markushi.ui.CircleButton
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            app:cb_color="#FF5722"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="205dp"
+            android:layout_marginBottom="15dp"
+            app:cb_pressedRingWidth="8dip" />
+
+        <at.markushi.ui.CircleButton
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            app:cb_color="#065009"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="10dp"
+            app:cb_pressedRingWidth="8dip" />
+
+-->
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/facebook_button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:layout_marginLeft="-30dp"
+            app:sparkbutton_activeImage="@drawable/foodexpress_icon"
+            app:sparkbutton_iconSize="60dp"
+
+            app:sparkbutton_primaryColor="@color/logo_secondary_color"
+            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/facebook_button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+
+            android:layout_marginLeft="65dp"
+            app:sparkbutton_activeImage="@drawable/icon_daraz"
+            app:sparkbutton_iconSize="60dp"
+
+            app:sparkbutton_primaryColor="@color/logo_secondary_color"
+            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/facebook_button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+
+            android:layout_marginLeft="170dp"
+            app:sparkbutton_activeImage="@drawable/icon_robishop"
+            app:sparkbutton_iconSize="60dp"
+
+            app:sparkbutton_primaryColor="@color/logo_secondary_color"
+            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/facebook_button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+
+            android:layout_marginLeft="280dp"
+            app:sparkbutton_activeImage="@drawable/icon_baagdoom"
+            app:sparkbutton_iconSize="60dp"
+
+            app:sparkbutton_primaryColor="@color/logo_secondary_color"
+            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+
+
+        <!-- 2nd row
+
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/facebook_button21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+android:layout_marginBottom="80dp"
+android:layout_alignParentBottom="true"
+            android:layout_marginLeft="-30dp"
+            app:sparkbutton_activeImage="@drawable/icon_ajkerdeal"
+            app:sparkbutton_iconSize="60dp"
+
+            app:sparkbutton_primaryColor="@color/logo_secondary_color"
+            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/facebook_button22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="65dp"
+            app:sparkbutton_activeImage="@drawable/icon_pickaboo"
+            app:sparkbutton_iconSize="60dp"
+
+            app:sparkbutton_primaryColor="@color/logo_secondary_color"
+            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/facebook_button23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="170dp"
+            app:sparkbutton_activeImage="@drawable/icon_baagdoom"
+            app:sparkbutton_iconSize="60dp"
+
+            app:sparkbutton_primaryColor="@color/logo_secondary_color"
+            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/facebook_button24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="300dp"
+            app:sparkbutton_activeImage="@drawable/icon_robishop"
+            app:sparkbutton_iconSize="60dp"
+
+            app:sparkbutton_primaryColor="@color/logo_secondary_color"
+            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+
+
+
+
+
+
+down row -->
+
+
+    <com.smarteist.autoimageslider.SliderLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/imageSlider"/>
+
+
+
+
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/facebook_button31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+
+            android:layout_marginLeft="-30dp"
+            app:sparkbutton_activeImage="@drawable/icon_robishop"
+            app:sparkbutton_iconSize="60dp"
+
+            app:sparkbutton_primaryColor="@color/logo_secondary_color"
+            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/facebook_button32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="65dp"
+            app:sparkbutton_activeImage="@drawable/icon_pickaboo"
+            app:sparkbutton_iconSize="60dp"
+
+            app:sparkbutton_primaryColor="@color/logo_secondary_color"
+            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/facebook_button33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="170dp"
+            app:sparkbutton_activeImage="@drawable/icon_baagdoom"
+            app:sparkbutton_iconSize="60dp"
+
+            app:sparkbutton_primaryColor="@color/logo_secondary_color"
+            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/facebook_button34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+android:contextClickable="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="280dp"
+            app:sparkbutton_activeImage="@drawable/icon_daraz"
+            app:sparkbutton_iconSize="60dp"
+
+            app:sparkbutton_primaryColor="@color/logo_secondary_color"
+            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+    </RelativeLayout>
+
+

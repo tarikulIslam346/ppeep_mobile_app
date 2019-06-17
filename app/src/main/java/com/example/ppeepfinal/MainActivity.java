@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,12 +27,6 @@ import com.facebook.accountkit.ui.LoginType;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     Handler mHandler;
     public static int APP_REQUEST_CODE = 99;
     String accountKitId, phoneNumberString;
+    ProgressBar pageSwitchProgress;
 
 
     @Override
@@ -51,17 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         LetsGoEnter = (Button) findViewById(R.id.enterletGo);
+        pageSwitchProgress = (ProgressBar) findViewById(R.id.page_switch_progressbar) ;
 
         LetsGoEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                             phoneLogin(v);
-
-
-              /* Intent letsGoIntent = new Intent(MainActivity.this,HomePage.class);
-                startActivity(letsGoIntent);*/
             }
 
         });
@@ -74,8 +65,9 @@ public class MainActivity extends AppCompatActivity {
         AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder =
                 new AccountKitConfiguration.AccountKitConfigurationBuilder(
                         LoginType.PHONE,
-                        AccountKitActivity.ResponseType.TOKEN); // or .ResponseType.TOKEN
-        // ... perform additional configuration ...
+                        AccountKitActivity.ResponseType.TOKEN);
+                        // or .ResponseType.CODE
+                        // ... perform additional configuration ...
         intent.putExtra(
                 AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION,
                 configurationBuilder.build());
@@ -94,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
             String toastMessage;
             if (loginResult.getError() != null) {
                 toastMessage = loginResult.getError().getErrorType().getMessage();
-               // showErrorActivity(loginResult.getError());
             } else if (loginResult.wasCancelled()) {
                 toastMessage = "Login Cancelled";
             } else {
@@ -106,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                             loginResult.getAuthorizationCode().substring(0,10));
                 }
                 goToProfileInActivity();
+                
             }
 
             Toast.makeText(
@@ -118,9 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public  void goToProfileInActivity(){
-        //phoneNumberString = "01796248710";
 
-        //userCheckRetrofit2Api(phoneNumberString);
 
        AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
             @Override
@@ -133,14 +123,11 @@ public class MainActivity extends AppCompatActivity {
                 if (phoneNumber != null) {
                     phoneNumberString = phoneNumber.toString();
                     URL githubSearchUrl = NetworkUtils.buildUrl();
-                    //Toast.makeText(MainActivity.this,phoneNumberString,Toast.LENGTH_SHORT).show();
-
                    // userCheckRetrofit2Api(phoneNumberString);
+                    LetsGoEnter.setVisibility(View.INVISIBLE);
+                    pageSwitchProgress.setVisibility(View.VISIBLE);
                     new GithubQueryTask().execute(githubSearchUrl);
                 }
-
-                // Get email
-                //String email = account.getEmail();
             }
 
             @Override
@@ -148,20 +135,18 @@ public class MainActivity extends AppCompatActivity {
                 // Handle Error
             }
         });
-        //Intent inputDetailsIntent = new Intent(MainActivity.this,InputDetails.class);
-        //inputDetailsIntent.putExtra("phone",)
 
-        //startActivity(inputDetailsIntent);*/
-    }
-
-    public void userCheckRetrofit2Api(String Phone) {
 
     }
+
+    //public void userCheckRetrofit2Api(String Phone) {
+
+    //}
 
     // COMPLETED (1) Create a class called GithubQueryTask that extends AsyncTask<URL, Void, String>
     public class GithubQueryTask extends AsyncTask<URL, Void, String> {
 
-        // COMPLETED (2) Override the doInBackground method to perform the query. Return the results. (Hint: You've already written the code to perform the query)
+
         @Override
         protected String doInBackground(URL... params) {
             URL searchUrl = params[0];
@@ -171,26 +156,23 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return githubSearchResults;
-        }
 
-        // COMPLETED (3) Override onPostExecute to display the results in the TextView
+            return githubSearchResults ;
+        }
         @Override
         protected void onPostExecute(String githubSearchResults) {
+           // LetsGoEnter.setVisibility(View.INVISIBLE);
+           // pageSwitchProgress.setVisibility(View.VISIBLE);
+            Intent HomepageStart = new Intent(MainActivity.this, HomePage.class);
+             Intent InputPageStart = new Intent(getBaseContext(),InputDetails.class);
             if (githubSearchResults != null && !githubSearchResults.equals("")) {
-                //mSearchResultsTextView.setText(githubSearchResults);
-                //String toastMessage = "Login Cancelled";
-                // Toast.makeText(MainActivity.this,githubSearchResults.toString(),Toast.LENGTH_SHORT).show();
-                // if(githubSearchResults.toString() == {"message":"Number exist"})
-                Intent HomepageStart = new Intent(MainActivity.this, HomePage.class);
-                //inputDetailsIntent.putExtra("phone",)
 
+                pageSwitchProgress.setVisibility(View.INVISIBLE);
                 startActivity(HomepageStart);
 
 
             }else{
-                Intent InputPageStart = new Intent(MainActivity.this, InputDetails.class);
-                //inputDetailsIntent.putExtra("phone",)
+                pageSwitchProgress.setVisibility(View.INVISIBLE);
 
                 startActivity(InputPageStart);
 
