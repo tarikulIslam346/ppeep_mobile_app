@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
             URL searchUrl = params[0];
             String githubSearchResults = null;
             try {
-                githubSearchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
+                githubSearchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl,phoneNumberString);
             } catch (IOException e) {
                 e.printStackTrace();
             }

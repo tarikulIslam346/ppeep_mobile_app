@@ -21,7 +21,7 @@ import java.util.Scanner;
 
 public class NetworkUtils {
     final static String GITHUB_BASE_URL =
-            "http://192.168.0.108/api/api/user/register";
+            "http://192.168.0.109/api/api/user/register";
 
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
@@ -49,13 +49,13 @@ public class NetworkUtils {
      * @return The contents of the HTTP response.
      * @throws IOException Related to network and stream reading
      */
-    public static String getResponseFromHttpUrl(URL url) throws IOException {
+    public static String getResponseFromHttpUrl(URL url,String phone) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("POST");
 
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("phone", "01796248701"));
+        params.add(new BasicNameValuePair("phone", phone));
        // params.add(new BasicNameValuePair("password", "123456"));
 
 
