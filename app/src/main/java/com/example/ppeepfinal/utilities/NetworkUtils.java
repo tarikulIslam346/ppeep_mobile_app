@@ -1,10 +1,6 @@
 package com.example.ppeepfinal.utilities;
 
 import android.net.Uri;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,12 +11,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class NetworkUtils {
-    final static String GITHUB_BASE_URL =
+    final static String REGISTER_BASE_URL =
             "http://192.168.0.109/api/api/user/register";
 
     // final static String PARAM_QUERY = "q";
@@ -28,8 +25,8 @@ public class NetworkUtils {
     final static String sortBy = "stars";*/
 
 
-    public static URL buildUrl() {
-        Uri builtUri = Uri.parse(GITHUB_BASE_URL).buildUpon()
+    public static URL buildRegisterUrl() {
+        Uri builtUri = Uri.parse(REGISTER_BASE_URL).buildUpon()
                 .build();
 
         URL url = null;
@@ -49,20 +46,18 @@ public class NetworkUtils {
      * @return The contents of the HTTP response.
      * @throws IOException Related to network and stream reading
      */
-    public static String getResponseFromHttpUrl(URL url,String phone) throws IOException {
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.setRequestMethod("POST");
+    public static String getResponseFromHttpUrl(URL url, String phone) throws IOException {
 
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
 
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("phone", phone));
-       // params.add(new BasicNameValuePair("password", "123456"));
-
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "phone", phone);
 
         OutputStream os = urlConnection.getOutputStream();
         BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(os, "UTF-8"));
-        writer.write(getQuery(params));
+        writer.write(getPostDataString(param));
         writer.flush();
         writer.close();
         os.close();
@@ -72,7 +67,6 @@ public class NetworkUtils {
 
         try {
             InputStream in = urlConnection.getInputStream();
-
             Scanner scanner = new Scanner(in);
             scanner.useDelimiter("\\A");
 
@@ -86,21 +80,21 @@ public class NetworkUtils {
             urlConnection.disconnect();
         }
     }
-    private static String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException
-    {
+
+
+
+    private static String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;
-
-        for (NameValuePair pair : params)
-        {
+        for (Map.Entry<String, String> entry : params.entrySet()) {
             if (first)
                 first = false;
             else
                 result.append("&");
 
-            result.append(URLEncoder.encode(pair.getName(), "UTF-8"));
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
             result.append("=");
-            result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
+            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
         }
 
         return result.toString();

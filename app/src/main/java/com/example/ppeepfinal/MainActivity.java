@@ -122,11 +122,10 @@ public class MainActivity extends AppCompatActivity {
                 PhoneNumber phoneNumber = account.getPhoneNumber();
                 if (phoneNumber != null) {
                     phoneNumberString = phoneNumber.toString();
-                    URL githubSearchUrl = NetworkUtils.buildUrl();
-                   // userCheckRetrofit2Api(phoneNumberString);
+                    URL userExistCheckUrl = NetworkUtils.buildRegisterUrl();
                     LetsGoEnter.setVisibility(View.INVISIBLE);
                     pageSwitchProgress.setVisibility(View.VISIBLE);
-                    new GithubQueryTask().execute(githubSearchUrl);
+                    new PhoneCheckTask().execute(userExistCheckUrl);
                 }
             }
 
@@ -144,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
     //}
 
     // COMPLETED (1) Create a class called GithubQueryTask that extends AsyncTask<URL, Void, String>
-    public class GithubQueryTask extends AsyncTask<URL, Void, String> {
+    public class PhoneCheckTask extends AsyncTask<URL, Void, String> {
 
 
         @Override
