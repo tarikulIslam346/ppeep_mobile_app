@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.smarteist.autoimageslider.SliderLayout;
 
@@ -23,9 +24,10 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
-    Context context;
+    //Context context;
     private Button mPeep;
-    SliderLayout sliderLayout;
+   // SliderLayout sliderLayout;
+   // TextView profileName ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //get profile text_view
+        //View headerView = HomePage.f(R.layout.hea);
+       // profileName = (TextView) findViewById(R.id.profile_name);
+       //profileName.setText(" OK");
 
 
 

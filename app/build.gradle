@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.example.ppeepfinal"
         minSdkVersion 21
@@ -41,7 +40,7 @@ dependencies {
     implementation 'com.facebook.android:account-kit-sdk:5.+' //facebook account kit sdk
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'//retrofit api communication
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
-    implementation 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+    //implementation 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     implementation 'com.google.code.gson:gson:2.8.5'//gson for retrofit
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

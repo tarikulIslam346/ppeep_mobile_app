@@ -7,19 +7,27 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class FragmentMyProfile extends Fragment {
 
 
     View v;
+    TextView myProfileName;
 
     public FragmentMyProfile() {
+        //myProfileName = (TextView)
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //inflater.inflate()
+        //myProfileName = (TextView) findViewById()
       v=inflater.inflate(R.layout.myprofile_fragment,container,false);
+      myProfileName = v.findViewById(R.id.profile_name);
+      myProfileName.setText("myName");
+
         return v;
     }
 }

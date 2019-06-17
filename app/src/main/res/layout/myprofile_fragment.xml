@@ -35,6 +35,7 @@
     android:layout_marginLeft="80dp"
     android:paddingTop="60px">
             <TextView
+                android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
