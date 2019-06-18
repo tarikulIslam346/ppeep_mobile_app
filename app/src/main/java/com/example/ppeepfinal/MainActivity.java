@@ -12,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ppeepfinal.data.UserDatabase;
+import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.facebook.accountkit.AccessToken;
 import com.facebook.accountkit.Account;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     public static int APP_REQUEST_CODE = 99;
     String accountKitId, phoneNumberString;
     ProgressBar pageSwitchProgress;
+    private UserDatabase mdb;
+
 
 
     @Override
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_input_screen);
 
        // service = APIClient.createService(ApiService.class);
+        mdb = UserDatabase.getInstance(getApplicationContext());
 
 
         LetsGoEnter = (Button) findViewById(R.id.enterletGo);
@@ -123,7 +128,9 @@ public class MainActivity extends AppCompatActivity {
                 PhoneNumber phoneNumber = account.getPhoneNumber();
                 if (phoneNumber != null) {
                     phoneNumberString = phoneNumber.toString();
-                    URL userExistCheckUrl = NetworkUtils.buildRegisterUrl();
+                    //NetworkUtils nt = new NetworkUtils();
+                   // nt.setPhoneNo(phoneNumberString);
+                    URL userExistCheckUrl = NetworkUtils.buildPhoneCheckUrl();
                     LetsGoEnter.setVisibility(View.INVISIBLE);
                     pageSwitchProgress.setVisibility(View.VISIBLE);
                     new PhoneCheckTask().execute(userExistCheckUrl);
@@ -139,43 +146,40 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //public void userCheckRetrofit2Api(String Phone) {
 
-    //}
-
-    // COMPLETED (1) Create a class called GithubQueryTask that extends AsyncTask<URL, Void, String>
+    //  Create a class called PhoneCheckTask that extends AsyncTask<URL, Void, String>
     public class PhoneCheckTask extends AsyncTask<URL, Void, String> {
 
 
         @Override
         protected String doInBackground(URL... params) {
             URL searchUrl = params[0];
-            String githubSearchResults = null;
+            String phonecheckResults = null;
             try {
-                githubSearchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl,phoneNumberString);
+                phonecheckResults = NetworkUtils.getResponseFromHttpUrl(searchUrl,phoneNumberString);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            return githubSearchResults ;
+            return phonecheckResults ;
         }
+
         @Override
-        protected void onPostExecute(String githubSearchResults) {
-           // LetsGoEnter.setVisibility(View.INVISIBLE);
-           // pageSwitchProgress.setVisibility(View.VISIBLE);
+        protected void onPostExecute(String phonecheckResults) {
             Intent HomepageStart = new Intent(MainActivity.this, HomePage.class);
-             Intent InputPageStart = new Intent(getBaseContext(),InputDetails.class);
-            if (githubSearchResults != null && !githubSearchResults.equals("")) {
+             Intent InputPageStart = new Intent(MainActivity.this,InputDetails.class);
+            if (phonecheckResults != null && !phonecheckResults.equals("")) {
 
+                    pageSwitchProgress.setVisibility(View.INVISIBLE);
+                    UserModel userModel = new UserModel(phoneNumberString.toString(), phonecheckResults);
+                    mdb.userDAO().insertPhone(userModel);
+                    finish();
+                    startActivity(HomepageStart);
+
+
+            }else {
                 pageSwitchProgress.setVisibility(View.INVISIBLE);
-                startActivity(HomepageStart);
-
-
-            }else{
-                pageSwitchProgress.setVisibility(View.INVISIBLE);
-
+                InputPageStart.putExtra("phone",phoneNumberString.toString());
                 startActivity(InputPageStart);
-
             }
         }
     }
