@@ -50,11 +50,13 @@ foodExpressButton= v.findViewById(R.id.foodexpress_id);
         foodExpressButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse("http://google.com/");
+            //    Uri uri = Uri.parse("http://foodexpress.com.bd/");
 
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-                startActivity(intent);
+                Intent intentFoodExpress = new Intent(getApplicationContext(),FoodApp.class);
+                startActivity(intentFoodExpress);
+
+
+
             }
         });
 /*
@@ -84,7 +86,7 @@ foodExpressButton= v.findViewById(R.id.foodexpress_id);
 
 
 
-        //daraz listener
+      /*  //daraz listener
         darazButton.setEventListener(new SparkEventListener() {
             @Override
             public void onEvent(ImageView button, boolean buttonState) {
@@ -170,8 +172,8 @@ foodExpressButton= v.findViewById(R.id.foodexpress_id);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
 
-             /*   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setPackage("com.pickaboo.app");*/
+             *//*   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setPackage("com.pickaboo.app");*//*
                 startActivity(intent);
             }
 
@@ -259,7 +261,7 @@ foodExpressButton= v.findViewById(R.id.foodexpress_id);
 
 
 
-
+*/
 
 
 
