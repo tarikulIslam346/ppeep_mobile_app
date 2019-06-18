@@ -19,13 +19,15 @@ import com.smarteist.autoimageslider.SliderView;
 import com.varunest.sparkbutton.SparkButton;
 import com.varunest.sparkbutton.SparkEventListener;
 
+import at.markushi.ui.CircleButton;
+
 import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
 
 public class FragmentHome extends Fragment {
     SliderLayout sliderLayout;
     View v;
-    SparkButton pickabooButton,darazButton,robishopButton,bagdoomButton,pickabooButton2,darazButton2,robishopButton2,bagdoomButton2;
-
+    SparkButton darazButton,robishopButton,bagdoomButton,pickabooButton2,darazButton2,robishopButton2,bagdoomButton2;
+CircleButton foodExpressButton;
     public FragmentHome() {
     }
 
@@ -39,18 +41,31 @@ public class FragmentHome extends Fragment {
 
 
 
-pickabooButton= v.findViewById(R.id.facebook_button1);
-        darazButton= v.findViewById(R.id.facebook_button2);
+foodExpressButton= v.findViewById(R.id.foodexpress_id);
+      /*  darazButton= v.findViewById(R.id.facebook_button2);
         robishopButton= v.findViewById(R.id.facebook_button3);
-        bagdoomButton= v.findViewById(R.id.facebook_button4);
+        bagdoomButton= v.findViewById(R.id.facebook_button4);*/
 
 
+        foodExpressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("http://google.com/");
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+                startActivity(intent);
+            }
+        });
+/*
 //pickaboo listener
-       pickabooButton.setEventListener(new SparkEventListener() {
+       foodExpressButton.setEventListener(new SparkEventListener() {
                                      @Override
                                      public void onEvent(ImageView button, boolean buttonState) {
-                                         Intent intent = new Intent(getContext(), WebView.class);
-                                         intent.putExtra("uri", "https://foodexpress.com.bd/");
+                                         Uri uri = Uri.parse("http://google.com/");
+
+                                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                         startActivity(intent);
                                          startActivity(intent);
 
                                      }
@@ -64,7 +79,7 @@ pickabooButton= v.findViewById(R.id.facebook_button1);
            public void onEventAnimationStart(ImageView button, boolean buttonState) {
 
            }
-       });
+       });*/
 
 
 
@@ -141,18 +156,22 @@ pickabooButton= v.findViewById(R.id.facebook_button1);
 
 
 
-        robishopButton2= v.findViewById(R.id.facebook_button31);
-        pickabooButton2= v.findViewById(R.id.facebook_button32);
-        bagdoomButton2= v.findViewById(R.id.facebook_button33);
-        darazButton2= v.findViewById(R.id.facebook_button34);
+        robishopButton2= v.findViewById(R.id.foodexpress_id);
+
 
 //pickaboo listener
-        pickabooButton.setEventListener(new SparkEventListener() {
+        robishopButton2.setEventListener(new SparkEventListener() {
             @Override
             public void onEvent(ImageView button, boolean buttonState) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pickaboo.com/"));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setPackage("com.pickaboo.app");
+                //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pickaboo.com/"));
+
+                Uri uri = Uri.parse("http://google.com/");
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
+             /*   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setPackage("com.pickaboo.app");*/
                 startActivity(intent);
             }
 

@@ -11,8 +11,8 @@
         android:layout_height="match_parent"
 
         android:background="@color/backgroundfragment">
+
 <!--
-        <! 1st line
 
         <at.markushi.ui.CircleButton
             android:layout_width="75dip"
@@ -46,12 +46,15 @@
             android:layout_alignParentRight="true"
             android:layout_margin="15dp"
             app:cb_pressedRingWidth="8dip" />
+-->
 
         2nd line
         <at.markushi.ui.CircleButton
-            android:layout_width="85dip"
-            android:layout_height="85dip"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:id="@+id/foodexpress_id"
             app:cb_color="#3F51B5"
+            android:src="@drawable/foodexpress_icon"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="100dp"
@@ -126,7 +129,8 @@
             android:layout_marginRight="10dp"
             app:cb_pressedRingWidth="8dip" />
 
--->
+<!--
+
         <com.varunest.sparkbutton.SparkButton
             android:id="@+id/facebook_button1"
             android:layout_width="wrap_content"
@@ -181,7 +185,7 @@
 
 
 
-        <!-- 2nd row
+        &lt;!&ndash; 2nd row
 
         <com.varunest.sparkbutton.SparkButton
             android:id="@+id/facebook_button21"
@@ -240,6 +244,7 @@ android:layout_alignParentBottom="true"
 
 
 
+-->
 
 
 down row -->
@@ -252,7 +257,7 @@ down row -->
         android:id="@+id/imageSlider"/>
 
 
-
+<!--
 
         <com.varunest.sparkbutton.SparkButton
             android:id="@+id/facebook_button31"
@@ -304,7 +309,7 @@ android:contextClickable="true"
             app:sparkbutton_iconSize="60dp"
 
             app:sparkbutton_primaryColor="@color/logo_secondary_color"
-            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+            app:sparkbutton_secondaryColor="@color/logo_primary_color" />-->
 
     </RelativeLayout>
 
