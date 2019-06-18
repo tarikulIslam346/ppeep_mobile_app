@@ -38,6 +38,7 @@ android:layout_margin="50dp"
   />
 
     <EditText
+        android:id="@+id/name_input"
         android:layout_width="300dp"
         android:layout_height="60dp"
 

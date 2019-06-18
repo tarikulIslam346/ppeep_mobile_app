@@ -18,24 +18,36 @@ import java.util.Scanner;
 
 public class NetworkUtils {
     final static String REGISTER_BASE_URL =
-            "http://192.168.0.109/api/api/user/register";
+            "http://192.168.0.108/api/api/user/register";
+    final static String PHONE_CHECK_URL =
+            "http://192.168.0.108/api/api/user/checkPhoneNo";
+
 
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
     final static String sortBy = "stars";*/
 
 
-    public static URL buildRegisterUrl() {
-        Uri builtUri = Uri.parse(REGISTER_BASE_URL).buildUpon()
-                .build();
 
+    public static URL buildRegisterUrl() {
+        Uri builtUri = Uri.parse(REGISTER_BASE_URL).buildUpon().build();
+        URL registerurl = null;
+        try {
+            registerurl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return registerurl;
+    }
+
+    public static URL buildPhoneCheckUrl() {
+        Uri builtUri = Uri.parse(PHONE_CHECK_URL).buildUpon().build();
         URL url = null;
         try {
             url = new URL(builtUri.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
         return url;
     }
 
@@ -46,13 +58,55 @@ public class NetworkUtils {
      * @return The contents of the HTTP response.
      * @throws IOException Related to network and stream reading
      */
+
+
     public static String getResponseFromHttpUrl(URL url, String phone) throws IOException {
 
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();//establish connection
         urlConnection.setRequestMethod("POST");//use post method
 
+       // setPhoneNo();
+
         HashMap<String, String> param = new HashMap<String, String>();
         param.put( "phone", phone);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static String postUserNameResponseUrl(URL registerurl, String phone,String name) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) registerurl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+
+        // setPhoneNo();
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "contact", phone);
+        param.put( "first_name",name);
 
         OutputStream os = urlConnection.getOutputStream();
         BufferedWriter writer = new BufferedWriter(
