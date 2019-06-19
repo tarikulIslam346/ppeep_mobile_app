@@ -15,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".FoodApp"></activity>
+        <activity android:name=".TabFragmentOffer"></activity>
+        <activity android:name=".TabFragmentPopular" />
+        <activity android:name=".TabFragmentNearby" />
+        <activity android:name=".TabFragmentRecommended" />
+        <activity android:name=".FoodApp" />
         <activity android:name=".WebViewClass" />
         <activity android:name=".InputDetails" />
         <activity android:name=".VerificationComplete" />

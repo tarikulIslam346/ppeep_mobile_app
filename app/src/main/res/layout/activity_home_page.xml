@@ -41,9 +41,6 @@
             app:tabGravity="fill"
             app:tabIndicatorColor="#F50303"
             android:id="@+id/tabLayoutId"
-
-            android:layout_centerInParent="true"
-
             app:tabIndicatorHeight="0dp"
             app:tabPaddingBottom="-1dp"
             app:tabPaddingEnd="-1dp"

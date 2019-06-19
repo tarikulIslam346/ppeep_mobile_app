@@ -51,7 +51,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_marginBottom="20dp"
+  android:layout_marginBottom="25dp"
     android:layout_marginLeft="10dp"
 
     >
@@ -63,8 +63,7 @@
             android:id="@+id/foodexpress_id"
             app:cb_color="#3F51B5"
             android:src="@drawable/foodexpress_icon"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="40dp"
+           android:layout_margin="15dp"
             app:cb_pressedRingWidth="8dip" />
 
 
@@ -75,8 +74,7 @@
             android:id="@+id/foodexpress_id2"
             app:cb_color="#3F51B5"
             android:src="@drawable/foodexpress_icon"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="40dp"
+            android:layout_margin="15dp"
             app:cb_pressedRingWidth="8dip" />
 
 
@@ -86,8 +84,7 @@
             android:id="@+id/foodexpress_id3"
             app:cb_color="#3F51B5"
             android:src="@drawable/foodexpress_icon"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="40dp"
+            android:layout_margin="15dp"
             app:cb_pressedRingWidth="8dip" />
 
         <at.markushi.ui.CircleButton
@@ -96,8 +93,7 @@
             android:id="@+id/foodexpress_id4"
             app:cb_color="#3F51B5"
             android:src="@drawable/foodexpress_icon"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="40dp"
+            android:layout_margin="15dp"
             app:cb_pressedRingWidth="8dip" />
 </LinearLayout>
 
@@ -299,8 +295,7 @@ android:contextClickable="true"
     android:id="@+id/foodexpress_id21"
     app:cb_color="#3F51B5"
     android:src="@drawable/foodexpress_icon"
-    android:layout_marginLeft="10dp"
-    android:layout_marginBottom="20dp"
+    android:layout_margin="15dp"
     app:cb_pressedRingWidth="8dip" />
 
 
@@ -311,8 +306,7 @@ android:contextClickable="true"
     android:id="@+id/foodexpress_id22"
     app:cb_color="#3F51B5"
     android:src="@drawable/foodexpress_icon"
-    android:layout_marginLeft="10dp"
-    android:layout_marginBottom="20dp"
+    android:layout_margin="15dp"
     app:cb_pressedRingWidth="8dip" />
 
 <at.markushi.ui.CircleButton
@@ -321,8 +315,7 @@ android:contextClickable="true"
     android:id="@+id/foodexpress_id23"
     app:cb_color="#3F51B5"
     android:src="@drawable/foodexpress_icon"
-    android:layout_marginLeft="10dp"
-    android:layout_marginBottom="20dp"
+    android:layout_margin="15dp"
     app:cb_pressedRingWidth="8dip" />
 
 <at.markushi.ui.CircleButton
@@ -331,8 +324,7 @@ android:contextClickable="true"
     android:id="@+id/foodexpress_id24"
     app:cb_color="#3F51B5"
     android:src="@drawable/foodexpress_icon"
-    android:layout_marginLeft="10dp"
-    android:layout_marginBottom="20dp"
+    android:layout_margin="15dp"
     app:cb_pressedRingWidth="8dip" />
 
 </LinearLayout>
