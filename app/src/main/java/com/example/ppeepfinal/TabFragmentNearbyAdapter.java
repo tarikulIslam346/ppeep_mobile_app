@@ -10,12 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNearbyAdapter.RestaurantViewHolder> {
 
     private int mNumberRestaurant;
+    private List<String> mData;
 
-    public TabFragmentNearbyAdapter(int numberOfRestaurant){
-        mNumberRestaurant= numberOfRestaurant;
+    public TabFragmentNearbyAdapter(List<String> RestaurantList){
+       // mNumberRestaurant= numberOfRestaurant;
+        mData = RestaurantList;
     }
 
     @NonNull
@@ -32,12 +36,13 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
 
     @Override
     public void onBindViewHolder(@NonNull RestaurantViewHolder restaurantViewHolder, int position) {
-        restaurantViewHolder.bind(position);
+        String restaurant = mData.get(position);
+        restaurantViewHolder.bind(restaurant);
     }
 
     @Override
     public int getItemCount() {
-        return mNumberRestaurant;
+        return mData.size();
     }
 
 
@@ -48,8 +53,8 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
             restaurantNameTextView = (TextView)itemView.findViewById(R.id.tv_item_number);
 
         }
-        void bind(int listIndex){
-            restaurantNameTextView.setText(String.valueOf(listIndex));
+        void bind(String restaurnatName){
+            restaurantNameTextView.setText(restaurnatName);
         }
 
     }
