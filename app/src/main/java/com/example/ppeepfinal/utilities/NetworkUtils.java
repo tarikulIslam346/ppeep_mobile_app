@@ -18,9 +18,9 @@ import java.util.Scanner;
 
 public class NetworkUtils {
     final static String REGISTER_BASE_URL =
-            "http://192.168.0.108/api/api/user/register";
+            "https://foodexpress.com.bd/ppeep/public/api/api/user/register";
     final static String PHONE_CHECK_URL =
-            "http://192.168.0.108/api/api/user/checkPhoneNo";
+            "https://foodexpress.com.bd/ppeep/public/api/api/user/checkPhoneNo";
 
 
     // final static String PARAM_QUERY = "q";
