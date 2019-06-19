@@ -16,7 +16,7 @@
         android:gravity="center"
         android:theme="@style/AppTheme2"
         android:id="@+id/foodtoolbar"
-        android:background="#ffcc00"
+        android:background="#FAFAF9"
 
         ></android.support.v7.widget.Toolbar>
 
