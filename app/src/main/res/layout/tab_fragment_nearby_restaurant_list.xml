@@ -41,10 +41,10 @@
                     android:layout_alignParentLeft="true"
                     />
                 <TextView
+                    android:id="@+id/tv_cusine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cuisine"
-                    />
+                    android:text="Cuisine" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -56,18 +56,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Opening Time"
-                    />
+                    android:text="Opening Time" />
 
                 <TextView
+                    android:id="@+id/tv_opening_closing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:text="9:00 am - 10:00 pm"/>
             </LinearLayout>
 
         </RelativeLayout>
-        // this is your bottom layout
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

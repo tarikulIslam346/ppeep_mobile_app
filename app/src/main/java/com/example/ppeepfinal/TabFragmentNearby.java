@@ -73,18 +73,33 @@ public class TabFragmentNearby extends Fragment {
         @Override
         protected void onPostExecute(String RestaurantResults) {
             if (RestaurantResults != null && !RestaurantResults.equals("")) {
+
                 List<String> allNames = new ArrayList<String>();
+                List<String> OpeningTimes = new ArrayList<String>();
+                List<String> ClosingTimes = new ArrayList<String>();
+                List<String> Cusines = new ArrayList<String>();
+
                 String json = RestaurantResults;
                 JSONObject restaurantList = null;
                 JSONArray jsonArray=null;
-                String name=null;
+
+                String name,closingTime,openingTime,cusine;
+
+
                 try {
                     restaurantList = new JSONObject(json);
                     jsonArray = restaurantList.getJSONArray("restaurnat_list");
                     for (int i=0; i<jsonArray.length(); i++) {
-                        JSONObject actor = jsonArray.getJSONObject(i);
-                        name = actor.getString("restaurant_name");
+                        JSONObject restaurant = jsonArray.getJSONObject(i);
+                        name = restaurant.getString("restaurant_name");
+                        openingTime = restaurant.getString("opening");
+                        closingTime = restaurant.getString("closing");
+                        cusine = restaurant.getString("cuisine");
+
                         allNames.add(name);
+                        OpeningTimes.add(openingTime);
+                        ClosingTimes.add(closingTime);
+                        Cusines.add(cusine);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -94,7 +109,7 @@ public class TabFragmentNearby extends Fragment {
 
                 mNumberOfRestaurant.setHasFixedSize(true);
 
-                tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames);
+                tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines);
                 mNumberOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
               //  mSearchResultsTextView.setText(allNames.get(8));
 

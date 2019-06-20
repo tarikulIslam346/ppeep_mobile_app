@@ -16,10 +16,22 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
 
     private int mNumberRestaurant;
     private List<String> mData;
+    private List<String> mOpeningTime;
+    private List<String> mClosingTime;
+    private List<String> mCusine;
 
-    public TabFragmentNearbyAdapter(List<String> RestaurantList){
+
+    public TabFragmentNearbyAdapter(
+            List<String> RestaurantList,
+            List<String> OpeningTime,
+            List<String> ClosingingTime,
+            List<String> Cusine
+    ){
        // mNumberRestaurant= numberOfRestaurant;
         mData = RestaurantList;
+        mOpeningTime = OpeningTime;
+        mClosingTime = ClosingingTime;
+        mCusine = Cusine;
     }
 
     @NonNull
@@ -37,7 +49,11 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
     @Override
     public void onBindViewHolder(@NonNull RestaurantViewHolder restaurantViewHolder, int position) {
         String restaurant = mData.get(position);
-        restaurantViewHolder.bind(restaurant);
+        String opening = mOpeningTime.get(position);
+        String closing = mClosingTime.get(position);
+        String cusine = mCusine.get(position);
+
+        restaurantViewHolder.bind(restaurant,opening,closing,cusine);
     }
 
     @Override
@@ -48,13 +64,19 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
 
     class RestaurantViewHolder extends  RecyclerView.ViewHolder{
         TextView restaurantNameTextView;
+        TextView openingClosingTextView;
+        TextView cusineTextview;
         public RestaurantViewHolder(View itemView){
             super(itemView);
             restaurantNameTextView = (TextView)itemView.findViewById(R.id.tv_item_number);
+            openingClosingTextView = (TextView) itemView.findViewById(R.id.tv_opening_closing);
+            cusineTextview = (TextView) itemView.findViewById(R.id.tv_cusine);
 
         }
-        void bind(String restaurnatName){
+        void bind(String restaurnatName,String openTime,String closing, String cusine){
             restaurantNameTextView.setText(restaurnatName);
+            openingClosingTextView.setText(openTime + " - "+closing);
+            cusineTextview.setText(cusine);
         }
 
     }
