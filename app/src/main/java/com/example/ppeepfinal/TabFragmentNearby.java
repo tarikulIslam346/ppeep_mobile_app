@@ -73,18 +73,25 @@ public class TabFragmentNearby extends Fragment {
         @Override
         protected void onPostExecute(String RestaurantResults) {
             if (RestaurantResults != null && !RestaurantResults.equals("")) {
+
                 List<String> allNames = new ArrayList<String>();
+                List<String> OpeningTimes = new ArrayList<String>();
+
                 String json = RestaurantResults;
                 JSONObject restaurantList = null;
                 JSONArray jsonArray=null;
                 String name=null;
+                String openingTime;
+
                 try {
                     restaurantList = new JSONObject(json);
                     jsonArray = restaurantList.getJSONArray("restaurnat_list");
                     for (int i=0; i<jsonArray.length(); i++) {
-                        JSONObject actor = jsonArray.getJSONObject(i);
-                        name = actor.getString("restaurant_name");
+                        JSONObject restaurant = jsonArray.getJSONObject(i);
+                        name = restaurant.getString("restaurant_name");
+                        openingTime = restaurant.getString("opening");
                         allNames.add(name);
+                        OpeningTimes.add(openingTime);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

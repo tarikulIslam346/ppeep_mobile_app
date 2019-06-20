@@ -16,10 +16,12 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
 
     private int mNumberRestaurant;
     private List<String> mData;
+    private List<String> mOpeningTime;
 
-    public TabFragmentNearbyAdapter(List<String> RestaurantList){
+    public TabFragmentNearbyAdapter(List<String> RestaurantList,List<String> OpeningTime){
        // mNumberRestaurant= numberOfRestaurant;
         mData = RestaurantList;
+        mOpeningTime = OpeningTime;
     }
 
     @NonNull
