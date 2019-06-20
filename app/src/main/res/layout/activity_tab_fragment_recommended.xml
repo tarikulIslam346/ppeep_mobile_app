@@ -16,12 +16,10 @@
 
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="160dp"
         android:layout_marginTop="8dp"
-        android:layout_weight="2"
-        android:alignmentMode="alignMargins"
         android:columnCount="2"
-        android:columnOrderPreserved="false"
+        android:columnOrderPreserved="true"
         android:padding="8dp"
         android:rowCount="2">
 
@@ -228,7 +226,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="160dp"
             android:layout_margin="5dp"
             android:orientation="horizontal">
  <!--       <LinearLayout
@@ -283,7 +281,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="160dp"
                 android:orientation="vertical">
 
                 // this is your first layout to put the big image
@@ -292,7 +290,7 @@
                 <LinearLayout
                     android:background="@drawable/burgerbackground"
                     android:layout_width="280dp"
-                    android:layout_height="110dp"
+                    android:layout_height="100dp"
                     android:orientation="vertical"
                     android:layout_weight="1">
 
@@ -378,7 +376,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="160dp"
                     android:orientation="vertical">
 
                     // this is your first layout to put the big image
@@ -387,7 +385,7 @@
                     <LinearLayout
                         android:background="@drawable/burgerbackground"
                         android:layout_width="280dp"
-                        android:layout_height="110dp"
+                        android:layout_height="100dp"
                         android:orientation="vertical"
                         android:layout_weight="1">
 
@@ -472,7 +470,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="160dp"
                     android:orientation="vertical">
 
                     // this is your first layout to put the big image
@@ -481,7 +479,101 @@
                     <LinearLayout
                         android:background="@drawable/burgerbackground"
                         android:layout_width="280dp"
-                        android:layout_height="110dp"
+                        android:layout_height="100dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Burger King"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:layout_alignParentLeft="true"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cuisine"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="vertical"
+                            android:layout_margin="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Opening Time"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:text="9:00 am - 10:00 pm"/>
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                    // this is your bottom layout
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                // This is the imageview which overlay the first LinearLayout
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:adjustViewBounds="true"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/foodexpress_icon" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:orientation="vertical">
+
+                    // this is your first layout to put the big image
+                    // use src or backgroud image as per requirement
+
+                    <LinearLayout
+                        android:background="@drawable/burgerbackground"
+                        android:layout_width="280dp"
+                        android:layout_height="100dp"
                         android:orientation="vertical"
                         android:layout_weight="1">
 
