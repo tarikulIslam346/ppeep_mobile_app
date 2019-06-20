@@ -16,10 +16,8 @@
 
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="259dp"
+        android:layout_height="160dp"
         android:layout_marginTop="8dp"
-        android:layout_weight="2"
-        android:alignmentMode="alignMargins"
         android:columnCount="2"
         android:columnOrderPreserved="true"
         android:padding="8dp"
@@ -58,7 +56,7 @@
                     android:text="Chinese"
                     android:textAlignment="center"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
 
@@ -97,7 +95,7 @@
                     android:text="Fastfood"
                     android:textAlignment="center"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
 
@@ -136,7 +134,7 @@
                     android:text="Bangla"
                     android:textAlignment="center"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
 
@@ -175,7 +173,7 @@
                     android:text="Bakery"
                     android:textAlignment="center"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
 
@@ -193,8 +191,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Recommended for you"
+            android:layout_margin="10dp"
 
-            android:textSize="16sp"
+            android:textSize="14sp"
 
             />
         <RelativeLayout
@@ -209,7 +208,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View All"
-                    android:textSize="10sp"
+                    android:layout_margin="10dp"
+                    android:textSize="12sp"
                     android:layout_marginRight="10dp"
                     android:layout_alignParentRight="true"
                     android:textColor="#A80404"/>
@@ -223,7 +223,13 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+ <!--       <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -266,6 +272,384 @@
                     android:src="@drawable/burgericon"
                     />
             </LinearLayout>
+        </LinearLayout>-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:orientation="vertical">
+
+                // this is your first layout to put the big image
+                // use src or backgroud image as per requirement
+
+                <LinearLayout
+                    android:background="@drawable/burgerbackground"
+                    android:layout_width="280dp"
+                    android:layout_height="100dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Burger King"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:layout_alignParentLeft="true"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cuisine"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:orientation="vertical"
+                        android:layout_margin="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Opening Time"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="9:00 am - 10:00 pm"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+                // this is your bottom layout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                </LinearLayout>
+            </LinearLayout>
+
+            // This is the imageview which overlay the first LinearLayout
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:adjustViewBounds="true"
+                android:layout_margin="10dp"
+                android:src="@drawable/foodexpress_icon" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+        </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:orientation="vertical">
+
+                    // this is your first layout to put the big image
+                    // use src or backgroud image as per requirement
+
+                    <LinearLayout
+                        android:background="@drawable/burgerbackground"
+                        android:layout_width="280dp"
+                        android:layout_height="100dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Burger King"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:layout_alignParentLeft="true"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cuisine"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="vertical"
+                            android:layout_margin="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Opening Time"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:text="9:00 am - 10:00 pm"/>
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                    // this is your bottom layout
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                // This is the imageview which overlay the first LinearLayout
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:adjustViewBounds="true"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/foodexpress_icon" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:orientation="vertical">
+
+                    // this is your first layout to put the big image
+                    // use src or backgroud image as per requirement
+
+                    <LinearLayout
+                        android:background="@drawable/burgerbackground"
+                        android:layout_width="280dp"
+                        android:layout_height="100dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Burger King"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:layout_alignParentLeft="true"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cuisine"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="vertical"
+                            android:layout_margin="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Opening Time"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:text="9:00 am - 10:00 pm"/>
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                    // this is your bottom layout
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                // This is the imageview which overlay the first LinearLayout
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:adjustViewBounds="true"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/foodexpress_icon" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:orientation="vertical">
+
+                    // this is your first layout to put the big image
+                    // use src or backgroud image as per requirement
+
+                    <LinearLayout
+                        android:background="@drawable/burgerbackground"
+                        android:layout_width="280dp"
+                        android:layout_height="100dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Burger King"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:layout_alignParentLeft="true"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cuisine"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="vertical"
+                            android:layout_margin="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Opening Time"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:text="9:00 am - 10:00 pm"/>
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                    // this is your bottom layout
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                // This is the imageview which overlay the first LinearLayout
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:adjustViewBounds="true"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/foodexpress_icon" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                </LinearLayout>
+            </FrameLayout>
         </LinearLayout>
     </HorizontalScrollView>
 
