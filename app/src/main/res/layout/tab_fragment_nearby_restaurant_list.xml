@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
@@ -10,8 +12,6 @@
         android:layout_height="250dp"
         android:orientation="vertical">
 
-        // this is your first layout to put the big image
-        // use src or backgroud image as per requirement
 
         <LinearLayout
             android:background="@drawable/burgerbackground"
@@ -76,7 +76,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    // This is the imageview which overlay the first LinearLayout
+
 
     <ImageView
         android:layout_width="80dp"
@@ -85,6 +85,10 @@
         android:adjustViewBounds="true"
         android:layout_margin="10dp"
         android:src="@drawable/foodexpress_icon" />
+
+
+
+
 
     <LinearLayout
         android:layout_width="wrap_content"

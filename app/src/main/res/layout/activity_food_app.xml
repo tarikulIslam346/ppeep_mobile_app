@@ -26,6 +26,7 @@
         android:layout_height="35dp"
         android:queryHint="Search Here"
         android:iconifiedByDefault="false"
+        android:focusedByDefault="false"
         android:layout_marginLeft="15sp"
         >
 
