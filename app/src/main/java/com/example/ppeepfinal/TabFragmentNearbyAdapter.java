@@ -39,7 +39,8 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
     @Override
     public void onBindViewHolder(@NonNull RestaurantViewHolder restaurantViewHolder, int position) {
         String restaurant = mData.get(position);
-        restaurantViewHolder.bind(restaurant);
+        String opening = mOpeningTime.get(position);
+        restaurantViewHolder.bind(restaurant,opening);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
             restaurantNameTextView = (TextView)itemView.findViewById(R.id.tv_item_number);
 
         }
-        void bind(String restaurnatName){
+        void bind(String restaurnatName,String open,){
             restaurantNameTextView.setText(restaurnatName);
         }
 

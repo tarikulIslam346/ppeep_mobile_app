@@ -101,7 +101,7 @@ public class TabFragmentNearby extends Fragment {
 
                 mNumberOfRestaurant.setHasFixedSize(true);
 
-                tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames);
+                tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes);
                 mNumberOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
               //  mSearchResultsTextView.setText(allNames.get(8));
 
