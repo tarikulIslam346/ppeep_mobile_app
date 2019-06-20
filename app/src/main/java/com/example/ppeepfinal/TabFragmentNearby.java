@@ -76,12 +76,15 @@ public class TabFragmentNearby extends Fragment {
 
                 List<String> allNames = new ArrayList<String>();
                 List<String> OpeningTimes = new ArrayList<String>();
+                List<String> ClosingTimes = new ArrayList<String>();
+                List<String> Cusines = new ArrayList<String>();
 
                 String json = RestaurantResults;
                 JSONObject restaurantList = null;
                 JSONArray jsonArray=null;
-                String name=null;
-                String openingTime;
+
+                String name,closingTime,openingTime,cusine;
+
 
                 try {
                     restaurantList = new JSONObject(json);
@@ -90,8 +93,13 @@ public class TabFragmentNearby extends Fragment {
                         JSONObject restaurant = jsonArray.getJSONObject(i);
                         name = restaurant.getString("restaurant_name");
                         openingTime = restaurant.getString("opening");
+                        closingTime = restaurant.getString("closing");
+                        cusine = restaurant.getString("cuisine");
+
                         allNames.add(name);
                         OpeningTimes.add(openingTime);
+                        ClosingTimes.add(closingTime);
+                        Cusines.add(cusine);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -101,7 +109,7 @@ public class TabFragmentNearby extends Fragment {
 
                 mNumberOfRestaurant.setHasFixedSize(true);
 
-                tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes);
+                tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines);
                 mNumberOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
               //  mSearchResultsTextView.setText(allNames.get(8));
 
