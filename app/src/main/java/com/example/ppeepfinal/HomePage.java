@@ -86,6 +86,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         tabLayout.getTabAt(0).setIcon(R.drawable.icon_homelogo);
 
         tabLayout.getTabAt(1).setIcon(R.drawable.groupicon);
+        tabLayout.getTabAt(2).setIcon(R.drawable.notificationicon);
+        tabLayout.getTabAt(3).setIcon(R.drawable.myprofileicon);
 
 /*
         for (int i = 0; i < tabLayout.getTabCount(); i++) {

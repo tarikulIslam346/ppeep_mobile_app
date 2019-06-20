@@ -46,6 +46,7 @@
             app:tabPaddingEnd="-1dp"
             app:tabPaddingStart="-1dp"
             app:tabPaddingTop="-1dp"
+            app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
 
             >
 
