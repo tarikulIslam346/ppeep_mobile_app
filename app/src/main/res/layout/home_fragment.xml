@@ -55,7 +55,12 @@
     android:layout_marginLeft="10dp"
 
     >
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+ android:gravity="center"
+    >
         2nd line
         <at.markushi.ui.CircleButton
             android:layout_width="65dp"
@@ -63,10 +68,19 @@
             android:id="@+id/foodexpress_id"
             app:cb_color="#3F51B5"
             android:src="@drawable/foodexpress_icon"
-           android:layout_margin="15dp"
+           android:layout_alignParentTop="true"
+           android:layout_marginTop="15dp"
+           android:layout_marginLeft="15dp"
+           android:layout_marginRight="15dp"
             app:cb_pressedRingWidth="8dip" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="PPEEP Food"/>
 
 
+</LinearLayout>
 
         <at.markushi.ui.CircleButton
             android:layout_width="65dp"

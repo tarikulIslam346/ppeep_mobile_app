@@ -1,5 +1,6 @@
 package com.example.ppeepfinal;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,7 +25,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabFragmentNearby extends Fragment {
+public class TabFragmentNearby extends Fragment  {
     View v;
     private  static final int NUM_LIST_ITEM = 100;
     private TabFragmentNearbyAdapter tabFragmentNearbyAdapter;
@@ -35,6 +36,7 @@ public class TabFragmentNearby extends Fragment {
     public TabFragmentNearby(){
 
     }
+
 
     @Nullable
     @Override
@@ -54,7 +56,8 @@ public class TabFragmentNearby extends Fragment {
 
     }
 
-    public class RestaurantListTask extends AsyncTask<URL, Void, String> {
+
+    public class RestaurantListTask extends AsyncTask<URL, Void, String> implements   TabFragmentNearbyAdapter.ListItemClickListener {
 
         // COMPLETED (2) Override the doInBackground method to perform the query. Return the results. (Hint: You've already written the code to perform the query)
         @Override
@@ -109,13 +112,22 @@ public class TabFragmentNearby extends Fragment {
 
                 mNumberOfRestaurant.setHasFixedSize(true);
 
-                tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines);
+                tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines,  this);
                 mNumberOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
               //  mSearchResultsTextView.setText(allNames.get(8));
 
             }else{
                 Toast.makeText(getContext(), "No restaurant", Toast.LENGTH_SHORT).show();
             }
+        }
+
+        @Override
+        public void onListItemClick(int clickedItemIndex) {
+            Intent foodmenuIntent = new Intent(getContext(),RestaurantMenuPage.class);
+            startActivity(foodmenuIntent);
+
+
+
         }
     }
 }
