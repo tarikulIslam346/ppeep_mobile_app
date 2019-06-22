@@ -19,19 +19,26 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
     private List<String> mOpeningTime;
     private List<String> mClosingTime;
     private List<String> mCusine;
+    final private  ListItemClickListener mOnClickListener;
+
+    public interface ListItemClickListener{
+        void onListItemClick(int clickedItemIndex);
+    }
 
 
     public TabFragmentNearbyAdapter(
             List<String> RestaurantList,
             List<String> OpeningTime,
             List<String> ClosingingTime,
-            List<String> Cusine
+            List<String> Cusine,
+            ListItemClickListener listener
     ){
        // mNumberRestaurant= numberOfRestaurant;
         mData = RestaurantList;
         mOpeningTime = OpeningTime;
         mClosingTime = ClosingingTime;
         mCusine = Cusine;
+        mOnClickListener = listener;
     }
 
     @NonNull
@@ -62,7 +69,7 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
     }
 
 
-    class RestaurantViewHolder extends  RecyclerView.ViewHolder{
+    class RestaurantViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
         TextView restaurantNameTextView;
         TextView openingClosingTextView;
         TextView cusineTextview;
@@ -71,12 +78,17 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
             restaurantNameTextView = (TextView)itemView.findViewById(R.id.tv_item_number);
             openingClosingTextView = (TextView) itemView.findViewById(R.id.tv_opening_closing);
             cusineTextview = (TextView) itemView.findViewById(R.id.tv_cusine);
+            itemView.setOnClickListener(this);
 
         }
         void bind(String restaurnatName,String openTime,String closing, String cusine){
             restaurantNameTextView.setText(restaurnatName);
             openingClosingTextView.setText(openTime + " - "+closing);
             cusineTextview.setText(cusine);
+        }
+        public void onClick(View v){
+            int clickedPosition = getAdapterPosition();
+            mOnClickListener.onListItemClick(clickedPosition);
         }
 
     }
