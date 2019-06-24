@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RestaurantMenuPage"></activity>
+        <activity android:name=".FoodCartPage"></activity>
+        <activity android:name=".RestaurantMenuPage" />
         <activity android:name=".CheckoutCart" />
         <activity android:name=".TabFragmentOffer" />
         <activity android:name=".TabFragmentPopular" />
