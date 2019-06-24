@@ -63,7 +63,6 @@
 android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:textColor="#0A0909"
-        android:theme="@style/Theme.MaterialButton"
         tools:ignore="OnClick"/>
 
 

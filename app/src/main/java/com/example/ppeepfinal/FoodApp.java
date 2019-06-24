@@ -22,13 +22,16 @@ Menu foodCart;
         setSupportActionBar(foodToolbar);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-   /*     @Override
+
+/*
+ @Override
         public boolean onCreateOptionsMenu(Menu menu) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.foodappcart, menu);
             foodCart=menu.findItem(R.id.action_drawer_cart);
             return super.onCreateOptionsMenu(menu);
-        }*/
+        }
+*/
 
         tabLayoutId = (TabLayout) findViewById(R.id.tabLayoutId);
         viewPagerId = (ViewPager) findViewById(R.id.viewPagerId);
