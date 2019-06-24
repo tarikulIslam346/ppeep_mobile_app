@@ -45,7 +45,7 @@
                     android:layout_margin="10dp"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/tv_item_number"
+                        android:id="@+id/tv_restaurnat_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Burger King"
@@ -93,6 +93,12 @@
 
     </LinearLayout>
 </FrameLayout>
+    <ProgressBar
+        android:id="@+id/pv_restaurant_menu_item"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
 
 
     <ExpandableListView

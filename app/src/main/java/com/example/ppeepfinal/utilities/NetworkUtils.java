@@ -24,6 +24,8 @@ public class NetworkUtils {
             "https://foodexpress.com.bd/ppeep/public/api/api/user/checkPhoneNo";
     final static String RESTAURANT_URL =
             "https://foodexpress.com.bd/ppeep/public/api/api/restaurnats";
+    final static String RESTAURANT_MENU_URL =
+            "https://foodexpress.com.bd/ppeep/public/api/api/categories";
 
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
@@ -38,6 +40,17 @@ public class NetworkUtils {
             e.printStackTrace();
         }
         return retauranturl;
+    }
+
+    public static URL buildRestaurantMenuUrl() {
+        Uri builtUri = Uri.parse(RESTAURANT_MENU_URL).buildUpon().build();
+        URL retaurantMenuUrl = null;
+        try {
+            retaurantMenuUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return retaurantMenuUrl;
     }
 
 
@@ -71,6 +84,43 @@ public class NetworkUtils {
         try {
             InputStream in = urlConnection.getInputStream();
 
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static String getRestaurantMenuFromHttpUrl(URL retaurantMenuUrl, String merchantId) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) retaurantMenuUrl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+
+        // setPhoneNo();
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "merchant_id", merchantId);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+
+
+        try {
+            InputStream in = urlConnection.getInputStream();
             Scanner scanner = new Scanner(in);
             scanner.useDelimiter("\\A");
 
