@@ -17,7 +17,6 @@
         android:theme="@style/AppTheme2"
         android:id="@+id/foodtoolbar"
         android:background="#FAFAF9"
-
         >
 
 

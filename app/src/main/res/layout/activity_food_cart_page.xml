@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:text="Pre-Order"
         android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
 
         />
     <Button
@@ -56,6 +57,7 @@
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:layout_width="180dp"
+        android:layout_margin="10dp"
         android:onClick="insertOrder"
         android:text="Place Order"
 android:layout_alignParentRight="true"
