@@ -16,6 +16,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ppeepfinal.data.OrderMercahntDAO;
+import com.example.ppeepfinal.data.OrderMerchantModel;
 import com.example.ppeepfinal.data.OrderModel;
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.utilities.NetworkUtils;
@@ -230,19 +232,36 @@ public class RestaurantMenuPage extends AppCompatActivity {
                         @Override
                         public boolean onChildClick(ExpandableListView parent, View v,
                                                     int groupPosition, int childPosition, long id) {
-                            // Add to phone storage
 
-                            Date date = new Date();
-                            int ItemId = listDataChildId.get(listDataHeader.get(groupPosition)).get(childPosition);
-                            int ItemPrice = Integer.valueOf(listDataChildPrice.get(listDataHeader.get(groupPosition)).get(childPosition));
-                            String ItemName =  listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
-                            OrderModel orderModel = new OrderModel(ItemId,ItemName,ItemPrice,date);
-                            mdb.orderDAO().insertOrder(orderModel);
-                            //finish();
+                            List<OrderMerchantModel> orderMerchantModelList =  mdb.orderMercahntDAO().loadOrderMerchant();
+                            //add order item if order from same marchant or no add to cart select
+                            if(orderMerchantModelList.size() ==0  || Integer.valueOf(merchantId)== orderMerchantModelList.get(0).getMerchantId() ){
+                                //Add to merchant list if no order merchant select
+                                if(orderMerchantModelList.size() == 0 ){
+                                    OrderMerchantModel orderMerchantModel = new OrderMerchantModel(Integer.valueOf(merchantId));
+                                    mdb.orderMercahntDAO().insertOrderMerchant(orderMerchantModel);
+                                }
 
-                            Toast.makeText(getApplicationContext(), listDataChildId.get(groupPosition) + " : " +
+
+                                // Add to phone storage order item
+                                Date date = new Date();
+                                int ItemId = listDataChildId.get(listDataHeader.get(groupPosition)).get(childPosition);
+                                int ItemPrice = Integer.valueOf(listDataChildPrice.get(listDataHeader.get(groupPosition)).get(childPosition));
+                                String ItemName =  listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
+                                OrderModel orderModel = new OrderModel(ItemId,ItemName,ItemPrice,date);
+                                mdb.orderDAO().insertOrder(orderModel);
+                                //finish();
+
+                            }else {
+                                Toast.makeText(getApplicationContext(), "You can only order from same restaurant at a time", Toast.LENGTH_LONG)
+                                        .show();
+                            }
+
+
+
+                            /*Toast.makeText(getApplicationContext(), listDataChildId.get(groupPosition) + " : " +
                                     listDataChildId.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT)
-                                    .show();
+                                    .show();*/
                             return false;
                         }
                     });
