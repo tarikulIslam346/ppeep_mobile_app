@@ -7,7 +7,7 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.util.Log;
 
-@Database(entities = {UserModel.class,OrderModel.class}, version = 1, exportSchema = false)
+@Database(entities = {UserModel.class,OrderModel.class,OrderMerchantModel.class}, version = 1, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class UserDatabase extends RoomDatabase {
     private static final String LOG_TAG = UserDatabase.class.getSimpleName();
@@ -35,4 +35,6 @@ public abstract class UserDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
 
     public abstract OrderDAO orderDAO();
+
+    public abstract OrderMercahntDAO orderMercahntDAO();
 }
