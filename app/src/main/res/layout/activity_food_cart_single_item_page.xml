@@ -12,8 +12,21 @@
         android:text="Item name" />
     <TextView
         android:id="@+id/tv_order_item_price"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Price"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:src="@drawable/deleteicon2"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
 
 </LinearLayout>
