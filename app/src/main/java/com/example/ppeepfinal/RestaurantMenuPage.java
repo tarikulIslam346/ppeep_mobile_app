@@ -16,6 +16,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ppeepfinal.data.OrderModel;
+import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.utilities.NetworkUtils;
 
 import org.json.JSONArray;
@@ -26,31 +28,24 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 public class RestaurantMenuPage extends AppCompatActivity {
-    Menu foodCart;
+
     Toolbar foodToolbar;
     ExpandableListAdapter listAdapter;
-
     ExpandableListView expListView;
-
     List<String> listDataHeader;
-
-    HashMap<String, List<String>> listDataChild;
-
-    HashMap<String,List<String>>Items;
-
+    HashMap<String, List<String>> listDataChild,listDataChildPrice;
+    HashMap<String,List<Integer>>listDataChildId;
     TextView mRestaurantName,mCusine;
-
     String merchantId;
-
     URL restaurantMenuListUrl;
-
     List<String> Menus;
-
     ProgressBar mProgressbar;
+    private UserDatabase mdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +63,8 @@ public class RestaurantMenuPage extends AppCompatActivity {
         merchantId = intent.getStringExtra("mercahnt_Id");
         String restaurantName = intent.getStringExtra("restaurant_name");
         String cusine = intent.getStringExtra("cuisine");
+
+        mdb = UserDatabase.getInstance(getApplicationContext());// create db instance
 
         if(restaurantName != null){
             mRestaurantName.setText(restaurantName);
@@ -106,11 +103,13 @@ public class RestaurantMenuPage extends AppCompatActivity {
 
                  Menus = new ArrayList<String>();
 
-                 Items = new HashMap<String,List<String>>();
-
                  listDataHeader = new ArrayList<String>();
 
                  listDataChild = new HashMap<String, List<String>>();
+
+                 listDataChildId = new HashMap<String, List<Integer>>();
+
+                 listDataChildPrice = new HashMap<String, List<String>>();
 
 
                 String json = RestaurantMenuResults;
@@ -157,6 +156,8 @@ public class RestaurantMenuPage extends AppCompatActivity {
 
                         JSONArray foodMenu = restaurantFoodMenu.getJSONArray(foodMenuItem);
                         List<String> itemMenu = new ArrayList<String>();
+                        List<Integer> itemMenuId = new ArrayList<Integer>();
+                        List<String> itemMenuPrice = new ArrayList<String>();
 
                         for(int j=0;j<foodMenu.length();j++){
 
@@ -164,29 +165,29 @@ public class RestaurantMenuPage extends AppCompatActivity {
 
                             String itemName = restaurantFoodMenuItem.getString("item_name");
 
+                            String itemPrice = restaurantFoodMenuItem.getString("price");
+
+                            Integer ItemId = restaurantFoodMenuItem.getInt("item_id");
+
+                            itemMenuId.add(ItemId);
+
+                            itemMenuPrice.add(itemPrice);
+
                             itemMenu.add(itemName);
 
                         }
 
-                        Items.put(foodMenuItem, itemMenu);
                         listDataChild.put(foodMenuItem, itemMenu);
-
+                        listDataChildId.put(foodMenuItem, itemMenuId);
+                        listDataChildPrice.put(foodMenuItem, itemMenuPrice);
                     }
-
-                    mProgressbar.setVisibility(View.INVISIBLE);
-                    ViewGroup.LayoutParams layoutParams = mProgressbar.getLayoutParams();
-
-                    layoutParams.height = 0;
-                    layoutParams.width = 0;
-                    mProgressbar.setLayoutParams(layoutParams);
-
-
-
-                    listAdapter = new ExpandableListAdapter(getApplicationContext(), listDataHeader, listDataChild);
-
-                    // setting list adapter
+                    mProgressbar.setVisibility(View.INVISIBLE);// set progressbar to invisible
+                    ViewGroup.LayoutParams layoutParams = mProgressbar.getLayoutParams();// instantiate  layout parameter progressbar
+                    layoutParams.height = 0;// set layout height to zero
+                    layoutParams.width = 0;// set layout width to zero
+                    mProgressbar.setLayoutParams(layoutParams);// set progressbar layout height & width
+                    listAdapter = new ExpandableListAdapter(getApplicationContext(), listDataHeader, listDataChild,listDataChildPrice,listDataChildId);// setting list adapter
                     expListView.setAdapter(listAdapter);
-
                     // Listview Group click listener
                    /* expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
@@ -221,7 +222,7 @@ public class RestaurantMenuPage extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
 
                         }
-                    });
+                    });*/
 
                     // Listview on child click listener
                     expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -229,35 +230,31 @@ public class RestaurantMenuPage extends AppCompatActivity {
                         @Override
                         public boolean onChildClick(ExpandableListView parent, View v,
                                                     int groupPosition, int childPosition, long id) {
-                            // TODO Auto-generated method stub
-                            Toast.makeText(
-                                    getApplicationContext(),
-                                    listDataHeader.get(groupPosition)
-                                            + " : "
-                                            + listDataChild.get(
-                                            listDataHeader.get(groupPosition)).get(
-                                            childPosition), Toast.LENGTH_SHORT)
+                            // Add to phone storage
+
+                            Date date = new Date();
+                            int ItemId = listDataChildId.get(listDataHeader.get(groupPosition)).get(childPosition);
+                            int ItemPrice = Integer.valueOf(listDataChildPrice.get(listDataHeader.get(groupPosition)).get(childPosition));
+                            String ItemName =  listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
+                            OrderModel orderModel = new OrderModel(ItemId,ItemName,ItemPrice,date);
+                            mdb.orderDAO().insertOrder(orderModel);
+                            //finish();
+
+                            Toast.makeText(getApplicationContext(), listDataChildId.get(groupPosition) + " : " +
+                                    listDataChildId.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT)
                                     .show();
                             return false;
                         }
-                    });*/
-
-
-
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
                 //  mSearchResultsTextView.setText(allNames.get(8));
-
             }else{
                 Toast.makeText(getApplicationContext(), "No restaurant menu found or net connection error", Toast.LENGTH_SHORT).show();
             }
         }
-
-
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -265,7 +262,6 @@ public class RestaurantMenuPage extends AppCompatActivity {
         //  foodCart= (Menu) menu.findItem(R.id.action_drawer_cart);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
@@ -273,11 +269,9 @@ public class RestaurantMenuPage extends AppCompatActivity {
                 Intent intent = new Intent(this, FoodCartPage.class);
                 this.startActivity(intent);
                 break;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
-
         return true;
     }
 }
