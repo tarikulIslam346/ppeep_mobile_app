@@ -1,70 +1,191 @@
 package com.example.ppeepfinal;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.ppeepfinal.data.UserDatabase;
+import com.example.ppeepfinal.data.UserModel;
+import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.hitomi.cmlibrary.CircleMenu;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class FragmentGroup extends Fragment {
-private ImageView imageView1,imageView2,imageView3,imageView4,imageView5;
+
+    private ImageView imageView1,imageView2,imageView3,imageView4,imageView5;
 
     View v;
+
+    private RecyclerView mListOfFriend;
+
     private CircleMenu circleMenu,circleMenu2;
-    public FragmentGroup() {
-    }
+
+    private UserDatabase mdb;
+
+    private List<UserModel> user;
+
+    private String phoneNo;
+
+    private FragmentGroupAdapter mfragmentGroupAdapter;
+
+    private ProgressBar mProgressbar;
+
+    private TextView mProfileNameTv,mPhoneNoTv;
+
+    public FragmentGroup() { }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         v = inflater.inflate(R.layout.group_fragment,container,false);
 
+        mListOfFriend = (RecyclerView)v.findViewById(R.id.rv_list_of_friend_group);
 
+        mProgressbar = (ProgressBar) v.findViewById(R.id.pv_friend_list);
 
+        mProfileNameTv = (TextView) v.findViewById(R.id.tv_profile_name_of_friend_group);
 
+        mPhoneNoTv = (TextView) v.findViewById(R.id.tv_phone_no_of_friend_group);
 
+        mdb = UserDatabase.getInstance(getContext());
 
+        user =  mdb.userDAO().loadPhone();
 
+        if(user.size() != 0){
 
+            phoneNo = user.get(0).getPhone();
 
-        //circle menu start
-        final CircleMenu circleMenu = (CircleMenu) v.findViewById(R.id.circleMenuId);
+            mProfileNameTv.setText(user.get(0).getName());
 
+            mPhoneNoTv.setText(phoneNo);
+        }
 
+        mProgressbar.setVisibility(View.VISIBLE);
 
+        URL FriendListCheckUrl = NetworkUtils.buildFriendListUrl();
 
-        circleMenu.setMainMenu(Color.parseColor("#FFFFFF"), R.drawable.iconppeep2, R.drawable.iconppeep2);
-        circleMenu.addSubMenu(Color.parseColor("#0077B5"), R.drawable.icon_pickaboo)
-                .addSubMenu(Color.parseColor("#00acee"), R.drawable.icon_daraz)
-                .addSubMenu(Color.parseColor("#C4302B"), R.drawable.icon_baagdoom)
-                .addSubMenu(Color.parseColor("#fffc00"), R.drawable.icon_daraz)
-                .addSubMenu(Color.parseColor("#54C0d4"), R.drawable.icon_robishop)
-                .addSubMenu(Color.parseColor("#00acee"), R.drawable.icon_pickaboo)
-                .addSubMenu(Color.parseColor("#C4302B"), R.drawable.icon_baagdoom)
-                .addSubMenu(Color.parseColor("#fffc00"), R.drawable.icon_daraz)
-                .addSubMenu(Color.parseColor("#54C0d4"), R.drawable.icon_robishop)
-                .addSubMenu(Color.parseColor("#C4302B"), R.drawable.icon_baagdoom)
-
-
-        ;
-
-
-
-
-
-
-
-
-
+        new  FriendListTask().execute(FriendListCheckUrl);
 
         return v;
+    }
+
+    public class FriendListTask extends AsyncTask<URL, Void, String> implements   FragmentGroupAdapter.ListItemClickListener {
+
+
+
+
+        @Override
+        protected String doInBackground(URL... params) {
+
+            URL searchUrl = params[0];
+
+            String friendListResults = null;
+
+            try {
+
+                friendListResults = NetworkUtils.getFriendListResponseFromHttpUrl(searchUrl,phoneNo);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return friendListResults;
+        }
+
+        @Override
+        protected void onPostExecute(String friendListResults) {
+
+            if (friendListResults != null && !friendListResults.equals("")) {
+
+                String json = friendListResults;
+
+                JSONObject friendList = null;
+
+                JSONArray jsonArray=null;
+
+                String name;
+
+                List<String> allNames = new ArrayList<String>();
+
+
+
+                try {
+                    friendList = new JSONObject(json);
+                    jsonArray = friendList.getJSONArray("friend_list");
+
+                    for (int i=0; i<jsonArray.length(); i++) {
+                        JSONObject friend = jsonArray.getJSONObject(i);
+                        name = friend.getString("first_name");
+                        allNames.add(name);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                mProgressbar.setVisibility(View.INVISIBLE);
+
+                ViewGroup.LayoutParams layoutParams = mProgressbar.getLayoutParams();
+
+                layoutParams.height = 0;
+
+                layoutParams.width = 0;
+
+                mProgressbar.setLayoutParams(layoutParams);
+
+                LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext());
+
+                mListOfFriend.setLayoutManager(layoutManager);
+
+                mListOfFriend.setHasFixedSize(true);
+
+                mfragmentGroupAdapter = new FragmentGroupAdapter(allNames, this);
+
+                mListOfFriend.setAdapter(mfragmentGroupAdapter);
+
+            }else{
+                Toast.makeText(getContext(), "No restaurant", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onListItemClick(int clickedItemIndex) {
+
+            /*int clickedRestaurnat = MerchantId.get(clickedItemIndex).intValue();
+            String restaurantName = allNames.get(clickedItemIndex);
+            String cusine = Cusines.get(clickedItemIndex);
+            //Toast.makeText(getContext(),"restaurant id" +clickedRestaurnat ,Toast.LENGTH_SHORT).show();
+            Intent foodmenuIntent = new Intent(getContext(),RestaurantMenuPage.class);
+            foodmenuIntent.putExtra("mercahnt_Id",String.valueOf(clickedRestaurnat));
+            foodmenuIntent.putExtra("restaurant_name",restaurantName);
+            foodmenuIntent.putExtra("cuisine",cusine);
+            startActivity(foodmenuIntent);*/
+
+
+
+        }
     }
 
 

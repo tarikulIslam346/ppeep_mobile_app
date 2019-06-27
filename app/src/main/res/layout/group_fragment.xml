@@ -4,22 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundfragment"
-   >
+    android:background="@color/backgroundfragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#222020"
-            android:orientation="vertical"
-
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,7 +38,7 @@
                     android:paddingTop="60px">
 
                     <TextView
-                        android:id="@+id/profile_name"
+                        android:id="@+id/tv_profile_name_of_friend_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nurul Mumen"
@@ -51,7 +47,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/phone_no"
+                        android:id="@+id/tv_phone_no_of_friend_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -62,7 +58,6 @@
 
                         />
                 </LinearLayout>
-
 
             </LinearLayout>
 
@@ -101,9 +96,7 @@
                             android:layout_height="wrap_content"
                             android:text="Points"
                             android:textColor="#ffff"
-                            android:textSize="15sp"
-
-                            />
+                            android:textSize="15sp" />
 
 
                     </LinearLayout>
@@ -136,10 +129,7 @@
                             android:layout_height="wrap_content"
                             android:text="Group Members"
                             android:textColor="#ffff"
-                            android:textSize="15sp"
-
-                            />
-
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 
@@ -170,9 +160,7 @@
                             android:layout_height="wrap_content"
                             android:text="Balance"
                             android:textColor="#ffff"
-                            android:textSize="15sp"
-
-                            />
+                            android:textSize="15sp" />
 
 
                     </LinearLayout>
@@ -183,24 +171,43 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <ProgressBar
+            android:id="@+id/pv_friend_list"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:visibility="invisible"/>
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_margin="15dp"
             android:layout_height="wrap_content">
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_list_of_friend_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="282dp">
 
-        </android.support.v7.widget.RecyclerView>
+
+            </android.support.v7.widget.RecyclerView>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/friendadd" />
+
+        </RelativeLayout>
+
+
 
 
 
     </LinearLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/friendadd" />
+
 </RelativeLayout>
