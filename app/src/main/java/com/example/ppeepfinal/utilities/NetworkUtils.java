@@ -26,6 +26,8 @@ public class NetworkUtils {
             "https://foodexpress.com.bd/ppeep/public/api/api/restaurnats";
     final static String RESTAURANT_MENU_URL =
             "https://foodexpress.com.bd/ppeep/public/api/api/categories";
+    final static String FRIEND_LIST_URL =
+            "https://foodexpress.com.bd/ppeep/public/api/api/friend";
 
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
@@ -53,8 +55,6 @@ public class NetworkUtils {
         return retaurantMenuUrl;
     }
 
-
-
     public static URL buildRegisterUrl() {
         Uri builtUri = Uri.parse(REGISTER_BASE_URL).buildUpon().build();
         URL registerurl = null;
@@ -64,6 +64,17 @@ public class NetworkUtils {
             e.printStackTrace();
         }
         return registerurl;
+    }
+
+    public static URL buildFriendListUrl() {
+        Uri builtUri = Uri.parse(FRIEND_LIST_URL).buildUpon().build();
+        URL friendListurl = null;
+        try {
+            friendListurl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return friendListurl;
     }
 
     public static URL buildPhoneCheckUrl() {
@@ -107,6 +118,43 @@ public class NetworkUtils {
 
         HashMap<String, String> param = new HashMap<String, String>();
         param.put( "merchant_id", merchantId);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static String getFriendListResponseFromHttpUrl(URL friendListurl, String phone) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) friendListurl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+
+        // setPhoneNo();
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "contact", phone);
 
         OutputStream os = urlConnection.getOutputStream();
         BufferedWriter writer = new BufferedWriter(

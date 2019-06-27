@@ -128,10 +128,10 @@ public class TabFragmentNearby extends Fragment  {
                 tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines,  this);
 
                 mNumberOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
-              //  mSearchResultsTextView.setText(allNames.get(8));
+
 
             }else{
-                Toast.makeText(getContext(), "No restaurant", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "No restaurant found or network not available", Toast.LENGTH_SHORT).show();
             }
         }
 
