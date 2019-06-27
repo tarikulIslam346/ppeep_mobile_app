@@ -13,7 +13,7 @@
             android:id="@+id/list_icon"
             android:layout_width="80dp"
             android:layout_height="90dp"
-            android:src="@drawable/pavelpic"
+            android:src="@drawable/user"
             android:background="@drawable/friendlist_icon_bg" />
 
         <LinearLayout
