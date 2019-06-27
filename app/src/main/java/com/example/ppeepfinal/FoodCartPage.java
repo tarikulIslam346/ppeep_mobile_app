@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.example.ppeepfinal.data.OrderModel;
 import com.example.ppeepfinal.data.UserDatabase;
@@ -19,12 +20,17 @@ public class FoodCartPage extends AppCompatActivity  implements   FoodCartPageAd
     private UserDatabase mdb;
     List<String>OrderItem;
     List<Integer>OrderItemPrice;
+    Toolbar foodToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_cart_page);
         mListOfCartItem = (RecyclerView)findViewById(R.id.recycler_cart);
+
+
+        foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
+        setSupportActionBar(foodToolbar);
         mdb = UserDatabase.getInstance(getApplicationContext());//intantiate room database
         List<OrderModel> order =  mdb.orderDAO().loadOrder();//select all data form room database user table
         OrderItem = new ArrayList<String>();

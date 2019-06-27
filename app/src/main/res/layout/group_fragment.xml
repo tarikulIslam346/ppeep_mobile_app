@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundfragment">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -73,8 +75,7 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingLeft="50px"
-                    android:paddingTop="10px"
-                    android:paddingBottom="10px">
+                   >
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -173,8 +174,8 @@
 
         <ProgressBar
             android:id="@+id/pv_friend_list"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
             android:layout_gravity="center"
             android:visibility="invisible"/>
         <RelativeLayout
@@ -184,11 +185,9 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_list_of_friend_group"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="282dp">
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                >
 
 
             </android.support.v7.widget.RecyclerView>
@@ -209,5 +208,5 @@
 
 
     </LinearLayout>
-
 </RelativeLayout>
+</LinearLayout>
