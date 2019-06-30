@@ -2,6 +2,7 @@ package com.example.ppeepfinal;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -48,6 +50,7 @@ public class RestaurantMenuPage extends AppCompatActivity {
     List<String> Menus;
     ProgressBar mProgressbar;
     private UserDatabase mdb;
+    int vat,deliveryCharge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,9 @@ public class RestaurantMenuPage extends AppCompatActivity {
         merchantId = intent.getStringExtra("mercahnt_Id");
         String restaurantName = intent.getStringExtra("restaurant_name");
         String cusine = intent.getStringExtra("cuisine");
+        vat = Integer.valueOf(intent.getStringExtra("vat"));
+        deliveryCharge = Integer.valueOf( intent.getStringExtra("deliveryCharge"));
+
 
         mdb = UserDatabase.getInstance(getApplicationContext());// create db instance
 
@@ -226,6 +232,8 @@ public class RestaurantMenuPage extends AppCompatActivity {
                         }
                     });*/
 
+
+
                     // Listview on child click listener
                     expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
@@ -238,7 +246,7 @@ public class RestaurantMenuPage extends AppCompatActivity {
                             if(orderMerchantModelList.size() ==0  || Integer.valueOf(merchantId)== orderMerchantModelList.get(0).getMerchantId() ){
                                 //Add to merchant list if no order merchant select
                                 if(orderMerchantModelList.size() == 0 ){
-                                    OrderMerchantModel orderMerchantModel = new OrderMerchantModel(Integer.valueOf(merchantId));
+                                    OrderMerchantModel orderMerchantModel = new OrderMerchantModel(Integer.valueOf(merchantId),mRestaurantName.getText().toString(),vat,deliveryCharge);
                                     mdb.orderMercahntDAO().insertOrderMerchant(orderMerchantModel);
                                 }
 
@@ -250,6 +258,16 @@ public class RestaurantMenuPage extends AppCompatActivity {
                                 String ItemName =  listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
                                 OrderModel orderModel = new OrderModel(ItemId,ItemName,ItemPrice,date);
                                 mdb.orderDAO().insertOrder(orderModel);
+                                View parentLayout = findViewById(R.id.lvExp);
+                                Snackbar.make(parentLayout, " Item has been added to cart", Snackbar.LENGTH_LONG)
+                                        .setAction("Go to cart", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                Intent intent = new Intent(getApplicationContext(),FoodCartPage.class);
+                                                startActivity(intent);
+                                            }
+                                        })
+                                        .show();
                                 //finish();
 
                             }else {
@@ -259,9 +277,7 @@ public class RestaurantMenuPage extends AppCompatActivity {
 
 
 
-                            /*Toast.makeText(getApplicationContext(), listDataChildId.get(groupPosition) + " : " +
-                                    listDataChildId.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT)
-                                    .show();*/
+
                             return false;
                         }
                     });

@@ -8,13 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.ppeepfinal.data.OrderModel;
+import com.example.ppeepfinal.data.UserModel;
+
 import java.util.List;
 
 public class FoodCartPageAdapter extends RecyclerView.Adapter<FoodCartPageAdapter.FoodCartViewHolder> {
 
-    private List<String> mItemName;
-    private List<Integer> mItemPrice;
-    final private FoodCartPageAdapter.ListItemClickListener mOnClickListener;
+    final private ListItemClickListener mOnClickListener;
+    private List<OrderModel> mOrders;
+    private Context mContext;
 
     public interface ListItemClickListener{
         void onListItemClick(int clickedItemIndex);
@@ -22,38 +25,45 @@ public class FoodCartPageAdapter extends RecyclerView.Adapter<FoodCartPageAdapte
 
 
     public FoodCartPageAdapter(
-            List<String> orderItemName,
-            List<Integer> orderItemPrice,
+            Context context,
             FoodCartPageAdapter.ListItemClickListener listener
     ){
         // mNumberRestaurant= numberOfRestaurant;
-        mItemName = orderItemName;
-        mItemPrice = orderItemPrice;
+        mContext = context;
         mOnClickListener = listener;
     }
 
     @NonNull
     @Override
-    public FoodCartPageAdapter.FoodCartViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        Context context = viewGroup.getContext();
-        int layoutItemOfRestaurant = R.layout.activity_food_cart_single_item_page;
-        LayoutInflater layoutInflater = LayoutInflater.from(context) ;
-        boolean shouldAttachToParentImmediately = false;
-        View view = layoutInflater.inflate(layoutItemOfRestaurant,viewGroup,shouldAttachToParentImmediately);
-        FoodCartPageAdapter.FoodCartViewHolder viewHolder = new FoodCartPageAdapter.FoodCartViewHolder(view);
-        return viewHolder;
+    public FoodCartViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
+        View view = LayoutInflater.from(mContext).inflate(R.layout.activity_food_cart_single_item_page,viewGroup,false);
+        return new FoodCartViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodCartPageAdapter.FoodCartViewHolder foodCartViewHolder, int position) {
-        String orederItemName = mItemName.get(position);
-        int orderItemPrice = mItemPrice.get(position);
+    public void onBindViewHolder(@NonNull FoodCartViewHolder foodCartViewHolder, int position) {
+        OrderModel orderModel = mOrders.get(position);
+        String orederItemName = orderModel.getItemName();
+        int orderItemPrice = orderModel.getItemPrice();
         foodCartViewHolder.bind(orederItemName,orderItemPrice);
     }
 
     @Override
     public int getItemCount() {
-        return mItemName.size();
+        if(mOrders == null){
+            return 0;
+        }
+        return mOrders.size();
+    }
+
+    public  List<OrderModel> getmOrders(){
+        return mOrders;
+    }
+
+    public void setmOrders(List<OrderModel> orders){
+        mOrders = orders;
+        notifyDataSetChanged();
     }
 
     class FoodCartViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
@@ -71,7 +81,7 @@ public class FoodCartPageAdapter extends RecyclerView.Adapter<FoodCartPageAdapte
             orderItemPriceTextView.setText(String.valueOf(orderItemPrice));
         }
         public void onClick(View v){
-            int clickedPosition = getAdapterPosition();
+            int clickedPosition = mOrders.get(getAdapterPosition()).getId();
             mOnClickListener.onListItemClick(clickedPosition);
         }
 

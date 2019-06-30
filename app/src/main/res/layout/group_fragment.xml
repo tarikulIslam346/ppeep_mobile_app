@@ -46,7 +46,8 @@
                         android:text="Nurul Mumen"
                         android:textColor="#0E0B0B"
                         android:textSize="22sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textAllCaps="true"/>
 
                     <TextView
                         android:id="@+id/tv_phone_no_of_friend_group"

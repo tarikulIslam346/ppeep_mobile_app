@@ -42,6 +42,7 @@
                 android:textStyle="bold"
                 android:text="Nurul Mumen"
                 android:textColor="#0E0B0B"
+                android:textAllCaps="true"
                 />
 
             <TextView
