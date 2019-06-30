@@ -125,7 +125,7 @@ public class FragmentGroup extends Fragment {
 
                 JSONArray jsonArray=null;
 
-                String name;
+                String name,message = null;
 
                 List<String> allNames = new ArrayList<String>();
 
@@ -134,6 +134,10 @@ public class FragmentGroup extends Fragment {
                 try {
                     friendList = new JSONObject(json);
                     jsonArray = friendList.getJSONArray("friend_list");
+
+                    if(jsonArray.length() == 0 ){
+                        message = friendList.getString("message");
+                    }
 
                     for (int i=0; i<jsonArray.length(); i++) {
                         JSONObject friend = jsonArray.getJSONObject(i);
@@ -155,15 +159,22 @@ public class FragmentGroup extends Fragment {
 
                 mProgressbar.setLayoutParams(layoutParams);
 
-                LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext());
+                if(jsonArray.length() == 0 ){
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
-                mListOfFriend.setLayoutManager(layoutManager);
+                }else{
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext());
 
-                mListOfFriend.setHasFixedSize(true);
+                    mListOfFriend.setLayoutManager(layoutManager);
 
-                mfragmentGroupAdapter = new FragmentGroupAdapter(allNames, this);
+                    mListOfFriend.setHasFixedSize(true);
 
-                mListOfFriend.setAdapter(mfragmentGroupAdapter);
+                    mfragmentGroupAdapter = new FragmentGroupAdapter(allNames, this);
+
+                    mListOfFriend.setAdapter(mfragmentGroupAdapter);
+                }
+
+
 
             }else{
                 Toast.makeText(getContext(), "No restaurant", Toast.LENGTH_SHORT).show();

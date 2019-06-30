@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -58,12 +60,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             final int childPosition,
             boolean isLastChild,
             View convertView,
-            ViewGroup parent
+            final ViewGroup parent
     ) {
 
         final String childText = (String) getChild(groupPosition, childPosition);
         final String childPriceText = (String) getChildPrice(groupPosition, childPosition);
         final Integer childDataIdText = (Integer) getChildDataId(groupPosition, childPosition);
+
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -73,6 +76,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
         TextView txtListChildId = (TextView) convertView.findViewById(R.id.tv_item_id);
         TextView textViewPrice = (TextView) convertView.findViewById(R.id.price_food);
+        TextView textViewAddCart = (TextView)convertView.findViewById(R.id.tv_add_to_cart) ;
 
         txtListChild.setText(childText);
         txtListChildId.setText(String.valueOf(childDataIdText));

@@ -3,12 +3,14 @@ package com.example.ppeepfinal;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smarteist.autoimageslider.DefaultSliderView;
@@ -16,8 +18,10 @@ import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
 
 public class TabFragmentRecommended extends Fragment {
-    View v;
+    View v, nextV;
     SliderLayout sliderLayout;
+    TextView mViewAll;
+
     public TabFragmentRecommended(){
 
 
@@ -27,6 +31,19 @@ public class TabFragmentRecommended extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.activity_tab_fragment_recommended,container,false);
+        mViewAll = (TextView) v.findViewById(R.id.tv_view_all);
+
+        /*mViewAll.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Fragment fragment = new TabFragmentOffer();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.show( fragment);
+                //fragmentTransaction.addToBackStack(null);
+                //fragmentTransaction.commit();
+            }
+        });*/
 
 
 

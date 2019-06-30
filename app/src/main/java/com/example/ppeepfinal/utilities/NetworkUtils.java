@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,8 @@ public class NetworkUtils {
             "https://foodexpress.com.bd/ppeep/public/api/api/categories";
     final static String FRIEND_LIST_URL =
             "https://foodexpress.com.bd/ppeep/public/api/api/friend";
+    final  static  String ORDER_CREATE_URL =
+            "https://foodexpress.com.bd/ppeep/public/api/api/order_create";
 
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
@@ -43,6 +46,18 @@ public class NetworkUtils {
         }
         return retauranturl;
     }
+
+    public static URL buildOrderUrl() {
+        Uri builtUri = Uri.parse(ORDER_CREATE_URL).buildUpon().build();
+        URL orderUrl = null;
+        try {
+            orderUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return orderUrl;
+    }
+
 
     public static URL buildRestaurantMenuUrl() {
         Uri builtUri = Uri.parse(RESTAURANT_MENU_URL).buildUpon().build();
@@ -118,6 +133,47 @@ public class NetworkUtils {
 
         HashMap<String, String> param = new HashMap<String, String>();
         param.put( "merchant_id", merchantId);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static String getFoodOrderFromHttpUrl(URL orderUrl, String itemId,String amount,String client_phone_no,String merchant_id) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) orderUrl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+
+        // setPhoneNo();
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "item_id", itemId);
+        param.put( "amount", amount);
+        param.put( "client_phone_no", client_phone_no);
+        param.put( "merchant_id", merchant_id);
+
 
         OutputStream os = urlConnection.getOutputStream();
         BufferedWriter writer = new BufferedWriter(
@@ -258,6 +314,8 @@ public class NetworkUtils {
             urlConnection.disconnect();
         }
     }
+
+
 
 
 

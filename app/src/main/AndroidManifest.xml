@@ -40,6 +40,7 @@
             android:name="com.facebook.accountkit.ClientToken"
             android:value="@string/ACCOUNT_KIT_CLIENT_TOKEN" />
 
+
         <activity android:name="com.facebook.accountkit.ui.AccountKitActivity" />
         <activity
             android:name=".HomePage"
