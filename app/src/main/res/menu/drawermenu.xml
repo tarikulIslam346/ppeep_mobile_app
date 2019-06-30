@@ -14,25 +14,21 @@
             android:title="History"
             android:icon="@drawable/ic_history_black_24dp"/>
         <item
+            android:id="@+id/promotionoffer"
+            android:title="Promotion"
+            android:icon="@drawable/promotionicon" />
+
+        <item
             android:id="@+id/settings"
             android:title="Settings"
             android:icon="@drawable/ic_settings_black_24dp" />
+
+
         <item
             android:id="@+id/help"
-            android:title="Help"
+            android:title="Support"
             android:icon="@drawable/ic_help_black_24dp"/>
-        <item
-            android:id="@+id/language"
-            android:title="Language"
-            android:icon="@drawable/ic_language_black_24dp"/>
-        <item
-            android:id="@+id/policies"
-            android:title="Policies"
-            android:icon="@drawable/ic_description_black_24dp"/>
-        <item
-            android:id="@+id/logout"
-            android:title="Log Out"
-            android:icon="@drawable/ic_input_black_24dp"/>
+
 
 
 

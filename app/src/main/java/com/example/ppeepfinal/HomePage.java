@@ -10,9 +10,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
@@ -40,6 +43,10 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         setContentView(R.layout.activity_home_page);
 
+        NavigationView navigationView = findViewById(R.id.NavigationId2);
+        // navigationView.setNavigationItemSelectedListener(this);
+    navigationView.setNavigationItemSelectedListener(this);
+
         tabLayout = (TabLayout) findViewById(R.id.tabLayoutId);
 
         viewPager = (ViewPager) findViewById(R.id.viewPagerId);
@@ -58,11 +65,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.NavigationId);
 
-        View headerView = navigationView.getHeaderView(0);
 
-        TextView navUsername = (TextView) headerView.findViewById(R.id.profile_name);
+    View headerView = navigationView.getHeaderView(0);
+
+     TextView navUsername = (TextView) headerView.findViewById(R.id.profile_name);
 
         List<UserModel> user =  mdb.userDAO().loadPhone();//select all data form room database user table
 
@@ -97,7 +104,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 */
     }
 
-    @Override
+
+ @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mToggle.onOptionsItemSelected(item))
         {
@@ -110,10 +118,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-       /* Intent intent;
+
+        Intent intent;
         if (menuItem.getItemId()==R.id.profile)
         {
-            intent=new Intent(this,ProfileEdit.class);
+         intent=new Intent(getApplicationContext(),ProfileEdit.class);
             startActivity(intent);
 
         }
@@ -127,7 +136,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         else if (menuItem.getItemId()==R.id.settings)
         {
-            intent=new Intent(this,SettingsPage.class);
+            intent=new Intent(this,PromotionPage.class);
             startActivity(intent);
 
         }
@@ -139,26 +148,44 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         }
 
-        else if (menuItem.getItemId()==R.id.language)
-        {
-            intent=new Intent(this,LanguagePage.class);
-            startActivity(intent);
 
-        }
-
-        else if (menuItem.getItemId()==R.id.policies)
-        {
-            intent=new Intent(this,PoliciesPage.class);
-            startActivity(intent);
-
-        }
-        else if (menuItem.getItemId()==R.id.logout)
-        {
-            intent=new Intent(this,HomePage.class);
-            startActivity(intent);
-
-        }*/
 
         return false;
     }
+
+   /* @Override
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+     Intent intent;
+        if (menuItem.getItemId()==R.id.profile)
+        {
+           *//* intent=new Intent(this,ProfileEdit.class);
+            startActivity(intent);*//*
+            Toast.makeText(this, "Camera", Toast.LENGTH_SHORT).show();
+        }
+
+        else if (menuItem.getItemId()==R.id.history)
+        {
+            intent=new Intent(this,HistoryPage.class);
+            startActivity(intent);
+
+        }
+
+        else if (menuItem.getItemId()==R.id.settings)
+        {
+            intent=new Intent(this,PromotionPage.class);
+            startActivity(intent);
+
+        }
+
+        else if (menuItem.getItemId()==R.id.help)
+        {
+            intent=new Intent(this,HelpPage.class);
+            startActivity(intent);
+
+        }
+
+        Toast.makeText(this, "Camera", Toast.LENGTH_SHORT).show();
+
+        return false;
+    }*/
 }
