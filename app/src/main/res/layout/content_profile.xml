@@ -39,6 +39,7 @@
                 style="@style/profileDetailsMiniText" />
 
             <ImageView
+                android:id="@+id/nameEditID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -49,6 +50,7 @@
         </RelativeLayout>
 
         <View style="@style/proifleDetailsView" />
+
         <RelativeLayout style="@style/profileDetailsLayout">
             <ImageView
                 android:id="@+id/mobileImageView"
@@ -65,16 +67,20 @@
                 android:layout_toRightOf="@id/mobileImageView"
                 style="@style/profileDetailsMiniText" />
 <ImageView
+    android:id="@+id/GenderEditID"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentRight="true"
     android:layout_centerInParent="true"
     android:src="@drawable/ic_edit_black_24dp"
     />
+
+
         </RelativeLayout>
 
         <View style="@style/proifleDetailsView" />
         <RelativeLayout style="@style/profileDetailsLayout">
+
             <ImageView
                 android:id="@+id/emailImageView"
                 android:src="@drawable/ic_email"
@@ -86,18 +92,18 @@
                 style="@style/profileDetailsTextMain" />
 
             <TextView
-                android:text="developer@appsnipp.com"
+                android:text="info@ppeepbd.com"
                 android:layout_toRightOf="@id/emailImageView"
                 style="@style/profileDetailsMiniText" />
 
 
             <ImageView
+                android:id="@+id/EmailEditID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_edit_black_24dp"
-                />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_edit_black_24dp" />
         </RelativeLayout>
 
         <View style="@style/proifleDetailsView" />
@@ -113,11 +119,15 @@
                 style="@style/profileDetailsTextMain" />
 
             <TextView
-                android:text="Avenue 2nd Street NW SY."
+                style="@style/profileDetailsMiniText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
                 android:layout_toRightOf="@id/addressImageView"
-                style="@style/profileDetailsMiniText" />
+                android:text="Monalee Tower, Bastola, Dhaka, Bangladesh" />
 
             <ImageView
+                android:id="@+id/AddressEditID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -145,6 +155,7 @@
                 style="@style/profileDetailsMiniText" />
 
             <ImageView
+                android:id="@+id/dobEditID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -152,6 +163,8 @@
                 android:src="@drawable/ic_edit_black_24dp"
                 />
         </RelativeLayout>
+        <View style="@style/proifleDetailsView" />
+
         <RelativeLayout style="@style/profileDetailsLayout">
             <ImageView
                 android:id="@+id/bloodgroupImage"
@@ -169,6 +182,7 @@
                 style="@style/profileDetailsMiniText" />
 
             <ImageView
+                android:id="@+id/BloodGroupEditID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

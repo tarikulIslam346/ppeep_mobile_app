@@ -16,7 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HelpPage"></activity>
+        <activity android:name=".ProfileBloodGroupEdit"></activity>
+        <activity android:name=".ProfileDobEdit" />
+        <activity android:name=".ProfileAddressEdit" />
+        <activity android:name=".ProfileEmailEdit" />
+        <activity android:name=".ProfileGenderEdit" />
+        <activity android:name=".ProfileNameEdit" />
+        <activity android:name=".OrderHistoryDetails" />
+        <activity android:name=".HelpPage" />
         <activity android:name=".PromotionPage" />
         <activity android:name=".HistoryPage" />
         <activity android:name=".ProfileEdit" />
@@ -44,7 +51,6 @@
         <meta-data
             android:name="com.facebook.accountkit.ClientToken"
             android:value="@string/ACCOUNT_KIT_CLIENT_TOKEN" />
-
 
         <activity android:name="com.facebook.accountkit.ui.AccountKitActivity" />
         <activity

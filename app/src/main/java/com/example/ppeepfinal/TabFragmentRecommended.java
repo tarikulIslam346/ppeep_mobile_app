@@ -33,19 +33,24 @@ public class TabFragmentRecommended extends Fragment {
         v=inflater.inflate(R.layout.activity_tab_fragment_recommended,container,false);
         mViewAll = (TextView) v.findViewById(R.id.tv_view_all);
 
-        /*mViewAll.setOnClickListener(new View.OnClickListener() {
+
+
+
+/*
+
+       mViewAll.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Fragment fragment = new TabFragmentOffer();
+                Fragment fragment = new TabFragmentNearby();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.show( fragment);
-                //fragmentTransaction.addToBackStack(null);
-                //fragmentTransaction.commit();
+             //   fragmentTransaction.show( fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
-        });*/
+        });
 
-
+*/
 
 
 

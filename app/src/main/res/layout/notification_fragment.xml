@@ -7,6 +7,7 @@
     android:background="@color/backgroundfragment"
     android:orientation="vertical"
     >
+<!--
 
     <com.smarteist.autoimageslider.SliderLayout
         android:layout_width="match_parent"
@@ -371,6 +372,7 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
         </GridLayout>
+-->
 
 
 

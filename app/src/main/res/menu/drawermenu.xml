@@ -13,7 +13,7 @@
             android:id="@+id/history"
             android:title="History"
             android:icon="@drawable/ic_history_black_24dp"/>
-        <item
+     <!--   <item
             android:id="@+id/promotionoffer"
             android:title="Promotion"
             android:icon="@drawable/promotionicon" />
@@ -23,7 +23,7 @@
             android:title="Settings"
             android:icon="@drawable/ic_settings_black_24dp" />
 
-
+-->
         <item
             android:id="@+id/help"
             android:title="Support"

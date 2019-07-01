@@ -15,9 +15,15 @@
 
     <string name="title_activity_profile">Profile</string>
     <string name="action_settings">Settings</string>
-
- 
-
-
+    <string-array name="bloodgroup_array">
+        <item>0(+ve)</item>
+        <item>0(-ve)</item>
+        <item>B(+ve)</item>
+        <item>B(-ve)</item>
+        <item>A(+ve)</item>
+        <item>A(-ve)</item>
+        <item>AB(+ve)</item>
+        <item>AB(-ve)</item>
+    </string-array>
 
 </resources>

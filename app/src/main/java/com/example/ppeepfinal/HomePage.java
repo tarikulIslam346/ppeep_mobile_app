@@ -133,13 +133,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(intent);
 
         }
-
-        else if (menuItem.getItemId()==R.id.settings)
-        {
-            intent=new Intent(this,PromotionPage.class);
-            startActivity(intent);
-
-        }
+        
 
         else if (menuItem.getItemId()==R.id.help)
         {
