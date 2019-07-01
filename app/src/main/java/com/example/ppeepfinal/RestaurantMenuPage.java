@@ -235,6 +235,7 @@ public class RestaurantMenuPage extends AppCompatActivity {
 
 
                     // Listview on child click listener
+
                     expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
                         @Override

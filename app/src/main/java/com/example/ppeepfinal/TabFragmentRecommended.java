@@ -1,15 +1,19 @@
 package com.example.ppeepfinal;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +25,9 @@ public class TabFragmentRecommended extends Fragment {
     View v, nextV;
     SliderLayout sliderLayout;
     TextView mViewAll;
+    ViewPager viewPager;
+    CardView cardViewForSearchChiniseCusine,cardViewForSearchCFastFoodCusine,cardViewForSearchBanglaCusine,cardViewForBakeryCusine;
+
 
     public TabFragmentRecommended(){
 
@@ -32,25 +39,57 @@ public class TabFragmentRecommended extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.activity_tab_fragment_recommended,container,false);
         mViewAll = (TextView) v.findViewById(R.id.tv_view_all);
+        viewPager = (ViewPager) getActivity().findViewById(R.id.viewPagerId) ;
+        cardViewForSearchChiniseCusine = (CardView) v.findViewById(R.id.cv_chinise);
+        cardViewForBakeryCusine = (CardView) v.findViewById(R.id.cv_bakery);
+        cardViewForSearchBanglaCusine = (CardView) v.findViewById(R.id.cv_bangla);
+        cardViewForSearchCFastFoodCusine = (CardView) v.findViewById(R.id.cv_fastfood);
 
 
 
 
-/*
-
-       mViewAll.setOnClickListener(new View.OnClickListener() {
+        mViewAll.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Fragment fragment = new TabFragmentNearby();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-             //   fragmentTransaction.show( fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+               viewPager.setCurrentItem(1);
+            }
+        });
+        cardViewForSearchChiniseCusine.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getContext(),SearchRestaurant.class);
+                intent.putExtra("search","Chinese");
+                startActivity(intent);
+            }
+        });
+        cardViewForBakeryCusine.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getContext(),SearchRestaurant.class);
+                intent.putExtra("search","Bakery");
+                startActivity(intent);
+            }
+        });
+        cardViewForSearchBanglaCusine.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getContext(),SearchRestaurant.class);
+                intent.putExtra("search","Bangla");
+                startActivity(intent);
+            }
+        });
+        cardViewForSearchCFastFoodCusine.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getContext(),SearchRestaurant.class);
+                intent.putExtra("search","Fastfood");
+                startActivity(intent);
             }
         });
 
-*/
+
+
+
 
 
 

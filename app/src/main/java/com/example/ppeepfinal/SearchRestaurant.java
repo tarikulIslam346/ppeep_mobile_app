@@ -2,18 +2,18 @@ package com.example.ppeepfinal;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.example.ppeepfinal.utilities.NetworkUtils;
 
@@ -26,35 +26,34 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabFragmentNearby extends Fragment  {
-    View v;
-    //private  static final int NUM_LIST_ITEM = 100;
+public class SearchRestaurant extends AppCompatActivity {
     private TabFragmentNearbyAdapter tabFragmentNearbyAdapter;
-    private RecyclerView mNumberOfRestaurant;
+    private RecyclerView mListOfRestaurant;
     ProgressBar mProgressbar;
-
-
-    public TabFragmentNearby(){
-
-    }
-
-
-    @Nullable
+    String search;
+    TextView searchPageResult;
+    Toolbar foodToolbar;
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search_restaurant);
+        foodToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.searchtoolbar);
+        setSupportActionBar(foodToolbar);
+        searchPageResult = (TextView) findViewById(R.id.tv_search_result_for);
 
 
-        v=inflater.inflate(R.layout.activity_tab_fragment_nearby,container,false);
-        URL restaurantListUrl = NetworkUtils.buildRestaurantUrl();
-        mProgressbar = (ProgressBar) v.findViewById(R.id.pv_restaurant_menu) ;
+        Intent intent = getIntent();
+        search = intent.getStringExtra("search");
+        searchPageResult.setText("Search result for : "+search);
+
+
+        URL restaurantSearchListUrl = NetworkUtils.buildSearchRestaurantUrl();
+        mProgressbar = (ProgressBar) findViewById(R.id.pv_restaurant_list_search) ;
         mProgressbar.setVisibility(View.VISIBLE);
-        new RestaurantListTask().execute(restaurantListUrl);
-        mNumberOfRestaurant = (RecyclerView)v.findViewById(R.id.rv_numbers);
-        return v;
+        new SearchRestaurant.RestaurantListTask().execute(restaurantSearchListUrl);
+        mListOfRestaurant = (RecyclerView) findViewById(R.id.rv_search_restaurant);
 
     }
-
-
     public class RestaurantListTask extends AsyncTask<URL, Void, String> implements   TabFragmentNearbyAdapter.ListItemClickListener {
 
         List<String> allNames = new ArrayList<String>();
@@ -71,7 +70,7 @@ public class TabFragmentNearby extends Fragment  {
             URL searchUrl = params[0];
             String RestaurantResults = null;
             try {
-                RestaurantResults = NetworkUtils.getRestaurantFromHttpUrl(searchUrl);
+                RestaurantResults = NetworkUtils.getRestaurantSearchFromHttpUrl(searchUrl,search);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -90,8 +89,8 @@ public class TabFragmentNearby extends Fragment  {
                 JSONArray jsonArray=null;
 
                 String name,closingTime,openingTime,cusine;
-                        int vatOfRestaurant,deliverChargeOfRestaurant;
-               int merchantId;
+                int vatOfRestaurant,deliverChargeOfRestaurant;
+                int merchantId;
 
 
                 try {
@@ -126,18 +125,18 @@ public class TabFragmentNearby extends Fragment  {
                 layoutParams.width = 0;
                 mProgressbar.setLayoutParams(layoutParams);
 
-                LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext());
-                mNumberOfRestaurant.setLayoutManager(layoutManager);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                mListOfRestaurant.setLayoutManager(layoutManager);
 
-                mNumberOfRestaurant.setHasFixedSize(true);
+                mListOfRestaurant.setHasFixedSize(true);
 
                 tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines,  this);
 
-                mNumberOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
+                mListOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
 
 
             }else{
-                Toast.makeText(getContext(), "No restaurant found or network not available", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "No restaurant found or network not available", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -150,13 +149,13 @@ public class TabFragmentNearby extends Fragment  {
             int vat = VatList.get(clickedItemIndex);
             int deliveryCharge = deliveryChargList.get(clickedItemIndex);
             //Toast.makeText(getContext(),"restaurant id" +clickedRestaurnat ,Toast.LENGTH_SHORT).show();
-           Intent foodmenuIntent = new Intent(getContext(),RestaurantMenuPage.class);
-           foodmenuIntent.putExtra("mercahnt_Id",String.valueOf(clickedRestaurnat));
+            Intent foodmenuIntent = new Intent(getApplicationContext(),RestaurantMenuPage.class);
+            foodmenuIntent.putExtra("mercahnt_Id",String.valueOf(clickedRestaurnat));
             foodmenuIntent.putExtra("restaurant_name",restaurantName);
             foodmenuIntent.putExtra("cuisine",cusine);
             foodmenuIntent.putExtra("vat",String.valueOf(vat));
             foodmenuIntent.putExtra("deliveryCharge",String.valueOf(deliveryCharge));
-           startActivity(foodmenuIntent);
+            startActivity(foodmenuIntent);
 
 
 

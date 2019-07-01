@@ -30,6 +30,7 @@
         android:iconifiedByDefault="false"
         android:focusedByDefault="false"
         android:layout_marginLeft="15sp"
+        android:id="@+id/sv_for_restaurant"
         >
 
     </SearchView>

@@ -31,16 +31,17 @@
         <activity android:name=".FoodCartPage" />
         <activity android:name=".RestaurantMenuPage" />
         <activity android:name=".CheckoutCart" />
-        <activity android:name=".TabFragmentOffer" />
+        <!--<activity android:name=".TabFragmentOffer" />
         <activity android:name=".TabFragmentPopular" />
         <activity android:name=".TabFragmentNearby" />
-        <activity android:name=".TabFragmentRecommended" />
+        <activity android:name=".TabFragmentRecommended" />-->
         <activity android:name=".FoodApp" />
         <activity android:name=".WebViewClass" />
         <activity android:name=".InputDetails" />
         <activity android:name=".VerificationComplete" />
         <activity android:name=".TermsConditions" />
         <activity android:name=".OTPpage" />
+        <activity android:name=".SearchRestaurant" />
 
         <meta-data
             android:name="com.facebook.accountkit.ApplicationName"
