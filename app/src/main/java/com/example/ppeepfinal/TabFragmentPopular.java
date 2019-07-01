@@ -60,6 +60,8 @@ public class TabFragmentPopular extends Fragment {
         List<String> ClosingTimes = new ArrayList<String>();
         List<String> Cusines = new ArrayList<String>();
         List<Integer> MerchantId = new ArrayList<Integer>();
+        List<Integer> VatList = new ArrayList<Integer>();
+        List<Integer> deliveryChargList = new ArrayList<Integer>();
 
         @Override
         protected String doInBackground(URL... params) {
@@ -86,6 +88,7 @@ public class TabFragmentPopular extends Fragment {
                 JSONArray jsonArray=null;
 
                 String name,closingTime,openingTime,cusine;
+                int vatOfRestaurant,deliverChargeOfRestaurant;
                 int merchantId;
 
 
@@ -100,12 +103,16 @@ public class TabFragmentPopular extends Fragment {
                         closingTime = restaurant.getString("closing");
                         cusine = restaurant.getString("cuisine");
                         merchantId = restaurant.getInt("merchant_id");
+                        vatOfRestaurant = restaurant.getInt("vat");
+                        deliverChargeOfRestaurant = restaurant.getInt("delivery_charges");
 
                         allNames.add(name);
                         OpeningTimes.add(openingTime);
                         ClosingTimes.add(closingTime);
                         Cusines.add(cusine);
                         MerchantId.add(merchantId);
+                        VatList.add(vatOfRestaurant);
+                        deliveryChargList.add(deliverChargeOfRestaurant);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -125,10 +132,10 @@ public class TabFragmentPopular extends Fragment {
                 tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines,  this);
 
                 mNumberOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
-                //  mSearchResultsTextView.setText(allNames.get(8));
+
 
             }else{
-                Toast.makeText(getContext(), "No restaurant", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "No restaurant found or network not available", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -138,11 +145,15 @@ public class TabFragmentPopular extends Fragment {
             int clickedRestaurnat = MerchantId.get(clickedItemIndex).intValue();
             String restaurantName = allNames.get(clickedItemIndex);
             String cusine = Cusines.get(clickedItemIndex);
+            int vat = VatList.get(clickedItemIndex);
+            int deliveryCharge = deliveryChargList.get(clickedItemIndex);
             //Toast.makeText(getContext(),"restaurant id" +clickedRestaurnat ,Toast.LENGTH_SHORT).show();
             Intent foodmenuIntent = new Intent(getContext(),RestaurantMenuPage.class);
             foodmenuIntent.putExtra("mercahnt_Id",String.valueOf(clickedRestaurnat));
             foodmenuIntent.putExtra("restaurant_name",restaurantName);
             foodmenuIntent.putExtra("cuisine",cusine);
+            foodmenuIntent.putExtra("vat",String.valueOf(vat));
+            foodmenuIntent.putExtra("deliveryCharge",String.valueOf(deliveryCharge));
             startActivity(foodmenuIntent);
 
 

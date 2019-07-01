@@ -3,6 +3,7 @@ package com.example.ppeepfinal;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -120,7 +121,6 @@ public class FoodCartPage extends AppCompatActivity  implements   FoodCartPageAd
             }
 
 
-
             // Called when a user swipes left or right on a ViewHolder
             @Override
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
@@ -167,6 +167,12 @@ public class FoodCartPage extends AppCompatActivity  implements   FoodCartPageAd
             mVat.setText("0.0");
             mTotal.setText("0.0");
             mDeliveryCharge.setText("0.0");
+            List<OrderMerchantModel> orderMerchantModel = mdb.orderMercahntDAO().loadOrderMerchant();
+            if(orderMerchantModel.size() !=0 ){
+                mdb.orderMercahntDAO().deleteOrderMerchant(orderMerchantModel.get(0));
+                mRestaurantName.setText("No order found");
+
+            }
 
         }
     }

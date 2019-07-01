@@ -1,5 +1,6 @@
 package com.example.ppeepfinal;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.widget.SearchView;
 
 public class FoodApp extends AppCompatActivity {
 Toolbar foodToolbar;
@@ -14,6 +17,7 @@ Menu foodCart;
     private TabLayout tabLayoutId;
     private ViewPager viewPagerId;
     private ViewPagerAdapter adapter;
+    SearchView restaurantSearchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +25,28 @@ Menu foodCart;
         foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
         setSupportActionBar(foodToolbar);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        restaurantSearchView = (SearchView)  findViewById(R.id.sv_for_restaurant);
+
+        restaurantSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Log.e("onQueryTextChange", "called");
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                Intent intent = new Intent(getApplicationContext(),SearchRestaurant.class);
+                intent.putExtra("search",query);
+                startActivity(intent);
+
+                return false;
+            }
+
+        });
 
 
 /*

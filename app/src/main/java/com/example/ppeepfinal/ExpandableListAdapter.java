@@ -76,7 +76,17 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
         TextView txtListChildId = (TextView) convertView.findViewById(R.id.tv_item_id);
         TextView textViewPrice = (TextView) convertView.findViewById(R.id.price_food);
-        TextView textViewAddCart = (TextView)convertView.findViewById(R.id.tv_add_to_cart) ;
+        final TextView  textViewAddCart = (TextView)convertView.findViewById(R.id.tv_add_to_cart) ;
+        textViewAddCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // if (child.getCount() > 0) {
+                int i =1;
+                   Toast.makeText(v.getContext(),"Clicked", Toast.LENGTH_LONG).show();
+                textViewAddCart.setText("+ "+ String.valueOf(i)+ " -");
+                //}
+            }
+        });
 
         txtListChild.setText(childText);
         txtListChildId.setText(String.valueOf(childDataIdText));
