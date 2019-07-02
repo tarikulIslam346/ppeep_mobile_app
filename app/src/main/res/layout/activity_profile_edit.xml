@@ -65,6 +65,7 @@
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/tv_edit_page_profile_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PPEEP Limited"
@@ -72,6 +73,7 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/tv_edit_page_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+8801844462227"
@@ -106,6 +108,12 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
+    <ProgressBar
+        android:id="@+id/pv_edit_page_profile_detail"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
 
     <include layout="@layout/content_profile" />
 

@@ -33,6 +33,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     private ViewPager viewPager;
 
     private ViewPagerAdapter adapter;
+    TextView navUsername;
+    View headerView;
 
     private UserDatabase mdb;// declear databse
 
@@ -45,7 +47,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         NavigationView navigationView = findViewById(R.id.NavigationId2);
         // navigationView.setNavigationItemSelectedListener(this);
-    navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this);
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayoutId);
 
@@ -67,13 +69,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
 
 
-    View headerView = navigationView.getHeaderView(0);
+        headerView = navigationView.getHeaderView(0);
 
-     TextView navUsername = (TextView) headerView.findViewById(R.id.profile_name);
+        navUsername = (TextView) headerView.findViewById(R.id.profile_name);
 
-        List<UserModel> user =  mdb.userDAO().loadPhone();//select all data form room database user table
-
-        if(user.size()!=0) {navUsername.setText(user.get(0).getName());}
+         loadUserFromDb();
 
         //add fragment here
         adapter.AddFragment(new FragmentHome(),"Home");
@@ -102,6 +102,20 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             if (tab != null) tab.setCustomView(R.layout.customtab);
         }
 */
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadUserFromDb();
+    }
+
+    public  void loadUserFromDb(){
+
+
+        List<UserModel> user =  mdb.userDAO().loadPhone();//select all data form room database user table
+
+        if(user.size()!=0) {navUsername.setText(user.get(0).getName());}
     }
 
 
