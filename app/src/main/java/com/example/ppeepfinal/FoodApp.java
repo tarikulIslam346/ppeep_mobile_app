@@ -65,20 +65,20 @@ Menu foodCart;
 
 
 
-        adapter.AddFragment(new TabFragmentRecommended(),"Recommended");
+        adapter.AddFragment(new TabFragmentRecommended(),"Home");
         adapter.AddFragment(new TabFragmentNearby(),"Nearby");
         //  adapter.AddFragment(new FragmentNotification() ,"Promotion");
         adapter.AddFragment(new TabFragmentPopular(),"Popular");
-        adapter.AddFragment(new TabFragmentOffer(),"Offer");
+        adapter.AddFragment(new TabFragmentOffer(),"Free Delivery");
 
 
         viewPagerId.setAdapter(adapter);
         tabLayoutId.setupWithViewPager(viewPagerId);
 
-        tabLayoutId.getTabAt(0).setIcon(R.drawable.recommendedicon);
+        tabLayoutId.getTabAt(0).setIcon(R.drawable.homeicon);
         tabLayoutId.getTabAt(1).setIcon(R.drawable.nearbyicon);
         tabLayoutId.getTabAt(2).setIcon(R.drawable.recommendedicon2);
-        tabLayoutId.getTabAt(3).setIcon(R.drawable.offericon);
+        tabLayoutId.getTabAt(3).setIcon(R.drawable.freedeliveryicon);
 
 
 
