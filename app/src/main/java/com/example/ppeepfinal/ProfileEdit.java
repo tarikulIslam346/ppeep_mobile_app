@@ -1,7 +1,12 @@
 package com.example.ppeepfinal;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,6 +35,9 @@ public class ProfileEdit extends AppCompatActivity {
     private UserDatabase mdb;
     TextView myProfileName,myPhoneNo,myProfileDetailName,myProfileDetailGender,myProfileDetaildob,myProfileDetailemail;
     ProgressBar progressBar;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    FloatingActionButton floatingActionButtonImage;
+    ImageView accountProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,15 @@ public class ProfileEdit extends AppCompatActivity {
         myProfileDetailGender = (TextView) findViewById(R.id.tv_profile_detail_gender);
         myProfileDetailemail = (TextView) findViewById(R.id.tv_profile_detail_email);
         myProfileDetaildob = (TextView) findViewById(R.id.tv_profile_detail_dob);
+        floatingActionButtonImage = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        accountProfile = (ImageView) findViewById(R.id.imageview_account_profile);
+
+        floatingActionButtonImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectImage();
+            }
+        });
 
         loadUserFromDb();
         loadUserFromServer();
@@ -144,6 +162,44 @@ public class ProfileEdit extends AppCompatActivity {
         });
 
     }
+
+    private void selectImage() {
+        final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setTitle("Add Photo!");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (options[item].equals("Take Photo"))
+                {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    //File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
+                    //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+                    startActivityForResult(intent, 1);
+                }
+                else if (options[item].equals("Choose from Gallery"))
+                {
+                    Intent intent = new   Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(intent, 2);
+                }
+                else if (options[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            accountProfile.setImageBitmap(imageBitmap);
+        }
+    }
+
+
 
     @Override
     protected void onRestart() {

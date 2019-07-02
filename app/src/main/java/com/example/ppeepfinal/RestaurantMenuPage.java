@@ -1,5 +1,7 @@
 package com.example.ppeepfinal;
 
+import android.app.Activity;
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
@@ -194,8 +196,35 @@ public class RestaurantMenuPage extends AppCompatActivity {
                     layoutParams.height = 0;// set layout height to zero
                     layoutParams.width = 0;// set layout width to zero
                     mProgressbar.setLayoutParams(layoutParams);// set progressbar layout height & width
-                    listAdapter = new ExpandableListAdapter(getApplicationContext(), listDataHeader, listDataChild,listDataChildPrice,listDataChildId);// setting list adapter
+
+                    listAdapter = new ExpandableListAdapter(
+                            getApplicationContext(),
+                            listDataHeader,
+                            listDataChild,
+                            listDataChildPrice,
+                            listDataChildId,
+                            Integer.valueOf(merchantId),
+                            vat,deliveryCharge,
+                            mRestaurantName.getText().toString()
+                           );// setting list adapter
                     expListView.setAdapter(listAdapter);
+
+                    View parentLayout = findViewById(R.id.lvExp);
+
+                    /*List<OrderModel> order =  mdb.orderDAO().loadOrder();
+                    if(order.size()!= 0){
+                        Snackbar.make(parentLayout, " Item has been added to cart", Snackbar.LENGTH_INDEFINITE)
+                                .setAction("Go to cart", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(getApplicationContext(),FoodCartPage.class);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .show();
+                    }*/
+
+
                     // Listview Group click listener
                    /* expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
@@ -236,11 +265,14 @@ public class RestaurantMenuPage extends AppCompatActivity {
 
                     // Listview on child click listener
 
-                    expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                    /*expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
                         @Override
                         public boolean onChildClick(ExpandableListView parent, View v,
                                                     int groupPosition, int childPosition, long id) {
+
+
+
 
                             List<OrderMerchantModel> orderMerchantModelList =  mdb.orderMercahntDAO().loadOrderMerchant();
                             //add order item if order from same marchant or no add to cart select
@@ -281,7 +313,7 @@ public class RestaurantMenuPage extends AppCompatActivity {
 
                             return false;
                         }
-                    });
+                    });*/
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -291,6 +323,9 @@ public class RestaurantMenuPage extends AppCompatActivity {
             }
         }
     }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
