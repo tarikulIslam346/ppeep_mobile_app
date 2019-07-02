@@ -1,6 +1,9 @@
 package com.example.ppeepfinal;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,17 +12,31 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.smarteist.autoimageslider.DefaultSliderView;
 import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TabFragmentRecommended extends Fragment {
     View v, nextV;
@@ -27,6 +44,9 @@ public class TabFragmentRecommended extends Fragment {
     TextView mViewAll;
     ViewPager viewPager;
     CardView cardViewForSearchChiniseCusine,cardViewForSearchCFastFoodCusine,cardViewForSearchBanglaCusine,cardViewForBakeryCusine;
+    List<String>imgUrl;
+    ProgressBar progressBar;
+
 
 
     public TabFragmentRecommended(){
@@ -44,11 +64,12 @@ public class TabFragmentRecommended extends Fragment {
         cardViewForBakeryCusine = (CardView) v.findViewById(R.id.cv_bakery);
         cardViewForSearchBanglaCusine = (CardView) v.findViewById(R.id.cv_bangla);
         cardViewForSearchCFastFoodCusine = (CardView) v.findViewById(R.id.cv_fastfood);
+        progressBar = (ProgressBar) v.findViewById(R.id.pv_offerr);
 
 
 
 
-        mViewAll.setOnClickListener(new View.OnClickListener() {
+                mViewAll.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                viewPager.setCurrentItem(1);
@@ -91,15 +112,12 @@ public class TabFragmentRecommended extends Fragment {
 
 
 
+       progressBar.setVisibility(View.VISIBLE);
+
+        URL offerListUrl = NetworkUtils.buildOfferUrl();
+        new RestaurantListOfferTask().execute(offerListUrl);
 
 
-
-
-        sliderLayout = v.findViewById(R.id.FoodAppimageSlider);
-        //    sliderLayout.setIndicatorAnimation(IndicatorAnimations.NONE); //set indicator animation by using SliderLayout.Animations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
-        sliderLayout.setScrollTimeInSec(2); //set scroll delay in seconds :
-
-        setSliderViews();
         return v;
     }
 
@@ -119,16 +137,22 @@ public class TabFragmentRecommended extends Fragment {
 
             switch (i) {
                 case 0:
-                    sliderView.setImageDrawable(R.drawable.offerimageslider1);
-                    //  sliderView.setImageUrl("https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+                    //sliderView.setImageDrawable(R.drawable.offerimageslider1);
+                    String URL = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(0);
+                      sliderView.setImageUrl(URL);
                     break;
                 case 1:
-                    sliderView.setImageDrawable(R.drawable.offerimageslider2);
+                    //sliderView.setImageDrawable(R.drawable.offerimageslider2);
+                    String URL1 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(1);
+                    sliderView.setImageUrl(URL1);
                     // sliderView.setImageUrl("https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
 
                     break;
                 case 2:
-                    sliderView.setImageDrawable(R.drawable.offerimageslider4);
+                    //sliderView.setImageDrawable(R.drawable.offerimageslider4);
+
+                    String URL2 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(2);
+                    sliderView.setImageUrl(URL2);
                     //  sliderView.setImageUrl("https://images.pexels.com/photos/747964/pexels-photo-747964.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
                     break;
 
@@ -150,6 +174,83 @@ public class TabFragmentRecommended extends Fragment {
 
 
     }
+
+    public class RestaurantListOfferTask extends AsyncTask<URL, Void, String> {
+
+
+
+        @Override
+        protected String doInBackground(URL... params) {
+
+            URL searchUrl = params[0];
+            String offerResults = null;
+            try {
+                offerResults = NetworkUtils.getOfferFromHttpUrl(searchUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return offerResults;
+        }
+
+        // COMPLETED (3) Override onPostExecute to display the results in the TextView
+        @Override
+        protected void onPostExecute(String RestaurantResults) {
+            if (RestaurantResults != null && !RestaurantResults.equals("")) {
+
+
+
+                String json = RestaurantResults;
+                JSONObject restaurantList = null;
+                JSONArray jsonArray=null;
+
+                String imageUrl;
+                imgUrl = new ArrayList<String>();
+
+
+
+                try {
+                    restaurantList = new JSONObject(json);
+                    jsonArray = restaurantList.getJSONArray("offer_list");
+
+                    for (int i=0; i<jsonArray.length(); i++) {
+                        JSONObject restaurant = jsonArray.getJSONObject(i);
+                        imageUrl = restaurant.getString("img_url");
+                        if(i==1)Toast.makeText(getContext(),""+imageUrl,Toast.LENGTH_LONG).show();
+
+                        imgUrl.add(imageUrl);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                progressBar.setVisibility(View.INVISIBLE);
+                ViewGroup.LayoutParams layoutParams = progressBar.getLayoutParams();
+
+                layoutParams.height = 0;
+                layoutParams.width = 0;
+                progressBar.setLayoutParams(layoutParams);
+
+
+                sliderLayout = v.findViewById(R.id.FoodAppimageSlider);
+                //    sliderLayout.setIndicatorAnimation(IndicatorAnimations.NONE); //set indicator animation by using SliderLayout.Animations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+                sliderLayout.setScrollTimeInSec(2); //set scroll delay in seconds :
+
+                setSliderViews();
+
+
+
+            }else{
+                Toast.makeText(getContext(), "No restaurant found or network not available", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+    }
+
+
+
+
 
 
 

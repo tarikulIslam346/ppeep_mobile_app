@@ -33,6 +33,12 @@ public class NetworkUtils {
             "https://foodexpress.com.bd/ppeep/public/api/api/order_create";
     final  static  String RESTAURANT_SEARCH_URL =
             "https://foodexpress.com.bd/ppeep/public/api/api/search/restaurnats";
+    final  static  String OFFER_URL =
+            "https://foodexpress.com.bd/ppeep/public/api/api/offers";
+    final  static  String PROFILE_DETAIL =
+            "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/phone";
+    final static  String PROFILE_UPDATE=
+            "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/update";
 
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
@@ -59,6 +65,17 @@ public class NetworkUtils {
         return retaurantSearchurl;
     }
 
+    public static URL buildOfferUrl() {
+        Uri builtUri = Uri.parse(OFFER_URL).buildUpon().build();
+        URL offerUrl = null;
+        try {
+            offerUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return offerUrl;
+    }
+
     public static URL buildOrderUrl() {
         Uri builtUri = Uri.parse(ORDER_CREATE_URL).buildUpon().build();
         URL orderUrl = null;
@@ -68,6 +85,29 @@ public class NetworkUtils {
             e.printStackTrace();
         }
         return orderUrl;
+    }
+
+
+    public static URL buildProfileDetailInfoUrl() {
+        Uri builtUri = Uri.parse(PROFILE_DETAIL).buildUpon().build();
+        URL profileDetailInfoUrl = null;
+        try {
+            profileDetailInfoUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return profileDetailInfoUrl;
+    }
+   /****** Profile update******/
+    public static URL buildProfileUpdateUrl() {
+        Uri builtUri = Uri.parse(PROFILE_UPDATE).buildUpon().build();
+        URL profileUpdateUrl = null;
+        try {
+            profileUpdateUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return profileUpdateUrl;
     }
 
 
@@ -115,6 +155,27 @@ public class NetworkUtils {
         return url;
     }
 
+    public static String getOfferFromHttpUrl(URL offerUrl) throws IOException {
+        HttpURLConnection urlConnection = (HttpURLConnection) offerUrl.openConnection();
+
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
     public static String getRestaurantFromHttpUrl(URL retauranturl) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) retauranturl.openConnection();
 
@@ -122,6 +183,80 @@ public class NetworkUtils {
         try {
             InputStream in = urlConnection.getInputStream();
 
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static String getProfileUpdateResponseFromHttpUrl(URL profileDetailInfoUrl, String phone,String updateString,String updateData) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) profileDetailInfoUrl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+
+        // setPhoneNo();
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "phone", phone);
+        param.put( updateString, updateData);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+    public static String getProfileDetailResponseFromHttpUrl(URL profileDetailInfoUrl, String phone) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) profileDetailInfoUrl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+
+        // setPhoneNo();
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "phone", phone);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+
+
+        try {
+            InputStream in = urlConnection.getInputStream();
             Scanner scanner = new Scanner(in);
             scanner.useDelimiter("\\A");
 

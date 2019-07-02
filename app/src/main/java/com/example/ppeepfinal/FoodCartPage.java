@@ -131,7 +131,7 @@ public class FoodCartPage extends AppCompatActivity  implements   FoodCartPageAd
                 List<OrderModel> orders = foodCartPageAdapter.getmOrders();
                 mdb.orderDAO().deleteOrder(orders.get(position));
                 View parentLayout = findViewById(R.id.snackbar_show);
-                Snackbar.make(parentLayout, orders.get(position).getItemName()+ " has been deleted", Snackbar.LENGTH_LONG)
+                Snackbar.make(parentLayout, orders.get(position).getItemName()+ " has been deleted", Snackbar.LENGTH_INDEFINITE)
                         .show();
                 retriveOrder();
 

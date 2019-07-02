@@ -8,6 +8,13 @@
     tools:context=".TabFragmentRecommended"
     android:id="@+id/tab_offer_container">
 
+    <ProgressBar
+        android:id="@+id/pv_offerr"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:visibility="invisible"/>
+
 
     <com.smarteist.autoimageslider.SliderLayout
         android:layout_width="match_parent"
