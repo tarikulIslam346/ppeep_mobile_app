@@ -69,7 +69,7 @@ public class PreOrderTimeSelect extends AppCompatActivity {
                                     am_pm="AM";
                                 }
 
-                                timePicker.setText(sHour + ":" + sMinute +""+am_pm);
+                                timePicker.setText(sHour + ":" + sMinute +" "+am_pm);
                             }
                         }, hour, minutes, false);
                 picker.show();
