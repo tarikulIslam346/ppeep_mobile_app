@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProfileBloodGroupEdit"></activity>
+        <activity android:name=".OrderSubmitComplete"></activity>
+        <activity android:name=".ApplyPromoPage" />
+        <activity android:name=".ProfileBloodGroupEdit" />
         <activity android:name=".ProfileDobEdit" />
         <activity android:name=".ProfileAddressEdit" />
         <activity android:name=".ProfileEmailEdit" />
@@ -31,10 +33,12 @@
         <activity android:name=".FoodCartPage" />
         <activity android:name=".RestaurantMenuPage" />
         <activity android:name=".CheckoutCart" />
-        <!--<activity android:name=".TabFragmentOffer" />
+        <!--
+<activity android:name=".TabFragmentOffer" />
         <activity android:name=".TabFragmentPopular" />
         <activity android:name=".TabFragmentNearby" />
-        <activity android:name=".TabFragmentRecommended" />-->
+        <activity android:name=".TabFragmentRecommended" />
+        -->
         <activity android:name=".FoodApp" />
         <activity android:name=".WebViewClass" />
         <activity android:name=".InputDetails" />

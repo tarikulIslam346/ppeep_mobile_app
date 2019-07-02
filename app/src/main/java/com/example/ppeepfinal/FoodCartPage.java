@@ -47,6 +47,22 @@ public class FoodCartPage extends AppCompatActivity  implements   FoodCartPageAd
         foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
         setSupportActionBar(foodToolbar);
 
+        TextView orderSubmit = (TextView) findViewById(R.id.placeOrderId);
+        orderSubmit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View v) {
+
+                Intent orderSubmitIntent = new Intent(getApplicationContext(),OrderSubmitComplete.class);
+                startActivity(orderSubmitIntent);
+
+            }
+
+        });
+
+
+
         mdb = UserDatabase.getInstance(getApplicationContext());
         List<OrderMerchantModel> orderMerchant = mdb.orderMercahntDAO().loadOrderMerchant();
         mRestaurantName = (TextView) findViewById(R.id.tv_restaurant_name_food_cart);
