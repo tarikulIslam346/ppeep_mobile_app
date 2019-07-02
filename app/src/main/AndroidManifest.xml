@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OrderSubmitComplete"></activity>
+        <activity android:name=".PreOrderTimeSelect"></activity>
+        <activity android:name=".OrderSubmitComplete" />
         <activity android:name=".ApplyPromoPage" />
         <activity android:name=".ProfileBloodGroupEdit" />
         <activity android:name=".ProfileDobEdit" />

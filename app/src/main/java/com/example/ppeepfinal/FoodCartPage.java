@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ppeepfinal.data.OrderMerchantModel;
@@ -47,7 +48,7 @@ public class FoodCartPage extends AppCompatActivity  implements   FoodCartPageAd
         foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
         setSupportActionBar(foodToolbar);
 
-        TextView orderSubmit = (TextView) findViewById(R.id.placeOrderId);
+        Button orderSubmit = (Button) findViewById(R.id.placeOrderId);
         orderSubmit.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -55,6 +56,20 @@ public class FoodCartPage extends AppCompatActivity  implements   FoodCartPageAd
             public void onClick(View v) {
 
                 Intent orderSubmitIntent = new Intent(getApplicationContext(),OrderSubmitComplete.class);
+                startActivity(orderSubmitIntent);
+
+            }
+
+        });
+
+        Button preOrderFood = (Button) findViewById(R.id.preorderfoodID);
+        preOrderFood.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View v) {
+
+                Intent orderSubmitIntent = new Intent(getApplicationContext(),PreOrderTimeSelect.class);
                 startActivity(orderSubmitIntent);
 
             }
