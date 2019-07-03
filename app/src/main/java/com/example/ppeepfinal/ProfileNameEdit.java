@@ -1,5 +1,6 @@
 package com.example.ppeepfinal;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -39,7 +40,16 @@ public class ProfileNameEdit extends AppCompatActivity {
         List<UserModel> user =  mdb.userDAO().loadPhone();//select all data form room database user table
         userNameTextInput = (EditText) findViewById(R.id.userNameTextInputEditText);
         userNameUpdate = (Button) findViewById(R.id.userNameUpdateButton);
+      final Button  cancelButton = (Button) findViewById(R.id.cancelButton);
         progressBar = (ProgressBar) findViewById(R.id.pv_edit_profile_name);
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SwithToProfile();
+            }
+        });
+
         if(user.size()!= 0){//if data exist
 
             myPhoneNo = user.get(0).getPhone();// set phone to text view
@@ -56,6 +66,7 @@ public class ProfileNameEdit extends AppCompatActivity {
                         //update from server
                         progressBar.setVisibility(View.VISIBLE);
                         userNameUpdate.setVisibility(View.INVISIBLE);
+                        cancelButton.setVisibility(View.INVISIBLE);
                         URL profileUpdateUrl = NetworkUtils.buildProfileUpdateUrl();
                         new ProfileNameUpdateTask().execute(profileUpdateUrl);
                     }
@@ -114,7 +125,9 @@ public class ProfileNameEdit extends AppCompatActivity {
                 layoutParams.height = 0;
                 layoutParams.width = 0;
                 progressBar.setLayoutParams(layoutParams);
-                userNameUpdate.setVisibility(View.VISIBLE);
+
+
+
                 if(success != null){
                     List<UserModel> user =  mdb.userDAO().loadPhone();
                     if(user.size()!= 0){
@@ -127,6 +140,8 @@ public class ProfileNameEdit extends AppCompatActivity {
                     View parentLayout = findViewById(R.id.sb_user_name_error);
                     Snackbar.make(parentLayout,  ""+success, Snackbar.LENGTH_LONG)
                             .show();
+                    SwithToProfile();
+
                 }
                 if(error  != null){
                     View parentLayout = findViewById(R.id.sb_user_name_error);
@@ -140,6 +155,12 @@ public class ProfileNameEdit extends AppCompatActivity {
             }
         }
 
+
+    }
+    public void SwithToProfile(){
+
+        Intent updateintent=new Intent(getApplicationContext(),ProfileEdit.class);
+        startActivity(updateintent);
 
     }
 }

@@ -33,7 +33,7 @@ import java.util.List;
 public class ProfileEdit extends AppCompatActivity {
 
     private UserDatabase mdb;
-    TextView myProfileName,myPhoneNo,myProfileDetailName,myProfileDetailGender,myProfileDetaildob,myProfileDetailemail;
+    TextView myProfileName,myPhoneNo,myProfileDetailName,myProfileDetailGender,myProfileDetaildob,myProfileDetailemail,MyProfileAddress;
     ProgressBar progressBar;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     FloatingActionButton floatingActionButtonImage;
@@ -54,6 +54,7 @@ public class ProfileEdit extends AppCompatActivity {
         myProfileDetailGender = (TextView) findViewById(R.id.tv_profile_detail_gender);
         myProfileDetailemail = (TextView) findViewById(R.id.tv_profile_detail_email);
         myProfileDetaildob = (TextView) findViewById(R.id.tv_profile_detail_dob);
+        MyProfileAddress=(TextView) findViewById(R.id.addresTextView);
         floatingActionButtonImage = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         accountProfile = (ImageView) findViewById(R.id.imageview_account_profile);
 
@@ -68,98 +69,6 @@ public class ProfileEdit extends AppCompatActivity {
         loadUserFromServer();
 
 
-
-        ImageView nameEdit = findViewById(R.id.nameEditID);
-        nameEdit.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-
-                Intent NameEditIntent = new Intent(getApplicationContext(),ProfileNameEdit.class);
-                startActivity(NameEditIntent);
-
-            }
-
-        });
-
-
-
-        ImageView GenderEdit = findViewById(R.id.GenderEditID);
-        GenderEdit.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-
-                Intent GenderEditIntent = new Intent(getApplicationContext(),ProfileGenderEdit.class);
-                startActivity(GenderEditIntent);
-
-            }
-
-        });
-
-
-
-
-        ImageView EmailEdit = findViewById(R.id.EmailEditID);
-        EmailEdit.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-
-                Intent EmailEditIntent = new Intent(getApplicationContext(),ProfileEmailEdit.class);
-                startActivity(EmailEditIntent);
-
-            }
-
-        });
-
-
-        ImageView AddressEdit = findViewById(R.id.AddressEditID);
-        AddressEdit.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-
-                Intent AddressEditIntent = new Intent(getApplicationContext(),ProfileAddressEdit.class);
-                startActivity(AddressEditIntent);
-
-            }
-
-        });
-
-
-        ImageView DOBEdit = findViewById(R.id.dobEditID);
-        DOBEdit.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-
-                Intent DOBEditIntent = new Intent(getApplicationContext(),ProfileDobEdit.class);
-                startActivity(DOBEditIntent);
-
-            }
-
-        });
-
-
-        ImageView BloodEdit = findViewById(R.id.BloodGroupEditID);
-        BloodEdit.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-
-                Intent BloodEditIntent = new Intent(getApplicationContext(),ProfileBloodGroupEdit.class);
-                startActivity(BloodEditIntent);
-
-            }
-
-        });
 
     }
 
@@ -224,6 +133,7 @@ public class ProfileEdit extends AppCompatActivity {
         new ProfileDetailTask().execute(profileDetailUrl);
     }
 
+
     public class ProfileDetailTask extends AsyncTask<URL, Void, String> {
 
 
@@ -252,7 +162,7 @@ public class ProfileEdit extends AppCompatActivity {
                 JSONObject userInfo = null;
                 JSONArray jsonArray=null;
 
-                String userName = null,email = null,gender =null,dob=null;
+                String userName = null,email = null,gender =null,dob=null,address = null;
 
 
 
@@ -261,11 +171,12 @@ public class ProfileEdit extends AppCompatActivity {
                     jsonArray = userInfo.getJSONArray("user");
 
                     for (int i=0; i<jsonArray.length(); i++) {
-                        JSONObject restaurant = jsonArray.getJSONObject(i);
-                        userName = restaurant.getString("first_name");
-                        email = restaurant.getString("email");
-                        gender = restaurant.getString("gender");
-                        dob = restaurant.getString("dob");
+                        JSONObject userProfile = jsonArray.getJSONObject(i);
+                        userName = userProfile.getString("first_name");
+                        email = userProfile.getString("email");
+                        gender = userProfile.getString("gender");
+                        dob = userProfile.getString("dob");
+                        address = userProfile.getString("address");
 
                     }
                 } catch (JSONException e) {
@@ -291,6 +202,105 @@ public class ProfileEdit extends AppCompatActivity {
                 if(dob != null ){
                     myProfileDetaildob.setText(dob);
                 }
+                if(address != null ){
+                    MyProfileAddress.setText(address);
+                }
+
+                ImageView nameEdit = findViewById(R.id.nameEditID);
+                nameEdit.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+
+                    public void onClick(View v) {
+
+                        Intent NameEditIntent = new Intent(getApplicationContext(),ProfileNameEdit.class);
+
+                        startActivity(NameEditIntent);
+
+                    }
+
+                });
+
+
+
+                ImageView GenderEdit = findViewById(R.id.GenderEditID);
+                GenderEdit.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+
+                    public void onClick(View v) {
+
+                        Intent GenderEditIntent = new Intent(getApplicationContext(),ProfileGenderEdit.class);
+                        startActivity(GenderEditIntent);
+
+                    }
+
+                });
+
+
+
+
+                ImageView EmailEdit = findViewById(R.id.EmailEditID);
+                EmailEdit.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+
+                    public void onClick(View v) {
+
+                        Intent EmailEditIntent = new Intent(getApplicationContext(),ProfileEmailEdit.class);
+                        EmailEditIntent.putExtra("email",myProfileDetailemail.getText().toString());
+                        startActivity(EmailEditIntent);
+
+                    }
+
+                });
+
+
+                ImageView AddressEdit = findViewById(R.id.AddressEditID);
+                AddressEdit.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+
+                    public void onClick(View v) {
+
+                        Intent AddressEditIntent = new Intent(getApplicationContext(),ProfileAddressEdit.class);
+                        AddressEditIntent.putExtra("address",MyProfileAddress.getText().toString());
+                        startActivity(AddressEditIntent);
+
+                    }
+
+                });
+
+
+                ImageView DOBEdit = findViewById(R.id.dobEditID);
+                DOBEdit.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+
+                    public void onClick(View v) {
+
+                        Intent DOBEditIntent = new Intent(getApplicationContext(),ProfileDobEdit.class);
+                        startActivity(DOBEditIntent);
+
+                    }
+
+                });
+
+
+                ImageView BloodEdit = findViewById(R.id.BloodGroupEditID);
+                BloodEdit.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+
+                    public void onClick(View v) {
+
+                        Intent BloodEditIntent = new Intent(getApplicationContext(),ProfileBloodGroupEdit.class);
+                        startActivity(BloodEditIntent);
+
+                    }
+
+                });
+
 
 
 

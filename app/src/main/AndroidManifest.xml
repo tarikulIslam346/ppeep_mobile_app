@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ppeepfinal">
 
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,8 +14,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,7 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PreOrderTimeSelect"></activity>
+        <activity android:name=".GroupFriendAdd"></activity>
+        <activity android:name=".SupportPage" />
+        <activity android:name=".PreOrderTimeSelect" />
         <activity android:name=".OrderSubmitComplete" />
         <activity android:name=".ApplyPromoPage" />
         <activity android:name=".ProfileBloodGroupEdit" />
