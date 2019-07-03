@@ -5,8 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="55dp"
         app:title="PPEEP Food"
@@ -14,93 +13,95 @@
         android:id="@+id/foodtoolbar"
         android:background="#FAFAF9">
 
+    </androidx.appcompat.widget.Toolbar>
 
 
 
 
-
-    </android.support.v7.widget.Toolbar>
-
-
-
-
-
-<FrameLayout
+<com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:orientation="vertical">
-
-    <LinearLayout
+    app:cardElevation="4dp"
+    android:layout_margin="10dp">
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:orientation="vertical">
 
-
         <LinearLayout
-            android:background="@drawable/burgerbackground"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:orientation="vertical"
-            android:layout_weight="1">
-            <RelativeLayout
+            android:layout_height="180dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:background="@drawable/burgerbackground"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tv_restaurnat_name"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Burger King"
-                        android:textSize="20sp"
-                        android:textColor="#971409"
-                        android:textStyle="bold"
-                        android:layout_alignParentLeft="true"
-                        />
-                    <TextView
-                        android:id="@+id/tv_cusine"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#3C1212"
-                        android:text="Cuisine" />
-                </LinearLayout>
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tv_restaurnat_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Burger King"
+                            android:textSize="20sp"
+                            android:textColor="#971409"
+                            android:textStyle="bold"
+                            android:layout_alignParentLeft="true"
+                            />
+                        <TextView
+                            android:id="@+id/tv_cusine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#3C1212"
+                            android:text="Cuisine" />
+                    </LinearLayout>
 
 
-            </RelativeLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
 
         </LinearLayout>
 
 
 
-    </LinearLayout>
-
-
-
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:adjustViewBounds="true"
-        android:layout_margin="10dp"
-        android:src="@drawable/foodexpress_icon" />
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:adjustViewBounds="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/foodexpress_icon" />
 
 
 
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
-    </LinearLayout>
-</FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
     <ProgressBar
         android:id="@+id/pv_restaurant_menu_item"
         android:layout_width="42dp"

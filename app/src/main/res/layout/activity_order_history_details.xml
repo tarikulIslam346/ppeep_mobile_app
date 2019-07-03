@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".OrderHistoryDetails">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="55dp"
         app:title="History Details"
@@ -16,7 +16,7 @@
         android:id="@+id/foodtoolbar"
         android:background="@drawable/toolbarbg"
         />
-<ScrollView
+    <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -156,5 +156,5 @@
         android:layout_marginTop="50dp"
         android:background="#EB0707"
         />
-</ScrollView>
+    </ScrollView>
 </LinearLayout>

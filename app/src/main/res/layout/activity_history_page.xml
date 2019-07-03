@@ -5,27 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     tools:context=".HistoryPage">
 
-
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="55dp"
         app:title="History"
         android:gravity="center"
         android:theme="@style/AppTheme2"
         android:id="@+id/foodtoolbar"
-        android:background="@drawable/toolbarbg"
-        />
-
-  <android.support.v7.widget.RecyclerView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:id="@+id/historyRecycleID"
-      >
+        android:background="@drawable/toolbarbg" />
 
 
-  </android.support.v7.widget.RecyclerView>
+    <androidx.recyclerview.widget.RecyclerView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:id="@+id/historyRecycleID">
+
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

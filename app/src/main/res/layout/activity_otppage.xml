@@ -43,7 +43,7 @@
         android:id="@+id/layout_otp"
         android:layout_width="match_parent"
         android:layout_height="90dp"
-  android:gravity="center"
+        android:gravity="center"
         android:paddingTop="20dp"
         android:layout_below="@+id/layout_header"
         android:orientation="horizontal">
@@ -102,7 +102,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="65sp"
- android:id="@+id/submit_button"
+        android:id="@+id/submit_button"
         android:text="SUBMIT"
         android:textSize="20sp"
         android:background="@drawable/button_shadow"/>

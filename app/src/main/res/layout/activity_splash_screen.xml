@@ -14,8 +14,4 @@
         android:layout_marginBottom="10dp"
         android:src="@drawable/ppeeplogo3" />
 
-
-
-
-
 </LinearLayout>

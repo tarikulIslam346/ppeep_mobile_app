@@ -1,6 +1,8 @@
 package com.example.ppeepfinal.data;
 
-import android.arch.persistence.room.TypeConverter;
+//import android.arch.persistence.room.TypeConverter;
+
+import androidx.room.TypeConverter;
 
 import java.util.Date;
 

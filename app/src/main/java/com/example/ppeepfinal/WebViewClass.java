@@ -1,9 +1,11 @@
 package com.example.ppeepfinal;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.WebView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class WebViewClass extends AppCompatActivity {
     private WebView webView2;

@@ -7,18 +7,15 @@
     android:orientation="vertical"
     tools:context=".GroupFriendAdd">
 
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Enter Phone Number Of Your Friend"
-    android:textSize="18sp"
-   android:layout_marginTop="25dp"
-    android:gravity="center"
-    />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Phone Number Of Your Friend"
+        android:textSize="18sp"
+        android:layout_marginTop="25dp"
+        android:gravity="center" />
 
-
-
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userEmailTextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
@@ -29,13 +26,13 @@
 
         android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/userEmailTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:hint="Phone Number" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

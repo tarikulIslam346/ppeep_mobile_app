@@ -3,10 +3,10 @@ package com.example.ppeepfinal;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+/*import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar;*/
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -14,6 +14,11 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ppeepfinal.utilities.NetworkUtils;
 
@@ -37,7 +42,7 @@ public class SearchRestaurant extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_restaurant);
-        foodToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.searchtoolbar);
+        foodToolbar = (Toolbar) findViewById(R.id.searchtoolbar);
         setSupportActionBar(foodToolbar);
         searchPageResult = (TextView) findViewById(R.id.tv_search_result_for);
 
