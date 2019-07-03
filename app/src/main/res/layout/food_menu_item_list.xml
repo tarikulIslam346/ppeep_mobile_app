@@ -62,33 +62,35 @@
                 android:textSize="14sp"
                 android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"/>
 
+
             <ImageView
-                android:id="@+id/increase"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_add"
+                android:id="@+id/decrease"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_sub"
                 android:visibility="invisible"
+                android:layout_marginRight="10dp"
                 />
-
-
 
             <TextView
                 android:id="@+id/tv_add_to_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:textSize="14sp"
+                android:gravity="center"
+                android:textSize="19sp"
                 android:text="Add"
                 android:textColor="#26E42E"
                 />
+
+
             <ImageView
-                android:id="@+id/decrease"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_sub"
+                android:id="@+id/increase"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_add"
                 android:visibility="invisible"
                 />
-
 
 
         </LinearLayout>
