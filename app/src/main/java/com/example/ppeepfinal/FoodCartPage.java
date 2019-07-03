@@ -2,30 +2,40 @@ package com.example.ppeepfinal;
 
 
 import android.content.Intent;
-import android.os.AsyncTask;
+/*import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;*/
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
+/*import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.helper.ItemTouchHelper;
+import android.support.v7.widget.helper.ItemTouchHelper;*/
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.ppeepfinal.data.OrderMerchantModel;
 import com.example.ppeepfinal.data.OrderModel;
 import com.example.ppeepfinal.data.UserDatabase;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
+import static android.icu.lang.UCharacter.DecompositionType.VERTICAL;
 
-public class FoodCartPage extends AppCompatActivity  implements   FoodCartPageAdapter.ListItemClickListener{
+//import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
+
+public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAdapter.ListItemClickListener{
 
     private RecyclerView mListOfCartItem;
     private FoodCartPageAdapter foodCartPageAdapter;
@@ -147,8 +157,8 @@ public class FoodCartPage extends AppCompatActivity  implements   FoodCartPageAd
 
         mListOfCartItem.setAdapter(foodCartPageAdapter);
 
-        DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(), VERTICAL);
-        mListOfCartItem.addItemDecoration(decoration);
+        //DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(), VERTICAL);
+       // mListOfCartItem.addItemDecoration(decoration);
 
         /*
          Add a touch helper to the RecyclerView to recognize when a user swipes to delete an item.
@@ -198,7 +208,7 @@ public class FoodCartPage extends AppCompatActivity  implements   FoodCartPageAd
         if(order.size() != 0){
             total_with_vat_delivery_chrage = 0;
             for(int i =0;i<order.size();i++){
-                total_price_without_vat_deliveryCharg = total_price_without_vat_deliveryCharg + order.get(i).getItemPrice();
+                total_price_without_vat_deliveryCharg = total_price_without_vat_deliveryCharg + order.get(i).getItemPrice() * order.get(i).getItemAmount();
             }
             mSubTotal.setText(String.valueOf(total_price_without_vat_deliveryCharg));
 

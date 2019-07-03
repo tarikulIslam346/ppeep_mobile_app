@@ -17,7 +17,8 @@
         android:layout_marginTop="30dp"
         android:textSize="22sp"/>
 
-    <android.support.design.widget.TextInputLayout
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userIDTextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
@@ -29,12 +30,12 @@
 
 
 
-        <android.support.design.widget.TextInputEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/userIDTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Promo Code" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

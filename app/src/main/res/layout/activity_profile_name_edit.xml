@@ -8,25 +8,22 @@
     android:layout_margin="5dp"
     tools:context=".ProfileNameEdit">
 
-
-
-
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userIDTextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-android:layout_marginLeft="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="40dp"
         android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/userNameTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 <LinearLayout
     android:layout_width="match_parent"

@@ -1,9 +1,11 @@
 package com.example.ppeepfinal;
 
 import android.graphics.drawable.Animatable;
-import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PreOrderPage extends AppCompatActivity {
 
