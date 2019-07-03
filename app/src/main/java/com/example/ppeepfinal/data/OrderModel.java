@@ -15,24 +15,27 @@ public class OrderModel {
     private int ItemId;
     private String ItemName;
     private int ItemPrice;
+    private int ItemAmount;
     @ColumnInfo(name = "created_at")
     private Date createdAt;
 
 
     @Ignore
-    public OrderModel( int ItemId,String ItemName,int ItemPrice,Date createdAt){
+    public OrderModel( int ItemId,String ItemName,int ItemPrice,int ItemAmount, Date createdAt){
         this.ItemId = ItemId;
         this.ItemName = ItemName;
         this.ItemPrice = ItemPrice;
         this.createdAt = createdAt;
+        this.ItemAmount = ItemAmount;
     }
 
-    public OrderModel(int id, int ItemId,String ItemName,int ItemPrice,Date createdAt){
+    public OrderModel(int id, int ItemId,String ItemName,int ItemPrice,int ItemAmount,Date createdAt){
         this.id = id;
         this.ItemId = ItemId;
         this.ItemName = ItemName;
         this.ItemPrice = ItemPrice;
         this.createdAt = createdAt;
+        this.ItemAmount = ItemAmount;
     }
 
     public void setId(int id) {
@@ -65,6 +68,14 @@ public class OrderModel {
 
     public int getItemPrice() {
         return ItemPrice;
+    }
+
+    public int getItemAmount() {
+        return ItemAmount;
+    }
+
+    public void setItemAmount(int itemAmount) {
+        ItemAmount = itemAmount;
     }
 
     public void setCreatedAt(Date createdAt) {

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private UserDatabase mdb;
     private int merchantId,vat,deliveryCharge;
     private String restaurantName;
+    int i ;
 
 
     public ExpandableListAdapter(
@@ -76,6 +78,27 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return childPosition;
     }
 
+    public  int ItemAddCheck( int ItemId){
+
+
+        List<OrderModel> order  = mdb.orderDAO().loadOrder();
+        int flag =  0;
+        if(order.size()!=0){
+            for(int j =0;j<order.size();j++){
+                if(order.get(j).getItemId() == ItemId){
+                    //i++;
+                    //textViewAddCart.setText( " "+String.valueOf(i)+ " ");
+                    flag = 1;
+                    return flag;
+
+
+                }
+            }
+            return flag;
+        }
+        return flag;
+    }
+
     @Override
     public View getChildView(
             final int groupPosition,
@@ -98,23 +121,80 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
         TextView txtListChildId = (TextView) convertView.findViewById(R.id.tv_item_id);
         TextView textViewPrice = (TextView) convertView.findViewById(R.id.price_food);
+
         final TextView  textViewAddCart = (TextView)convertView.findViewById(R.id.tv_add_to_cart) ;
+        final ImageView increaseImage = (ImageView) convertView.findViewById(R.id.increase);
+        final ImageView decreaseImage = (ImageView) convertView.findViewById(R.id.decrease);
         final Intent intent = new Intent(this._context,FoodCartPage.class);
-       // final View parentLayout = convertView.findViewById(R.id.lvExp);
+
+
+         i =0;//intialize
+        increaseImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i++;
+                textViewAddCart.setText( " "+String.valueOf(i)+ " ");
+                //Date date = new Date();
+                int ItemId = _listChildIdData.get(_listDataHeader.get(groupPosition)).get(childPosition);
+                int ItemPrice = Integer.valueOf(_listChildPriceData.get(_listDataHeader.get(groupPosition)).get(childPosition));
+                String ItemName = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
+
+                int Flag = ItemAddCheck(ItemId);
+                OrderModel order =  mdb.orderDAO().loadOrderById(ItemId);
+                if(Flag == 1){
+                    //Toast.makeText(_context, ItemName +" Already added ", Toast.LENGTH_SHORT).show();
+                    if(order != null){
+                        order.setItemAmount(i);
+                        mdb.orderDAO().updateOrder(order);
+                    }
+                }
+
+            }
+        });
+
+        decreaseImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(i >1) {
+                    i--;
+                    textViewAddCart.setText( " "+String.valueOf(i)+ " ");
+                    Date date = new Date();
+                    int ItemId = _listChildIdData.get(_listDataHeader.get(groupPosition)).get(childPosition);
+                    int ItemPrice = Integer.valueOf(_listChildPriceData.get(_listDataHeader.get(groupPosition)).get(childPosition));
+                    String ItemName = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
+
+
+                    int Flag = ItemAddCheck(ItemId);
+                    OrderModel order =  mdb.orderDAO().loadOrderById(ItemId);
+                    if(Flag == 1){
+                        //Toast.makeText(_context, ItemName +" Already added ", Toast.LENGTH_SHORT).show();
+                        if(order != null){
+                            order.setItemAmount(i);
+                            mdb.orderDAO().updateOrder(order);
+                        }
+                    }
+                }
+            }
+        });
+
 
         textViewAddCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // if (child.getCount() > 0) {
-                int i =1;
-                  // Toast.makeText(v.getContext(),"Clicked", Toast.LENGTH_LONG).show();
-                textViewAddCart.setText( String.valueOf(i)+ " item add to cart");
 
-                //}
 
                 List<OrderMerchantModel> orderMerchantModelList =  mdb.orderMercahntDAO().loadOrderMerchant();
+                i = 1;
+
                 //add order item if order from same marchant or no add to cart select
+
                 if(orderMerchantModelList.size() ==0  || Integer.valueOf(merchantId)== orderMerchantModelList.get(0).getMerchantId() ) {
+
+                    // Toast.makeText(v.getContext(),"Clicked", Toast.LENGTH_LONG).show();
+                    //i;
+                    textViewAddCart.setText( " "+String.valueOf(i)+ " ");
+                    increaseImage.setVisibility(View.VISIBLE);
+                    decreaseImage.setVisibility(View.VISIBLE);
                     //Add to merchant list if no order merchant select
                     if (orderMerchantModelList.size() == 0) {
                         OrderMerchantModel orderMerchantModel = new OrderMerchantModel(Integer.valueOf(merchantId), restaurantName, vat, deliveryCharge);
@@ -125,8 +205,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     int ItemId = _listChildIdData.get(_listDataHeader.get(groupPosition)).get(childPosition);
                     int ItemPrice = Integer.valueOf(_listChildPriceData.get(_listDataHeader.get(groupPosition)).get(childPosition));
                     String ItemName = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
-                    OrderModel orderModel = new OrderModel(ItemId, ItemName, ItemPrice, date);
-                    mdb.orderDAO().insertOrder(orderModel);
+
+                    int Flag = ItemAddCheck(ItemId);
+                    if(Flag != 1){
+                        OrderModel orderModel = new OrderModel(ItemId, ItemName, ItemPrice,i, date);
+                        mdb.orderDAO().insertOrder(orderModel);
+                    }
+
 
 
 
@@ -142,6 +227,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 
 
+                }else{
+                    Snackbar.make(parent.findViewById(R.id.lvExp), " Do not order from diffrent restaurant", Snackbar.LENGTH_LONG)
+                            .show();
                 }
                 //i++;
                // textViewAddCart.setText("+ "+ String.valueOf(i)+ " -");

@@ -46,7 +46,8 @@ public class FoodCartPageAdapter extends RecyclerView.Adapter<FoodCartPageAdapte
         OrderModel orderModel = mOrders.get(position);
         String orederItemName = orderModel.getItemName();
         int orderItemPrice = orderModel.getItemPrice();
-        foodCartViewHolder.bind(orederItemName,orderItemPrice);
+        int ItemAmount = orderModel.getItemAmount();
+        foodCartViewHolder.bind(orederItemName,orderItemPrice,ItemAmount);
     }
 
     @Override
@@ -76,9 +77,9 @@ public class FoodCartPageAdapter extends RecyclerView.Adapter<FoodCartPageAdapte
             itemView.setOnClickListener(this);
 
         }
-        void bind(String orderITemName,int orderItemPrice){
+        void bind(String orderITemName,int orderItemPrice,int ItemAmount){
             orderItemTextview.setText(orderITemName);
-            orderItemPriceTextView.setText(String.valueOf(orderItemPrice));
+            orderItemPriceTextView.setText(String.valueOf(orderItemPrice)+" x "+ String.valueOf(ItemAmount));
         }
         public void onClick(View v){
             int clickedPosition = mOrders.get(getAdapterPosition()).getId();
