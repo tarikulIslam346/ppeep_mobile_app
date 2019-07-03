@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -61,6 +62,7 @@ public class FragmentGroup extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.group_fragment,container,false);
+FloatingActionButton friendAddButton= (FloatingActionButton) v.findViewById(R.id.fabGroupAdd);
 
         mListOfFriend = (RecyclerView)v.findViewById(R.id.rv_list_of_friend_group);
 
@@ -69,6 +71,15 @@ public class FragmentGroup extends Fragment {
         mProfileNameTv = (TextView) v.findViewById(R.id.tv_profile_name_of_friend_group);
 
         mPhoneNoTv = (TextView) v.findViewById(R.id.tv_phone_no_of_friend_group);
+
+
+        friendAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             Intent friendAddIntent= new Intent(getActivity(),GroupFriendAdd.class);
+             startActivity(friendAddIntent);
+            }
+        });
 
         mdb = UserDatabase.getInstance(getContext());
 

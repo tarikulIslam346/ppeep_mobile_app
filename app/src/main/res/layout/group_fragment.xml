@@ -96,7 +96,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Points"
+                            android:text="Own Earned"
                             android:textColor="#ffff"
                             android:textSize="15sp" />
 
@@ -160,7 +160,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Balance"
+                            android:text="Total Earned"
                             android:textColor="#ffff"
                             android:textSize="15sp" />
 
@@ -192,15 +192,8 @@
 
 
             </android.support.v7.widget.RecyclerView>
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_margin="16dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/friendadd" />
+
+
 
         </RelativeLayout>
 
@@ -209,5 +202,14 @@
 
 
     </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabGroupAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+     android:layout_margin="15dp"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/friendadd" />
 </RelativeLayout>
 </LinearLayout>

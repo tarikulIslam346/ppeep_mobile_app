@@ -5,27 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="15dp"
-    tools:context=".ProfileAddressEdit">
+    tools:context=".GroupFriendAdd">
 
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Enter Phone Number Of Your Friend"
+    android:textSize="18sp"
+   android:layout_marginTop="25dp"
+    android:gravity="center"
+    />
 
 
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/userAddressTextInputLayout"
+        android:id="@+id/userEmailTextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="40dp"
+
         android:layout_height="wrap_content">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/userAddressTextInputEditText"
+            android:id="@+id/userEmailTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Address" />
+
+            android:hint="Phone Number" />
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
@@ -45,13 +54,12 @@
             android:background="@color/colorPrimary"
             android:textColor="@android:color/white"
             android:layout_height="wrap_content" />
-
         <Button
-            android:id="@+id/addressUpdateButton"
+            android:id="@+id/emailUpdateButton"
             android:layout_width="200dp"
             android:padding="5dp"
             android:layout_margin="5dp"
-            android:text="UPDATE"
+            android:text="ADD"
             android:textStyle="bold"
             android:background="@color/colorPrimary"
             android:textColor="@android:color/white"
@@ -63,4 +71,5 @@
         android:layout_height="42dp"
         android:layout_gravity="center"
         android:visibility="invisible" />
+
 </LinearLayout>

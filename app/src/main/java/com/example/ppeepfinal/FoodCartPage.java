@@ -76,6 +76,19 @@ public class FoodCartPage extends AppCompatActivity  implements   FoodCartPageAd
 
         });
 
+        Button promoApply = (Button) findViewById(R.id.btn_applyPromo);
+        promoApply.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View v) {
+
+                Intent PromoApplyIntent = new Intent(getApplicationContext(),ApplyPromoPage.class);
+                startActivity(PromoApplyIntent);
+
+            }
+
+        });
 
 
         mdb = UserDatabase.getInstance(getApplicationContext());

@@ -3,6 +3,7 @@ package com.example.ppeepfinal;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -39,7 +40,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class RestaurantMenuPage extends AppCompatActivity {
-
+    private int mNotificationsCount = 1;
     Toolbar foodToolbar;
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
@@ -60,7 +61,7 @@ public class RestaurantMenuPage extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_menu_page);
         foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
         setSupportActionBar(foodToolbar);
-
+        new FetchCountTask().execute();
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
         mRestaurantName = (TextView) findViewById(R.id.tv_restaurnat_name) ;
         mCusine = (TextView) findViewById(R.id.tv_cusine);
@@ -330,7 +331,14 @@ public class RestaurantMenuPage extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.foodappcart, menu);
-        //  foodCart= (Menu) menu.findItem(R.id.action_drawer_cart);
+        MenuItem  foodCart= (MenuItem) menu.findItem(R.id.action_drawer_cart);
+
+        LayerDrawable icon = (LayerDrawable) foodCart.getIcon();
+
+        // Update LayerDrawable's BadgeDrawable
+        Utils.setBadgeCount(this, icon, mNotificationsCount);
+
+
         return true;
     }
     @Override
@@ -344,6 +352,40 @@ public class RestaurantMenuPage extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void updateNotificationsBadge(int count) {
+        mNotificationsCount = count;
+
+        // force the ActionBar to relayout its MenuItems.
+        // onCreateOptionsMenu(Menu) will be called again.
+        invalidateOptionsMenu();
+    }
+
+    /*
+    Sample AsyncTask to fetch the notifications count
+    */
+    class FetchCountTask extends AsyncTask<Void, Void, Integer> {
+
+        @Override
+        protected Integer doInBackground(Void... params) {
+            // example count. This is where you'd
+            // query your data store for the actual count.
+          /*  List<OrderModel> order =  mdb.orderDAO().loadOrder();
+            if (order.size()==0)
+            return 0;
+            else {
+                int count = order.size();
+                return count ;
+            }*/
+          return 3;
+
+        }
+
+        @Override
+        public void onPostExecute(Integer count) {
+            updateNotificationsBadge(count);
+        }
     }
 }
 

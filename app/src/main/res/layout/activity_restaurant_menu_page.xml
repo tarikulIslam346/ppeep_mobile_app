@@ -10,12 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         app:title="PPEEP Food"
-        android:gravity="center"
         android:theme="@style/AppTheme2"
         android:id="@+id/foodtoolbar"
-        android:background="#FAFAF9"
+        android:background="#FAFAF9">
 
-        />
+
+
+
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+
 
 <FrameLayout
     android:layout_width="match_parent"
