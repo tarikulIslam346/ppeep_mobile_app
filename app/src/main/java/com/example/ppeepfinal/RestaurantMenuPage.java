@@ -249,6 +249,18 @@ public class RestaurantMenuPage extends AppCompatActivity {
 
         return true;
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        List<OrderModel> order =  mdb.orderDAO().loadOrder();
+        int count = order.size();
+        updateNotificationsBadge(count);
+        if(order.size() == 0){
+            new RestaurantMenuListTask().execute(restaurantMenuListUrl);
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
