@@ -4,11 +4,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+
+import android.app.Activity;
+import android.app.ExpandableListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 //import android.support.design.widget.Snackbar;
+import android.graphics.drawable.LayerDrawable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
@@ -21,6 +28,8 @@ import com.example.ppeepfinal.data.OrderMerchantModel;
 import com.example.ppeepfinal.data.OrderModel;
 import com.example.ppeepfinal.data.UserDatabase;
 import com.google.android.material.snackbar.Snackbar;
+
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -126,7 +135,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         final TextView  textViewAddCart = (TextView)convertView.findViewById(R.id.tv_add_to_cart) ;
         final ImageView increaseImage = (ImageView) convertView.findViewById(R.id.increase);
         final ImageView decreaseImage = (ImageView) convertView.findViewById(R.id.decrease);
-        final Intent intent = new Intent(this._context,FoodCartPage.class);
+
+       // final Intent intent = new Intent(this._context,FoodCartPage.class);
 
 
          i =0;//intialize
@@ -178,6 +188,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             }
         });
 
+        Menu menu = RestaurantMenuPage.getThis().getMenu();
+
+        MenuItem  foodCart= (MenuItem) menu.findItem(R.id.action_drawer_cart);
+        final LayerDrawable icon = (LayerDrawable) foodCart.getIcon();
+
 
         textViewAddCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,27 +206,50 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
                 if(orderMerchantModelList.size() ==0  || Integer.valueOf(merchantId)== orderMerchantModelList.get(0).getMerchantId() ) {
 
-                    // Toast.makeText(v.getContext(),"Clicked", Toast.LENGTH_LONG).show();
-                    //i;
                     textViewAddCart.setText( " "+String.valueOf(i)+ " ");
+
                     increaseImage.setVisibility(View.VISIBLE);
+
                     decreaseImage.setVisibility(View.VISIBLE);
+
                     //Add to merchant list if no order merchant select
+
                     if (orderMerchantModelList.size() == 0) {
+
                         OrderMerchantModel orderMerchantModel = new OrderMerchantModel(Integer.valueOf(merchantId), restaurantName, vat, deliveryCharge);
+
                         mdb.orderMercahntDAO().insertOrderMerchant(orderMerchantModel);
                     }
 
                     Date date = new Date();
+
                     int ItemId = _listChildIdData.get(_listDataHeader.get(groupPosition)).get(childPosition);
+
                     int ItemPrice = Integer.valueOf(_listChildPriceData.get(_listDataHeader.get(groupPosition)).get(childPosition));
+
                     String ItemName = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
 
+
                     int Flag = ItemAddCheck(ItemId);
+
                     if(Flag != 1){
+
                         OrderModel orderModel = new OrderModel(ItemId, ItemName, ItemPrice,i, date);
+
                         mdb.orderDAO().insertOrder(orderModel);
+
+                        List<OrderModel> order = mdb.orderDAO().loadOrder();
+
+
+
+
+                        // Update LayerDrawable's BadgeDrawable
+                        int count = order.size();
+                        Utils.setBadgeCount(_context, icon, count);
+
+
                     }
+
 
 
 
@@ -220,6 +258,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                             .setAction("Go to cart", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    Intent intent = new Intent(_context,FoodCartPage.class);
+
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     _context.startActivity(intent);
                                 }
@@ -232,8 +272,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     Snackbar.make(parent.findViewById(R.id.lvExp), " Do not order from diffrent restaurant", Snackbar.LENGTH_LONG)
                             .show();
                 }
-                //i++;
-               // textViewAddCart.setText("+ "+ String.valueOf(i)+ " -");
+
             }
         });
 

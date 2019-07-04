@@ -1,6 +1,7 @@
 package com.example.ppeepfinal;
 
 
+import android.app.Activity;
 import android.content.Intent;
 /*import android.os.AsyncTask;
 import android.support.annotation.Nullable;
@@ -15,8 +16,11 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;*/
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -175,6 +179,8 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
             }
 
 
+
+
             // Called when a user swipes left or right on a ViewHolder
             @Override
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
@@ -200,6 +206,8 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         super.onResume();
         retriveOrder();
     }
+
+
 
     private void  retriveOrder(){
         final List<OrderModel> order = mdb.orderDAO().loadOrder();
@@ -233,6 +241,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
     @Override
     public void onListItemClick(int clickedItemIndex) {
+
 
        // List<OrderModel> order = mdb.orderDAO().loadOrder();
 

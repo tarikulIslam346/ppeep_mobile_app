@@ -58,6 +58,8 @@ public class RestaurantMenuPage extends AppCompatActivity {
     ProgressBar mProgressbar;
     private UserDatabase mdb;
     int vat,deliveryCharge;
+    private Menu mMenu = null;
+    private static RestaurantMenuPage mThis = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,8 @@ public class RestaurantMenuPage extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_menu_page);
         foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
         setSupportActionBar(foodToolbar);
-        new FetchCountTask().execute();
+        mThis = this;
+       // new FetchCountTask().execute();
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
         mRestaurantName = (TextView) findViewById(R.id.tv_restaurnat_name) ;
         mCusine = (TextView) findViewById(R.id.tv_cusine);
@@ -93,6 +96,7 @@ public class RestaurantMenuPage extends AppCompatActivity {
         new RestaurantMenuListTask().execute(restaurantMenuListUrl);
 
     }
+
 
 
     public class RestaurantMenuListTask extends AsyncTask<URL, Void, String>  {
@@ -203,7 +207,7 @@ public class RestaurantMenuPage extends AppCompatActivity {
                     mProgressbar.setLayoutParams(layoutParams);// set progressbar layout height & width
 
                     listAdapter = new ExpandableListAdapter(
-                            getApplicationContext(),
+                            RestaurantMenuPage.this,
                             listDataHeader,
                             listDataChild,
                             listDataChildPrice,
@@ -215,110 +219,10 @@ public class RestaurantMenuPage extends AppCompatActivity {
                     expListView.setAdapter(listAdapter);
 
                     View parentLayout = findViewById(R.id.lvExp);
+                    List<OrderModel> order =  mdb.orderDAO().loadOrder();
+                    int count = order.size();
+                    updateNotificationsBadge(count);
 
-                    /*List<OrderModel> order =  mdb.orderDAO().loadOrder();
-                    if(order.size()!= 0){
-                        Snackbar.make(parentLayout, " Item has been added to cart", Snackbar.LENGTH_INDEFINITE)
-                                .setAction("Go to cart", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        Intent intent = new Intent(getApplicationContext(),FoodCartPage.class);
-                                        startActivity(intent);
-                                    }
-                                })
-                                .show();
-                    }*/
-
-
-                    // Listview Group click listener
-                   /* expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-
-                        @Override
-                        public boolean onGroupClick(ExpandableListView parent, View v,
-                                                    int groupPosition, long id) {
-                            // Toast.makeText(getApplicationContext(),
-                            // "Group Clicked " + listDataHeader.get(groupPosition),
-                            // Toast.LENGTH_SHORT).show();
-                            return false;
-                        }
-                    });
-
-                    // Listview Group expanded listener
-                    expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-                        @Override
-                        public void onGroupExpand(int groupPosition) {
-                            Toast.makeText(getApplicationContext(),
-                                    listDataHeader.get(groupPosition) + " Expanded",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                    // Listview Group collasped listener
-                    expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-                        @Override
-                        public void onGroupCollapse(int groupPosition) {
-                            Toast.makeText(getApplicationContext(),
-                                    listDataHeader.get(groupPosition) + " Collapsed",
-                                    Toast.LENGTH_SHORT).show();
-
-                        }
-                    });*/
-
-
-
-                    // Listview on child click listener
-
-                    /*expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-
-                        @Override
-                        public boolean onChildClick(ExpandableListView parent, View v,
-                                                    int groupPosition, int childPosition, long id) {
-
-
-
-
-                            List<OrderMerchantModel> orderMerchantModelList =  mdb.orderMercahntDAO().loadOrderMerchant();
-                            //add order item if order from same marchant or no add to cart select
-                            if(orderMerchantModelList.size() ==0  || Integer.valueOf(merchantId)== orderMerchantModelList.get(0).getMerchantId() ){
-                                //Add to merchant list if no order merchant select
-                                if(orderMerchantModelList.size() == 0 ){
-                                    OrderMerchantModel orderMerchantModel = new OrderMerchantModel(Integer.valueOf(merchantId),mRestaurantName.getText().toString(),vat,deliveryCharge);
-                                    mdb.orderMercahntDAO().insertOrderMerchant(orderMerchantModel);
-                                }
-
-
-                                // Add to phone storage order item
-                                Date date = new Date();
-                                int ItemId = listDataChildId.get(listDataHeader.get(groupPosition)).get(childPosition);
-                                int ItemPrice = Integer.valueOf(listDataChildPrice.get(listDataHeader.get(groupPosition)).get(childPosition));
-                                String ItemName =  listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
-                                OrderModel orderModel = new OrderModel(ItemId,ItemName,ItemPrice,date);
-                                mdb.orderDAO().insertOrder(orderModel);
-                                View parentLayout = findViewById(R.id.lvExp);
-                                Snackbar.make(parentLayout, " Item has been added to cart", Snackbar.LENGTH_LONG)
-                                        .setAction("Go to cart", new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view) {
-                                                Intent intent = new Intent(getApplicationContext(),FoodCartPage.class);
-                                                startActivity(intent);
-                                            }
-                                        })
-                                        .show();
-                                //finish();
-
-                            }else {
-                                Toast.makeText(getApplicationContext(), "You can only order from same restaurant at a time", Toast.LENGTH_LONG)
-                                        .show();
-                            }
-
-
-
-
-                            return false;
-                        }
-                    });*/
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -358,7 +262,7 @@ public class RestaurantMenuPage extends AppCompatActivity {
         return true;
     }
 
-    private void updateNotificationsBadge(int count) {
+    public void updateNotificationsBadge(int count) {
         mNotificationsCount = count;
 
         // force the ActionBar to relayout its MenuItems.
@@ -366,31 +270,25 @@ public class RestaurantMenuPage extends AppCompatActivity {
         invalidateOptionsMenu();
     }
 
-    /*
-    Sample AsyncTask to fetch the notifications count
-    */
-    class FetchCountTask extends AsyncTask<Void, Void, Integer> {
-
-        @Override
-        protected Integer doInBackground(Void... params) {
-            // example count. This is where you'd
-            // query your data store for the actual count.
-          /*  List<OrderModel> order =  mdb.orderDAO().loadOrder();
-            if (order.size()==0)
-            return 0;
-            else {
-                int count = order.size();
-                return count ;
-            }*/
-          return 3;
-
-        }
-
-        @Override
-        public void onPostExecute(Integer count) {
-            updateNotificationsBadge(count);
-        }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        mMenu = menu;
+        return super.onPrepareOptionsMenu(menu);
     }
+
+    public Menu getMenu()
+    {
+        return mMenu;
+    }
+
+
+    public static RestaurantMenuPage getThis()
+    {
+        return mThis;
+    }
+
+
 }
 
 
