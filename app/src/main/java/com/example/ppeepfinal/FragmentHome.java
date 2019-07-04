@@ -28,16 +28,21 @@ import at.markushi.ui.CircleButton;
 import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
 
 public class FragmentHome extends Fragment {
+
     SliderLayout sliderLayout;
+
     View v;
+
     SparkButton darazButton,robishopButton,bagdoomButton,pickabooButton2,darazButton2,robishopButton2,bagdoomButton2;
-CircleButton foodExpressButton;
-    public FragmentHome() {
-    }
+
+    CircleButton foodExpressButton;
+
+    public FragmentHome() { }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         v = inflater.inflate(R.layout.home_fragment, container, false);
 
       //  View v = getLayoutInflater().inflate(R.layout.customtab, null);
@@ -45,7 +50,7 @@ CircleButton foodExpressButton;
 
 
 
-foodExpressButton= v.findViewById(R.id.foodexpress_id);
+       foodExpressButton= v.findViewById(R.id.foodexpress_id);
       /*  darazButton= v.findViewById(R.id.facebook_button2);
         robishopButton= v.findViewById(R.id.facebook_button3);
         bagdoomButton= v.findViewById(R.id.facebook_button4);*/
