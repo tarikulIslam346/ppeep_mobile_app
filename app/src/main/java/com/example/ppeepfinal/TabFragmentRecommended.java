@@ -45,42 +45,54 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TabFragmentRecommended extends Fragment {
+
     View v, nextV;
+
     SliderLayout sliderLayout;
+
     TextView mViewAll;
+
     ViewPager viewPager;
+
     CardView cardViewForSearchChiniseCusine,cardViewForSearchCFastFoodCusine,cardViewForSearchBanglaCusine,cardViewForBakeryCusine;
+
     List<String>imgUrl;
+
     ProgressBar progressBar;
 
 
-
-    public TabFragmentRecommended(){
-
-
-    }
+    public TabFragmentRecommended(){ }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         v=inflater.inflate(R.layout.activity_tab_fragment_recommended,container,false);
+
         mViewAll = (TextView) v.findViewById(R.id.tv_view_all);
+
         viewPager = (ViewPager) getActivity().findViewById(R.id.viewPagerId) ;
+
         cardViewForSearchChiniseCusine = (CardView) v.findViewById(R.id.cv_chinise);
+
         cardViewForBakeryCusine = (CardView) v.findViewById(R.id.cv_bakery);
+
         cardViewForSearchBanglaCusine = (CardView) v.findViewById(R.id.cv_bangla);
+
         cardViewForSearchCFastFoodCusine = (CardView) v.findViewById(R.id.cv_fastfood);
+
         progressBar = (ProgressBar) v.findViewById(R.id.pv_offerr);
 
 
 
 
-                mViewAll.setOnClickListener(new View.OnClickListener() {
+        mViewAll.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                viewPager.setCurrentItem(1);
             }
         });
+
         cardViewForSearchChiniseCusine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
@@ -89,6 +101,7 @@ public class TabFragmentRecommended extends Fragment {
                 startActivity(intent);
             }
         });
+
         cardViewForBakeryCusine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
@@ -97,6 +110,7 @@ public class TabFragmentRecommended extends Fragment {
                 startActivity(intent);
             }
         });
+
         cardViewForSearchBanglaCusine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
@@ -105,6 +119,7 @@ public class TabFragmentRecommended extends Fragment {
                 startActivity(intent);
             }
         });
+
         cardViewForSearchCFastFoodCusine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
@@ -143,23 +158,18 @@ public class TabFragmentRecommended extends Fragment {
 
             switch (i) {
                 case 0:
-                    //sliderView.setImageDrawable(R.drawable.offerimageslider1);
                     String URL = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(0);
                       sliderView.setImageUrl(URL);
                     break;
                 case 1:
-                    //sliderView.setImageDrawable(R.drawable.offerimageslider2);
                     String URL1 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(1);
                     sliderView.setImageUrl(URL1);
-                    // sliderView.setImageUrl("https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
 
                     break;
                 case 2:
-                    //sliderView.setImageDrawable(R.drawable.offerimageslider4);
 
                     String URL2 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(2);
                     sliderView.setImageUrl(URL2);
-                    //  sliderView.setImageUrl("https://images.pexels.com/photos/747964/pexels-photo-747964.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
                     break;
 
             }
@@ -221,8 +231,6 @@ public class TabFragmentRecommended extends Fragment {
                     for (int i=0; i<jsonArray.length(); i++) {
                         JSONObject restaurant = jsonArray.getJSONObject(i);
                         imageUrl = restaurant.getString("img_url");
-                        if(i==1)Toast.makeText(getContext(),""+imageUrl,Toast.LENGTH_LONG).show();
-
                         imgUrl.add(imageUrl);
 
                     }
@@ -239,7 +247,7 @@ public class TabFragmentRecommended extends Fragment {
 
 
                 sliderLayout = v.findViewById(R.id.FoodAppimageSlider);
-                //    sliderLayout.setIndicatorAnimation(IndicatorAnimations.NONE); //set indicator animation by using SliderLayout.Animations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+
                 sliderLayout.setScrollTimeInSec(2); //set scroll delay in seconds :
 
                 setSliderViews();
