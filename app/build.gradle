@@ -16,6 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 repositories {
     jcenter()
@@ -60,5 +64,13 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.1.0'
 
     implementation 'com.github.cdflynn:checkview:v1.1'
+
+    implementation 'com.android.volley:volley:1.1.1'
+
+    implementation project(':dingiMap')
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-telemetry:3.5.6'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-geojson:4.1.1'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-gestures:0.4.0'
+    implementation 'com.github.Mohammad-Faisal:DingiTelemetry:1.5'
 
 }
