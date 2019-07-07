@@ -16,9 +16,7 @@
         android:id="@+id/foodtoolbar"
         android:background="@drawable/toolbarbg"
         />
-    <ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -148,13 +146,14 @@
         android:layout_margin="10dp"
         />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Apply Promo"
+        android:text="Report Issues"
         android:gravity="center"
         android:layout_marginTop="50dp"
-        android:background="#EB0707"
+        android:backgroundTint="#EC0A0A"
+        android:background="#990F0F"
         />
-    </ScrollView>
+
 </LinearLayout>
