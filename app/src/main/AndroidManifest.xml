@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".GroupFriendAdd"></activity>
+        <activity android:name=".UserMapActivity"></activity>
+        <activity android:name=".GroupFriendAdd" />
         <activity android:name=".SupportPage" />
         <activity android:name=".PreOrderTimeSelect" />
         <activity android:name=".OrderSubmitComplete" />

@@ -26,4 +26,8 @@
         <item>AB(-ve)</item>
     </string-array>
 
+
+    //Here is your X api key
+    <string name="xApiKey">ru7KPUg2Wj17lRGdT1mTn9fCbYYSI2Ojaop8iwB5</string>
+
 </resources>

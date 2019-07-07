@@ -44,7 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class RestaurantMenuPage extends AppCompatActivity {
-    private int mNotificationsCount = 1;
+    private int mNotificationsCount = 0;
     Toolbar foodToolbar;
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;

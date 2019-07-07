@@ -48,6 +48,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     int total_price_without_vat_deliveryCharg;
     int vat,deliveryCharge;
     float total_with_vat_delivery_chrage;
+    TextView addressOnMap;
 
     Toolbar foodToolbar;
 
@@ -61,6 +62,15 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
         foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
         setSupportActionBar(foodToolbar);
+
+        addressOnMap = (TextView) findViewById(R.id.tv_user_address_map_view);
+        addressOnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapView = new Intent(getApplicationContext(),UserMapActivity.class);
+                startActivity(mapView);
+            }
+        });
 
         Button orderSubmit = (Button) findViewById(R.id.placeOrderId);
         orderSubmit.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +201,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
                 List<OrderModel> orders = foodCartPageAdapter.getmOrders();
                 mdb.orderDAO().deleteOrder(orders.get(position));
                 View parentLayout = findViewById(R.id.snackbar_show);
-                Snackbar.make(parentLayout, orders.get(position).getItemName()+ " has been deleted", Snackbar.LENGTH_INDEFINITE)
+                Snackbar.make(parentLayout, orders.get(position).getItemName()+ " has been deleted", Snackbar.LENGTH_SHORT)
                         .show();
                 retriveOrder();
 
@@ -205,6 +215,12 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     protected void onResume() {
         super.onResume();
         retriveOrder();
+        Intent foodCart = getIntent();
+        String address = foodCart.getStringExtra("address");
+        if(address!=null)
+        addressOnMap.setText(address);
+
+
     }
 
 

@@ -1,2 +1,5 @@
 configurations.maybeCreate("default")
+
+dependencies {
+}
 artifacts.add("default", file('Dingi.aar'))
