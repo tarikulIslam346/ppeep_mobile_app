@@ -3,17 +3,11 @@ package com.example.ppeepfinal;
 
 import android.app.Activity;
 import android.content.Intent;
-/*import android.os.AsyncTask;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;*/
+
+import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
-/*import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.helper.ItemTouchHelper;*/
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,11 +22,25 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dingi.dingisdk.camera.CameraUpdate;
+import com.dingi.dingisdk.camera.CameraUpdateFactory;
+import com.dingi.dingisdk.geometry.LatLng;
+import com.dingi.dingisdk.maps.DingiMap;
 import com.example.ppeepfinal.data.OrderMerchantModel;
 import com.example.ppeepfinal.data.OrderModel;
 import com.example.ppeepfinal.data.UserDatabase;
+import com.example.ppeepfinal.data.UserModel;
+import com.example.ppeepfinal.utilities.MyLocation;
+import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.icu.lang.UCharacter.DecompositionType.VERTICAL;
@@ -51,6 +59,13 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     TextView addressOnMap;
 
     Toolbar foodToolbar;
+    String ItemIds="",ItemAmounts="";
+    Integer merchantId;
+    String phoneNo;
+    double lat;
+    double lng;
+    URL orderCreateUrl;
+    Button orderSubmit,preOrderFood,promoApply;
 
 
     @Override
@@ -63,6 +78,9 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
         setSupportActionBar(foodToolbar);
 
+
+
+
         addressOnMap = (TextView) findViewById(R.id.tv_user_address_map_view);
         addressOnMap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,21 +90,11 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
             }
         });
 
-        Button orderSubmit = (Button) findViewById(R.id.placeOrderId);
-        orderSubmit.setOnClickListener(new View.OnClickListener() {
+        orderSubmit = (Button) findViewById(R.id.placeOrderId);
+        orderSubmit.setVisibility(View.INVISIBLE);
 
-            @Override
 
-            public void onClick(View v) {
-
-                Intent orderSubmitIntent = new Intent(getApplicationContext(),OrderSubmitComplete.class);
-                startActivity(orderSubmitIntent);
-
-            }
-
-        });
-
-        Button preOrderFood = (Button) findViewById(R.id.preorderfoodID);
+        preOrderFood = (Button) findViewById(R.id.preorderfoodID);
         preOrderFood.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -100,7 +108,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
         });
 
-        Button promoApply = (Button) findViewById(R.id.btn_applyPromo);
+        promoApply = (Button) findViewById(R.id.btn_applyPromo);
         promoApply.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -136,27 +144,74 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         }
 
 
-       // mdb = UserDatabase.getInstance(getApplicationContext());//intantiate room database
-       /* List<OrderModel> order =  mdb.orderDAO().loadOrder();//select all data form room database user table
-        OrderItem = new ArrayList<String>();
-        OrderItemPrice = new ArrayList<Integer>();
-        if(order.size()!= 0){//if data exist
-            for(int i=0;i<order.size();i++) {
-                OrderItem.add(order.get(i).getItemName());// set order item name
-                itemId = itemId + (order.get(i).getItemId() + ",");
+        mdb = UserDatabase.getInstance(getApplicationContext());//intantiate room database
+       List<OrderModel> order =  mdb.orderDAO().loadOrder();//select all data form room database user table
 
-                OrderItemPrice.add(order.get(i).getItemPrice());// set order item price
+        if(order.size()!= 0){//if data exist
+            orderSubmit.setVisibility(View.VISIBLE);//if has order then visible the place order button
+            orderSubmit.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+
+                public void onClick(View v) {
+
+
+                    Intent orderSubmitIntent = new Intent(getApplicationContext(),OrderSubmitComplete.class);
+                    startActivity(orderSubmitIntent);
+
+                }
+
+            });
+            for(int i=0;i<order.size();i++) {
+                ItemIds = ItemIds + (order.get(i).getItemId() + ",");
+                ItemAmounts = ItemAmounts + (order.get(i).getItemAmount() + ",");
 
             }
         }
+        Toast.makeText(getApplicationContext()," Item  : " + ItemIds + " amounts : " + ItemAmounts,Toast.LENGTH_LONG).show();
         List<OrderMerchantModel> mercahnt = mdb.orderMercahntDAO().loadOrderMerchant();
         if(mercahnt.size() != 0){
-            mercahntId = mercahnt.get(0).getMerchantId();
+            merchantId = mercahnt.get(0).getMerchantId();
         }
         List<UserModel> user = mdb.userDAO().loadPhone();
         if(user.size() != 0){
             phoneNo = user.get(0).getPhone();
-        }*/
+        }
+
+        MyLocation myLocation = new MyLocation(FoodCartPage.this);
+        myLocation.setListener(new MyLocation.MyLocationListener() {
+            @Override
+            public void onLocationFound(Location location) {
+
+                lat = location.getLatitude();
+                lng = location.getLongitude();
+               // Toast.makeText(getApplicationContext()," Lat : " + String.valueOf(lat) + " Lng : " + String.valueOf(lng),Toast.LENGTH_LONG).show();
+
+
+
+            }
+
+            @Override
+            public void onFailed() {
+
+            }
+        });
+
+        orderSubmit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View v) {
+
+                orderCreateUrl = NetworkUtils.buildOrderUrl();
+                new OrderTask().execute(orderCreateUrl);
+
+               // Intent orderSubmitIntent = new Intent(getApplicationContext(),OrderSubmitComplete.class);
+              //  startActivity(orderSubmitIntent);
+
+            }
+
+        });
         //Toast.makeText(getApplicationContext(), "Mercahnt Id : " + mercahntId + " ,Client phone No : "+ phoneNo + ",Order Item : " + itemId, Toast.LENGTH_LONG).show();
 
 
@@ -265,56 +320,67 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
     }
 
-   /* public class RestaurantMenuListTask extends AsyncTask<URL, Void, String> {
+   public class OrderTask extends AsyncTask<URL, Void, String> {
 
         // COMPLETED (2) Override the doInBackground method to perform the query. Return the results. (Hint: You've already written the code to perform the query)
         @Override
         protected String doInBackground(URL... params) {
             URL searchUrl = params[0];
-            String RestaurantMenuResults = null;
+            String DriverResults = null;
             try {
-                RestaurantMenuResults = NetworkUtils.getRestaurantMenuFromHttpUrl(searchUrl,merchantId);
+                DriverResults = NetworkUtils.getFoodOrderFromHttpUrl(searchUrl,ItemIds,ItemAmounts,phoneNo,String.valueOf(merchantId),String.valueOf(lat),String.valueOf(lng));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return RestaurantMenuResults;
+            return DriverResults;
         }
 
         // COMPLETED (3) Override onPostExecute to display the results in the TextView
         @Override
-        protected void onPostExecute(String RestaurantMenuResults) {
+        protected void onPostExecute(String DriverResults) {
 
-            if (RestaurantMenuResults != null && !RestaurantMenuResults.equals("")) {
-
-
+            if (DriverResults != null && !DriverResults.equals("")) {
 
 
-                String json = RestaurantMenuResults;
 
-                JSONObject restaurantMenuList = null;
 
-                JSONObject restaurantFoodMenuList = null;
+                String json = DriverResults;
 
-                JSONArray jsonArray ,jsonFoodMenuArray;
+                JSONObject driverINfo = null;
 
-                String menu,foodMenuItem;
+
+                JSONArray jsonArray ;
+
+                String name = null;
 
 
                 try {
 
-                    restaurantMenuList = new JSONObject(json);
+                    driverINfo = new JSONObject(json);
 
-                    jsonArray = restaurantMenuList.getJSONArray("menu");
+                    jsonArray = driverINfo.getJSONArray("driver");
 
                     for (int i=0; i<jsonArray.length(); i++) {
 
                         JSONObject restaurant = jsonArray.getJSONObject(i);
 
-                        menu = restaurant.getString("category_name");
+                        name = restaurant.getString("first_name");
 
-                        Menus.add(menu);
+                        //Menus.add(menu);
                     }
 
+                    if(name != null){
+                        List<OrderModel> orders = foodCartPageAdapter.getmOrders();
+                        if(orders.size()!=0){
+                            for(int i =0;i<orders.size();i++) mdb.orderDAO().deleteOrder(orders.get(i));
+                        }
+                        List<OrderMerchantModel> om = mdb.orderMercahntDAO().loadOrderMerchant();
+                        mdb.orderMercahntDAO().deleteOrderMerchant(om.get(0));
+
+                        Intent orderSubmitIntent = new Intent(getApplicationContext(),OrderSubmitComplete.class);
+                        orderSubmitIntent.putExtra("driver_name",name);
+                        startActivity(orderSubmitIntent);
+                    }
 
 
 
@@ -329,7 +395,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
                     mProgressbar.setLayoutParams(layoutParams);// set progressbar layout height & width*/
 
 
-               /* } catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 //  mSearchResultsTextView.setText(allNames.get(8));
@@ -337,5 +403,5 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
                 Toast.makeText(getApplicationContext(), "No restaurant menu found or net connection error", Toast.LENGTH_SHORT).show();
             }
         }
-    }*/
+    }
 }
