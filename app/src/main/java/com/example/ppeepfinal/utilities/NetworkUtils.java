@@ -1,6 +1,10 @@
 package com.example.ppeepfinal.utilities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.widget.Toast;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,10 +43,24 @@ public class NetworkUtils {
             "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/phone";
     final static  String PROFILE_UPDATE=
             "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/update";
+    final static String DRIVER_IMAGE=
+            "https://foodexpress.com.bd/ppeep/public/images/driver_images/";
 
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
     final static String sortBy = "stars";*/
+
+    public static URL buildDriverIamgeUrl(String imageUrl) {
+        Uri builtUri = Uri.parse(DRIVER_IMAGE+""+imageUrl).buildUpon().build();
+        URL driverIamgeUrl = null;
+        try {
+            driverIamgeUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return driverIamgeUrl;
+    }
 
     public static URL buildRestaurantUrl() {
         Uri builtUri = Uri.parse(RESTAURANT_URL).buildUpon().build();
@@ -154,6 +172,8 @@ public class NetworkUtils {
         }
         return url;
     }
+
+
 
     public static String getOfferFromHttpUrl(URL offerUrl) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) offerUrl.openConnection();

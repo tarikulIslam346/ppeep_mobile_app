@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +31,10 @@ import com.example.ppeepfinal.data.OrderMerchantModel;
 import com.example.ppeepfinal.data.OrderModel;
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
+import com.example.ppeepfinal.utilities.Api;
 import com.example.ppeepfinal.utilities.MyLocation;
 import com.example.ppeepfinal.utilities.NetworkUtils;
+import com.example.ppeepfinal.utilities.VolleyRequest;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
@@ -168,7 +171,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
             }
         }
-        Toast.makeText(getApplicationContext()," Item  : " + ItemIds + " amounts : " + ItemAmounts,Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext()," Item  : " + ItemIds + " amounts : " + ItemAmounts,Toast.LENGTH_LONG).show();
         List<OrderMerchantModel> mercahnt = mdb.orderMercahntDAO().loadOrderMerchant();
         if(mercahnt.size() != 0){
             merchantId = mercahnt.get(0).getMerchantId();
@@ -185,7 +188,35 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
                 lat = location.getLatitude();
                 lng = location.getLongitude();
-               // Toast.makeText(getApplicationContext()," Lat : " + String.valueOf(lat) + " Lng : " + String.valueOf(lng),Toast.LENGTH_LONG).show();
+                VolleyRequest volleyRequest = new VolleyRequest(FoodCartPage.this);
+                volleyRequest.VolleyGet(Api.reverseGeo + "demo?lat=" + lat + "&lng=" + lng + "&address_level=UPTO_THANA");
+                volleyRequest.setListener(new VolleyRequest.MyServerListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            //((EditText) findViewById(R.id.address)).setText(response.getJSONObject("result").getString("address"));
+                            String address = response.getJSONObject("result").getString("address");
+                            addressOnMap.setText(address);
+
+
+                        } catch (Exception e) {
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Toast.makeText(FoodCartPage.this, error, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void responseCode(int resposeCode) {
+
+                    }
+                });
 
 
 
@@ -351,7 +382,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
                 JSONArray jsonArray ;
 
-                String name = null;
+                String fname = null,lname=null,profilePic = null,contact = null;
 
 
                 try {
@@ -362,14 +393,17 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
                     for (int i=0; i<jsonArray.length(); i++) {
 
-                        JSONObject restaurant = jsonArray.getJSONObject(i);
+                        JSONObject driverProfile = jsonArray.getJSONObject(i);
 
-                        name = restaurant.getString("first_name");
+                        fname = driverProfile.getString("first_name");
+                        lname = driverProfile.getString("last_name");
+                        profilePic = driverProfile.getString("profile_pic");
+                        contact = driverProfile.getString("contact");
 
                         //Menus.add(menu);
                     }
 
-                    if(name != null){
+                    if(fname != null){
                         List<OrderModel> orders = foodCartPageAdapter.getmOrders();
                         if(orders.size()!=0){
                             for(int i =0;i<orders.size();i++) mdb.orderDAO().deleteOrder(orders.get(i));
@@ -378,7 +412,9 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
                         mdb.orderMercahntDAO().deleteOrderMerchant(om.get(0));
 
                         Intent orderSubmitIntent = new Intent(getApplicationContext(),OrderSubmitComplete.class);
-                        orderSubmitIntent.putExtra("driver_name",name);
+                        orderSubmitIntent.putExtra("driver_name",fname+" "+lname);
+                        orderSubmitIntent.putExtra("profile_pic",profilePic);
+                        orderSubmitIntent.putExtra("contact",contact);
                         startActivity(orderSubmitIntent);
                     }
 
