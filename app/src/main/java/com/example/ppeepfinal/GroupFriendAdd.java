@@ -2,10 +2,13 @@ package com.example.ppeepfinal;
 
 //import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GroupFriendAdd extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
