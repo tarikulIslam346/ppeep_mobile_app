@@ -9,10 +9,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GroupFriendAdd extends AppCompatActivity {
 
+    EditText mUserInput;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_friend_add);
+        mUserInput = (EditText) findViewById(R.id.userPhoneNoTextOfFriendInputEditText);
     }
 }
