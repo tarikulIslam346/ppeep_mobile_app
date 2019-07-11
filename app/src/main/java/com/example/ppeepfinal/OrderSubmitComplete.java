@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
@@ -148,6 +149,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
 
                         }
+
                                 //Snackbar.make(parent,"order confirm",Snackbar.LENGTH_INDEFINITE).show();
                                 //mOrderNotification.setVisibility(View.VISIBLE);
                            // }

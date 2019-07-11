@@ -359,7 +359,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
             URL searchUrl = params[0];
             String DriverResults = null;
             try {
-                DriverResults = NetworkUtils.getFoodOrderFromHttpUrl(searchUrl,ItemIds,ItemAmounts,phoneNo,String.valueOf(merchantId),String.valueOf(lat),String.valueOf(lng));
+                DriverResults = NetworkUtils.getFoodOrderFromHttpUrl(searchUrl,ItemIds,ItemAmounts,phoneNo,String.valueOf(merchantId),String.valueOf(lat),String.valueOf(lng), addressOnMap.getText().toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
