@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    tools:context=".FriendHistoryDetails">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TableLayout
+        android:id="@+id/table_of_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1,2"
+        android:gravity="center">
+
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_margin="1dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Date"
+                android:layout_margin="1dp"
+                android:layout_column="0"
+                android:background="#5DE26A"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Order Ammount"
+                android:layout_margin="1dp"
+                android:layout_column="1"
+                android:background="#5DE26A"
+                android:gravity="center"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:text="Points Earned"
+                android:layout_margin="1dp"
+                android:background="#5DE26A"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_column="2"
+                />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_margin="1dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="30/05/2019"
+                android:layout_margin="1dp"
+                android:layout_column="0"
+
+                android:textStyle="bold"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="845"
+                android:layout_margin="1dp"
+                android:layout_column="1"
+
+                android:gravity="center"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:text="84.5"
+                android:layout_margin="1dp"
+
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_column="2"
+                />
+
+
+        </TableRow>
+
+
+    </TableLayout>
+
+    </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Remove Friend"
+        android:gravity="center"
+        android:layout_margin="10dp"
+    android:backgroundTint="#F00606"
+        android:padding="15dp"
+
+android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
+</LinearLayout>
