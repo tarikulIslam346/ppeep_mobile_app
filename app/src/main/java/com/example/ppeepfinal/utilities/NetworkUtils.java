@@ -1,6 +1,10 @@
 package com.example.ppeepfinal.utilities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.widget.Toast;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +33,8 @@ public class NetworkUtils {
             "https://foodexpress.com.bd/ppeep/public/api/api/categories";
     final static String FRIEND_LIST_URL =
             "https://foodexpress.com.bd/ppeep/public/api/api/friend";
+    final  static  String ADD_FRIEND =
+            "https://foodexpress.com.bd/ppeep/public/api/api/add/friend";
     final  static  String ORDER_CREATE_URL =
             "https://foodexpress.com.bd/ppeep/public/api/api/order_create";
     final  static  String RESTAURANT_SEARCH_URL =
@@ -39,10 +45,24 @@ public class NetworkUtils {
             "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/phone";
     final static  String PROFILE_UPDATE=
             "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/update";
+    final static String DRIVER_IMAGE=
+            "https://foodexpress.com.bd/ppeep/public/images/driver_images/";
 
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
     final static String sortBy = "stars";*/
+
+    public static URL buildDriverIamgeUrl(String imageUrl) {
+        Uri builtUri = Uri.parse(DRIVER_IMAGE+""+imageUrl).buildUpon().build();
+        URL driverIamgeUrl = null;
+        try {
+            driverIamgeUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return driverIamgeUrl;
+    }
 
     public static URL buildRestaurantUrl() {
         Uri builtUri = Uri.parse(RESTAURANT_URL).buildUpon().build();
@@ -144,6 +164,17 @@ public class NetworkUtils {
         return friendListurl;
     }
 
+    public static URL buildAddFriendUrl() {
+        Uri builtUri = Uri.parse(ADD_FRIEND).buildUpon().build();
+        URL addfriendurl = null;
+        try {
+            addfriendurl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return addfriendurl;
+    }
+
     public static URL buildPhoneCheckUrl() {
         Uri builtUri = Uri.parse(PHONE_CHECK_URL).buildUpon().build();
         URL url = null;
@@ -154,6 +185,8 @@ public class NetworkUtils {
         }
         return url;
     }
+
+
 
     public static String getOfferFromHttpUrl(URL offerUrl) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) offerUrl.openConnection();
@@ -183,6 +216,40 @@ public class NetworkUtils {
         try {
             InputStream in = urlConnection.getInputStream();
 
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static String getAddFriendResponseFromHttpUrl(URL addfriendurl, String phone,String phoneNoOfFriend) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) addfriendurl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "phone", phone);
+        param.put( "phone_no_of_friend", phoneNoOfFriend);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+        try {
+            InputStream in = urlConnection.getInputStream();
             Scanner scanner = new Scanner(in);
             scanner.useDelimiter("\\A");
 
@@ -345,7 +412,7 @@ public class NetworkUtils {
         }
     }
 
-    public static String getFoodOrderFromHttpUrl(URL orderUrl, String itemId,String amount,String client_phone_no,String merchant_id) throws IOException {
+    public static String getFoodOrderFromHttpUrl(URL orderUrl, String itemId,String amount,String client_phone_no,String merchant_id,String lat,String lng,String address) throws IOException {
 
         HttpURLConnection urlConnection = (HttpURLConnection) orderUrl.openConnection();//establish connection
         urlConnection.setRequestMethod("POST");//use post method
@@ -357,6 +424,9 @@ public class NetworkUtils {
         param.put( "amount", amount);
         param.put( "client_phone_no", client_phone_no);
         param.put( "merchant_id", merchant_id);
+        param.put( "lat", lat);
+        param.put( "lng", lng);
+        param.put("delivery_address",address);
 
 
         OutputStream os = urlConnection.getOutputStream();

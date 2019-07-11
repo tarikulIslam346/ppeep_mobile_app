@@ -1,5 +1,6 @@
 package com.example.ppeepfinal;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -10,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;*/
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -103,12 +106,26 @@ public class FragmentGroup extends Fragment {
 
         mProgressbar.setVisibility(View.VISIBLE);
 
-        URL FriendListCheckUrl = NetworkUtils.buildFriendListUrl();
-
-        new  FriendListTask().execute(FriendListCheckUrl);
+        callApi();
 
         return v;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        callApi();
+
+    }
+
+
+    public void callApi(){
+        URL FriendListCheckUrl = NetworkUtils.buildFriendListUrl();
+
+        new  FriendListTask().execute(FriendListCheckUrl);
+    }
+
+
 
     public class FriendListTask extends AsyncTask<URL, Void, String> implements   FragmentGroupAdapter.ListItemClickListener {
 
@@ -178,7 +195,7 @@ public class FragmentGroup extends Fragment {
                 mProgressbar.setLayoutParams(layoutParams);
 
                 if(jsonArray.length() == 0 ){
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
                 }else{
                     LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext());
