@@ -3,9 +3,7 @@ package com.example.ppeepfinal;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-/*import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;*/
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +31,6 @@ public class FragmentHome extends Fragment {
 
     View v;
 
-    SparkButton darazButton,robishopButton,bagdoomButton,pickabooButton2,darazButton2,robishopButton2,bagdoomButton2;
-
     CircleButton foodExpressButton;
 
     public FragmentHome() { }
@@ -45,21 +41,12 @@ public class FragmentHome extends Fragment {
 
         v = inflater.inflate(R.layout.home_fragment, container, false);
 
-      //  View v = getLayoutInflater().inflate(R.layout.customtab, null);
-      //  v.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_homelogo);
-
-
-
        foodExpressButton= v.findViewById(R.id.foodexpress_id);
-      /*  darazButton= v.findViewById(R.id.facebook_button2);
-        robishopButton= v.findViewById(R.id.facebook_button3);
-        bagdoomButton= v.findViewById(R.id.facebook_button4);*/
 
 
         foodExpressButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            //    Uri uri = Uri.parse("http://foodexpress.com.bd/");
 
                 Intent intentFoodExpress = new Intent(getApplicationContext(),FoodApp.class);
                 startActivity(intentFoodExpress);
@@ -68,226 +55,16 @@ public class FragmentHome extends Fragment {
 
             }
         });
-/*
-//pickaboo listener
-       foodExpressButton.setEventListener(new SparkEventListener() {
-                                     @Override
-                                     public void onEvent(ImageView button, boolean buttonState) {
-                                         Uri uri = Uri.parse("http://google.com/");
-
-                                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                                         startActivity(intent);
-                                         startActivity(intent);
-
-                                     }
-
-           @Override
-           public void onEventAnimationEnd(ImageView button, boolean buttonState) {
-
-           }
-
-           @Override
-           public void onEventAnimationStart(ImageView button, boolean buttonState) {
-
-           }
-       });*/
-
-
-
-
-      /*  //daraz listener
-        darazButton.setEventListener(new SparkEventListener() {
-            @Override
-            public void onEvent(ImageView button, boolean buttonState) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.daraz.com.bd/"));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setPackage("com.daraz.android");
-                startActivity(intent);
-            }
-
-            @Override
-            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
-
-            }
-
-            @Override
-            public void onEventAnimationStart(ImageView button, boolean buttonState) {
-
-            }
-        });
-
-//robishop listener
-        robishopButton.setEventListener(new SparkEventListener() {
-            @Override
-            public void onEvent(ImageView button, boolean buttonState) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://robishop.com.bd/"));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setPackage("net.omobio.robisc");
-                startActivity(intent);
-            }
-
-            @Override
-            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
-
-            }
-
-            @Override
-            public void onEventAnimationStart(ImageView button, boolean buttonState) {
-
-            }
-        });
-
-
-
-
-        //bagdoom listener
-        bagdoomButton.setEventListener(new SparkEventListener() {
-            @Override
-            public void onEvent(ImageView button, boolean buttonState) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.bagdoom.com/"));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setPackage("com.mcc.bagdoom");
-                startActivity(intent);
-            }
-
-            @Override
-            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
-
-            }
-
-            @Override
-            public void onEventAnimationStart(ImageView button, boolean buttonState) {
-
-            }
-        });
-
-
-        //below buttons
-
-
-
-
-        robishopButton2= v.findViewById(R.id.foodexpress_id);
-
-
-//pickaboo listener
-        robishopButton2.setEventListener(new SparkEventListener() {
-            @Override
-            public void onEvent(ImageView button, boolean buttonState) {
-                //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pickaboo.com/"));
-
-                Uri uri = Uri.parse("http://google.com/");
-
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-
-             *//*   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setPackage("com.pickaboo.app");*//*
-                startActivity(intent);
-            }
-
-            @Override
-            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
-
-            }
-
-            @Override
-            public void onEventAnimationStart(ImageView button, boolean buttonState) {
-
-            }
-        });
-
-
-
-
-        //daraz listener
-        darazButton.setEventListener(new SparkEventListener() {
-            @Override
-            public void onEvent(ImageView button, boolean buttonState) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.daraz.com.bd/"));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setPackage("com.daraz.android");
-                startActivity(intent);
-            }
-
-            @Override
-            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
-
-            }
-
-            @Override
-            public void onEventAnimationStart(ImageView button, boolean buttonState) {
-
-            }
-        });
-
-//robishop listener
-        robishopButton.setEventListener(new SparkEventListener() {
-            @Override
-            public void onEvent(ImageView button, boolean buttonState) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://robishop.com.bd/"));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setPackage("net.omobio.robisc");
-                startActivity(intent);
-            }
-
-            @Override
-            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
-
-            }
-
-            @Override
-            public void onEventAnimationStart(ImageView button, boolean buttonState) {
-
-            }
-        });
-
-
-
-
-        //bagdoom listener
-        bagdoomButton.setEventListener(new SparkEventListener() {
-            @Override
-            public void onEvent(ImageView button, boolean buttonState) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.bagdoom.com/"));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setPackage("com.mcc.bagdoom");
-                startActivity(intent);
-            }
-
-            @Override
-            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
-
-            }
-
-            @Override
-            public void onEventAnimationStart(ImageView button, boolean buttonState) {
-
-            }
-        });
-
-
-
-
-
-*/
-
 
 
         sliderLayout = v.findViewById(R.id.imageSlider);
-    //    sliderLayout.setIndicatorAnimation(IndicatorAnimations.NONE); //set indicator animation by using SliderLayout.Animations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+
         sliderLayout.setScrollTimeInSec(3); //set scroll delay in seconds :
 
         setSliderViews();
+
         return v;
     }
-
-
-
-
-
-
-
 
 
     private void setSliderViews() {
