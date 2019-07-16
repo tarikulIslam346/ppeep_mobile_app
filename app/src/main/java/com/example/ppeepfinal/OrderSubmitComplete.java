@@ -1,16 +1,10 @@
 package com.example.ppeepfinal;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
 //import android.support.v7.app.AppCompatActivity;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,30 +15,21 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.NetworkUtils;
-import com.google.android.material.snackbar.Snackbar;
 import com.pusher.client.Pusher;
 import com.pusher.client.PusherOptions;
 import com.pusher.client.channel.Channel;
 import com.pusher.client.channel.SubscriptionEventListener;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
-
-import cdflynn.android.library.checkview.CheckView;
-
 
 
 public class OrderSubmitComplete extends AppCompatActivity {
@@ -123,6 +108,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
         Channel channel = pusher.subscribe("my-channel");
 
+
         channel.bind("my-order-confirm-event", new SubscriptionEventListener() {
             @Override
             public void onEvent(String channelName, String eventName, final String data) {
@@ -130,11 +116,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //JSONObject driverInfo;
-                        ///try {
-                           // driverInfo = new JSONObject(data);
-                           // String phone = driverInfo.getString("driver");
-                           // if(phone.equals(userPhoneNo)){
+
                                 Toast.makeText(getApplicationContext()," Order confirm : ",Toast.LENGTH_LONG).show();
                         if(imageUrl != null){
                             URL getimageUrl = NetworkUtils.buildDriverIamgeUrl(imageUrl);
@@ -150,24 +132,57 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
                         }
 
-                                //Snackbar.make(parent,"order confirm",Snackbar.LENGTH_INDEFINITE).show();
-                                //mOrderNotification.setVisibility(View.VISIBLE);
-                           // }
+                    }
+                });
+                channel.bind("driver-order-confirm-event", new SubscriptionEventListener() {
+                    @Override
+                    public void onEvent(String channelName, String eventName, final String data) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
 
-                       // } catch (JSONException e) {
-                           // e.printStackTrace();
-                      //  }
+                                JSONObject driverInfo;
+                                int OrderId = 0;
+
+                                try {
+                                    driverInfo = new JSONObject(data);
+                                    OrderId = driverInfo.getInt("order_id");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
 
 
-                        // System.out.println("Received event with data: " + data);
-                        // mAccept.setText("ok");
-                        // Log.d(TAG,"Call pusher ");
+                                Toast.makeText(getApplicationContext()," Order confirm By driver ",Toast.LENGTH_LONG).show();
+                                Intent homePageIntent = new Intent(OrderSubmitComplete.this,FoodApp.class);
+                                if(OrderId != 0) {
+
+                                    homePageIntent.putExtra("order_id",String.valueOf(OrderId));
+                                }
+                                startActivity(homePageIntent);
+
+
+                            }
+                        });
+
                     }
                 });
 
             }
         });
+
+
+
+
+
         pusher.connect();
+
+
+
+
+
+
+
+
 
 
 

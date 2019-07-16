@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ public class UserMapActivity extends AppCompatActivity implements OnMapReadyCall
     Button addressConfirm;
     String address;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,7 @@ public class UserMapActivity extends AppCompatActivity implements OnMapReadyCall
         setContentView(R.layout.activity_user_map);
 
         addressConfirm = (Button) findViewById(R.id.bt_delivery_address_confirm);
+        addressConfirm.setVisibility(View.INVISIBLE);
 
 
        // Toolbar toolbar = findViewById(R.id.toolbar);
@@ -72,6 +75,8 @@ public class UserMapActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
 
+
+
     @Override
     public void onMapReady(@NonNull DingiMap dingiMap) {
         dingiMap.setStyleUrl(Style.DINGI_ENGLISH);
@@ -87,6 +92,8 @@ public class UserMapActivity extends AppCompatActivity implements OnMapReadyCall
                     @Override
                     public void onCameraMove() {
                         LatLng center = map.getCameraPosition().target;
+                        addressConfirm.setVisibility(View.INVISIBLE);
+
                         callAPI(center);
 
                     }
@@ -154,6 +161,7 @@ public class UserMapActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     private void callAPI(LatLng latLng) {
+
         VolleyRequest volleyRequest = new VolleyRequest(UserMapActivity.this);
         volleyRequest.VolleyGet(Api.reverseGeo + "demo?lat=" + latLng.getLatitude() + "&lng=" + latLng.getLongitude() + "&address_level=UPTO_THANA");
         volleyRequest.setListener(new VolleyRequest.MyServerListener() {
@@ -163,11 +171,13 @@ public class UserMapActivity extends AppCompatActivity implements OnMapReadyCall
                 try {
                     ((EditText) findViewById(R.id.address)).setText(response.getJSONObject("result").getString("address"));
                     address = ((EditText) findViewById(R.id.address)).getText().toString();
+                    addressConfirm.setVisibility(View.VISIBLE);
                     addressConfirm.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent foodCart = new Intent(UserMapActivity.this, FoodCartPage.class);
                             if(address != null)foodCart.putExtra("address", address);
+                            finish();
                             startActivity(foodCart);
                         }
                     });

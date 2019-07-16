@@ -5,12 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-/*import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;*/
+
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,8 +40,6 @@ import java.util.List;
 
 public class FragmentGroup extends Fragment {
 
-    private ImageView imageView1,imageView2,imageView3,imageView4,imageView5;
-
     View v;
 
     private RecyclerView mListOfFriend;
@@ -63,7 +56,7 @@ public class FragmentGroup extends Fragment {
 
     private ProgressBar mProgressbar;
 
-    private TextView mProfileNameTv,mPhoneNoTv;
+    private TextView mProfileNameTv,mPhoneNoTv,mGropuMemberNo,mTotalPointOfUser;
 
     public FragmentGroup() { }
 
@@ -72,6 +65,7 @@ public class FragmentGroup extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.group_fragment,container,false);
+
         FloatingActionButton friendAddButton= (FloatingActionButton) v.findViewById(R.id.fabGroupAdd);
 
         mListOfFriend = (RecyclerView)v.findViewById(R.id.rv_list_of_friend_group);
@@ -81,6 +75,14 @@ public class FragmentGroup extends Fragment {
         mProfileNameTv = (TextView) v.findViewById(R.id.tv_profile_name_of_friend_group);
 
         mPhoneNoTv = (TextView) v.findViewById(R.id.tv_phone_no_of_friend_group);
+
+        mGropuMemberNo = (TextView) v.findViewById(R.id.tv_group_member_no);
+
+        mTotalPointOfUser = (TextView) v.findViewById(R.id.tv_total_point_of_user);
+
+        mTotalPointOfUser.setText("0");
+
+        mGropuMemberNo.setText("0");
 
 
         friendAddButton.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +120,12 @@ public class FragmentGroup extends Fragment {
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        callApi();
+    }
+
 
     public void callApi(){
         URL FriendListCheckUrl = NetworkUtils.buildFriendListUrl();
@@ -130,7 +138,9 @@ public class FragmentGroup extends Fragment {
     public class FriendListTask extends AsyncTask<URL, Void, String> implements   FragmentGroupAdapter.ListItemClickListener {
 
 
-
+        List<String> allNames = new ArrayList<String>();
+        List<String> allPhoneNo = new ArrayList<String>();
+        List<Double>allTotalPoint = new ArrayList<Double>();
 
         @Override
         protected String doInBackground(URL... params) {
@@ -158,11 +168,12 @@ public class FragmentGroup extends Fragment {
 
                 JSONObject friendList = null;
 
-                JSONArray jsonArray=null;
+                JSONArray jsonArray=null,jsonArrayOfTotalPoint=null;
 
-                String name,message = null;
+                String name,message = null,contact = null;
+                double total_point,total_point_of_user=0;
 
-                List<String> allNames = new ArrayList<String>();
+               // List<String> allNames = new ArrayList<String>();
 
 
 
@@ -170,14 +181,36 @@ public class FragmentGroup extends Fragment {
                     friendList = new JSONObject(json);
                     jsonArray = friendList.getJSONArray("friend_list");
 
+
                     if(jsonArray.length() == 0 ){
                         message = friendList.getString("message");
                     }
 
                     for (int i=0; i<jsonArray.length(); i++) {
+
                         JSONObject friend = jsonArray.getJSONObject(i);
+
                         name = friend.getString("first_name");
+
                         allNames.add(name);
+
+                        contact = friend.getString("contact");
+
+                        allPhoneNo.add(contact);
+
+                        total_point = friend.getDouble("total_point");
+
+                        allTotalPoint.add(total_point);
+                    }
+
+                    jsonArrayOfTotalPoint = friendList.getJSONArray("total_earn_of_user");
+                    for (int i=0; i<jsonArrayOfTotalPoint.length(); i++) {
+
+                        JSONObject friend = jsonArrayOfTotalPoint.getJSONObject(i);
+
+                        total_point_of_user = friend.getDouble("total_point");
+
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -198,13 +231,18 @@ public class FragmentGroup extends Fragment {
                    // Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
                 }else{
+
+                    mGropuMemberNo.setText(String.valueOf(jsonArray.length()));
+
+                    if(total_point_of_user!=0)mTotalPointOfUser.setText(String.valueOf(total_point_of_user));
+
                     LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext());
 
                     mListOfFriend.setLayoutManager(layoutManager);
 
                     mListOfFriend.setHasFixedSize(true);
 
-                    mfragmentGroupAdapter = new FragmentGroupAdapter(allNames, this);
+                    mfragmentGroupAdapter = new FragmentGroupAdapter(allNames,allTotalPoint, this);
 
                     mListOfFriend.setAdapter(mfragmentGroupAdapter);
                 }
@@ -219,15 +257,10 @@ public class FragmentGroup extends Fragment {
         @Override
         public void onListItemClick(int clickedItemIndex) {
 
-            /*int clickedRestaurnat = MerchantId.get(clickedItemIndex).intValue();
-            String restaurantName = allNames.get(clickedItemIndex);
-            String cusine = Cusines.get(clickedItemIndex);
-            //Toast.makeText(getContext(),"restaurant id" +clickedRestaurnat ,Toast.LENGTH_SHORT).show();
-            Intent foodmenuIntent = new Intent(getContext(),RestaurantMenuPage.class);
-            foodmenuIntent.putExtra("mercahnt_Id",String.valueOf(clickedRestaurnat));
-            foodmenuIntent.putExtra("restaurant_name",restaurantName);
-            foodmenuIntent.putExtra("cuisine",cusine);
-            startActivity(foodmenuIntent);*/
+            String phoneNo = allPhoneNo.get(clickedItemIndex);
+            Intent freindPointIntent = new Intent(getContext(),FriendHistoryDetails.class);
+            freindPointIntent.putExtra("contact",phoneNo);
+            startActivity(freindPointIntent);
 
 
 

@@ -86,6 +86,7 @@
 
 
                         <TextView
+                            android:id="@+id/tv_total_point_of_user"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="650"
@@ -119,6 +120,7 @@
 
 
                         <TextView
+                            android:id="@+id/tv_group_member_no"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="6"

@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;*/
 import android.os.Bundle;
 //import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.SearchView;
 
@@ -15,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.ppeepfinal.data.UserDatabase;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 public class FoodApp extends AppCompatActivity {
@@ -24,6 +25,7 @@ Menu foodCart;
     private ViewPager viewPagerId;
     private ViewPagerAdapter adapter;
     SearchView restaurantSearchView;
+    private UserDatabase mdb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,44 @@ Menu foodCart;
         setSupportActionBar(foodToolbar);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         restaurantSearchView = (SearchView)  findViewById(R.id.sv_for_restaurant);
+
+        mdb = UserDatabase.getInstance(getApplicationContext());
+
+
+        Intent OrderConfirmIntent = getIntent();
+        String orderId = OrderConfirmIntent.getStringExtra("order_id");
+        if(orderId != null){
+           // OrderConfirmModel orderConfirmModel = new OrderConfirmModel(Integer.valueOf(orderId),1);
+           // mdb.orderConfirmDAO().insertOrderConfirm(orderConfirmModel);
+            Snackbar.make(findViewById(R.id.food_app_layout), " 1 order has been placed", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("See Details", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(FoodApp.this,CurrentOrderHistory.class);
+                            intent.putExtra("order_id",orderId);
+                            startActivity(intent);
+                        }
+                    })
+                    .show();
+        }
+
+           /* List<OrderConfirmModel> orderConfirmModel = mdb.orderConfirmDAO().loadOrderConfirm();
+
+            if(orderConfirmModel.size() !=0 ){
+                Snackbar.make(findViewById(R.id.food_app_layout), " 1 order has been placed", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("See Details", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(FoodApp.this,CurrentOrderHistory.class);
+                                int order_id = orderConfirmModel.get(0).getOrderId();
+                                intent.putExtra("order_id",String.valueOf(order_id));
+                                startActivity(intent);
+                            }
+                        })
+                        .show();
+            }*/
+
+
 
         restaurantSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 

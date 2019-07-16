@@ -3,6 +3,7 @@ package com.example.ppeepfinal;
 import android.content.Context;
 /*import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;*/
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ public class FragmentGroupAdapter extends  RecyclerView.Adapter<FragmentGroupAda
 
     private List<String> mFriendlist;
 
+    private List<Double> mFriendPoint;
+
     final private ListItemClickListener mOnClickListener;
 
     public interface ListItemClickListener{
@@ -24,8 +27,9 @@ public class FragmentGroupAdapter extends  RecyclerView.Adapter<FragmentGroupAda
     }
 
 
-    public FragmentGroupAdapter (List<String> FriendList, ListItemClickListener listener){
+    public FragmentGroupAdapter (List<String> FriendList, List<Double> FriendPoint,ListItemClickListener listener){
         mFriendlist = FriendList;
+        mFriendPoint = FriendPoint;
         mOnClickListener = listener;
     }
 
@@ -53,7 +57,9 @@ public class FragmentGroupAdapter extends  RecyclerView.Adapter<FragmentGroupAda
 
         String friend = mFriendlist.get(position);
 
-        fragmentGroupViewHolder.bind(friend);
+        double totalPoint = mFriendPoint.get(position);
+
+        fragmentGroupViewHolder.bind(friend,totalPoint);
     }
 
     @Override
@@ -64,16 +70,19 @@ public class FragmentGroupAdapter extends  RecyclerView.Adapter<FragmentGroupAda
 
     class FragmentGroupViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView friendNameTextView;
+        TextView friendNameTextView,friendPointTextView;
 
         public FragmentGroupViewHolder(View itemView){
             super(itemView);
             friendNameTextView = (TextView)itemView.findViewById(R.id.tv_friend_name);
+            friendPointTextView = (TextView)itemView.findViewById(R.id.tv_total_earn_point);
             itemView.setOnClickListener(this);
 
         }
-        void bind(String friendName){
+        void bind(String friendName,double totalPoint){
             friendNameTextView.setText(friendName);
+            friendPointTextView.setTextColor(Color.GREEN);
+            friendPointTextView.setText(String.valueOf(totalPoint));
         }
         public void onClick(View v){
             int clickedPosition = getAdapterPosition();

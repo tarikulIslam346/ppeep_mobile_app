@@ -2,6 +2,7 @@ package com.example.ppeepfinal;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 
 import android.location.Location;
@@ -69,6 +70,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     double lng;
     URL orderCreateUrl;
     Button orderSubmit,preOrderFood,promoApply;
+    ProgressDialog dialog;
 
 
     @Override
@@ -89,6 +91,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
             @Override
             public void onClick(View v) {
                 Intent mapView = new Intent(getApplicationContext(),UserMapActivity.class);
+                finish();
                 startActivity(mapView);
             }
         });
@@ -181,52 +184,60 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
             phoneNo = user.get(0).getPhone();
         }
 
-        MyLocation myLocation = new MyLocation(FoodCartPage.this);
-        myLocation.setListener(new MyLocation.MyLocationListener() {
-            @Override
-            public void onLocationFound(Location location) {
+        Intent foodCart = getIntent();
+        String address = foodCart.getStringExtra("address");
+        if(address!=null) addressOnMap.setText(address);
+        else{
+            MyLocation myLocation = new MyLocation(FoodCartPage.this);
+            myLocation.setListener(new MyLocation.MyLocationListener() {
+                @Override
+                public void onLocationFound(Location location) {
 
-                lat = location.getLatitude();
-                lng = location.getLongitude();
-                VolleyRequest volleyRequest = new VolleyRequest(FoodCartPage.this);
-                volleyRequest.VolleyGet(Api.reverseGeo + "demo?lat=" + lat + "&lng=" + lng + "&address_level=UPTO_THANA");
-                volleyRequest.setListener(new VolleyRequest.MyServerListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
+                    lat = location.getLatitude();
+                    lng = location.getLongitude();
+                    ShowLoder("Loading..");
+                    VolleyRequest volleyRequest = new VolleyRequest(FoodCartPage.this);
+                    volleyRequest.VolleyGet(Api.reverseGeo + "demo?lat=" + lat + "&lng=" + lng + "&address_level=UPTO_THANA");
+                    volleyRequest.setListener(new VolleyRequest.MyServerListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
 
-                        try {
-                            //((EditText) findViewById(R.id.address)).setText(response.getJSONObject("result").getString("address"));
-                            String address = response.getJSONObject("result").getString("address");
-                            addressOnMap.setText(address);
+                            try {
+                                //((EditText) findViewById(R.id.address)).setText(response.getJSONObject("result").getString("address"));
+                                String address = response.getJSONObject("result").getString("address");
+                                addressOnMap.setText(address);
+                                dialog.dismiss();
 
 
-                        } catch (Exception e) {
+                            } catch (Exception e) {
+
+                            }
+
 
                         }
 
+                        @Override
+                        public void onError(String error) {
+                            Toast.makeText(FoodCartPage.this, error, Toast.LENGTH_SHORT).show();
+                        }
 
-                    }
+                        @Override
+                        public void responseCode(int resposeCode) {
 
-                    @Override
-                    public void onError(String error) {
-                        Toast.makeText(FoodCartPage.this, error, Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void responseCode(int resposeCode) {
-
-                    }
-                });
+                        }
+                    });
 
 
 
-            }
+                }
 
-            @Override
-            public void onFailed() {
+                @Override
+                public void onFailed() {
 
-            }
-        });
+                }
+            });
+        }
+
 
         orderSubmit.setOnClickListener(new View.OnClickListener() {
 
@@ -307,6 +318,10 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         addressOnMap.setText(address);
 
 
+    }
+    public void ShowLoder(String message){
+        dialog = ProgressDialog.show(this, "",
+                message, true);
     }
 
 

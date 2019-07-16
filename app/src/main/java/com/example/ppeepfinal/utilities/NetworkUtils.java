@@ -22,31 +22,37 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class NetworkUtils {
-    final static String REGISTER_BASE_URL =
-            "https://foodexpress.com.bd/ppeep/public/api/api/user/register";
+    final static String REGISTER_BASE_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/register";
 
-    final static String PHONE_CHECK_URL =
-            "https://foodexpress.com.bd/ppeep/public/api/api/user/checkPhoneNo";
-    final static String RESTAURANT_URL =
-            "https://foodexpress.com.bd/ppeep/public/api/api/restaurnats";
-    final static String RESTAURANT_MENU_URL =
-            "https://foodexpress.com.bd/ppeep/public/api/api/categories";
-    final static String FRIEND_LIST_URL =
-            "https://foodexpress.com.bd/ppeep/public/api/api/friend";
-    final  static  String ADD_FRIEND =
-            "https://foodexpress.com.bd/ppeep/public/api/api/add/friend";
-    final  static  String ORDER_CREATE_URL =
-            "https://foodexpress.com.bd/ppeep/public/api/api/order_create";
-    final  static  String RESTAURANT_SEARCH_URL =
-            "https://foodexpress.com.bd/ppeep/public/api/api/search/restaurnats";
-    final  static  String OFFER_URL =
-            "https://foodexpress.com.bd/ppeep/public/api/api/offers";
-    final  static  String PROFILE_DETAIL =
-            "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/phone";
-    final static  String PROFILE_UPDATE=
-            "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/update";
-    final static String DRIVER_IMAGE=
-            "https://foodexpress.com.bd/ppeep/public/images/driver_images/";
+    final static String PHONE_CHECK_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/checkPhoneNo";
+
+    final static String RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/restaurnats";
+
+    final static String RECOMMENDED_RESTAURANT_URL ="https://foodexpress.com.bd/ppeep/public/api/api/recomanded/restaurnats";
+
+    final static String RESTAURANT_MENU_URL = "https://foodexpress.com.bd/ppeep/public/api/api/categories";
+
+    final static String FRIEND_LIST_URL = "https://foodexpress.com.bd/ppeep/public/api/api/friend";
+
+    final  static  String ADD_FRIEND = "https://foodexpress.com.bd/ppeep/public/api/api/add/friend";
+
+    final  static  String REMOVE_FRIEND = "https://foodexpress.com.bd/ppeep/public/api/api/remove/friend";
+
+    final  static  String ORDER_CREATE_URL = "https://foodexpress.com.bd/ppeep/public/api/api/order_create";
+
+    final  static  String RESTAURANT_SEARCH_URL = "https://foodexpress.com.bd/ppeep/public/api/api/search/restaurnats";
+
+    final  static  String OFFER_URL = "https://foodexpress.com.bd/ppeep/public/api/api/offers";
+
+    final  static  String PROFILE_DETAIL = "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/phone";
+
+    final static  String PROFILE_UPDATE= "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/update";
+
+    final static String DRIVER_IMAGE= "https://foodexpress.com.bd/ppeep/public/images/driver_images/";
+
+    final static String ORDER_DETAILS_URL ="https://foodexpress.com.bd/ppeep/public/api/api/getOrder";
+
+    final static String ORDER_DELIVER_INFO = "https://foodexpress.com.bd/ppeep/public/api/api/user/orderDeliver";
 
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
@@ -74,6 +80,18 @@ public class NetworkUtils {
         }
         return retauranturl;
     }
+
+    public static URL buildRecommendedRestaurantUrl() {
+        Uri builtUri = Uri.parse(RECOMMENDED_RESTAURANT_URL).buildUpon().build();
+        URL recommendedRetauranturl = null;
+        try {
+            recommendedRetauranturl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return recommendedRetauranturl;
+    }
+
     public static URL buildSearchRestaurantUrl() {
         Uri builtUri = Uri.parse(RESTAURANT_SEARCH_URL).buildUpon().build();
         URL retaurantSearchurl = null;
@@ -175,6 +193,17 @@ public class NetworkUtils {
         return addfriendurl;
     }
 
+    public static URL buildRemoveFriendUrl() {
+        Uri builtUri = Uri.parse(REMOVE_FRIEND).buildUpon().build();
+        URL removefriendurl = null;
+        try {
+            removefriendurl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return removefriendurl;
+    }
+
     public static URL buildPhoneCheckUrl() {
         Uri builtUri = Uri.parse(PHONE_CHECK_URL).buildUpon().build();
         URL url = null;
@@ -185,6 +214,28 @@ public class NetworkUtils {
         }
         return url;
     }
+
+    public static URL buildOrderInfoUrl() {
+        Uri builtUri = Uri.parse(ORDER_DETAILS_URL).buildUpon().build();
+        URL orderInfoUrl = null;
+        try {
+            orderInfoUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return orderInfoUrl;
+    }
+    public static URL buildDeliverOrderInfoUrl() {
+        Uri builtUri = Uri.parse(ORDER_DELIVER_INFO).buildUpon().build();
+        URL orderDeliverInfoUrl = null;
+        try {
+            orderDeliverInfoUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return orderDeliverInfoUrl;
+    }
+
 
 
 
@@ -229,6 +280,61 @@ public class NetworkUtils {
             urlConnection.disconnect();
         }
     }
+
+    public static String getRecommendedRestaurantFromHttpUrl(URL recommendedRetauranturl) throws IOException {
+        HttpURLConnection urlConnection = (HttpURLConnection) recommendedRetauranturl.openConnection();
+
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static String getRemoveFriendResponseFromHttpUrl(URL removefriendurl, String phone) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) removefriendurl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "contact", phone);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
 
     public static String getAddFriendResponseFromHttpUrl(URL addfriendurl, String phone,String phoneNoOfFriend) throws IOException {
 
@@ -568,6 +674,75 @@ public class NetworkUtils {
             urlConnection.disconnect();
         }
     }
+
+    public static String getOrderDetailsResponseFromHttpUrl(URL orderInfoUrl, String OrderId) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) orderInfoUrl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "order_id", OrderId);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    //This api will get response of order deliver information
+
+    public static String getDeliverOrderDetailsOfUserResponseFromHttpUrl(URL orderDeliverInfoUrl, String phone) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) orderDeliverInfoUrl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "phone", phone);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
 
 
 
