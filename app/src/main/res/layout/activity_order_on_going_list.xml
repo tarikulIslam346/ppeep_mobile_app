@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="15dp"
+    tools:context=".OrderOnGoingList">
+
+    <TableLayout
+        android:id="@+id/table_of_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1,2,3"
+        android:gravity="center">
+
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_margin="1dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=" Item Name"
+                android:layout_margin="1dp"
+                android:layout_column="0"
+                android:background="#5DE26A"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Qnty"
+                android:layout_margin="1dp"
+                android:layout_column="1"
+                android:background="#5DE26A"
+                android:gravity="center"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:text="Unit Price"
+                android:layout_margin="1dp"
+                android:background="#5DE26A"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_column="2"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="3"
+                android:layout_margin="1dp"
+                android:background="#5DE26A"
+                android:gravity="center"
+                android:text="Total"
+                android:textStyle="bold" />
+        </TableRow>
+
+
+    </TableLayout>
+
+</LinearLayout>
