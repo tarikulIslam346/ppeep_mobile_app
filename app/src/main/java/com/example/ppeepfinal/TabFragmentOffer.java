@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ppeepfinal.data.UserDatabase;
+import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.NetworkUtils;
 
 import org.json.JSONArray;
@@ -38,6 +40,9 @@ public class TabFragmentOffer extends Fragment {
     ProgressBar mProgressbar;
     RecyclerView mNumberOfRestaurant;
     private TabFragmentNearbyAdapter tabFragmentNearbyAdapter;
+    UserDatabase mdb;
+    List<UserModel> user ;
+    String lat,lng;
 
     public TabFragmentOffer(){
 
@@ -47,12 +52,30 @@ public class TabFragmentOffer extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         v=inflater.inflate(R.layout.activity_tab_fragment_offer,container,false);
-        URL restaurantListUrl = NetworkUtils.buildRestaurantUrl();
+
+        URL restaurantListUrl = NetworkUtils.buildFreeDeliverRestaurantUrl();
+
         mProgressbar = (ProgressBar) v.findViewById(R.id.pv_restaurant_offer_menu) ;
+
         mProgressbar.setVisibility(View.VISIBLE);
-        new TabFragmentOffer.RestaurantListTask().execute(restaurantListUrl);
+
+        mdb = UserDatabase.getInstance(getContext());
+
+        user = mdb.userDAO().loadPhone();
+
         mNumberOfRestaurant = (RecyclerView)v.findViewById(R.id.rv_restaurants_offer);
+
+        if(user.size() !=0){
+            // Toast.makeText(getContext()," " + String.valueOf(user.get(0).getLat()), Toast.LENGTH_LONG).show();
+            lat  = String.valueOf(user.get(0).getLat());
+            lng = String.valueOf(user.get(0).getLng());
+            new TabFragmentOffer.RestaurantListTask().execute(restaurantListUrl);
+
+        }
+
+
         return v;
 
     }
@@ -73,7 +96,7 @@ public class TabFragmentOffer extends Fragment {
             URL searchUrl = params[0];
             String RestaurantResults = null;
             try {
-                RestaurantResults = NetworkUtils.getRestaurantFromHttpUrl(searchUrl);
+                RestaurantResults = NetworkUtils.getNearByRestaurantFromHttpUrl(searchUrl,lat,lng);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -91,7 +114,7 @@ public class TabFragmentOffer extends Fragment {
                 JSONObject restaurantList = null;
                 JSONArray jsonArray=null;
 
-                String name,closingTime,openingTime,cusine;
+                String name,closingTime,openingTime,cusine,message=null;
                 int vatOfRestaurant,deliverChargeOfRestaurant;
                 int merchantId;
 
@@ -121,6 +144,17 @@ public class TabFragmentOffer extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                try {
+                    restaurantList = new JSONObject(json);
+                    message = restaurantList.getString("message");
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
                 mProgressbar.setVisibility(View.INVISIBLE);
                 ViewGroup.LayoutParams layoutParams = mProgressbar.getLayoutParams();
 
@@ -128,14 +162,21 @@ public class TabFragmentOffer extends Fragment {
                 layoutParams.width = 0;
                 mProgressbar.setLayoutParams(layoutParams);
 
-                LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext());
-                mNumberOfRestaurant.setLayoutManager(layoutManager);
+                if(message != null ){
 
-                mNumberOfRestaurant.setHasFixedSize(true);
+                }
 
-                tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines,  this);
+                if(jsonArray!= null){
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext());
+                    mNumberOfRestaurant.setLayoutManager(layoutManager);
 
-                mNumberOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
+                    mNumberOfRestaurant.setHasFixedSize(true);
+
+                    tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines,  this);
+
+                    mNumberOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
+                }
+
 
 
             }else{

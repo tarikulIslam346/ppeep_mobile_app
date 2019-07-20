@@ -28,6 +28,12 @@ public class NetworkUtils {
 
     final static String RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/nearby/restaurnats";
 
+    final static String NEARBY_RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/getnearby/restaurnats";
+
+    final static String POPULAR_RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/getPopular/restaurnats";
+
+    final static String FREE_DELIVERY_RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/getFreeDelivery/restaurnats";
+
     final static String RECOMMENDED_RESTAURANT_URL ="https://foodexpress.com.bd/ppeep/public/api/api/recomanded/restaurnats";
 
     final static String RESTAURANT_MENU_URL = "https://foodexpress.com.bd/ppeep/public/api/api/categories";
@@ -81,6 +87,37 @@ public class NetworkUtils {
             e.printStackTrace();
         }
         return retauranturl;
+    }
+    public static URL buildPopularRestaurantUrl() {
+        Uri builtUri = Uri.parse(POPULAR_RESTAURANT_URL).buildUpon().build();
+        URL retauranturl = null;
+        try {
+            retauranturl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return retauranturl;
+    }
+    public static URL buildFreeDeliverRestaurantUrl() {
+        Uri builtUri = Uri.parse(FREE_DELIVERY_RESTAURANT_URL).buildUpon().build();
+        URL retauranturl = null;
+        try {
+            retauranturl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return retauranturl;
+    }
+
+    public static URL buildNearByRestaurantUrl() {
+        Uri builtUri = Uri.parse(NEARBY_RESTAURANT_URL).buildUpon().build();
+        URL nearbyRetaurantUrl = null;
+        try {
+            nearbyRetaurantUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return nearbyRetaurantUrl;
     }
 
     public static URL buildRecommendedRestaurantUrl() {
@@ -275,6 +312,42 @@ public class NetworkUtils {
 
     public static String getRestaurantFromHttpUrl(URL retauranturl) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) retauranturl.openConnection();
+
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static String getNearByRestaurantFromHttpUrl(URL retauranturl,String lat,String lng) throws IOException {
+        HttpURLConnection urlConnection = (HttpURLConnection) retauranturl.openConnection();
+
+        urlConnection.setRequestMethod("POST");//use post method
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "lat", lat);
+        param.put( "lng", lng);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
 
 
         try {

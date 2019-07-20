@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -32,6 +33,9 @@ Menu foodCart;
     SearchView restaurantSearchView;
     private UserDatabase mdb;
     TextView mAddress;
+    LinearLayout addresslayout;
+    String address, lat,lng;
+    List<UserModel> user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +45,38 @@ Menu foodCart;
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
        // restaurantSearchView = (SearchView)  findViewById(R.id.sv_for_restaurant);
         mAddress = (TextView) findViewById(R.id.tv_delivery_address);
+        addresslayout = (LinearLayout) findViewById(R.id.layout_address);
+
+        addresslayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent deliveryMap = new Intent(FoodApp.this,UserAutoCompleteAdress.class);
+                startActivity(deliveryMap);
+            }
+        });
 
         mdb = UserDatabase.getInstance(getApplicationContext());
 
-        List<UserModel> user = mdb.userDAO().loadPhone();
+        user = mdb.userDAO().loadPhone();
 
-        if(user.size()!=0){
+        Intent intentAddressData = getIntent();
+
+        address = intentAddressData.getStringExtra("address");
+        lat = intentAddressData.getStringExtra("lat");
+        lng = intentAddressData.getStringExtra("lng");
+
+        if(address != null &&  lat !=null && lng != null){
+            int Id = user.get(0).getId();
+            UserModel updateUser = mdb.userDAO().loadUserById(Id);
+            updateUser.setLat(Double.valueOf(lat));
+            updateUser.setLng(Double.valueOf(lng));
+            updateUser.setAddress(address);
+            mdb.userDAO().updateUser(updateUser);
+            user = mdb.userDAO().loadPhone();
             mAddress.setText(user.get(0).getAddress());
+        } else{
+            user = mdb.userDAO().loadPhone();
+            if(user.size()!=0) mAddress.setText(user.get(0).getAddress());
         }
 
 
