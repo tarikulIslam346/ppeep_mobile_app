@@ -13,30 +13,44 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        app:title="PPEEP Food"
+        app:title="PPEEP FOOD"
         android:gravity="center"
         android:theme="@style/AppTheme2"
         android:id="@+id/foodtoolbar"
-        android:background="@drawable/toolbarbg"
-        >
+        android:background="@color/colorPrimary">
 
 
     </androidx.appcompat.widget.Toolbar>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textStyle="bold"
+        android:text="Delivery To:"
+        android:textSize="12sp"
 
-    <SearchView
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:queryHint="Search Here"
-        android:iconifiedByDefault="false"
-        android:focusedByDefault="false"
-        android:layout_marginLeft="15sp"
-        android:id="@+id/sv_for_restaurant"
-        >
+        />
+    <TextView
+        android:id="@+id/tv_delivery_address"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_margin="5dp"
+        android:text="c1, monallee tower, bastola"
 
-    </SearchView>
-
-
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_forward_black_24dp"
+        android:layout_margin="5dp"
+        android:layout_gravity="right"/>
+</LinearLayout>
 
 
     <LinearLayout

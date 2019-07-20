@@ -10,14 +10,18 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.ppeepfinal.data.UserDatabase;
+import com.example.ppeepfinal.data.UserModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.List;
 
 public class FoodApp extends AppCompatActivity {
 Toolbar foodToolbar;
@@ -27,6 +31,7 @@ Menu foodCart;
     private ViewPagerAdapter adapter;
     SearchView restaurantSearchView;
     private UserDatabase mdb;
+    TextView mAddress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +39,16 @@ Menu foodCart;
         foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
         setSupportActionBar(foodToolbar);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        restaurantSearchView = (SearchView)  findViewById(R.id.sv_for_restaurant);
+       // restaurantSearchView = (SearchView)  findViewById(R.id.sv_for_restaurant);
+        mAddress = (TextView) findViewById(R.id.tv_delivery_address);
 
         mdb = UserDatabase.getInstance(getApplicationContext());
+
+        List<UserModel> user = mdb.userDAO().loadPhone();
+
+        if(user.size()!=0){
+            mAddress.setText(user.get(0).getAddress());
+        }
 
 
         Intent OrderConfirmIntent = getIntent();
@@ -74,7 +86,7 @@ Menu foodCart;
 
 
 
-        restaurantSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+       /* restaurantSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextChange(String newText) {
@@ -93,7 +105,7 @@ Menu foodCart;
                 return false;
             }
 
-        });
+        });*/
 
 
 /*
