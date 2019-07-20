@@ -26,7 +26,7 @@ public class NetworkUtils {
 
     final static String PHONE_CHECK_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/checkPhoneNo";
 
-    final static String RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/restaurnats";
+    final static String RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/nearby/restaurnats";
 
     final static String RECOMMENDED_RESTAURANT_URL ="https://foodexpress.com.bd/ppeep/public/api/api/recomanded/restaurnats";
 
