@@ -1,348 +1,358 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:background="@color/backgroundfragment">
-
-<!--
-
-        <at.markushi.ui.CircleButton
-            android:layout_width="75dip"
-            android:layout_height="75dip"
-            app:cb_color="#3F51B5"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="15dp"
-            app:cb_pressedRingWidth="8dip" />
-
-
-
-        <at.markushi.ui.CircleButton
-            android:layout_width="75dip"
-            android:layout_height="75dip"
-            app:cb_color="#673AB7"
-            android:layout_marginLeft="108dp"
-            android:layout_marginTop="15dp"
-            app:cb_pressedRingWidth="8dip" />
-        <at.markushi.ui.CircleButton
-            android:layout_width="75dip"
-            android:layout_height="75dip"
-            app:cb_color="#FF5722"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="205dp"
-            app:cb_pressedRingWidth="8dip" />
-
-        <at.markushi.ui.CircleButton
-            android:layout_width="75dip"
-            android:layout_height="75dip"
-            app:cb_color="#065009"
-            android:layout_alignParentRight="true"
-            android:layout_margin="15dp"
-            app:cb_pressedRingWidth="8dip" />
--->
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-  android:layout_marginBottom="25dp"
-    android:layout_marginLeft="10dp"
-
-    >
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
- android:gravity="center"
-    >
-        2nd line
-        <at.markushi.ui.CircleButton
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:id="@+id/foodexpress_id"
-            app:cb_color="#3F51B5"
-            android:src="@drawable/foodexpress_icon"
-           android:layout_alignParentTop="true"
-           android:layout_marginTop="15dp"
-           android:layout_marginLeft="15dp"
-           android:layout_marginRight="15dp"
-            app:cb_pressedRingWidth="8dip" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="PPEEP Food"/>
-
-
-</LinearLayout>
-
-        <at.markushi.ui.CircleButton
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:id="@+id/foodexpress_id2"
-            app:cb_color="#3F51B5"
-            android:src="@drawable/foodexpress_icon"
-            android:layout_margin="15dp"
-            app:cb_pressedRingWidth="8dip" />
-
-
-        <at.markushi.ui.CircleButton
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:id="@+id/foodexpress_id3"
-            app:cb_color="#3F51B5"
-            android:src="@drawable/foodexpress_icon"
-            android:layout_margin="15dp"
-            app:cb_pressedRingWidth="8dip" />
-
-        <at.markushi.ui.CircleButton
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:id="@+id/foodexpress_id4"
-            app:cb_color="#3F51B5"
-            android:src="@drawable/foodexpress_icon"
-            android:layout_margin="15dp"
-            app:cb_pressedRingWidth="8dip" />
-</LinearLayout>
-
-
-
-
-<!--
-
-        <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/facebook_button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-
-            android:layout_marginLeft="-30dp"
-            app:sparkbutton_activeImage="@drawable/foodexpress_icon"
-            app:sparkbutton_iconSize="60dp"
-
-            app:sparkbutton_primaryColor="@color/logo_secondary_color"
-            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
-
-        <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/facebook_button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-
-            android:layout_marginLeft="65dp"
-            app:sparkbutton_activeImage="@drawable/icon_daraz"
-            app:sparkbutton_iconSize="60dp"
-
-            app:sparkbutton_primaryColor="@color/logo_secondary_color"
-            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
-
-        <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/facebook_button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-
-            android:layout_marginLeft="170dp"
-            app:sparkbutton_activeImage="@drawable/icon_robishop"
-            app:sparkbutton_iconSize="60dp"
-
-            app:sparkbutton_primaryColor="@color/logo_secondary_color"
-            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
-
-        <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/facebook_button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-
-            android:layout_marginLeft="280dp"
-            app:sparkbutton_activeImage="@drawable/icon_baagdoom"
-            app:sparkbutton_iconSize="60dp"
-
-            app:sparkbutton_primaryColor="@color/logo_secondary_color"
-            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
-
-
-
-        &lt;!&ndash; 2nd row
-
-        <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/facebook_button21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-android:layout_marginBottom="80dp"
-android:layout_alignParentBottom="true"
-            android:layout_marginLeft="-30dp"
-            app:sparkbutton_activeImage="@drawable/icon_ajkerdeal"
-            app:sparkbutton_iconSize="60dp"
-
-            app:sparkbutton_primaryColor="@color/logo_secondary_color"
-            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
-
-        <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/facebook_button22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="80dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="65dp"
-            app:sparkbutton_activeImage="@drawable/icon_pickaboo"
-            app:sparkbutton_iconSize="60dp"
-
-            app:sparkbutton_primaryColor="@color/logo_secondary_color"
-            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
-
-        <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/facebook_button23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="80dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="170dp"
-            app:sparkbutton_activeImage="@drawable/icon_baagdoom"
-            app:sparkbutton_iconSize="60dp"
-
-            app:sparkbutton_primaryColor="@color/logo_secondary_color"
-            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
-
-        <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/facebook_button24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginBottom="80dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="300dp"
-            app:sparkbutton_activeImage="@drawable/icon_robishop"
-            app:sparkbutton_iconSize="60dp"
-
-            app:sparkbutton_primaryColor="@color/logo_secondary_color"
-            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
-
-
-
-
-
--->
-
-
-
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.smarteist.autoimageslider.SliderLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-
+        android:layout_height="220dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/imageSlider"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:gravity="center">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="120dp"
+            android:layout_height="130dp"
+            android:backgroundTint="#EED68D"
+            app:cardCornerRadius="15dp"
+            android:layout_margin="4dp"
+            android:elevation="10dp"
+            app:cardElevation="15dp"
+            android:stateListAnimator="@animator/card_click_anim"
+            android:focusableInTouchMode="true"
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
- android:layout_marginTop="20dp"
-    android:layout_marginLeft="10dp"
-    >
+            android:id="@+id/ppeepfoodCard">
 
-      <!--  <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/facebook_button31"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-       android:layout_alignParentBottom="true"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                >
 
-            android:layout_marginLeft="-30dp"
-            app:sparkbutton_activeImage="@drawable/icon_robishop"
-            app:sparkbutton_iconSize="60dp"
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/foodexpress_icon"
+                    android:layout_margin="4dp"
 
-            app:sparkbutton_primaryColor="@color/logo_secondary_color"
-            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+                    />
 
-        <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/facebook_button32"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="65dp"
-            app:sparkbutton_activeImage="@drawable/icon_pickaboo"
-            app:sparkbutton_iconSize="60dp"
-
-            app:sparkbutton_primaryColor="@color/logo_secondary_color"
-            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
-
-        <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/facebook_button33"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="170dp"
-            app:sparkbutton_activeImage="@drawable/icon_baagdoom"
-            app:sparkbutton_iconSize="60dp"
-
-            app:sparkbutton_primaryColor="@color/logo_secondary_color"
-            app:sparkbutton_secondaryColor="@color/logo_primary_color" />
-
-        <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/facebook_button34"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-android:contextClickable="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="280dp"
-            app:sparkbutton_activeImage="@drawable/icon_daraz"
-            app:sparkbutton_iconSize="60dp"
-
-            app:sparkbutton_primaryColor="@color/logo_secondary_color"
-            app:sparkbutton_secondaryColor="@color/logo_primary_color" />-->
-
-
-<at.markushi.ui.CircleButton
-    android:layout_width="65dp"
-    android:layout_height="65dp"
-    android:id="@+id/foodexpress_id21"
-    app:cb_color="#3F51B5"
-    android:src="@drawable/foodexpress_icon"
-    android:layout_margin="15dp"
-    app:cb_pressedRingWidth="8dip" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="P-PEEP FOOD"
+                    android:textAlignment="center"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="4dp"
+                    android:fontFamily="@font/marvinvision"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
 
 
-<at.markushi.ui.CircleButton
-    android:layout_width="65dp"
-    android:layout_height="65dp"
-    android:id="@+id/foodexpress_id22"
-    app:cb_color="#3F51B5"
-    android:src="@drawable/foodexpress_icon"
-    android:layout_margin="15dp"
-    app:cb_pressedRingWidth="8dip" />
 
-<at.markushi.ui.CircleButton
-    android:layout_width="65dp"
-    android:layout_height="65dp"
-    android:id="@+id/foodexpress_id23"
-    app:cb_color="#3F51B5"
-    android:src="@drawable/foodexpress_icon"
-    android:layout_margin="15dp"
-    app:cb_pressedRingWidth="8dip" />
+            </LinearLayout>
 
-<at.markushi.ui.CircleButton
-    android:layout_width="65dp"
-    android:layout_height="65dp"
-    android:id="@+id/foodexpress_id24"
-    app:cb_color="#3F51B5"
-    android:src="@drawable/foodexpress_icon"
-    android:layout_margin="15dp"
-    app:cb_pressedRingWidth="8dip" />
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="120dp"
+            android:layout_height="130dp"
+            android:backgroundTint="#64C0B7"
+            app:cardCornerRadius="15dp"
+            android:layout_margin="4dp"
+            android:elevation="10dp"
+            app:cardElevation="15dp">
 
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/foodexpress_icon"
+                    android:layout_margin="4dp"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="P-PEEP FOOD"
+                    android:textAlignment="center"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="4dp"
+                    android:fontFamily="@font/marvinvision"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+
+
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="120dp"
+            android:layout_height="130dp"
+            android:backgroundTint="#63AAE2"
+            app:cardCornerRadius="15dp"
+            android:layout_margin="4dp"
+            android:elevation="10dp"
+            app:cardElevation="15dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/foodexpress_icon"
+                    android:layout_margin="4dp"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="P-PEEP FOOD"
+                    android:textAlignment="center"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="4dp"
+                    android:fontFamily="@font/marvinvision"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+
+
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center"
 
+        android:orientation="horizontal">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:layout_gravity="top"
+
+            app:cardCornerRadius="15dp"
+            android:layout_margin="4dp"
+            android:elevation="10dp"
+            app:cardElevation="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="#3F51B5"
+                android:gravity="center"
+                android:layout_gravity="center"
+
+                >
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_fb"
+                    android:layout_margin="4dp"
+
+                    />
+
+
+
+
+
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="240dp"
+            android:layout_height="140dp"
+            android:layout_gravity="top"
+
+            app:cardCornerRadius="15dp"
+            android:layout_margin="4dp"
+            android:elevation="10dp"
+            app:cardElevation="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="#AA1414"
+                >
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/youtube_icon"
+                    android:layout_margin="4dp"
+
+                    />
+
+
+
+
+
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+    <!-- <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:gravity="center"
+         android:orientation="horizontal"
+ android:layout_marginBottom="15dp"
+        android:padding="5dp"
+
+         >
+
+         &lt;!&ndash;  <com.varunest.sparkbutton.SparkButton
+               android:id="@+id/facebook_button31"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+
+               android:layout_marginLeft="-30dp"
+               app:sparkbutton_activeImage="@drawable/icon_robishop"
+               app:sparkbutton_iconSize="60dp"
+
+               app:sparkbutton_primaryColor="@color/logo_secondary_color"
+               app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+           <com.varunest.sparkbutton.SparkButton
+               android:id="@+id/facebook_button32"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+
+               android:layout_alignParentBottom="true"
+               android:layout_marginLeft="65dp"
+               app:sparkbutton_activeImage="@drawable/icon_pickaboo"
+               app:sparkbutton_iconSize="60dp"
+
+               app:sparkbutton_primaryColor="@color/logo_secondary_color"
+               app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+           <com.varunest.sparkbutton.SparkButton
+               android:id="@+id/facebook_button33"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+
+               android:layout_alignParentBottom="true"
+               android:layout_marginLeft="170dp"
+               app:sparkbutton_activeImage="@drawable/icon_baagdoom"
+               app:sparkbutton_iconSize="60dp"
+
+               app:sparkbutton_primaryColor="@color/logo_secondary_color"
+               app:sparkbutton_secondaryColor="@color/logo_primary_color" />
+
+           <com.varunest.sparkbutton.SparkButton
+               android:id="@+id/facebook_button34"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+   android:contextClickable="true"
+               android:layout_alignParentBottom="true"
+               android:layout_marginLeft="280dp"
+               app:sparkbutton_activeImage="@drawable/icon_daraz"
+               app:sparkbutton_iconSize="60dp"
+
+               app:sparkbutton_primaryColor="@color/logo_secondary_color"
+               app:sparkbutton_secondaryColor="@color/logo_primary_color" />&ndash;&gt;
+
+         <com.google.android.material.card.MaterialCardView
+             android:layout_width="wrap_content"
+             android:layout_height="100dp"
+             android:elevation="10dp"
+             android:layout_margin="5dp"
+             >
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:src="@drawable/facebook_banner"/>
+
+         </com.google.android.material.card.MaterialCardView>
+
+         &lt;!&ndash;<at.markushi.ui.CircleButton
+             android:layout_width="65dp"
+             android:layout_height="65dp"
+             android:id="@+id/foodexpress_id22"
+             app:cb_color="#3F51B5"
+             android:src="@drawable/foodexpress_icon"
+             android:layout_margin="15dp"
+             app:cb_pressedRingWidth="8dip" />
+
+         <at.markushi.ui.CircleButton
+             android:layout_width="65dp"
+             android:layout_height="65dp"
+             android:id="@+id/foodexpress_id23"
+             app:cb_color="#3F51B5"
+             android:src="@drawable/foodexpress_icon"
+             android:layout_margin="15dp"
+             app:cb_pressedRingWidth="8dip" />
+
+         <at.markushi.ui.CircleButton
+             android:layout_width="65dp"
+             android:layout_height="65dp"
+             android:id="@+id/foodexpress_id24"
+             app:cb_color="#3F51B5"
+             android:src="@drawable/youtube_icon"
+             android:layout_margin="15dp"
+             app:cb_pressedRingWidth="8dip" />&ndash;&gt;
+ <com.google.android.material.card.MaterialCardView
+     android:layout_width="wrap_content"
+     android:layout_height="100dp"
+     android:elevation="10dp"
+     android:layout_margin="5dp"
+ >
+     <ImageView
+     android:layout_width="180dp"
+     android:layout_height="110dp"
+         android:layout_gravity="center"
+     android:src="@drawable/youtubelogo"/></com.google.android.material.card.MaterialCardView>
+
+
+     </LinearLayout>-->
+
+</LinearLayout>

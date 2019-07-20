@@ -49,15 +49,19 @@
 -->
 
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/enterletGo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+app:cornerRadius="45dp"
+        android:elevation="50dp"
 
-        android:background="@drawable/rounded_shape"
+        style="@style/Widget.MaterialComponents.Button"
 
         android:text="Enter with phone number"
+        android:backgroundTint="#4CAF50"
         android:textAlignment="center"
         android:textColor="#070000"
         android:textSize="20sp"

@@ -50,12 +50,13 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:text="finish"/>-->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/input_details"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-        android:background="@drawable/button_shadow"
+        android:backgroundTint="#4CAF50"
+       app:cornerRadius="45dp"
         android:text="finish"
         android:textAlignment="center"
         android:textColor="#0F0F0F"

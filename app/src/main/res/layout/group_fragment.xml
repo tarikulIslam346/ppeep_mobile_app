@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundfragment">
+    android:background="#ffff">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#222020"
+            android:background="#ffcc00"
             android:orientation="vertical">
 
             <LinearLayout
@@ -67,7 +67,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/backgroundfragment">
+                android:background="#ffff">
 
                 <LinearLayout
                     android:layout_width="match_parent"

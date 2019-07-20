@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.card.MaterialCardView;
 import com.smarteist.autoimageslider.DefaultSliderView;
 import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
@@ -32,6 +33,8 @@ public class FragmentHome extends Fragment {
     View v;
 
     CircleButton foodExpressButton;
+    MaterialCardView ppeepfoodCardView;
+
 
     public FragmentHome() { }
 
@@ -40,11 +43,12 @@ public class FragmentHome extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.home_fragment, container, false);
+        ppeepfoodCardView=v.findViewById(R.id.ppeepfoodCard);
 
-       foodExpressButton= v.findViewById(R.id.foodexpress_id);
+      // foodExpressButton= v.findViewById(R.id.foodexpress_id);
 
 
-        foodExpressButton.setOnClickListener(new View.OnClickListener() {
+        ppeepfoodCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
