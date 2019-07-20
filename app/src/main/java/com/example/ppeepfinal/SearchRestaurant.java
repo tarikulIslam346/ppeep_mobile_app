@@ -47,15 +47,15 @@ public class SearchRestaurant extends AppCompatActivity {
         searchPageResult = (TextView) findViewById(R.id.tv_search_result_for);
 
 
-        Intent intent = getIntent();
+       /* Intent intent = getIntent();
         search = intent.getStringExtra("search");
-        searchPageResult.setText("Search result for : "+search);
+        searchPageResult.setText("Search result for : "+search);*/
 
 
         URL restaurantSearchListUrl = NetworkUtils.buildSearchRestaurantUrl();
         mProgressbar = (ProgressBar) findViewById(R.id.pv_restaurant_list_search) ;
         mProgressbar.setVisibility(View.VISIBLE);
-        new SearchRestaurant.RestaurantListTask().execute(restaurantSearchListUrl);
+       // new SearchRestaurant.RestaurantListTask().execute(restaurantSearchListUrl);
         mListOfRestaurant = (RecyclerView) findViewById(R.id.rv_search_restaurant);
 
     }
