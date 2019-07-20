@@ -1,5 +1,6 @@
 package com.example.ppeepfinal;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 /*import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;*/
+import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,8 +27,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
+import com.example.ppeepfinal.utilities.Api;
+import com.example.ppeepfinal.utilities.MyLocation;
+import com.example.ppeepfinal.utilities.VolleyRequest;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -43,8 +50,12 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     private ViewPagerAdapter adapter;
     TextView navUsername;
     View headerView;
+    private double lat,lng;
 
     private UserDatabase mdb;// declear databse
+
+    List<UserModel> user;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +63,15 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home_page);
+
+        mdb = UserDatabase.getInstance(getApplicationContext());//call database here
+
+        //Load user info
+         user = mdb.userDAO().loadPhone();
+
+        setUserLocation();
+
+
 
         NavigationView navigationView = findViewById(R.id.NavigationId2);
         // navigationView.setNavigationItemSelectedListener(this);
@@ -65,7 +85,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         mDrawerLayout = findViewById(R.id.drawerId);
 
-        mdb = UserDatabase.getInstance(getApplicationContext());//call database here
+
 
         mToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.nav_open,R.string.nav_close);
 
@@ -104,12 +124,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         tabLayout.getTabAt(2).setIcon(R.drawable.notificationicon);
         tabLayout.getTabAt(3).setIcon(R.drawable.myprofileicon);
 
-/*
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            TabLayout.Tab tab = tabLayout.getTabAt(i);
-            if (tab != null) tab.setCustomView(R.layout.customtab);
-        }
-*/
     }
 
     @Override
@@ -167,6 +181,65 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
 
         return false;
+    }
+    public void ShowLoder(String message){
+        dialog = ProgressDialog.show(this, "",
+                message, true);
+    }
+    public void setUserLocation(){
+        MyLocation myLocation = new MyLocation(HomePage.this);
+        myLocation.setListener(new MyLocation.MyLocationListener() {
+            @Override
+            public void onLocationFound(Location location) {
+
+                lat = location.getLatitude();
+                lng = location.getLongitude();
+                ShowLoder("Loading..");
+                VolleyRequest volleyRequest = new VolleyRequest(HomePage.this);
+                volleyRequest.VolleyGet(Api.reverseGeo + "demo?lat=" + lat + "&lng=" + lng + "&address_level=UPTO_THANA");
+                volleyRequest.setListener(new VolleyRequest.MyServerListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            String address = response.getJSONObject("result").getString("address");
+                            dialog.dismiss();
+                            if(user.size()!=0){
+                                int Id = user.get(0).getId();
+                                UserModel updateUser = mdb.userDAO().loadUserById(Id);
+                                updateUser.setLat(lat);
+                                updateUser.setLng(lng);
+                                updateUser.setAddress(address);
+                                mdb.userDAO().updateUser(updateUser);
+                            }
+
+
+
+                        } catch (Exception e) {
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Toast.makeText(HomePage.this, error, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void responseCode(int resposeCode) {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onFailed() {
+
+            }
+        });
     }
 
    /* @Override

@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
             if (phonecheckResults != null && !phonecheckResults.equals("")) {
 
                     pageSwitchProgress.setVisibility(View.INVISIBLE);
-                    UserModel userModel = new UserModel(phoneNumberString.toString(), phonecheckResults);
+                    UserModel userModel = new UserModel(phoneNumberString.toString(), phonecheckResults,null,0.0,0.0);
                     mdb.userDAO().insertPhone(userModel);
                     finish();
                     startActivity(HomepageStart);

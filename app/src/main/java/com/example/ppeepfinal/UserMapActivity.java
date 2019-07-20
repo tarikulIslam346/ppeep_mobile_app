@@ -178,6 +178,7 @@ public class UserMapActivity extends AppCompatActivity implements OnMapReadyCall
                             Intent foodCart = new Intent(UserMapActivity.this, FoodCartPage.class);
                             if(address != null)foodCart.putExtra("address", address);
                             finish();
+                            foodCart.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
                             startActivity(foodCart);
                         }
                     });

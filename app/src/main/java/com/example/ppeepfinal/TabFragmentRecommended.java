@@ -1,6 +1,8 @@
 package com.example.ppeepfinal;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,9 +16,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;*/
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -25,13 +29,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.ppeepfinal.data.UserDatabase;
+import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.NetworkUtils;
+import com.google.android.material.button.MaterialButton;
 import com.smarteist.autoimageslider.DefaultSliderView;
 import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
@@ -68,6 +76,10 @@ public class TabFragmentRecommended extends Fragment {
     private RecyclerView mNumberOfRestaurant;
 
     private RecommandedRestaurantListAdapter recommandedRestaurantListAdapter;
+    MaterialButton currentOrder;
+    UserDatabase mdb;
+    String phoneNo;
+    List<Integer>OrderId;
 
 
     public TabFragmentRecommended(){ }
@@ -77,6 +89,8 @@ public class TabFragmentRecommended extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v=inflater.inflate(R.layout.activity_tab_fragment_recommended,container,false);
+
+        mdb = UserDatabase.getInstance(getContext());
 
         mViewAll = (TextView) v.findViewById(R.id.tv_view_all);
 
@@ -93,6 +107,20 @@ public class TabFragmentRecommended extends Fragment {
        // progressBar = (ProgressBar) v.findViewById(R.id.pv_offerr);
 
         mNumberOfRestaurant = (RecyclerView)v.findViewById(R.id.rv_numbers);
+
+       List<UserModel> user =  mdb.userDAO().loadPhone();
+       if(user.size()!=0){
+          phoneNo = user.get(0).getPhone();
+           //ShowLoder("Loading .. ..");
+           URL currentOrderInfoUrl = NetworkUtils.buildCurrentOrderInfoUrl();
+           new CurrentOrderListTask().execute(currentOrderInfoUrl);
+       }
+
+
+        currentOrder = (MaterialButton) v.findViewById(R.id.bt_show_current_order);
+
+        currentOrder.setVisibility(View.INVISIBLE);
+
 
 
 
@@ -262,7 +290,7 @@ public class TabFragmentRecommended extends Fragment {
 
 
             }else{
-                Toast.makeText(getContext(), "No restaurant found or network not available", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), " network not available", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -373,13 +401,102 @@ public class TabFragmentRecommended extends Fragment {
         }
     }
 
+    public class  CurrentOrderListTask extends AsyncTask<URL, Void, String> {
+
+
+        @Override
+        protected String doInBackground(URL... params) {
+
+            URL searchUrl = params[0];
+            String currentOrderResults = null;
+            try {
+                currentOrderResults = NetworkUtils.getCurrentOrderResponseFromHttpUrl(searchUrl,phoneNo);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return currentOrderResults;
+        }
+
+        // COMPLETED (3) Override onPostExecute to display the results in the TextView
+        @Override
+        protected void onPostExecute(String currentOrderResults) {
+            if (currentOrderResults != null && !currentOrderResults.equals("")) {
+
+                String json = currentOrderResults;
+
+                JSONObject orderList = null;
+
+                JSONArray jsonArray=null;
+
+                int orderID;
+                OrderId = new ArrayList<Integer>();
+
+
+                try {
+                    orderList = new JSONObject(json);
+                    jsonArray = orderList.getJSONArray("order");
+
+                    for (int i=0; i<jsonArray.length(); i++) {
+                        JSONObject restaurant = jsonArray.getJSONObject(i);
+                        orderID = restaurant.getInt("order_id");
+                        OrderId.add(orderID);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                dialog.dismiss();
+                if(OrderId.size()!=0){
+                    currentOrder.setVisibility(View.VISIBLE);
+                    currentOrder.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            CharSequence[] options = new CharSequence[OrderId.size()];
+                            for(int i=0;i<OrderId.size();i++){
+                                options[i] = "Order Id : # "+ String.valueOf(OrderId.get(i));
+                            }
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("See order");
+                            builder.setItems(options, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int item) {
+
+                                    Intent intent = new Intent(getContext(),CurrentOrderHistory.class);
+                                    intent.putExtra("order_id",String.valueOf(OrderId.get(item)));
+                                    startActivity(intent);
+
+                                    dialog.dismiss();
+
+                                }
+                            });
+                            // Create the AlertDialog object and return it
+                            builder.show();
+
+
+                        }
+                    });
+                }
 
 
 
-
-
-
+            }else{
+                Toast.makeText(getContext(), "No network not available", Toast.LENGTH_SHORT).show();
+            }
+        }
 
 
     }
+
+
+
+
+
+
+
+
+
+
+}
 

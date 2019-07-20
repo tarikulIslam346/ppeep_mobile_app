@@ -15,19 +15,29 @@ public class UserModel {
     private  int id;
     private String phone;
     private String name;
+    private String address;
+    private  double lat;
+    private  double lng;
 
 
     @Ignore
-    public UserModel( String phone,String name){
+    public UserModel( String phone,String name,String address,double lat,double lng){
         //this.id = id;
         this.phone = phone;
         this.name = name;
+        this.address = address;
+        this.lat = lat;
+        this.lng = lng;
+
     }
 
-    public UserModel(int id, String phone,String name){
+    public UserModel(int id, String phone,String name,String address,double lat,double lng){
         this.id = id;
         this.phone = phone;
         this.name = name;
+        this.address = address;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public void setId(int id) {
@@ -52,5 +62,29 @@ public class UserModel {
 
     public String getName() {
         return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 }

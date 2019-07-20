@@ -68,7 +68,7 @@ public class InputDetails extends AppCompatActivity {
         protected void onPostExecute(String postNameResults) {
             Intent HomepageStart = new Intent(InputDetails.this, HomePage.class);
             if (postNameResults != null && !postNameResults.equals("")) {
-                UserModel userModel = new UserModel(phoneNo,mInputName.getText().toString());
+                UserModel userModel = new UserModel(phoneNo,mInputName.getText().toString(),null,0.0,0.0);
                 mdb.userDAO().insertPhone(userModel);
                 finish();
                 startActivity(HomepageStart);

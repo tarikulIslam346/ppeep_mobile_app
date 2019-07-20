@@ -28,7 +28,7 @@ import java.util.List;
 public class CurrentOrderHistory extends AppCompatActivity {
 
     String OrderId;
-    TextView mOredrRestaurantName,mOrderrestaurnatAddress,mCustomerName,mCustomerPhoneNo,mDeliveryAddress,mSubTotal,mDeliveryCharge,mVat,mTotal,mDiscount;
+    TextView mOredrRestaurantName,mOrderrestaurnatAddress,mCustomerName,mCustomerPhoneNo,mDeliveryAddress,mSubTotal,mDeliveryCharge,mVat,mTotal,mDiscount,mOrderStatus;
     Button mDriverConfirm,mOrderDeliver;
     TableLayout stk;
     ProgressDialog dialog;
@@ -39,6 +39,8 @@ public class CurrentOrderHistory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_order_history);
+
+        mOrderStatus = (TextView) findViewById(R.id.tv_order_status);
 
 
         mOredrRestaurantName = (TextView) findViewById(R.id.tv_order_restaurant_name);
@@ -63,6 +65,8 @@ public class CurrentOrderHistory extends AppCompatActivity {
         mTotal = (TextView) findViewById(R.id.tv_total_price);
 
         mDiscount = (TextView)findViewById(R.id.tv_discount_amount);
+
+        mOrderStatus.setVisibility(View.INVISIBLE);
 
 
 
@@ -142,7 +146,7 @@ public class CurrentOrderHistory extends AppCompatActivity {
                         first_name = null,
                         contact=null,
                         item_name = null;
-                int quantity=0,discount_amount = 0;
+                int quantity=0,discount_amount = 0,status=-1;
                 double delivery_charge=0,total_per_item = 0,total_without_vat=0,total_vat=0,unit_price=0,total_with_discount=0;
                 List<String> item = new ArrayList<String>();
 
@@ -162,10 +166,12 @@ public class CurrentOrderHistory extends AppCompatActivity {
 
                         JSONObject driverProfile = jsonArray.getJSONObject(i);
 
-                        /*********** customer info**********/
-                        first_name = driverProfile.getString("first_name");
+                        /*********** driver & delivery info**********/
+                        first_name = driverProfile.getString("driver_first_name") + " " + driverProfile.getString("driver_last_name");
 
-                        contact = driverProfile.getString("contact");
+                        contact = driverProfile.getString("driver_phone");
+
+                        status = driverProfile.getInt("status");
 
                         delivery_address = driverProfile.getString("delivery_address");
 
@@ -230,6 +236,19 @@ public class CurrentOrderHistory extends AppCompatActivity {
                         /*********** food item info**********/
 
 
+                    }
+
+                    if(status!= -1){
+                        if(status == 0){
+                            mOrderStatus.setText("pending");
+                        }
+                        if(status == 1){
+                            mOrderStatus.setText("confirm");
+                        }
+                        if(status == 2){
+                            mOrderStatus.setText("deliver");
+                        }
+                       mOrderStatus.setVisibility(View.VISIBLE);
                     }
 
                     if(total_without_vat != 0){

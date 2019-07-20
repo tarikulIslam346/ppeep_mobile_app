@@ -158,6 +158,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
                                     homePageIntent.putExtra("order_id",String.valueOf(OrderId));
                                 }
+                                homePageIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
                                 startActivity(homePageIntent);
 
 

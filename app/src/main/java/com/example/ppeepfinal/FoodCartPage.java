@@ -90,8 +90,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         addressOnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mapView = new Intent(getApplicationContext(),UserMapActivity.class);
-                finish();
+                Intent mapView = new Intent(getApplicationContext(),UserMapActivity.class);;
                 startActivity(mapView);
             }
         });

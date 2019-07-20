@@ -54,6 +54,8 @@ public class NetworkUtils {
 
     final static String ORDER_DELIVER_INFO = "https://foodexpress.com.bd/ppeep/public/api/api/user/orderDeliver";
 
+    final static  String CURRENT_ORDER_HISTORY = "https://foodexpress.com.bd/ppeep/public/api/api/order/current";
+
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
     final static String sortBy = "stars";*/
@@ -234,6 +236,17 @@ public class NetworkUtils {
             e.printStackTrace();
         }
         return orderDeliverInfoUrl;
+    }
+
+    public static URL buildCurrentOrderInfoUrl() {
+        Uri builtUri = Uri.parse(CURRENT_ORDER_HISTORY).buildUpon().build();
+        URL orderCurrentInfoUrl = null;
+        try {
+            orderCurrentInfoUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return orderCurrentInfoUrl;
     }
 
 
@@ -713,6 +726,38 @@ public class NetworkUtils {
     public static String getDeliverOrderDetailsOfUserResponseFromHttpUrl(URL orderDeliverInfoUrl, String phone) throws IOException {
 
         HttpURLConnection urlConnection = (HttpURLConnection) orderDeliverInfoUrl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "phone", phone);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+    public static String getCurrentOrderResponseFromHttpUrl(URL orderCurrentInfoUrl, String phone) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) orderCurrentInfoUrl.openConnection();//establish connection
         urlConnection.setRequestMethod("POST");//use post method
 
         HashMap<String, String> param = new HashMap<String, String>();
