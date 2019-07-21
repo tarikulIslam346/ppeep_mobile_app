@@ -7,11 +7,13 @@ import android.support.v7.app.AppCompatActivity;*/
 import android.os.Bundle;
 //import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -42,6 +44,8 @@ Menu foodCart;
         setContentView(R.layout.activity_food_app);
         foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
         setSupportActionBar(foodToolbar);
+
+
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
        // restaurantSearchView = (SearchView)  findViewById(R.id.sv_for_restaurant);
         mAddress = (TextView) findViewById(R.id.tv_delivery_address);
@@ -51,6 +55,7 @@ Menu foodCart;
             @Override
             public void onClick(View v) {
                 Intent deliveryMap = new Intent(FoodApp.this,UserAutoCompleteAdress.class);
+                deliveryMap.putExtra("activity","food");
                 startActivity(deliveryMap);
             }
         });
@@ -61,9 +66,11 @@ Menu foodCart;
 
         Intent intentAddressData = getIntent();
 
+
         address = intentAddressData.getStringExtra("address");
         lat = intentAddressData.getStringExtra("lat");
         lng = intentAddressData.getStringExtra("lng");
+
 
         if(address != null &&  lat !=null && lng != null){
             int Id = user.get(0).getId();
@@ -172,6 +179,30 @@ Menu foodCart;
 
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.searchmenu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.search_menu_bar) {
+            Intent intent = new Intent(getApplicationContext(),SearchRestaurant.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
+
+
+

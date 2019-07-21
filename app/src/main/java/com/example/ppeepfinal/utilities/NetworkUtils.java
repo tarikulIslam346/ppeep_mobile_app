@@ -46,7 +46,7 @@ public class NetworkUtils {
 
     final  static  String ORDER_CREATE_URL = "https://foodexpress.com.bd/ppeep/public/api/api/order_create";
 
-    final  static  String RESTAURANT_SEARCH_URL = "https://foodexpress.com.bd/ppeep/public/api/api/search/restaurnats";
+    final  static  String RESTAURANT_SEARCH_URL = "https://foodexpress.com.bd/ppeep/public/api/api/search/nearby/restaurnats";
 
     final  static  String OFFER_URL = "https://foodexpress.com.bd/ppeep/public/api/api/offers";
 
@@ -530,7 +530,7 @@ public class NetworkUtils {
         }
     }
 
-    public static String getRestaurantSearchFromHttpUrl(URL retaurantSearchurl, String search) throws IOException {
+    public static String getRestaurantSearchFromHttpUrl(URL retaurantSearchurl, String search,String lat,String lng) throws IOException {
 
         HttpURLConnection urlConnection = (HttpURLConnection) retaurantSearchurl.openConnection();//establish connection
         urlConnection.setRequestMethod("POST");//use post method
@@ -539,6 +539,8 @@ public class NetworkUtils {
 
         HashMap<String, String> param = new HashMap<String, String>();
         param.put( "search", search);
+        param.put( "lat", lat);
+        param.put( "lng", lng);
 
         OutputStream os = urlConnection.getOutputStream();
         BufferedWriter writer = new BufferedWriter(

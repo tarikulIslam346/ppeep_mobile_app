@@ -32,8 +32,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.FragmentTransitionSupport;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.ppeepfinal.data.UserDatabase;
@@ -135,9 +138,11 @@ public class TabFragmentRecommended extends Fragment {
         cardViewForSearchChiniseCusine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Intent intent = new Intent(getContext(),SearchRestaurant.class);
+               /* Intent intent = new Intent(getContext(),SearchRestaurant.class);
                 intent.putExtra("search","Chinese");
-                startActivity(intent);
+                startActivity(intent);*/
+                replaceFragment();
+
             }
         });
 
@@ -492,11 +497,19 @@ public class TabFragmentRecommended extends Fragment {
 
 
 
+    public void replaceFragment() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        CuisineSearchFragment fragment = new CuisineSearchFragment();
+        fragmentTransaction.replace(R.id.tab_offer_container, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+        }
+    }
 
 
 
 
 
-
-}
 

@@ -22,6 +22,9 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+
+import android.widget.SearchView;
+
 import android.widget.TextView;
 
 import com.dingi.dingisdk.Dingi;
@@ -230,7 +233,18 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
                         mConfirm.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent foodApp = new Intent(UserAutoCompleteAdress.this, FoodApp.class);
+
+                                Intent changeIntent = getIntent();
+                                String activity = changeIntent.getStringExtra("activity");
+                                Intent foodApp = null;
+                                if(activity.equals("search")){
+                                    foodApp = new Intent(UserAutoCompleteAdress.this, SearchRestaurant.class);
+                                }
+                                if(activity.equals("food")){
+                                    foodApp = new Intent(UserAutoCompleteAdress.this, FoodApp.class);
+                                }
+                                
+
                                 if(address != null)foodApp.putExtra("address", address);
                                 foodApp.putExtra("lat",lat);
                                 foodApp.putExtra("lng",lng);
