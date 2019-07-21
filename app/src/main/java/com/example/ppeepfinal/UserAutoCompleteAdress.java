@@ -288,7 +288,7 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
 
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18);
                 mMap.animateCamera(cameraUpdate);
-   
+
 
             }
 
