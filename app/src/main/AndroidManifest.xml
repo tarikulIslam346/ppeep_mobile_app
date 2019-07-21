@@ -25,11 +25,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".CuisineSearchFragment"></activity>
+        <activity android:name=".UserAutoCompleteAdress"></activity>
         <activity android:name=".OrderOnGoingList" />
         <activity android:name=".CurrentOrderHistory" />
         <activity android:name=".FriendHistoryDetails" />
-        <activity android:name=".UserMapActivity" />
         <activity android:name=".GroupFriendAdd" />
         <activity android:name=".SupportPage" />
         <activity android:name=".PreOrderTimeSelect" />

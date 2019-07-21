@@ -9,18 +9,22 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;*/
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ppeepfinal.data.UserDatabase;
+import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.NetworkUtils;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +42,14 @@ public class SearchRestaurant extends AppCompatActivity {
     String search;
     TextView searchPageResult;
     Toolbar foodToolbar;
+    private UserDatabase mdb;
+    TextView mAddress;
+    LinearLayout addresslayout;
+    String address, lat,lng;
+    List<UserModel> user;
+    SearchView restaurantSearchView;
+    String searchText = null;
+    LinearLayout mAddressChange;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,18 +57,101 @@ public class SearchRestaurant extends AppCompatActivity {
         foodToolbar = (Toolbar) findViewById(R.id.searchtoolbar);
         setSupportActionBar(foodToolbar);
         searchPageResult = (TextView) findViewById(R.id.tv_search_result_for);
+        mAddress = (TextView) findViewById(R.id.tv_delivery_address);
+
+        restaurantSearchView = (SearchView) findViewById(R.id.searchItems);
+        mProgressbar = (ProgressBar) findViewById(R.id.pv_restaurant_list_search) ;
+
+        mAddressChange = (LinearLayout) findViewById(R.id.layout_map_address);
+
+        mAddressChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapIntent = new Intent(getApplicationContext(),UserAutoCompleteAdress.class);
+                mapIntent.putExtra("activity","search");
+
+                startActivity(mapIntent);
+            }
+        });
 
 
        /* Intent intent = getIntent();
         search = intent.getStringExtra("search");
         searchPageResult.setText("Search result for : "+search);*/
 
+        mdb = UserDatabase.getInstance(getApplicationContext());
 
-        URL restaurantSearchListUrl = NetworkUtils.buildSearchRestaurantUrl();
-        mProgressbar = (ProgressBar) findViewById(R.id.pv_restaurant_list_search) ;
-        mProgressbar.setVisibility(View.VISIBLE);
-       // new SearchRestaurant.RestaurantListTask().execute(restaurantSearchListUrl);
+        user = mdb.userDAO().loadPhone();
+
+        Intent intentAddressData = getIntent();
+
+        address = intentAddressData.getStringExtra("address");
+        lat = intentAddressData.getStringExtra("lat");
+        lng = intentAddressData.getStringExtra("lng");
+
+        if(address != null &&  lat !=null && lng != null){
+            int Id = user.get(0).getId();
+            UserModel updateUser = mdb.userDAO().loadUserById(Id);
+            updateUser.setLat(Double.valueOf(lat));
+            updateUser.setLng(Double.valueOf(lng));
+            updateUser.setAddress(address);
+            mdb.userDAO().updateUser(updateUser);
+            user = mdb.userDAO().loadPhone();
+            mAddress.setText(user.get(0).getAddress());
+        } else{
+            user = mdb.userDAO().loadPhone();
+            if(user.size()!=0) {
+                mAddress.setText(user.get(0).getAddress());
+                lat = String.valueOf(user.get(0).getLat());
+                lng = String.valueOf(user.get(0).getLng());
+                Toast.makeText(getApplicationContext(),""+lat,Toast.LENGTH_LONG).show();
+            }
+        }
+
         mListOfRestaurant = (RecyclerView) findViewById(R.id.rv_search_restaurant);
+        URL restaurantSearchListUrl = NetworkUtils.buildSearchRestaurantUrl();
+
+        restaurantSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Log.e("onQueryTextChange", "called");
+                searchText = newText;
+                //startActivity(intent);
+                if(searchText.length()>2) {
+                    Toast.makeText(getApplicationContext(), searchText, Toast.LENGTH_LONG).show();
+
+
+                    mProgressbar.setVisibility(View.VISIBLE);
+                    new SearchRestaurant.RestaurantListTask().execute(restaurantSearchListUrl);
+                }
+
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                searchText = query;
+
+                if(searchText.length()>2){
+                    mProgressbar.setVisibility(View.VISIBLE);
+                    new SearchRestaurant.RestaurantListTask().execute(restaurantSearchListUrl);
+                }
+                return false;
+            }
+
+        });
+
+       // if(searchText !=null){
+
+        //}
+
+
+
+
+
 
     }
     public class RestaurantListTask extends AsyncTask<URL, Void, String> implements   TabFragmentNearbyAdapter.ListItemClickListener {
@@ -75,7 +170,7 @@ public class SearchRestaurant extends AppCompatActivity {
             URL searchUrl = params[0];
             String RestaurantResults = null;
             try {
-                RestaurantResults = NetworkUtils.getRestaurantSearchFromHttpUrl(searchUrl,search);
+                RestaurantResults = NetworkUtils.getRestaurantSearchFromHttpUrl(searchUrl,searchText,lat,lng);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -93,7 +188,7 @@ public class SearchRestaurant extends AppCompatActivity {
                 JSONObject restaurantList = null;
                 JSONArray jsonArray=null;
 
-                String name,closingTime,openingTime,cusine;
+                String name,closingTime,openingTime,cusine,message = null;
                 int vatOfRestaurant,deliverChargeOfRestaurant;
                 int merchantId;
 
@@ -123,21 +218,41 @@ public class SearchRestaurant extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                try{
+                    restaurantList = new JSONObject(json);
+                    message = restaurantList.getString("message");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 mProgressbar.setVisibility(View.INVISIBLE);
-                ViewGroup.LayoutParams layoutParams = mProgressbar.getLayoutParams();
+                /*ViewGroup.LayoutParams layoutParams = mProgressbar.getLayoutParams();
 
                 layoutParams.height = 0;
                 layoutParams.width = 0;
-                mProgressbar.setLayoutParams(layoutParams);
+                mProgressbar.setLayoutParams(layoutParams);*/
+                if(message==null){
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                    mListOfRestaurant.setLayoutManager(layoutManager);
 
-                LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-                mListOfRestaurant.setLayoutManager(layoutManager);
+                    mListOfRestaurant.setHasFixedSize(true);
 
-                mListOfRestaurant.setHasFixedSize(true);
+                    tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines,  this);
 
-                tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines,  this);
+                    mListOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
+                }else{
+                    Snackbar.make(findViewById(R.id.layout_snackbar), " "+message, Snackbar.LENGTH_INDEFINITE)
+                            .setAction("CLOSE", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
 
-                mListOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
+                                }
+                            })
+                            .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
+                            .show();
+                }
+
+
+
 
 
             }else{
