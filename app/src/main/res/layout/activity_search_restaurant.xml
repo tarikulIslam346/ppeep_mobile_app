@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/layout_snackbar">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -32,7 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/layout_map_address">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,6 +70,7 @@
         android:textColor="#4CAF50"
         android:textSize="20sp"
         />
+
     <ProgressBar
         android:id="@+id/pv_restaurant_list_search"
         android:layout_width="42dp"

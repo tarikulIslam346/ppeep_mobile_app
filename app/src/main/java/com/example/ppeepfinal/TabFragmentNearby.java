@@ -1,5 +1,6 @@
 package com.example.ppeepfinal;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 /*import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,7 +23,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ppeepfinal.data.UserDatabase;
+import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.NetworkUtils;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +43,9 @@ public class TabFragmentNearby extends Fragment {
     private TabFragmentNearbyAdapter tabFragmentNearbyAdapter;
     private RecyclerView mNumberOfRestaurant;
     ProgressBar mProgressbar;
+    List<UserModel> user;
+    private UserDatabase mdb;
+    String lat,lng;
 
 
     public TabFragmentNearby(){
@@ -51,11 +59,25 @@ public class TabFragmentNearby extends Fragment {
 
 
         v=inflater.inflate(R.layout.activity_tab_fragment_nearby,container,false);
-        URL restaurantListUrl = NetworkUtils.buildRestaurantUrl();
+        URL restaurantListUrl = NetworkUtils.buildNearByRestaurantUrl();
         mProgressbar = (ProgressBar) v.findViewById(R.id.pv_restaurant_menu) ;
         mProgressbar.setVisibility(View.VISIBLE);
-        new RestaurantListTask().execute(restaurantListUrl);
+
+        mdb = UserDatabase.getInstance(getContext());
+
+        user = mdb.userDAO().loadPhone();
+
         mNumberOfRestaurant = (RecyclerView)v.findViewById(R.id.rv_numbers);
+
+        if(user.size() !=0){
+           // Toast.makeText(getContext()," " + String.valueOf(user.get(0).getLat()), Toast.LENGTH_LONG).show();
+            lat  = String.valueOf(user.get(0).getLat());
+            lng = String.valueOf(user.get(0).getLng());
+            new RestaurantListTask().execute(restaurantListUrl);
+
+        }
+
+
         return v;
 
     }
@@ -77,7 +99,7 @@ public class TabFragmentNearby extends Fragment {
             URL searchUrl = params[0];
             String RestaurantResults = null;
             try {
-                RestaurantResults = NetworkUtils.getRestaurantFromHttpUrl(searchUrl);
+                RestaurantResults = NetworkUtils.getNearByRestaurantFromHttpUrl(searchUrl,lat,lng);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -95,8 +117,8 @@ public class TabFragmentNearby extends Fragment {
                 JSONObject restaurantList = null;
                 JSONArray jsonArray=null;
 
-                String name,closingTime,openingTime,cusine;
-                        int vatOfRestaurant,deliverChargeOfRestaurant;
+                String name,closingTime,openingTime,cusine, message = null;
+                int vatOfRestaurant,deliverChargeOfRestaurant;
                int merchantId;
 
 
@@ -125,6 +147,17 @@ public class TabFragmentNearby extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                try {
+                    restaurantList = new JSONObject(json);
+                    message = restaurantList.getString("message");
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
                 mProgressbar.setVisibility(View.INVISIBLE);
                 ViewGroup.LayoutParams layoutParams = mProgressbar.getLayoutParams();
 
@@ -132,18 +165,38 @@ public class TabFragmentNearby extends Fragment {
                 layoutParams.width = 0;
                 mProgressbar.setLayoutParams(layoutParams);
 
-                LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext());
-                mNumberOfRestaurant.setLayoutManager(layoutManager);
+                if(message != null ){
+                    Snackbar.make(v.findViewById(R.id.layout_nearby), " "+message, Snackbar.LENGTH_INDEFINITE)
+                            .setAction("CLOSE", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
 
-                mNumberOfRestaurant.setHasFixedSize(true);
+                                }
+                            })
+                            .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
+                            .show();
+                }
 
-                tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines,  this);
+                if(jsonArray!= null){
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext());
+                    mNumberOfRestaurant.setLayoutManager(layoutManager);
 
-                mNumberOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
+                    mNumberOfRestaurant.setHasFixedSize(true);
+
+                    tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines,  this);
+
+                    mNumberOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
+                }
+
+
+
+
+
+
 
 
             }else{
-                Toast.makeText(getContext(), "No restaurant found or network not available", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "No restaurant found or network not available", Toast.LENGTH_LONG).show();
             }
         }
 

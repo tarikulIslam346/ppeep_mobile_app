@@ -87,13 +87,13 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
 
         addressOnMap = (TextView) findViewById(R.id.tv_user_address_map_view);
-        addressOnMap.setOnClickListener(new View.OnClickListener() {
+        /*addressOnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent mapView = new Intent(getApplicationContext(),UserMapActivity.class);;
                 startActivity(mapView);
             }
-        });
+        });*/
 
         orderSubmit = (Button) findViewById(R.id.placeOrderId);
         orderSubmit.setVisibility(View.INVISIBLE);
@@ -181,12 +181,16 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         List<UserModel> user = mdb.userDAO().loadPhone();
         if(user.size() != 0){
             phoneNo = user.get(0).getPhone();
+            String address  =  user.get(0).getAddress();
+            addressOnMap.setText(address);
         }
 
-        Intent foodCart = getIntent();
-        String address = foodCart.getStringExtra("address");
-        if(address!=null) addressOnMap.setText(address);
-        else{
+        //List<UserModel> user = mdb.userDAO().loadPhone()
+
+       // Intent foodCart = getIntent();
+        //String address = foodCart.getStringExtra("address");
+       // if(address!=null) addressOnMap.setText(address);
+       /* else{
             MyLocation myLocation = new MyLocation(FoodCartPage.this);
             myLocation.setListener(new MyLocation.MyLocationListener() {
                 @Override
@@ -235,7 +239,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
                 }
             });
-        }
+        }*/
 
 
         orderSubmit.setOnClickListener(new View.OnClickListener() {
@@ -311,10 +315,10 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     protected void onResume() {
         super.onResume();
         retriveOrder();
-        Intent foodCart = getIntent();
+        /*Intent foodCart = getIntent();
         String address = foodCart.getStringExtra("address");
         if(address!=null)
-        addressOnMap.setText(address);
+        addressOnMap.setText(address);*/
 
 
     }
