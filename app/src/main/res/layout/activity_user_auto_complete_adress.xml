@@ -59,6 +59,12 @@ tools:context=".UserAutoCompleteAdress">
         android:id="@+id/dingi_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></com.dingi.dingisdk.maps.MapView>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_select_pin"
+        />
 
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
