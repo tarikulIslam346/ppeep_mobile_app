@@ -77,6 +77,7 @@ dependencies {
 
 
     implementation 'com.pusher:pusher-java-client:1.5.0'
+    implementation 'com.github.florent37:bubbletab:1.0.0'
 
 
 }

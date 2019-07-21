@@ -16,10 +16,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
+import com.github.florent37.bubbletab.BubbleTab;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
@@ -28,8 +31,9 @@ import java.util.List;
 public class FoodApp extends AppCompatActivity {
 Toolbar foodToolbar;
 Menu foodCart;
-    private TabLayout tabLayoutId;
+  private BubbleTab tabLayoutId;
     private ViewPager viewPagerId;
+    BubbleTab bubbleTab;
     private ViewPagerAdapter adapter;
     SearchView restaurantSearchView;
     private UserDatabase mdb;
@@ -40,6 +44,9 @@ Menu foodCart;
         setContentView(R.layout.activity_food_app);
         foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
         setSupportActionBar(foodToolbar);
+/*
+        getSupportFragmentManager().beginTransaction().replace(R.id.food_app_layout, new CuisineSearchFragment()).addToBackStack(null).commit();
+*/
 
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -122,8 +129,12 @@ Menu foodCart;
         }
 */
 
-        tabLayoutId = (TabLayout) findViewById(R.id.tabLayoutId);
+tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
+
+
         viewPagerId = (ViewPager) findViewById(R.id.viewPagerId);
+        tabLayoutId.setupWithViewPager(viewPagerId);
+
 
 
 
@@ -136,12 +147,12 @@ Menu foodCart;
 
 
         viewPagerId.setAdapter(adapter);
-        tabLayoutId.setupWithViewPager(viewPagerId);
 
-        tabLayoutId.getTabAt(0).setIcon(R.drawable.homeicon);
+
+       /* tabLayoutId.getTabAt(0).setIcon(R.drawable.homeicon);
         tabLayoutId.getTabAt(1).setIcon(R.drawable.nearbyicon);
         tabLayoutId.getTabAt(2).setIcon(R.drawable.recommendedicon2);
-        tabLayoutId.getTabAt(3).setIcon(R.drawable.freedeliveryicon);
+        tabLayoutId.getTabAt(3).setIcon(R.drawable.freedeliveryicon);*/
 
 
 

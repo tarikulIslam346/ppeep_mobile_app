@@ -83,6 +83,7 @@ public class TabFragmentRecommended extends Fragment {
     UserDatabase mdb;
     String phoneNo;
     List<Integer>OrderId;
+     FragmentManager fragmentManager;
 
 
     public TabFragmentRecommended(){ }
@@ -92,8 +93,16 @@ public class TabFragmentRecommended extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v=inflater.inflate(R.layout.activity_tab_fragment_recommended,container,false);
-
         mdb = UserDatabase.getInstance(getContext());
+
+       /*TabFragmentRecommended fragmentHome = new TabFragmentRecommended();
+        fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+      fragmentTransaction.add(R.id.tab_offer_container, fragmentHome);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();*/
+
+
 
         mViewAll = (TextView) v.findViewById(R.id.tv_view_all);
 
@@ -498,13 +507,23 @@ public class TabFragmentRecommended extends Fragment {
 
 
     public void replaceFragment() {
-        FragmentManager fragmentManager = getFragmentManager();
+       /* TabFragmentRecommended fragmentHome = new TabFragmentRecommended();
+        fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.tab_offer_container, fragmentHome);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();*/
 
         CuisineSearchFragment fragment = new CuisineSearchFragment();
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.tab_offer_container, fragment);
-        fragmentTransaction.addToBackStack(null);
+
+
         fragmentTransaction.commit();
+
+/*
+   getFragmentManager().beginTransaction().replace(R.id.food_app_layout, new CuisineSearchFragment()).addToBackStack(null).commit();
+*/
         }
     }
 

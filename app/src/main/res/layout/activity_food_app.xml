@@ -17,6 +17,7 @@
         android:gravity="center"
         android:theme="@style/AppTheme2"
         android:id="@+id/foodtoolbar"
+
         android:background="@color/colorPrimary">
 
 
@@ -39,8 +40,9 @@
         android:id="@+id/tv_delivery_address"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:layout_margin="5dp"
+        android:maxLength="40"
         android:text="c1, monallee tower, bastola"
 
         />
@@ -60,7 +62,7 @@
 
 
 
-        <com.google.android.material.tabs.TabLayout
+       <!-- <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#F0EFEB"
@@ -76,7 +78,30 @@
             app:tabPaddingStart="-1dp"
             app:tabPaddingTop="-1dp">
 
-        </com.google.android.material.tabs.TabLayout>
+        </com.google.android.material.tabs.TabLayout>-->
+
+        <com.github.florent37.bubbletab.BubbleTab
+            android:id="@+id/tabLayoutId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="true"
+            android:background="@android:color/white"
+            android:elevation="10dp"
+            app:bubbleTab_circleColor="#ffcc00"
+            app:bubbleTab_circleRatio="1.25"
+            android:tooltipText="Home"
+            app:bubbleTab_image0="@drawable/homeicon2"
+
+
+            app:bubbleTab_image1="@drawable/nearbyicon"
+
+            app:bubbleTab_image2="@drawable/recommendedicon2"
+            app:bubbleTab_image3="@drawable/freedeliveryicon"
+/>
+
+
+
+
 
         <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
