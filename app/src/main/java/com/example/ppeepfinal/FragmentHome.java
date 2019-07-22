@@ -1,6 +1,9 @@
 package com.example.ppeepfinal;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -29,11 +32,12 @@ import static com.facebook.accountkit.internal.AccountKitController.getApplicati
 public class FragmentHome extends Fragment {
 
     SliderLayout sliderLayout;
-
+    public static String FACEBOOK_URL = "https://www.facebook.com/YourPageName";
+    public static String FACEBOOK_PAGE_ID = "YourPageName";
     View v;
 
     CircleButton foodExpressButton;
-    MaterialCardView ppeepfoodCardView;
+    MaterialCardView ppeepfoodCardView,ppeepStoreCardView,facebookCardView,youtubeCardView;
 
 
     public FragmentHome() { }
@@ -59,6 +63,62 @@ public class FragmentHome extends Fragment {
 
             }
         });
+
+        ppeepStoreCardView=v.findViewById(R.id.ppeepStoreCardView);
+
+        // foodExpressButton= v.findViewById(R.id.foodexpress_id);
+
+
+        ppeepStoreCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getContext(), WebViewClass.class);
+                i.putExtra(WebViewClass.WEBSITE_ADDRESS, "https://www.ppeepbd.com/store/");
+                startActivity(i);
+
+
+
+            }
+        });
+
+        facebookCardView=v.findViewById(R.id.facebookCardView);
+
+
+
+
+        facebookCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               goToFacebook();
+/*
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/P-PEEP-503500450179099/"));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setPackage("com.facebook.katana");
+                startActivity(intent);*/
+            }
+        });
+
+       youtubeCardView=v.findViewById(R.id.youtubeCardView);
+
+
+
+
+        youtubeCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/channel/UC2sv1y9olthPN5ewdr7TQ5g/"));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setPackage("com.google.android.youtube");
+                startActivity(intent);
+            }
+        });
+
+
 
 
         sliderLayout = v.findViewById(R.id.imageSlider);
@@ -117,5 +177,47 @@ public class FragmentHome extends Fragment {
 
 
     }
+
+    private void goToFacebook() {
+        try {
+            String facebookUrl = getFacebookPageURL();
+            Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+            facebookIntent.setData(Uri.parse(facebookUrl));
+            startActivity(facebookIntent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String getFacebookPageURL() {
+        String FACEBOOK_URL = "https://www.facebook.com/P-PEEP-503500450179099/";
+        String facebookurl = null;
+
+        try {
+            PackageManager packageManager = getActivity().getPackageManager();
+
+            if (packageManager != null) {
+                Intent activated = packageManager.getLaunchIntentForPackage("com.facebook.katana");
+
+                if (activated != null) {
+                    int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+
+                    if (versionCode >= 3002850) {
+                        facebookurl = "https://www.facebook.com/P-PEEP-503500450179099/";
+                    }
+                } else {
+                    facebookurl = FACEBOOK_URL;
+                }
+            } else {
+                facebookurl = FACEBOOK_URL;
+            }
+        } catch (Exception e) {
+            facebookurl = FACEBOOK_URL;
+        }
+        return facebookurl;
+    }
+
+
+
 
 }

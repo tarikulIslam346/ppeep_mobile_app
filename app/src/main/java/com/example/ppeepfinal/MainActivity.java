@@ -1,6 +1,8 @@
 package com.example.ppeepfinal;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Handler;
 //import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
@@ -43,7 +47,10 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar pageSwitchProgress;
     private UserDatabase mdb;
 
-
+    private static final String TAG = "MapActivity";
+    private static final String mREAD_SMS = Manifest.permission.READ_SMS;
+    private static final String mRECEIVE_SMS = Manifest.permission.RECEIVE_SMS;
+    private static final int SMS_PERMISSION_REQUEST_CODE = 1234;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
                         AccountKitActivity.ResponseType.TOKEN);
                         // or .ResponseType.CODE
                         // ... perform additional configuration ...
+
+        getSmsPermission();
+        configurationBuilder.setReadPhoneStateEnabled(true);
+
+        
         intent.putExtra(
                 AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION,
                 configurationBuilder.build());
@@ -187,6 +199,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void getSmsPermission(){
+        Log.d(TAG, "getSmsPermission: getting sms permissions");
+        String[] permissions = {Manifest.permission.READ_SMS,
+                Manifest.permission.RECEIVE_SMS};
 
+        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                mREAD_SMS) == PackageManager.PERMISSION_GRANTED){
+            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                    mRECEIVE_SMS) == PackageManager.PERMISSION_GRANTED){
+                //onActivityResult();
+            }else{
+                ActivityCompat.requestPermissions(this,
+                        permissions,
+                        SMS_PERMISSION_REQUEST_CODE);
+            }
+        }else{
+            ActivityCompat.requestPermissions(this,
+                    permissions,
+                    SMS_PERMISSION_REQUEST_CODE);
+        }
+    }
 
 }

@@ -17,7 +17,7 @@
         tools:context=".MainActivity"
         android:orientation="vertical">
 
-        <com.google.android.material.tabs.TabLayout
+       <!-- <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#F0EFEB"
@@ -32,10 +32,29 @@
             app:tabPaddingTop="-1dp"
             app:tabTextAppearance="@style/MyTabLayoutTextAppearance">
 
-        </com.google.android.material.tabs.TabLayout>
+
+        </com.google.android.material.tabs.TabLayout>-->
 
 
+        <com.github.florent37.bubbletab.BubbleTab
+            android:id="@+id/tabLayoutId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
 
+            android:background="@android:color/white"
+            android:elevation="40dp"
+            app:bubbleTab_circleColor="#ffcc00"
+            app:bubbleTab_circleRatio="1.25"
+
+            app:bubbleTab_image0="@drawable/homeicon2"
+
+
+            app:bubbleTab_image1="@drawable/grouptesticon"
+
+            app:bubbleTab_image2="@drawable/notificationicon"
+
+            />
         <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="match_parent"
