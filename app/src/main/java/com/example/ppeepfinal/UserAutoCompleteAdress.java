@@ -5,14 +5,17 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -26,9 +29,11 @@ import android.widget.EditText;
 import android.widget.SearchView;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dingi.dingisdk.Dingi;
 import com.dingi.dingisdk.annotations.MarkerOptions;
+import com.dingi.dingisdk.annotations.PolylineOptions;
 import com.dingi.dingisdk.camera.CameraUpdate;
 import com.dingi.dingisdk.camera.CameraUpdateFactory;
 import com.dingi.dingisdk.constants.Style;
@@ -60,6 +65,8 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
         private MapView mapView;
         private DingiMap mMap;
         Button mConfirm;
+        String lat,lng;
+    String address = null;
 
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         public static <T, E> String getKeysByValue(Map<T, E> map, E value) {
@@ -219,40 +226,46 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull DingiMap dingiMap) {
+
                 for (int i = 0; i < searchResults.size(); i++) {
+
                     if (searchResults.get(i).getId().equalsIgnoreCase(id)) {
+
                         LatLng sydney = new LatLng(searchResults.get(i).getLat(), searchResults.get(i).getLng());
+
                         ((TextView) findViewById(R.id.text)).setText(searchResults.get(i).getAddress());
-                        String address = searchResults.get(i).getAddress();
-                        String lat = String.valueOf(searchResults.get(i).getLat());
-                        String lng = String.valueOf(searchResults.get(i).getLng());
+
+                         address = searchResults.get(i).getAddress();
+
+                        lat = String.valueOf(searchResults.get(i).getLat());
+
+                        lng = String.valueOf(searchResults.get(i).getLng());
+
                         hideKeyboard(UserAutoCompleteAdress.this);
-                        dingiMap.addMarker(new MarkerOptions().position(sydney).title(searchResults.get(i).getName()));
+
+                        //dingiMap.addMarker(new MarkerOptions().position(sydney).title(searchResults.get(i).getName()));
+
                         dingiMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 18));
-                        mConfirm.setVisibility(View.VISIBLE);
-                        mConfirm.setOnClickListener(new View.OnClickListener() {
+                        final int j = i;
+
+                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(lat), Double.valueOf(lng)), 18);
+
+                        dingiMap.animateCamera(cameraUpdate);
+                        dingiMap.addOnCameraMoveListener(new DingiMap.OnCameraMoveListener() {
                             @Override
-                            public void onClick(View v) {
+                            public void onCameraMove() {
+                                mConfirm.setVisibility(View.INVISIBLE);
+                                LatLng center = dingiMap.getCameraPosition().target;
+                                lat = String.valueOf(center.getLatitude());
+                                lng = String.valueOf(center.getLongitude());
+                                callAPI(center);
+                                //searchResults.get(j).setAddress(address);
+                               // Toast.makeText(UserAutoCompleteAdress.this, ""+lat, Toast.LENGTH_SHORT).show();
 
-                                Intent changeIntent = getIntent();
-                                String activity = changeIntent.getStringExtra("activity");
-                                Intent foodApp = null;
-                                if(activity.equals("search")){
-                                    foodApp = new Intent(UserAutoCompleteAdress.this, SearchRestaurant.class);
-                                }
-                                if(activity.equals("food")){
-                                    foodApp = new Intent(UserAutoCompleteAdress.this, FoodApp.class);
-                                }
-                                
-
-                                if(address != null)foodApp.putExtra("address", address);
-                                foodApp.putExtra("lat",lat);
-                                foodApp.putExtra("lng",lng);
-                                finish();
-                                foodApp.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
-                                startActivity(foodApp);
                             }
                         });
+
+
 
 
 
@@ -286,8 +299,70 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
         });
     }
 
-        @Override
-        public void onStart() {
+
+    private String callAPI(LatLng latLng) {
+        VolleyRequest volleyRequest = new VolleyRequest(UserAutoCompleteAdress.this);
+        volleyRequest.VolleyGet(Api.reverseGeo + "demo?lat=" + latLng.getLatitude() + "&lng=" + latLng.getLongitude() + "&address_level=UPTO_THANA");        volleyRequest.setListener(new VolleyRequest.MyServerListener() {
+            @Override
+            public void onResponse(JSONObject response) {
+                  address = null;
+                  lat = String.valueOf(latLng.getLatitude());
+                  lng = String.valueOf(latLng.getLongitude());
+                  //mMap = dingi
+
+
+                try {
+                    address = response.getJSONObject("result").getString("address");
+
+                } catch (Exception e) {
+                    Log.e("LandMark", e.toString());
+                }
+                ((TextView) findViewById(R.id.text)).setText( address);
+               // Toast.makeText(UserAutoCompleteAdress.this, ""+address, Toast.LENGTH_SHORT).show();
+               // dingiMap.addMarker(new MarkerOptions().position(latLng).title(address));
+                mConfirm.setVisibility(View.VISIBLE);
+                mConfirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent changeIntent = getIntent();
+                        String activity = changeIntent.getStringExtra("activity");
+                        Intent foodApp = null;
+                        if(activity.equals("search")){
+                            foodApp = new Intent(UserAutoCompleteAdress.this, SearchRestaurant.class);
+                        }
+                        if(activity.equals("food")){
+                            foodApp = new Intent(UserAutoCompleteAdress.this, FoodApp.class);
+                        }
+
+
+                        if(address != null)foodApp.putExtra("address", address);
+                        foodApp.putExtra("lat",lat);
+                        foodApp.putExtra("lng",lng);
+                        finish();
+                        foodApp.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                        startActivity(foodApp);
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onError(String error) {
+                Toast.makeText(UserAutoCompleteAdress.this, error, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void responseCode(int resposeCode) {
+
+            }
+        });
+        return address;
+    }
+
+    @Override
+    public void onStart() {
         super.onStart();
         mapView.onStart();
     }
