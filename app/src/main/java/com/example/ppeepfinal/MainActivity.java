@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
+import com.example.ppeepfinal.utilities.MyLocation;
 import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.facebook.accountkit.AccessToken;
 import com.facebook.accountkit.Account;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_input_screen);
 
        // service = APIClient.createService(ApiService.class);
+        MyLocation myLocation = new MyLocation(MainActivity.this);
         mdb = UserDatabase.getInstance(getApplicationContext());
 
 
