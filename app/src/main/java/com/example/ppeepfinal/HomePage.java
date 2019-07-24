@@ -41,8 +41,15 @@ import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.Api;
 import com.example.ppeepfinal.utilities.MyLocation;
 import com.example.ppeepfinal.utilities.VolleyRequest;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+
+import com.github.florent37.bubbletab.BubbleTab;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -60,9 +67,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
     ActionBarDrawerToggle mToggle;
 
-    private TabLayout tabLayout;
-
-    private ViewPager viewPager;
+    private BubbleTab tabLayoutId;
+    private ViewPager viewPagerId;
 
     private ViewPagerAdapter adapter;
     TextView navUsername;
@@ -120,9 +126,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         // navigationView.setNavigationItemSelectedListener(this);
         navigationView.setNavigationItemSelectedListener(this);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabLayoutId);
+        tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
 
-        viewPager = (ViewPager) findViewById(R.id.viewPagerId);
+
+        viewPagerId = (ViewPager) findViewById(R.id.viewPagerId);
+        tabLayoutId.setupWithViewPager(viewPagerId);
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
@@ -157,15 +165,19 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         adapter.AddFragment(new FragmentMyProfile(),"My Profile");
 
-        viewPager.setAdapter(adapter);
+        tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
 
-        tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setIcon(R.drawable.icon_homelogo);
+        viewPagerId = (ViewPager) findViewById(R.id.viewPagerId);
+        tabLayoutId.setupWithViewPager(viewPagerId);
+
+    /*    tabLayout.getTabAt(0).setIcon(R.drawable.icon_homelogo);
 
         tabLayout.getTabAt(1).setIcon(R.drawable.groupicon);
         tabLayout.getTabAt(2).setIcon(R.drawable.notificationicon);
-        tabLayout.getTabAt(3).setIcon(R.drawable.myprofileicon);
+        tabLayout.getTabAt(3).setIcon(R.drawable.myprofileicon);*/
+
+        viewPagerId.setAdapter(adapter);
 
     }
 

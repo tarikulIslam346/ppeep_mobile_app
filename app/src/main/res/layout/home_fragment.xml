@@ -26,8 +26,6 @@
             android:layout_margin="4dp"
             android:elevation="10dp"
             app:cardElevation="15dp"
-            android:stateListAnimator="@animator/card_click_anim"
-            android:focusableInTouchMode="true"
 
             android:id="@+id/ppeepfoodCard">
 
@@ -66,6 +64,7 @@
 
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/ppeepStoreCardView"
             android:layout_width="120dp"
             android:layout_height="130dp"
             android:backgroundTint="#64C0B7"
@@ -161,6 +160,7 @@
 
         android:orientation="horizontal">
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/facebookCardView"
             android:layout_width="120dp"
             android:layout_height="140dp"
             android:layout_gravity="top"
@@ -200,6 +200,7 @@
 
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/youtubeCardView"
             android:layout_width="240dp"
             android:layout_height="140dp"
             android:layout_gravity="top"
