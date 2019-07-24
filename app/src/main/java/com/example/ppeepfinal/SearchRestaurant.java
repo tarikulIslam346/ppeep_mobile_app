@@ -45,9 +45,10 @@ public class SearchRestaurant extends AppCompatActivity {
     private UserDatabase mdb;
     TextView mAddress;
     LinearLayout addresslayout;
+    //android.widget.SearchView restaurantSearchView;
     String address, lat,lng;
     List<UserModel> user;
-    SearchView restaurantSearchView;
+   SearchView restaurantSearchView;
     String searchText = null;
     LinearLayout mAddressChange;
     @Override
@@ -63,7 +64,7 @@ public class SearchRestaurant extends AppCompatActivity {
         mProgressbar = (ProgressBar) findViewById(R.id.pv_restaurant_list_search) ;
 
         mAddressChange = (LinearLayout) findViewById(R.id.layout_map_address);
-
+        searchPageResult.setVisibility(View.INVISIBLE);
         mAddressChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +105,7 @@ public class SearchRestaurant extends AppCompatActivity {
                 mAddress.setText(user.get(0).getAddress());
                 lat = String.valueOf(user.get(0).getLat());
                 lng = String.valueOf(user.get(0).getLng());
-                Toast.makeText(getApplicationContext(),""+lat,Toast.LENGTH_LONG).show();
+               Toast.makeText(getApplicationContext(),""+lat,Toast.LENGTH_LONG).show();
             }
         }
 
@@ -119,7 +120,7 @@ public class SearchRestaurant extends AppCompatActivity {
                 searchText = newText;
                 //startActivity(intent);
                 if(searchText.length()>2) {
-                    Toast.makeText(getApplicationContext(), searchText, Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getApplicationContext(), searchText, Toast.LENGTH_LONG).show();
 
 
                     mProgressbar.setVisibility(View.VISIBLE);
@@ -231,6 +232,7 @@ public class SearchRestaurant extends AppCompatActivity {
                 layoutParams.width = 0;
                 mProgressbar.setLayoutParams(layoutParams);*/
                 if(message==null){
+                    searchPageResult.setVisibility(View.VISIBLE);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                     mListOfRestaurant.setLayoutManager(layoutManager);
 

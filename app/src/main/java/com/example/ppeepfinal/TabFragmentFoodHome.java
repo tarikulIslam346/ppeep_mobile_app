@@ -58,7 +58,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabFragmentRecommended extends Fragment {
+public class TabFragmentFoodHome extends Fragment {
 
     View v, nextV;
 
@@ -86,7 +86,7 @@ public class TabFragmentRecommended extends Fragment {
      FragmentManager fragmentManager;
 
 
-    public TabFragmentRecommended(){ }
+    public TabFragmentFoodHome(){ }
 
     @Nullable
     @Override

@@ -5,17 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <com.smarteist.autoimageslider.SliderLayout
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="240dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="10dp"
+       
         android:id="@+id/imageSlider"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="20dp"
         android:gravity="center">
         <com.google.android.material.card.MaterialCardView
@@ -24,8 +32,8 @@
             android:backgroundTint="#EED68D"
             app:cardCornerRadius="15dp"
             android:layout_margin="4dp"
-            android:elevation="10dp"
-            app:cardElevation="15dp"
+            android:elevation="40dp"
+
 
             android:id="@+id/ppeepfoodCard">
 
@@ -70,8 +78,7 @@
             android:backgroundTint="#64C0B7"
             app:cardCornerRadius="15dp"
             android:layout_margin="4dp"
-            android:elevation="10dp"
-            app:cardElevation="15dp">
+            android:elevation="40dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -114,8 +121,7 @@
             android:backgroundTint="#63AAE2"
             app:cardCornerRadius="15dp"
             android:layout_margin="4dp"
-            android:elevation="10dp"
-            app:cardElevation="15dp">
+            android:elevation="40dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -156,9 +162,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
-
+        android:layout_marginTop="15dp"
         android:orientation="horizontal">
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/facebookCardView"
@@ -169,7 +175,7 @@
             app:cardCornerRadius="15dp"
             android:layout_margin="4dp"
             android:elevation="10dp"
-            app:cardElevation="15dp">
+    >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -208,8 +214,8 @@
 
             app:cardCornerRadius="15dp"
             android:layout_margin="4dp"
-            android:elevation="10dp"
-            app:cardElevation="15dp">
+            android:elevation="40dp"
+      >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -238,123 +244,7 @@
 
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
-
-    <!-- <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:gravity="center"
-         android:orientation="horizontal"
- android:layout_marginBottom="15dp"
-        android:padding="5dp"
-
-         >
-
-         &lt;!&ndash;  <com.varunest.sparkbutton.SparkButton
-               android:id="@+id/facebook_button31"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-          android:layout_alignParentBottom="true"
-
-               android:layout_marginLeft="-30dp"
-               app:sparkbutton_activeImage="@drawable/icon_robishop"
-               app:sparkbutton_iconSize="60dp"
-
-               app:sparkbutton_primaryColor="@color/logo_secondary_color"
-               app:sparkbutton_secondaryColor="@color/logo_primary_color" />
-
-           <com.varunest.sparkbutton.SparkButton
-               android:id="@+id/facebook_button32"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-
-               android:layout_alignParentBottom="true"
-               android:layout_marginLeft="65dp"
-               app:sparkbutton_activeImage="@drawable/icon_pickaboo"
-               app:sparkbutton_iconSize="60dp"
-
-               app:sparkbutton_primaryColor="@color/logo_secondary_color"
-               app:sparkbutton_secondaryColor="@color/logo_primary_color" />
-
-           <com.varunest.sparkbutton.SparkButton
-               android:id="@+id/facebook_button33"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-
-               android:layout_alignParentBottom="true"
-               android:layout_marginLeft="170dp"
-               app:sparkbutton_activeImage="@drawable/icon_baagdoom"
-               app:sparkbutton_iconSize="60dp"
-
-               app:sparkbutton_primaryColor="@color/logo_secondary_color"
-               app:sparkbutton_secondaryColor="@color/logo_primary_color" />
-
-           <com.varunest.sparkbutton.SparkButton
-               android:id="@+id/facebook_button34"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-   android:contextClickable="true"
-               android:layout_alignParentBottom="true"
-               android:layout_marginLeft="280dp"
-               app:sparkbutton_activeImage="@drawable/icon_daraz"
-               app:sparkbutton_iconSize="60dp"
-
-               app:sparkbutton_primaryColor="@color/logo_secondary_color"
-               app:sparkbutton_secondaryColor="@color/logo_primary_color" />&ndash;&gt;
-
-         <com.google.android.material.card.MaterialCardView
-             android:layout_width="wrap_content"
-             android:layout_height="100dp"
-             android:elevation="10dp"
-             android:layout_margin="5dp"
-             >
-        <ImageView
-            android:layout_width="180dp"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
-            android:src="@drawable/facebook_banner"/>
-
-         </com.google.android.material.card.MaterialCardView>
-
-         &lt;!&ndash;<at.markushi.ui.CircleButton
-             android:layout_width="65dp"
-             android:layout_height="65dp"
-             android:id="@+id/foodexpress_id22"
-             app:cb_color="#3F51B5"
-             android:src="@drawable/foodexpress_icon"
-             android:layout_margin="15dp"
-             app:cb_pressedRingWidth="8dip" />
-
-         <at.markushi.ui.CircleButton
-             android:layout_width="65dp"
-             android:layout_height="65dp"
-             android:id="@+id/foodexpress_id23"
-             app:cb_color="#3F51B5"
-             android:src="@drawable/foodexpress_icon"
-             android:layout_margin="15dp"
-             app:cb_pressedRingWidth="8dip" />
-
-         <at.markushi.ui.CircleButton
-             android:layout_width="65dp"
-             android:layout_height="65dp"
-             android:id="@+id/foodexpress_id24"
-             app:cb_color="#3F51B5"
-             android:src="@drawable/youtube_icon"
-             android:layout_margin="15dp"
-             app:cb_pressedRingWidth="8dip" />&ndash;&gt;
- <com.google.android.material.card.MaterialCardView
-     android:layout_width="wrap_content"
-     android:layout_height="100dp"
-     android:elevation="10dp"
-     android:layout_margin="5dp"
- >
-     <ImageView
-     android:layout_width="180dp"
-     android:layout_height="110dp"
-         android:layout_gravity="center"
-     android:src="@drawable/youtubelogo"/></com.google.android.material.card.MaterialCardView>
-
-
-     </LinearLayout>-->
+    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

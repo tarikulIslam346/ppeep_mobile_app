@@ -9,7 +9,7 @@
     android:id="@+id/drawerId"
     tools:openDrawer="start">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -39,7 +39,8 @@
 
         <com.github.florent37.bubbletab.BubbleTab
             android:id="@+id/tabLayoutId"
-            android:layout_width="wrap_content"
+android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
 
@@ -52,20 +53,21 @@
 
 
 
-            app:bubbleTab_image1="@drawable/homeicon2"
+            app:bubbleTab_image1="@drawable/homeicon"
 
-            app:bubbleTab_image2="@drawable/grouptest3"
+            app:bubbleTab_image2="@drawable/groupicon2"
             app:bubbleTab_image3="@drawable/notificationicon"
 
             />
+
         <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPagerId"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/viewPagerId">
+            android:layout_height="match_parent">
 
         </androidx.viewpager.widget.ViewPager>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 

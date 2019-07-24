@@ -8,7 +8,7 @@
     android:layout_marginRight="10dp"
     app:cardCornerRadius="4dp"
     android:padding="4dp"
-    app:cardElevation="20dp">
+ android:elevation="40dp">
     <FrameLayout
 
         android:layout_width="match_parent"

@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TabFragmentRecommended"
+    tools:context=".TabFragmentFoodHome"
     android:id="@+id/tab_offer_container">
 
 
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <com.smarteist.autoimageslider.SliderLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginBottom="5dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="25dp"
         android:id="@+id/FoodAppimageSlider"/>
 
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="140dp"
         android:layout_marginTop="2dp"
+        android:layout_marginBottom="15dp"
         android:columnCount="2"
         android:columnOrderPreserved="true"
         android:padding="2dp"
@@ -34,7 +42,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
+            android:elevation="30dp"
+            android:padding="10dp"
             android:id="@+id/cv_chinise">
 
             <LinearLayout
@@ -191,6 +200,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
@@ -234,12 +247,19 @@
             android:layout_width="match_parent"
             android:layout_height="190dp"
             android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
             android:scrollbars="vertical|horizontal"/>
+
+
+
+
+
+    </LinearLayout>
+</ScrollView>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_show_current_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:text="Order status"/>
-
-
-</LinearLayout>
+</RelativeLayout>

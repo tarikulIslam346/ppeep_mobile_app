@@ -35,7 +35,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="80dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="vertical"
                     android:paddingTop="60px">
 
@@ -45,7 +46,7 @@
                         android:layout_height="wrap_content"
                         android:text="Nurul Mumen"
                         android:textColor="#0E0B0B"
-                        android:textSize="22sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         android:textAllCaps="true"/>
 
@@ -53,10 +54,10 @@
                         android:id="@+id/tv_phone_no_of_friend_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="15dp"
                         android:text="+8801844462225"
                         android:textColor="#D7444141"
-                        android:textSize="22sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
 
                         />
@@ -154,7 +155,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="3650"
+                            android:text="0"
                             android:textColor="#ffff"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -206,7 +207,8 @@
         android:id="@+id/fabGroupAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+       android:layout_marginBottom="70dp"
+        android:layout_marginRight="15dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/friendadd" />

@@ -12,10 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class WebViewClass extends AppCompatActivity {
-    private WebView webView2;
+    private WebView webView;
     public static final String WEBSITE_ADDRESS = "website_address";
     Toolbar foodToolbar;
-    private final int SPLASH_DISPLAY_LENGTH = 2200;
+    private final int SPLASH_DISPLAY_LENGTH = 3200;
     ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class WebViewClass extends AppCompatActivity {
         String url  = getIntent().getStringExtra(WEBSITE_ADDRESS);
         if (url == null || url.isEmpty()) finish();
 
-        WebView webView = (WebView) findViewById(R.id.webview1);
+      webView = (WebView) findViewById(R.id.webview1);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(url);
@@ -53,5 +53,13 @@ public class WebViewClass extends AppCompatActivity {
     public void ShowLoder(String message){
         dialog = ProgressDialog.show(this, "",
                 message, true);
+    }
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
