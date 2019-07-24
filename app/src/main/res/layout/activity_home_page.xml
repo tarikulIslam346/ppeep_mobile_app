@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/layout_home_page">
 
        <!-- <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
@@ -51,10 +52,10 @@
 
 
 
-            app:bubbleTab_image1="@drawable/groupicon6"
+            app:bubbleTab_image1="@drawable/homeicon2"
 
-            app:bubbleTab_image2="@drawable/homeicon2"
-            app:bubbleTab_image3="@drawable/homeicon2"
+            app:bubbleTab_image2="@drawable/grouptest3"
+            app:bubbleTab_image3="@drawable/notificationicon"
 
             />
         <androidx.viewpager.widget.ViewPager

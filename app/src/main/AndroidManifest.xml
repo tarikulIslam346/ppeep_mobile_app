@@ -24,9 +24,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".PPeepRideWebview"></activity>
         <activity android:name=".CuisineSearchFragment" />
         <activity android:name=".UserAutoCompleteAdress" />
+
+
+        <service
+            android:name=".FCMMessasingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+
+
+
+
+
+        <activity android:name=".CuisineSearchFragment"></activity>
+        <activity android:name=".UserAutoCompleteAdress"></activity>
+>>>>>>> 77177c629664285e7288bebd94984c0409470bf7
         <activity android:name=".OrderOnGoingList" />
         <activity android:name=".CurrentOrderHistory" />
         <activity android:name=".FriendHistoryDetails" />

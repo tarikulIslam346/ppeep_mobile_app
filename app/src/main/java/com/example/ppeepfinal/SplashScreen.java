@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
+import com.example.ppeepfinal.utilities.MyLocation;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         mdb = UserDatabase.getInstance(getApplicationContext());
         final List<UserModel> user =  mdb.userDAO().loadPhone();
+
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {

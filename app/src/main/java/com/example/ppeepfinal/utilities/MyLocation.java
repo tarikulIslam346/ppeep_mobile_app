@@ -3,6 +3,7 @@ package com.example.ppeepfinal.utilities;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -18,6 +19,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import static android.content.Context.LOCATION_SERVICE;
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class MyLocation {
     //https://drive.google.com/file/d/1y05I37G4dalM258Yao1xBRI-Towfxmxi/view?usp=sharing
@@ -34,6 +36,7 @@ public class MyLocation {
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
 
         } else {
 

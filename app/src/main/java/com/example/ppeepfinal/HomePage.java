@@ -1,5 +1,9 @@
 package com.example.ppeepfinal;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +15,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;*/
 import android.location.Location;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,23 +30,38 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.ppeepfinal.data.OrderMerchantModel;
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.Api;
 import com.example.ppeepfinal.utilities.MyLocation;
 import com.example.ppeepfinal.utilities.VolleyRequest;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+
 import com.github.florent37.bubbletab.BubbleTab;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
 
 import org.json.JSONObject;
 
 import java.util.List;
 
-public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
     DrawerLayout mDrawerLayout;
 
@@ -56,6 +79,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
     List<UserModel> user;
     ProgressDialog dialog;
+    private static final String TAG = "HomePage";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +94,31 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
          user = mdb.userDAO().loadPhone();
 
         setUserLocation();
+
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                       // String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d(TAG, "Token "+ token);
+                       // Toast.makeText(HomePage.this,"Token : "+token, Toast.LENGTH_LONG).show();
+                    }
+                });
+        List<OrderMerchantModel> orderMerchantModels =  mdb.orderMercahntDAO().loadOrderMerchant();
+        if(orderMerchantModels.size() != 0){
+            Toast.makeText(HomePage.this,""+orderMerchantModels.get(orderMerchantModels.size()-1).getMerchantName(),Toast.LENGTH_LONG).show();
+        }
+
 
 
 
@@ -247,6 +296,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
     }
+
+
 
    /* @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
