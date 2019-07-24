@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -78,6 +80,11 @@ dependencies {
 
     implementation 'com.pusher:pusher-java-client:1.5.0'
     implementation 'com.github.florent37:bubbletab:1.0.0'
+    implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation 'com.google.firebase:firebase-messaging:19.0.1'
+    implementation 'com.google.firebase:firebase-inappmessaging-display:18.0.2'
+    implementation 'com.google.firebase:firebase-auth:18.1.0'
 
 
 }
+apply plugin: 'com.google.gms.google-services'
