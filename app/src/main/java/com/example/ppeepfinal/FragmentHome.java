@@ -37,7 +37,7 @@ public class FragmentHome extends Fragment {
     View v;
 
     CircleButton foodExpressButton;
-    MaterialCardView ppeepfoodCardView,ppeepStoreCardView,facebookCardView,youtubeCardView;
+    MaterialCardView ppeepfoodCardView,ppeepStoreCardView,facebookCardView,youtubeCardView,ppeepRideCardView;
 
 
     public FragmentHome() { }
@@ -75,6 +75,24 @@ public class FragmentHome extends Fragment {
 
                 Intent i = new Intent(getContext(), WebViewClass.class);
                 i.putExtra(WebViewClass.WEBSITE_ADDRESS, "https://www.ppeepbd.com/store/");
+                startActivity(i);
+
+
+
+            }
+        });
+
+        ppeepRideCardView=v.findViewById(R.id.ppeepRideCardView);
+
+        // foodExpressButton= v.findViewById(R.id.foodexpress_id);
+
+
+        ppeepRideCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getContext(), PPeepRideWebview.class);
+                i.putExtra(PPeepRideWebview.WEBSITE_ADDRESS, "https://www.ppeepbd.com/ride/");
                 startActivity(i);
 
 

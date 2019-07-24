@@ -38,7 +38,7 @@
 
         <com.github.florent37.bubbletab.BubbleTab
             android:id="@+id/tabLayoutId"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
 
@@ -46,15 +46,15 @@
             android:elevation="40dp"
             app:bubbleTab_circleColor="#ffcc00"
             app:bubbleTab_circleRatio="1.25"
-            android:scaleType="fitCenter"
 
 
-            app:bubbleTab_image0="@drawable/homeicon2"
 
 
-            app:bubbleTab_image1="@drawable/grouptest3"
 
-            app:bubbleTab_image2="@drawable/notificationicon"
+            app:bubbleTab_image1="@drawable/groupicon6"
+
+            app:bubbleTab_image2="@drawable/homeicon2"
+            app:bubbleTab_image3="@drawable/homeicon2"
 
             />
         <androidx.viewpager.widget.ViewPager

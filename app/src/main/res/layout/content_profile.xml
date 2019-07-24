@@ -25,7 +25,7 @@
         <RelativeLayout style="@style/profileDetailsLayout">
             <ImageView
                 android:id="@+id/nameImageView"
-                android:src="@drawable/ic_name"
+                android:src="@drawable/nmw"
                 style="@style/profileDetailsImage" />
 
             <TextView
@@ -57,7 +57,7 @@
             <ImageView
 
                 android:id="@+id/mobileImageView"
-                android:src="@drawable/gendericon"
+                android:src="@drawable/geeee"
                 style="@style/profileDetailsImage" />
 
             <TextView
@@ -86,7 +86,7 @@
 
             <ImageView
                 android:id="@+id/emailImageView"
-                android:src="@drawable/ic_email"
+                android:src="@drawable/emlll"
                 style="@style/profileDetailsImage" />
 
             <TextView
@@ -114,7 +114,7 @@
         <RelativeLayout style="@style/profileDetailsLayout">
             <ImageView
                 android:id="@+id/addressImageView"
-                android:src="@drawable/ic_address"
+                android:src="@drawable/adsw"
                 style="@style/profileDetailsImage" />
 
             <TextView
@@ -146,7 +146,7 @@
         <RelativeLayout style="@style/profileDetailsLayout">
             <ImageView
                 android:id="@+id/dobImageView"
-                android:src="@drawable/ic_dob"
+                android:src="@drawable/dob555"
                 style="@style/profileDetailsImage" />
 
             <TextView
@@ -174,7 +174,7 @@
         <RelativeLayout style="@style/profileDetailsLayout">
             <ImageView
                 android:id="@+id/bloodgroupImage"
-                android:src="@drawable/bloodgroupicon"
+                android:src="@drawable/blw"
                 style="@style/profileDetailsImage" />
 
             <TextView
