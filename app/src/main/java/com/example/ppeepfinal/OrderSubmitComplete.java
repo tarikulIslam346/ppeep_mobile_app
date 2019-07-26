@@ -22,7 +22,10 @@ import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.pusher.client.Pusher;
 import com.pusher.client.PusherOptions;
 import com.pusher.client.channel.Channel;
+import com.pusher.client.channel.PrivateChannel;
+import com.pusher.client.channel.PrivateChannelEventListener;
 import com.pusher.client.channel.SubscriptionEventListener;
+import com.pusher.client.util.HttpAuthorizer;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -96,9 +99,17 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
         String driver = orderSubmitInten.getStringExtra("driver_name");
 
+        String orderId = orderSubmitInten.getStringExtra("orderId");
+
         String contact = orderSubmitInten.getStringExtra("contact");
 
         String imageUrl = orderSubmitInten.getStringExtra("profile_pic");
+
+
+        //https://foodexpress.com.bd/ppeep/public/broadcasting/auth
+       // HttpAuthorizer authorizer = new HttpAuthorizer("https://foodexpress.com.bd/ppeep/public/broadcasting/auth");
+       // Toast.makeText(getApplicationContext(), ""+authorizer, Toast.LENGTH_SHORT).show();
+       // PusherOptions options = new PusherOptions().setAuthorizer(authorizer);
 
 
         PusherOptions options = new PusherOptions();
@@ -107,6 +118,8 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
 
         Channel channel = pusher.subscribe("my-channel");
+
+       // PrivateChannel channel2 = pusher.subscribePrivate("private-orderConfirm."+orderId);
 
 
         channel.bind("my-order-confirm-event", new SubscriptionEventListener() {
@@ -120,8 +133,9 @@ public class OrderSubmitComplete extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext()," Order confirm : ",Toast.LENGTH_LONG).show();
                         if(imageUrl != null){
                             URL getimageUrl = NetworkUtils.buildDriverIamgeUrl(imageUrl);
-                            // new ImageLoadTask(driverImage).execute(getimageUrl);
+
                             Picasso.get().load(getimageUrl.toString()).into(driverImage);
+
                             orderConfirmProgressbar.setVisibility(View.INVISIBLE);
                             driverName.setText(driver);
                             driverContact.setText(contact);
@@ -134,42 +148,46 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
                     }
                 });
-                channel.bind("driver-order-confirm-event", new SubscriptionEventListener() {
+
+            }
+        });
+
+        channel.bind("driver-order-confirm-event", new SubscriptionEventListener() {
+
+
+            @Override
+            public void onEvent(String channelName, String eventName, final String data) {
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onEvent(String channelName, String eventName, final String data) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
+                    public void run() {
 
-                                JSONObject driverInfo;
-                                int OrderId = 0;
+                        JSONObject driverInfo;
+                        int OrderId = 0;
 
-                                try {
-                                    driverInfo = new JSONObject(data);
-                                    OrderId = driverInfo.getInt("order_id");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                        try {
+                            driverInfo = new JSONObject(data);
+                            OrderId = driverInfo.getInt("order_id");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
 
-                                Toast.makeText(getApplicationContext()," Order confirm By driver ",Toast.LENGTH_LONG).show();
-                                Intent homePageIntent = new Intent(OrderSubmitComplete.this,FoodApp.class);
-                                if(OrderId != 0) {
+                        Toast.makeText(getApplicationContext()," Order confirm By driver ",Toast.LENGTH_LONG).show();
+                        Intent homePageIntent = new Intent(OrderSubmitComplete.this,FoodApp.class);
+                        if(OrderId != 0) {
 
-                                    homePageIntent.putExtra("order_id",String.valueOf(OrderId));
-                                }
-                                homePageIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
-                                startActivity(homePageIntent);
+                            homePageIntent.putExtra("order_id",String.valueOf(OrderId));
+                        }
+                        homePageIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                        startActivity(homePageIntent);
 
-
-                            }
-                        });
 
                     }
                 });
 
             }
         });
+
 
 
 

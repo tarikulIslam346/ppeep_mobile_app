@@ -2,12 +2,9 @@ package com.example.ppeepfinal;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.os.Handler;
-//import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -15,27 +12,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.MyLocation;
 import com.example.ppeepfinal.utilities.NetworkUtils;
-import com.facebook.accountkit.AccessToken;
+
 import com.facebook.accountkit.Account;
 import com.facebook.accountkit.AccountKit;
 import com.facebook.accountkit.AccountKitCallback;
 import com.facebook.accountkit.AccountKitError;
-
 import com.facebook.accountkit.AccountKitLoginResult;
 import com.facebook.accountkit.PhoneNumber;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
 import java.net.URL;
+
+//import android.support.v7.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String mRECEIVE_SMS = Manifest.permission.RECEIVE_SMS;
     private static final int SMS_PERMISSION_REQUEST_CODE = 1234;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
        // service = APIClient.createService(ApiService.class);
         MyLocation myLocation = new MyLocation(MainActivity.this);
         mdb = UserDatabase.getInstance(getApplicationContext());
+
 
 
         LetsGoEnter = (Button) findViewById(R.id.enterletGo);
@@ -85,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
                         AccountKitActivity.ResponseType.TOKEN);
                         // or .ResponseType.CODE
                         // ... perform additional configuration ...
-
-        getSmsPermission();
         configurationBuilder.setReadPhoneStateEnabled(true);
 
         
@@ -112,11 +109,13 @@ public class MainActivity extends AppCompatActivity {
                 toastMessage = "Login Cancelled";
             } else {
                 if (loginResult.getAccessToken() != null) {
-                    toastMessage = "Success:" + loginResult.getAccessToken().getAccountId();
+                    //toastMessage = "Success:" + loginResult.getAccessToken().getAccountId();
+                    toastMessage = "Success " ;
                 } else {
-                    toastMessage = String.format(
+                    /*toastMessage = String.format(
                             "Success:%s...",
-                            loginResult.getAuthorizationCode().substring(0,10));
+                            loginResult.getAuthorizationCode().substring(0,10));*/
+                    toastMessage = "Success " ;
                 }
                 goToProfileInActivity();
                 
@@ -201,26 +200,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void getSmsPermission(){
-        Log.d(TAG, "getSmsPermission: getting sms permissions");
-        String[] permissions = {Manifest.permission.READ_SMS,
-                Manifest.permission.RECEIVE_SMS};
 
-        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                mREAD_SMS) == PackageManager.PERMISSION_GRANTED){
-            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                    mRECEIVE_SMS) == PackageManager.PERMISSION_GRANTED){
-                //onActivityResult();
-            }else{
-                ActivityCompat.requestPermissions(this,
-                        permissions,
-                        SMS_PERMISSION_REQUEST_CODE);
-            }
-        }else{
-            ActivityCompat.requestPermissions(this,
-                    permissions,
-                    SMS_PERMISSION_REQUEST_CODE);
-        }
-    }
 
 }
