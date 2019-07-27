@@ -29,7 +29,7 @@ public class CurrentOrderHistory extends AppCompatActivity {
 
     String OrderId;
     TextView mOredrRestaurantName,mOrderrestaurnatAddress,mCustomerName,mCustomerPhoneNo,mDeliveryAddress,mSubTotal,mDeliveryCharge,mVat,mTotal,mDiscount,mOrderStatus;
-    Button mDriverConfirm,mOrderDeliver;
+    Button mDriverConfirm,mOrderDeliver,mGoBack;
     TableLayout stk;
     ProgressDialog dialog;
 
@@ -42,6 +42,8 @@ public class CurrentOrderHistory extends AppCompatActivity {
         setContentView(R.layout.activity_current_order_history);
 
         mOrderStatus = (TextView) findViewById(R.id.tv_order_status);
+
+        mGoBack = (Button) findViewById(R.id.btn_go_back_home);
 
 
         mOredrRestaurantName = (TextView) findViewById(R.id.tv_order_restaurant_name);
@@ -103,6 +105,13 @@ public class CurrentOrderHistory extends AppCompatActivity {
 
 
         stk = (TableLayout) findViewById(R.id.table_of_item);
+
+        mGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
     public void ShowLoder(String message){
