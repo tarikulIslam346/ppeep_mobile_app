@@ -62,6 +62,8 @@ public class NetworkUtils {
 
     final static  String CURRENT_ORDER_HISTORY = "https://foodexpress.com.bd/ppeep/public/api/api/order/current";
 
+    final static  String ALL_ORDER_HISTORY = "https://foodexpress.com.bd/ppeep/public/api/api/order/all";
+
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
     final static String sortBy = "stars";*/
@@ -277,6 +279,17 @@ public class NetworkUtils {
 
     public static URL buildCurrentOrderInfoUrl() {
         Uri builtUri = Uri.parse(CURRENT_ORDER_HISTORY).buildUpon().build();
+        URL orderCurrentInfoUrl = null;
+        try {
+            orderCurrentInfoUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return orderCurrentInfoUrl;
+    }
+
+    public static URL buildAllOrderInfoUrl() {
+        Uri builtUri = Uri.parse(ALL_ORDER_HISTORY).buildUpon().build();
         URL orderCurrentInfoUrl = null;
         try {
             orderCurrentInfoUrl = new URL(builtUri.toString());
