@@ -76,9 +76,8 @@ public class SearchRestaurant extends AppCompatActivity {
         });
 
 
-       /* Intent intent = getIntent();
-        search = intent.getStringExtra("search");
-        searchPageResult.setText("Search result for : "+search);*/
+        mListOfRestaurant = (RecyclerView) findViewById(R.id.rv_search_restaurant);
+        URL restaurantSearchListUrl = NetworkUtils.buildSearchRestaurantUrl();
 
         mdb = UserDatabase.getInstance(getApplicationContext());
 
@@ -89,6 +88,10 @@ public class SearchRestaurant extends AppCompatActivity {
         address = intentAddressData.getStringExtra("address");
         lat = intentAddressData.getStringExtra("lat");
         lng = intentAddressData.getStringExtra("lng");
+
+        Intent intent = getIntent();
+        search = intent.getStringExtra("search");
+
 
         if(address != null &&  lat !=null && lng != null){
             int Id = user.get(0).getId();
@@ -105,12 +108,17 @@ public class SearchRestaurant extends AppCompatActivity {
                 mAddress.setText(user.get(0).getAddress());
                 lat = String.valueOf(user.get(0).getLat());
                 lng = String.valueOf(user.get(0).getLng());
-               Toast.makeText(getApplicationContext(),""+lat,Toast.LENGTH_LONG).show();
+               //Toast.makeText(getApplicationContext(),""+lat,Toast.LENGTH_LONG).show();
             }
         }
 
-        mListOfRestaurant = (RecyclerView) findViewById(R.id.rv_search_restaurant);
-        URL restaurantSearchListUrl = NetworkUtils.buildSearchRestaurantUrl();
+        if( search != null){
+            searchText = search;
+            mProgressbar.setVisibility(View.VISIBLE);
+            new SearchRestaurant.RestaurantListTask().execute(restaurantSearchListUrl);
+        }
+
+
 
         restaurantSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
@@ -226,11 +234,11 @@ public class SearchRestaurant extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 mProgressbar.setVisibility(View.INVISIBLE);
-                /*ViewGroup.LayoutParams layoutParams = mProgressbar.getLayoutParams();
+                ViewGroup.LayoutParams layoutParams = mProgressbar.getLayoutParams();
 
                 layoutParams.height = 0;
                 layoutParams.width = 0;
-                mProgressbar.setLayoutParams(layoutParams);*/
+                mProgressbar.setLayoutParams(layoutParams);
                 if(message==null){
                     searchPageResult.setVisibility(View.VISIBLE);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());

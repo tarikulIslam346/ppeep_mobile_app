@@ -30,9 +30,9 @@ public class FCMMessasingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
         super.onMessageReceived(remoteMessage);
-        mdb = UserDatabase.getInstance(getApplicationContext());
+        /*mdb = UserDatabase.getInstance(getApplicationContext());
         OrderMerchantModel orderMerchantModel = new OrderMerchantModel(7,"AR fantasia",40,100);
-        mdb.orderMercahntDAO().insertOrderMerchant(orderMerchantModel);
+        mdb.orderMercahntDAO().insertOrderMerchant(orderMerchantModel);*/
         // ...
 
         // TODO(developer): Handle FCM messages here.
@@ -67,8 +67,8 @@ public class FCMMessasingService extends FirebaseMessagingService {
             NotificationManager mNotificationManager = (NotificationManager)
                     this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-            String CHANNEL_ID = "FCM_channel_01";
-            CharSequence name = "Channel fCM";
+            String CHANNEL_ID = "FCM_channel_007";
+            CharSequence name = "Channel MyChannel";
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 int importance = NotificationManager.IMPORTANCE_DEFAULT;
                 NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);

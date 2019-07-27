@@ -1,8 +1,16 @@
 package com.example.ppeepfinal;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Animatable;
 //import android.support.v7.app.AppCompatActivity;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +23,8 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
@@ -33,6 +43,8 @@ import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.List;
+
+import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
 
 
 public class OrderSubmitComplete extends AppCompatActivity {
@@ -129,6 +141,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        addNotification("Your order has been accepted");
 
                                 Toast.makeText(getApplicationContext()," Order confirm : ",Toast.LENGTH_LONG).show();
                         if(imageUrl != null){
@@ -175,6 +188,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
                         Toast.makeText(getApplicationContext()," Order confirm By driver ",Toast.LENGTH_LONG).show();
                         Intent homePageIntent = new Intent(OrderSubmitComplete.this,FoodApp.class);
                         if(OrderId != 0) {
+                            addNotification("Your order has been confirmed");
 
                             homePageIntent.putExtra("order_id",String.valueOf(OrderId));
                         }
@@ -230,6 +244,42 @@ public class OrderSubmitComplete extends AppCompatActivity {
         super.onDestroy();
 
 
+
+    }
+    private void addNotification(String text) {
+        Intent it = new Intent(this, HomePage.class);
+        // Snackbar.make(R.id.layout_home_page),"Order_has",Snackbar.LENGTH_INDEFINITE).show();
+        PendingIntent contentIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), it, 0);
+        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        int ico_notification = R.drawable.ic_account_circle_black_24dp;
+        int color = ContextCompat.getColor(getApplicationContext(), R.color.colorAccent);
+
+        NotificationManager mNotificationManager = (NotificationManager)
+                this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        String CHANNEL_ID = "orderconfirm_channel";
+        CharSequence name = "Channel Order";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            mNotificationManager.createNotificationChannel(mChannel);
+        }
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this,CHANNEL_ID)
+                        .setSmallIcon(ico_notification)
+                        .setContentTitle(getString(R.string.app_name))
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText(text))
+                        .setSound(soundUri)
+                        .setColor(color)
+                        .setAutoCancel(true)
+                        .setVibrate(new long[]{1000, 1000})
+                        .setContentText(text);
+
+        mBuilder.setContentIntent(contentIntent);
+        Notification notification = mBuilder.build();
+
+        mNotificationManager.notify(0, notification);
 
     }
 

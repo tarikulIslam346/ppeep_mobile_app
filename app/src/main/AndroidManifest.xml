@@ -42,9 +42,8 @@
 
 
 
-        <activity android:name=".CuisineSearchFragment"></activity>
         <activity android:name=".UserAutoCompleteAdress"></activity>
->>>>>>> 77177c629664285e7288bebd94984c0409470bf7
+
         <activity android:name=".OrderOnGoingList" />
         <activity android:name=".CurrentOrderHistory" />
         <activity android:name=".FriendHistoryDetails" />

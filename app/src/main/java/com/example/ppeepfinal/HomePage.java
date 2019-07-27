@@ -96,7 +96,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         setUserLocation();
 
 
-        FirebaseInstanceId.getInstance().getInstanceId()
+       /* FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
@@ -113,7 +113,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                         Log.d(TAG, "Token "+ token);
                        // Toast.makeText(HomePage.this,"Token : "+token, Toast.LENGTH_LONG).show();
                     }
-                });
+                });*/
         List<OrderMerchantModel> orderMerchantModels =  mdb.orderMercahntDAO().loadOrderMerchant();
         if(orderMerchantModels.size() != 0){
             Toast.makeText(HomePage.this,""+orderMerchantModels.get(orderMerchantModels.size()-1).getMerchantName(),Toast.LENGTH_LONG).show();
