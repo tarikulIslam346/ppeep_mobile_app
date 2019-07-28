@@ -203,6 +203,14 @@ public class FragmentGroup extends Fragment {
                         allTotalPoint.add(total_point);
                     }
 
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    friendList = new JSONObject(json);
+
                     jsonArrayOfTotalPoint = friendList.getJSONArray("total_earn_of_user");
                     for (int i=0; i<jsonArrayOfTotalPoint.length(); i++) {
 
@@ -217,6 +225,7 @@ public class FragmentGroup extends Fragment {
                 }
 
 
+
                 mProgressbar.setVisibility(View.INVISIBLE);
 
                 ViewGroup.LayoutParams layoutParams = mProgressbar.getLayoutParams();
@@ -227,10 +236,7 @@ public class FragmentGroup extends Fragment {
 
                 mProgressbar.setLayoutParams(layoutParams);
 
-                if(jsonArray.length() == 0 ){
-                   // Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
-                }else{
 
                     mGropuMemberNo.setText(String.valueOf(jsonArray.length()));
 
@@ -245,7 +251,7 @@ public class FragmentGroup extends Fragment {
                     mfragmentGroupAdapter = new FragmentGroupAdapter(allNames,allTotalPoint, this);
 
                     mListOfFriend.setAdapter(mfragmentGroupAdapter);
-                }
+
 
 
 
