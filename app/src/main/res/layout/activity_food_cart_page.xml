@@ -293,7 +293,43 @@
                     android:text="Taka"/>
             </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Use Point"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="10dp"
+                />
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center">
+            <CheckBox
+                android:id="@+id/pointcheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerHorizontal="true" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/userEmailTextInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/userEmailTextInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Max point use per order 50" />
+            </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

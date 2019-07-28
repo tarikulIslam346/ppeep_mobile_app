@@ -100,25 +100,25 @@ public class FragmentHome extends Fragment {
             }
         });
 
-        facebookCardView=v.findViewById(R.id.facebookCardView);
+     //   facebookCardView=v.findViewById(R.id.facebookCardView);
 
 
 
 
-        facebookCardView.setOnClickListener(new View.OnClickListener() {
+      /*  facebookCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                goToFacebook();
-/*
+*//*
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/P-PEEP-503500450179099/"));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setPackage("com.facebook.katana");
-                startActivity(intent);*/
+                startActivity(intent);*//*
             }
-        });
+        });*/
 
-       youtubeCardView=v.findViewById(R.id.youtubeCardView);
+   /*    youtubeCardView=v.findViewById(R.id.youtubeCardView);
 
 
 
@@ -135,7 +135,7 @@ public class FragmentHome extends Fragment {
                 startActivity(intent);
             }
         });
-
+*/
 
 
 

@@ -57,6 +57,7 @@ android:layout_alignParentBottom="true"
 
             app:bubbleTab_image2="@drawable/groupicon2"
             app:bubbleTab_image3="@drawable/notificationicon"
+            app:bubbleTab_image4="@drawable/youtubeicon2"
 
             />
 

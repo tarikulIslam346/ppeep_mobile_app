@@ -7,7 +7,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,10 +29,10 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="120dp"
             android:layout_height="130dp"
-            android:backgroundTint="#EED68D"
+            android:backgroundTint="#FAF9F8"
             app:cardCornerRadius="15dp"
             android:layout_margin="4dp"
-            android:elevation="40dp"
+            android:elevation="8dp"
 
 
             android:id="@+id/ppeepfoodCard">
@@ -75,10 +75,11 @@
             android:id="@+id/ppeepStoreCardView"
             android:layout_width="120dp"
             android:layout_height="130dp"
-            android:backgroundTint="#64C0B7"
+            android:backgroundTint="#F8FAFA"
             app:cardCornerRadius="15dp"
             android:layout_margin="4dp"
-            android:elevation="40dp">
+            android:clipToPadding="false"
+            android:elevation="8dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -118,10 +119,10 @@
             android:id="@+id/ppeepRideCardView"
             android:layout_width="120dp"
             android:layout_height="130dp"
-            android:backgroundTint="#63AAE2"
+            android:backgroundTint="#FAFBFC"
             app:cardCornerRadius="15dp"
             android:layout_margin="4dp"
-            android:elevation="40dp">
+            android:elevation="5dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -160,13 +161,13 @@
 
     </LinearLayout>
 
-    <LinearLayout
+  <!--  <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="15dp"
         android:orientation="horizontal">
-        <com.google.android.material.card.MaterialCardView
+      &lt;!&ndash;  <com.google.android.material.card.MaterialCardView
             android:id="@+id/facebookCardView"
             android:layout_width="120dp"
             android:layout_height="140dp"
@@ -203,7 +204,7 @@
 
             </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>&ndash;&gt;
 
 
         <com.google.android.material.card.MaterialCardView
@@ -243,7 +244,7 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
+    </LinearLayout>-->
     </LinearLayout>
     </ScrollView>
 

@@ -1,5 +1,7 @@
 package com.example.ppeepfinal;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 /*import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,22 +9,17 @@ import android.support.v4.app.Fragment;*/
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import com.example.ppeepfinal.data.UserDatabase;
-import com.example.ppeepfinal.data.UserModel;
-import com.smarteist.autoimageslider.DefaultSliderView;
+import com.google.android.material.card.MaterialCardView;
 import com.smarteist.autoimageslider.SliderLayout;
-import com.smarteist.autoimageslider.SliderView;
-
-import java.util.List;
 
 
 public class FragmentMyProfile extends Fragment {
@@ -31,8 +28,9 @@ public class FragmentMyProfile extends Fragment {
     SliderLayout sliderLayout;
     TextView myProfileName,myPhoneNo;
     CircleImageView circleImageView;
-
+    ViewPager viewPager;
     private UserDatabase mdb;
+    MaterialCardView youtubeCardView;
 
     public FragmentMyProfile() { }
 
@@ -40,19 +38,45 @@ public class FragmentMyProfile extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-      v=inflater.inflate(R.layout.test_home_layout,container,false);
+      v=inflater.inflate(R.layout.myprofile_fragment,container,false);
 
 
 
-        sliderLayout = v.findViewById(R.id.imageSlider);
+        youtubeCardView=v.findViewById(R.id.youtubeCardView);
 
-        sliderLayout.setScrollTimeInSec(3); //set scroll delay in seconds :
 
-        setSliderViews();
+
+
+        youtubeCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/channel/UC2sv1y9olthPN5ewdr7TQ5g/"));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setPackage("com.google.android.youtube");
+                startActivity(intent);
+            }
+        });
+
+        //   sliderLayout = v.findViewById(R.id.imageSlider);
+
+      //  sliderLayout.setScrollTimeInSec(3); //set scroll delay in seconds :
+
+        //setSliderViews();
       return v;
 
     }
-    private void setSliderViews() {
+
+
+
+
+
+
+
+
+   /* private void setSliderViews() {
 
         for (int i = 0; i <= 4; i++) {
 
@@ -97,5 +121,5 @@ public class FragmentMyProfile extends Fragment {
         }
 
 
-    }
+    }*/
 }
