@@ -400,7 +400,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
                 JSONArray jsonArray ;
 
-                String fname = null,lname=null,profilePic = null,contact = null;
+                String fname = null,lname=null,profilePic = null,contact = null,orderId=null;
 
 
                 try {
@@ -420,26 +420,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
                         //Menus.add(menu);
                     }
-
-                    if(fname != null){
-                        List<OrderModel> orders = foodCartPageAdapter.getmOrders();
-                        if(orders.size()!=0){
-                            for(int i =0;i<orders.size();i++) mdb.orderDAO().deleteOrder(orders.get(i));
-                        }
-                        List<OrderMerchantModel> om = mdb.orderMercahntDAO().loadOrderMerchant();
-                        mdb.orderMercahntDAO().deleteOrderMerchant(om.get(0));
-
-                        Intent orderSubmitIntent = new Intent(getApplicationContext(),OrderSubmitComplete.class);
-                        orderSubmitIntent.putExtra("driver_name",fname+" "+lname);
-                        orderSubmitIntent.putExtra("profile_pic",profilePic);
-                        orderSubmitIntent.putExtra("contact",contact);
-                        startActivity(orderSubmitIntent);
-                    }
-
-
-
-
-
+                    orderId = driverINfo.getString("order_data");
 
 
                     /*mProgressbar.setVisibility(View.INVISIBLE);// set progressbar to invisible
@@ -451,6 +432,22 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }
+
+                if(fname != null){
+                    List<OrderModel> orders = foodCartPageAdapter.getmOrders();
+                    if(orders.size()!=0){
+                        for(int i =0;i<orders.size();i++) mdb.orderDAO().deleteOrder(orders.get(i));
+                    }
+                    List<OrderMerchantModel> om = mdb.orderMercahntDAO().loadOrderMerchant();
+                    mdb.orderMercahntDAO().deleteOrderMerchant(om.get(0));
+
+                    Intent orderSubmitIntent = new Intent(getApplicationContext(),OrderSubmitComplete.class);
+                    orderSubmitIntent.putExtra("driver_name",fname+" "+lname);
+                    orderSubmitIntent.putExtra("profile_pic",profilePic);
+                    orderSubmitIntent.putExtra("contact",contact);
+                    if(orderId!=null)orderSubmitIntent.putExtra("orderId",orderId);
+                    startActivity(orderSubmitIntent);
                 }
                 //  mSearchResultsTextView.setText(allNames.get(8));
             }else{

@@ -15,14 +15,67 @@
         android:theme="@style/AppTheme2"
         android:id="@+id/foodtoolbar"
         android:background="@drawable/toolbarbg" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:id="@+id/historyRecycleID">
+    <TableLayout
+        android:id="@+id/table_of_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1,2,3"
+        android:gravity="center">
 
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_margin="1dp"
+            android:textAlignment="center"
+            android:textDirection="firstStrong"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=" Order No"
+                android:layout_margin="1dp"
+                android:layout_column="0"
+                android:background="#5DE26A"
+                android:textStyle="bold"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Order Price"
+                android:layout_margin="1dp"
+                android:layout_column="1"
+                android:background="#5DE26A"
+                android:gravity="center"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Order date"
+                android:layout_margin="1dp"
+                android:layout_column="1"
+                android:background="#5DE26A"
+                android:gravity="center"
+                android:textStyle="bold"
+                />
+
+
+        </TableRow>
+
+
+    </TableLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -42,7 +42,6 @@
 
 
 
-        <activity android:name=".CuisineSearchFragment"></activity>
         <activity android:name=".UserAutoCompleteAdress"></activity>
 
         <activity android:name=".OrderOnGoingList" />

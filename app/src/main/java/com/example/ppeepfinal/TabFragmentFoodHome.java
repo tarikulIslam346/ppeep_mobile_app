@@ -43,6 +43,7 @@ import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.smarteist.autoimageslider.DefaultSliderView;
 import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
@@ -71,6 +72,7 @@ public class TabFragmentFoodHome extends Fragment {
     CardView cardViewForSearchChiniseCusine,cardViewForSearchCFastFoodCusine,cardViewForSearchBanglaCusine,cardViewForBakeryCusine;
 
     List<String>imgUrl;
+    String lat,lng;
 
    // ProgressBar progressBar;
 
@@ -137,6 +139,8 @@ public class TabFragmentFoodHome extends Fragment {
 
 
 
+
+
         mViewAll.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
@@ -147,10 +151,10 @@ public class TabFragmentFoodHome extends Fragment {
         cardViewForSearchChiniseCusine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-               /* Intent intent = new Intent(getContext(),SearchRestaurant.class);
+                Intent intent = new Intent(getContext(),SearchRestaurant.class);
                 intent.putExtra("search","Chinese");
-                startActivity(intent);*/
-                replaceFragment();
+                startActivity(intent);
+                //replaceFragment();
 
             }
         });
@@ -194,7 +198,17 @@ public class TabFragmentFoodHome extends Fragment {
         new RestaurantListOfferTask().execute(offerListUrl);
 
         URL restaurantUrl = NetworkUtils.buildRecommendedRestaurantUrl();
-        new RestaurantListTask().execute(restaurantUrl);
+
+        if(user.size() !=0){
+             Toast.makeText(getContext()," " + String.valueOf(user.get(0).getLat()), Toast.LENGTH_LONG).show();
+            lat  = String.valueOf(user.get(0).getLat());
+            lng = String.valueOf(user.get(0).getLng());
+            new RestaurantListTask().execute(restaurantUrl);
+
+        }
+
+
+        //new RestaurantListTask().execute(restaurantUrl);
 
 
         return v;
@@ -327,7 +341,7 @@ public class TabFragmentFoodHome extends Fragment {
             URL searchUrl = params[0];
             String RestaurantResults = null;
             try {
-                RestaurantResults = NetworkUtils.getRecommendedRestaurantFromHttpUrl(searchUrl);
+                RestaurantResults = NetworkUtils.getNearByRestaurantFromHttpUrl(searchUrl,lat,lng);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -345,7 +359,7 @@ public class TabFragmentFoodHome extends Fragment {
                 JSONObject restaurantList = null;
                 JSONArray jsonArray=null;
 
-                String name,closingTime,openingTime,cusine;
+                String name,closingTime,openingTime,cusine,message=null;
                 int vatOfRestaurant,deliverChargeOfRestaurant;
                 int merchantId;
 
@@ -376,16 +390,39 @@ public class TabFragmentFoodHome extends Fragment {
                     e.printStackTrace();
                 }
 
+                try {
+                    restaurantList = new JSONObject(json);
+                    message = restaurantList.getString("message");
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 dialog.dismiss();
+                if(message != null ){
+                    Snackbar.make(v.findViewById(R.id.tab_offer_container), " "+message, Snackbar.LENGTH_INDEFINITE)
+                            .setAction("CLOSE", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
 
-                LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL,true);
-                mNumberOfRestaurant.setLayoutManager(layoutManager);
+                                }
+                            })
+                            .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
+                            .show();
+                }
 
-                mNumberOfRestaurant.setHasFixedSize(true);
+                if(jsonArray!= null) {
 
-                recommandedRestaurantListAdapter = new RecommandedRestaurantListAdapter(allNames,OpeningTimes,ClosingTimes,Cusines,  this);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext(), LinearLayoutManager.HORIZONTAL, true);
+                    mNumberOfRestaurant.setLayoutManager(layoutManager);
 
-                mNumberOfRestaurant.setAdapter(recommandedRestaurantListAdapter);
+                    mNumberOfRestaurant.setHasFixedSize(true);
+
+                    recommandedRestaurantListAdapter = new RecommandedRestaurantListAdapter(allNames, OpeningTimes, ClosingTimes, Cusines, this);
+
+                    mNumberOfRestaurant.setAdapter(recommandedRestaurantListAdapter);
+                }
 
 
             }else{
@@ -506,7 +543,7 @@ public class TabFragmentFoodHome extends Fragment {
 
 
 
-    public void replaceFragment() {
+    //public void replaceFragment() {
        /* TabFragmentRecommended fragmentHome = new TabFragmentRecommended();
         fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -514,17 +551,17 @@ public class TabFragmentFoodHome extends Fragment {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();*/
 
-        CuisineSearchFragment fragment = new CuisineSearchFragment();
+       /* CuisineSearchFragment fragment = new CuisineSearchFragment();
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.tab_offer_container, fragment);
 
 
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
 
 /*
    getFragmentManager().beginTransaction().replace(R.id.food_app_layout, new CuisineSearchFragment()).addToBackStack(null).commit();
 */
-        }
+       /* }*/
     }
 
 
