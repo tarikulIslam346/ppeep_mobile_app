@@ -245,6 +245,125 @@
 
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:gravity="center"
+            android:layout_margin="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+            <ImageView
+                android:id="@+id/home_icon"
+                android:layout_width="80dp"
+                android:layout_height="90dp"
+  android:padding="20dp"
+                android:src="@drawable/home_icon"
+                android:background="@drawable/friendlist_icon_bg" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/friendlist_name_bg"
+                android:layout_toRightOf="@+id/home_icon"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:paddingRight="16dp"
+                    android:text="Home" />
+
+                <TextView
+
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="12sp"
+
+                    android:paddingRight="6dp"
+                    android:text="Uttara,Dhaka-1230" />
+
+
+            </LinearLayout>
+
+    </LinearLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:gravity="center"
+            android:layout_margin="4dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+            <ImageView
+                android:id="@+id/work_icon"
+                android:layout_width="80dp"
+                android:layout_height="90dp"
+                android:background="@drawable/friendlist_icon_bg"
+                android:padding="20dp"
+                android:src="@drawable/workicon" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/friendlist_name_bg"
+                android:layout_toRightOf="@+id/work_icon"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:paddingRight="16dp"
+                    android:text="Work" />
+
+                <TextView
+
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="12sp"
+
+                    android:paddingRight="6dp"
+                    android:text="1c, Monalee tower,Shahjadpur,gulshan, dhaka-1212" />
+
+
+            </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+
     </LinearLayout>
     </ScrollView>
 

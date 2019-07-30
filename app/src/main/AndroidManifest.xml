@@ -94,8 +94,10 @@
         <activity android:name="com.facebook.accountkit.ui.AccountKitActivity" />
         <activity
             android:name=".HomePage"
-            android:label="@string/pPeep"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme2.NoActionBar"
+
+
+         />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

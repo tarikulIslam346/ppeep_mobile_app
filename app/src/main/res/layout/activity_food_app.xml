@@ -10,18 +10,20 @@
 
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        app:title="PPEEP FOOD"
-        android:gravity="center"
-        android:theme="@style/AppTheme2"
-        android:id="@+id/foodtoolbar"
-
-        android:background="@color/colorPrimary">
 
 
-    </androidx.appcompat.widget.Toolbar>
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            app:title="P-PEEP"
+            android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+            app:popupTheme="@style/Theme.AppCompat.Light"
+            android:id="@+id/foodapptoolbar"
+            android:elevation="10dp"
+            />
+
+
+
 
 <LinearLayout
     android:layout_width="match_parent"

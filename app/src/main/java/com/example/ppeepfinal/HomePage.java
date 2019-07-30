@@ -30,6 +30,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -74,6 +75,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     TextView navUsername;
     View headerView;
     private double lat,lng;
+    Toolbar myToolbar;
 
     private UserDatabase mdb;// declear databse
 
@@ -136,15 +138,20 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         mDrawerLayout = findViewById(R.id.drawerId);
 
+        Toolbar myToolbar= (Toolbar) findViewById(R.id.ppeeptoolbar);
+        // TextView mTitle = (TextView) findViewById(R.id.toolbar_title);
+        setSupportActionBar(myToolbar);
+
 
 
         mToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.nav_open,R.string.nav_close);
 
         mDrawerLayout.addDrawerListener(mToggle);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
 
 
@@ -194,6 +201,14 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         if(user.size()!=0) {navUsername.setText(user.get(0).getName());}
     }
+/*    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }*/
 
 
  @Override

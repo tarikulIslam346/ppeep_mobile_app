@@ -46,7 +46,7 @@ Menu foodCart;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_app);
-        foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
+        foodToolbar = (Toolbar) findViewById(R.id.foodapptoolbar);
         setSupportActionBar(foodToolbar);
 /*
         getSupportFragmentManager().beginTransaction().replace(R.id.food_app_layout, new CuisineSearchFragment()).addToBackStack(null).commit();
