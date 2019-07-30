@@ -28,6 +28,7 @@
 
 
     //Here is your X api key
-    <string name="xApiKey">ru7KPUg2Wj17lRGdT1mTn9fCbYYSI2Ojaop8iwB5</string>
+    <string name="xApiKey">CxNizTHrVpKosZGRqZdZ41BpMPuktNJ2W52nyBn6</string>
+    <string name="banner_text">A restaurant is a place where cooked food is sold to the public, and where people sit down to eat it. It is also a place where people go to enjoy the time and to eat a meal. Some restaurants are a chain, meaning that there are restaurants which have the same name and serve the same food.</string>
 
 </resources>

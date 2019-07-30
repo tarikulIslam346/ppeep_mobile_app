@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;*/
+import android.graphics.Color;
 import android.location.Location;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SlidingDrawer;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,7 +64,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
+public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener   {
 
     DrawerLayout mDrawerLayout;
 
@@ -83,6 +85,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     ProgressDialog dialog;
     private static final String TAG = "HomePage";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -98,7 +101,9 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         setUserLocation();
 
 
-       /* FirebaseInstanceId.getInstance().getInstanceId()
+
+
+        FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
@@ -115,11 +120,9 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                         Log.d(TAG, "Token "+ token);
                        // Toast.makeText(HomePage.this,"Token : "+token, Toast.LENGTH_LONG).show();
                     }
-                });*/
-        List<OrderMerchantModel> orderMerchantModels =  mdb.orderMercahntDAO().loadOrderMerchant();
-        if(orderMerchantModels.size() != 0){
-            Toast.makeText(HomePage.this,""+orderMerchantModels.get(orderMerchantModels.size()-1).getMerchantName(),Toast.LENGTH_LONG).show();
-        }
+                });
+
+
 
 
 
@@ -264,7 +267,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
                 lat = location.getLatitude();
                 lng = location.getLongitude();
-                ShowLoder("Loading..");
+                //ShowLoder("Loading..");
                 VolleyRequest volleyRequest = new VolleyRequest(HomePage.this);
                 volleyRequest.VolleyGet(Api.reverseGeo + "demo?lat=" + lat + "&lng=" + lng + "&address_level=UPTO_THANA");
                 volleyRequest.setListener(new VolleyRequest.MyServerListener() {
@@ -273,7 +276,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
                         try {
                             String address = response.getJSONObject("result").getString("address");
-                            dialog.dismiss();
+                           // dialog.dismiss();
                             if(user.size()!=0){
                                 int Id = user.get(0).getId();
                                 UserModel updateUser = mdb.userDAO().loadUserById(Id);
