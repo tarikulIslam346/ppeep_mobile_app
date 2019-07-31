@@ -18,6 +18,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +44,7 @@ import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.Api;
 import com.example.ppeepfinal.utilities.MyLocation;
+import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.example.ppeepfinal.utilities.VolleyRequest;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -60,8 +62,12 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener   {
@@ -83,7 +89,9 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
     List<UserModel> user;
     ProgressDialog dialog;
+    String phoneNo,fcm=null;
     private static final String TAG = "HomePage";
+
 
 
     @Override
@@ -114,6 +122,10 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
                         // Get new Instance ID token
                         String token = task.getResult().getToken();
+                        fcm = token;
+                        URL fcmUrl = NetworkUtils.buildUpdateUserFCMInfoUrl();
+                        new UpdateFcmTask().execute(fcmUrl);
+
 
                         // Log and toast
                        // String msg = getString(R.string.msg_token_fmt, token);
@@ -169,8 +181,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         adapter.AddFragment(new FragmentGroup(),"My Group");
 
-        //  adapter.AddFragment(new FragmentNotification() ,"Promotion");
-
         adapter.AddFragment(new FragmentNotification(),"Notification");
 
         adapter.AddFragment(new FragmentMyProfile(),"My Profile");
@@ -202,7 +212,10 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         List<UserModel> user =  mdb.userDAO().loadPhone();//select all data form room database user table
 
-        if(user.size()!=0) {navUsername.setText(user.get(0).getName());}
+        if(user.size()!=0) {
+            navUsername.setText(user.get(0).getName());
+            phoneNo = user.get(0).getPhone();
+        }
     }
 /*    @Override
     public void onBackPressed() {
@@ -267,7 +280,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
                 lat = location.getLatitude();
                 lng = location.getLongitude();
-                //ShowLoder("Loading..");
+                ShowLoder("Update Location .....");
+                URL userCurrentLocationUrl = NetworkUtils.buildUpdateUserLocationInfoUrl();
+                new UpdateLocationTask().execute(userCurrentLocationUrl);
+
+
                 VolleyRequest volleyRequest = new VolleyRequest(HomePage.this);
                 volleyRequest.VolleyGet(Api.reverseGeo + "demo?lat=" + lat + "&lng=" + lng + "&address_level=UPTO_THANA");
                 volleyRequest.setListener(new VolleyRequest.MyServerListener() {
@@ -276,7 +293,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
                         try {
                             String address = response.getJSONObject("result").getString("address");
-                           // dialog.dismiss();
+                           dialog.dismiss();
                             if(user.size()!=0){
                                 int Id = user.get(0).getId();
                                 UserModel updateUser = mdb.userDAO().loadUserById(Id);
@@ -297,6 +314,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
                     @Override
                     public void onError(String error) {
+                        dialog.dismiss();
                         Toast.makeText(HomePage.this, error, Toast.LENGTH_SHORT).show();
                     }
 
@@ -313,6 +331,102 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
             }
         });
+    }
+
+
+    public class UpdateLocationTask extends AsyncTask<URL, Void, String> {
+
+
+        @Override
+        protected String doInBackground(URL... params) {
+            URL searchUrl = params[0];
+            String updateLocationResults = null;
+            try {
+                updateLocationResults = NetworkUtils.updateUserLocationFromHttpUrl(searchUrl,phoneNo,String.valueOf(lat),String.valueOf(lng));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return updateLocationResults ;
+        }
+
+        @Override
+        protected void onPostExecute(String updateLocationResults) {
+            if (updateLocationResults != null && !updateLocationResults.equals("")) {
+
+                String json = updateLocationResults;
+                JSONObject userLocationUpdate = null;
+                String  message=null,error=null;
+                try {
+                    userLocationUpdate = new JSONObject(json);
+                    message = userLocationUpdate.getString("message");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    userLocationUpdate = new JSONObject(json);
+                    error = userLocationUpdate.getString("error");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(message!=null)Log.d(TAG,message);
+                if(error!=null)Log.d(TAG,error);
+
+
+            }else{
+                dialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Server Not found", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+    public class UpdateFcmTask extends AsyncTask<URL, Void, String> {
+
+
+        @Override
+        protected String doInBackground(URL... params) {
+            URL searchUrl = params[0];
+            String updateFcmResults = null;
+            try {
+                updateFcmResults = NetworkUtils.updateUserFcmFromHttpUrl(searchUrl,phoneNo,fcm);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return updateFcmResults ;
+        }
+
+        @Override
+        protected void onPostExecute(String updateFcmResults) {
+            if (updateFcmResults != null && !updateFcmResults.equals("")) {
+
+                String json = updateFcmResults;
+                JSONObject userLocationUpdate = null;
+                String  message=null,error=null;
+                try {
+                    userLocationUpdate = new JSONObject(json);
+                    message = userLocationUpdate.getString("message");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    userLocationUpdate = new JSONObject(json);
+                    error = userLocationUpdate.getString("error");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(message!=null)Log.d(TAG,message);
+                if(error!=null)Log.d(TAG,error);
+
+
+            }else{
+                //dialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Server Not found", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 
