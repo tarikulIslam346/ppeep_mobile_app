@@ -64,6 +64,10 @@ public class NetworkUtils {
 
     final static  String ALL_ORDER_HISTORY = "https://foodexpress.com.bd/ppeep/public/api/api/order/all";
 
+    final static String UPDATE_USER_LOCATION_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/currentLocation";
+
+    final static String UPDATE_USER_FCM_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/fcmToken";
+
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
     final static String sortBy = "stars";*/
@@ -299,6 +303,28 @@ public class NetworkUtils {
         return orderCurrentInfoUrl;
     }
 
+    public static URL buildUpdateUserLocationInfoUrl() {
+        Uri builtUri = Uri.parse(UPDATE_USER_LOCATION_URL).buildUpon().build();
+        URL updateUserLocationInfoUrl = null;
+        try {
+            updateUserLocationInfoUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return updateUserLocationInfoUrl;
+    }
+
+    public static URL buildUpdateUserFCMInfoUrl() {
+        Uri builtUri = Uri.parse(UPDATE_USER_FCM_URL).buildUpon().build();
+        URL updateUserFcmInfoUrl = null;
+        try {
+            updateUserFcmInfoUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return updateUserFcmInfoUrl;
+    }
+
 
 
 
@@ -344,12 +370,86 @@ public class NetworkUtils {
         }
     }
 
-    public static String getNearByRestaurantFromHttpUrl(URL retauranturl,String lat,String lng) throws IOException {
+    public static String updateUserLocationFromHttpUrl(URL updateUserLocationInfoUrl,String phone,String lat,String lng) throws IOException {
+        HttpURLConnection urlConnection = (HttpURLConnection) updateUserLocationInfoUrl.openConnection();
+
+        urlConnection.setRequestMethod("POST");//use post method
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "contact", phone);
+        param.put( "lat", lat);
+        param.put( "lng", lng);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static String updateUserFcmFromHttpUrl(URL updateUserFcmInfoUrl,String phone,String fcm) throws IOException {
+        HttpURLConnection urlConnection = (HttpURLConnection) updateUserFcmInfoUrl.openConnection();
+
+        urlConnection.setRequestMethod("POST");//use post method
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "contact", phone);
+        param.put( "fcm_token", fcm);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static String getNearByRestaurantFromHttpUrl(URL retauranturl, String lat,String lng) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) retauranturl.openConnection();
 
         urlConnection.setRequestMethod("POST");//use post method
 
         HashMap<String, String> param = new HashMap<String, String>();
+
         param.put( "lat", lat);
         param.put( "lng", lng);
 
