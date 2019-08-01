@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme2"
         android:id="@+id/foodtoolbar"
         android:background="@drawable/toolbarbg" />
-    <ScrollView
+  <!--  <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -76,6 +76,11 @@
 
 
     </TableLayout>
-    </ScrollView>
+    </ScrollView>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/historyrecycle"></androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

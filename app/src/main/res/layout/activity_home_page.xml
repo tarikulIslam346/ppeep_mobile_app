@@ -16,16 +16,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dp">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="55dp"
-app:title="P-PEEP"
+    app:title="P-PEEP"
         android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
         app:popupTheme="@style/Theme.AppCompat.Light"
         android:id="@+id/ppeeptoolbar"
         android:elevation="10dp"
         />
-
+        </com.google.android.material.card.MaterialCardView>
 
     <RelativeLayout
         android:layout_width="match_parent"

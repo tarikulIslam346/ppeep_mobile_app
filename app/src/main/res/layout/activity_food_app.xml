@@ -11,18 +11,23 @@
 
 
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="55dp"
             app:title="P-PEEP"
+            app:titleTextColor="#ffcc00"
             android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
             app:popupTheme="@style/Theme.AppCompat.Light"
             android:id="@+id/foodapptoolbar"
             android:elevation="10dp"
             />
 
-
+    </com.google.android.material.card.MaterialCardView>
 
 
     <com.google.android.material.card.MaterialCardView
@@ -52,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
                 android:layout_margin="10dp"
-                android:maxLength="40"
+
                 android:text="c1, monallee tower, bastola"
                 android:textStyle="bold"
                 android:singleLine="true"
@@ -94,7 +99,13 @@
             app:bubbleTab_image2="@drawable/recommendedicon2"
             app:bubbleTab_image3="@drawable/freedeliveryicon" />
 
-        <com.sothree.slidinguppanel.SlidingUpPanelLayout
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewPagerId">
+
+        </androidx.viewpager.widget.ViewPager>
+      <!--  <com.sothree.slidinguppanel.SlidingUpPanelLayout
             xmlns:sothree="http://schemas.android.com/apk/res-auto"
             android:id="@+id/sliding_layout"
             android:layout_width="match_parent"
@@ -226,10 +237,14 @@
 
 
 
-        </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+        </com.sothree.slidinguppanel.SlidingUpPanelLayout>-->
+
+
 
 
     </LinearLayout>
+    <!-- include bottom sheet -->
+    <include layout="@layout/foodapp_bottom_sheet" />
 
 
 </LinearLayout>

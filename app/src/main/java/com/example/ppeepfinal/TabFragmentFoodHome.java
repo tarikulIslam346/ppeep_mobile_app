@@ -192,7 +192,7 @@ public class TabFragmentFoodHome extends Fragment {
 
       // progressBar.setVisibility(View.VISIBLE);
 
-        ShowLoder("Loading .. ..");
+       ShowLoder("Loading .. ..");
 
         URL offerListUrl = NetworkUtils.buildOfferUrl();
         new RestaurantListOfferTask().execute(offerListUrl);
@@ -399,7 +399,7 @@ public class TabFragmentFoodHome extends Fragment {
                     e.printStackTrace();
                 }
 
-                dialog.dismiss();
+      dialog.dismiss();
                 if(message != null ){
                     Snackbar.make(v.findViewById(R.id.tab_offer_container), " "+message, Snackbar.LENGTH_INDEFINITE)
                             .setAction("CLOSE", new View.OnClickListener() {
@@ -497,7 +497,7 @@ public class TabFragmentFoodHome extends Fragment {
                     e.printStackTrace();
                 }
 
-                dialog.dismiss();
+//                dialog.dismiss();
                 if(OrderId.size()!=0){
                     currentOrder.setVisibility(View.VISIBLE);
                     currentOrder.setOnClickListener(new View.OnClickListener() {
