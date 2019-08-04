@@ -153,7 +153,9 @@ public class ProfileEmailEdit extends AppCompatActivity {
     public void SwithToProfile() {
 
         Intent updateintent = new Intent(getApplicationContext(), ProfileEdit.class);
+        updateintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(updateintent);
+        finish();
 
     }
 }

@@ -7,14 +7,24 @@
     android:orientation="vertical"
     tools:context=".HistoryPage">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        app:title="History"
-        android:gravity="center"
-        android:theme="@style/AppTheme2"
-        android:id="@+id/foodtoolbar"
-        android:background="@drawable/toolbarbg" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:elevation="10dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            app:title="P-PEEP"
+            app:titleTextColor="#ffcc00"
+            android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+            app:popupTheme="@style/Theme.AppCompat.Light"
+            android:id="@+id/foodapptoolbar"
+            android:elevation="10dp"
+            />
+
+    </com.google.android.material.card.MaterialCardView>
   <!--  <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -81,6 +91,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         android:id="@+id/historyrecycle"></androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

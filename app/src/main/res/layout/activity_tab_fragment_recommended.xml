@@ -11,17 +11,27 @@
 
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
     <com.smarteist.autoimageslider.SliderLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginBottom="25dp"
+
         android:id="@+id/FoodAppimageSlider"/>
+
+        </com.google.android.material.card.MaterialCardView>
 
     <GridLayout
         android:layout_width="match_parent"
@@ -195,7 +205,15 @@
         </androidx.cardview.widget.CardView>
     </GridLayout>
 
-
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -249,7 +267,9 @@
             android:orientation="horizontal"
             android:layout_marginBottom="10dp"
             android:scrollbars="vertical|horizontal"/>
+    </LinearLayout>
 
+</com.google.android.material.card.MaterialCardView>
 
 
 
@@ -261,5 +281,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+android:backgroundTint="#ffcc00"
         android:text="Order status"/>
 </RelativeLayout>

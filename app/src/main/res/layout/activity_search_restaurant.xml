@@ -131,7 +131,7 @@
         android:layout_width="match_parent"
         android:layout_height="32dp"
 android:layout_marginBottom="10dp"
-
+android:layout_marginLeft="10dp"
         android:text="Restaurant"
         android:textColor="#4CAF50"
         android:textSize="20sp"

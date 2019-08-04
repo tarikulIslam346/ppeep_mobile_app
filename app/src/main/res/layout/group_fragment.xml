@@ -201,6 +201,8 @@
 
         </RelativeLayout>
 
+
+
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -210,6 +212,7 @@
        android:layout_marginBottom="70dp"
         android:layout_marginRight="15dp"
         android:layout_alignParentBottom="true"
+android:backgroundTint="#ffcc00"
         android:layout_alignParentRight="true"
         android:src="@drawable/friendadd" />
 </RelativeLayout>

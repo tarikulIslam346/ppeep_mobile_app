@@ -226,6 +226,7 @@ public class ProfileEdit extends AppCompatActivity {
                         Intent NameEditIntent = new Intent(getApplicationContext(),ProfileNameEdit.class);
 
                         startActivity(NameEditIntent);
+                        finish();
 
                     }
 
@@ -242,6 +243,7 @@ public class ProfileEdit extends AppCompatActivity {
 
                         Intent GenderEditIntent = new Intent(getApplicationContext(),ProfileGenderEdit.class);
                         startActivity(GenderEditIntent);
+                        finish();
 
                     }
 
@@ -260,6 +262,7 @@ public class ProfileEdit extends AppCompatActivity {
                         Intent EmailEditIntent = new Intent(getApplicationContext(),ProfileEmailEdit.class);
                         EmailEditIntent.putExtra("email",myProfileDetailemail.getText().toString());
                         startActivity(EmailEditIntent);
+                        finish();
 
                     }
 
@@ -276,7 +279,7 @@ public class ProfileEdit extends AppCompatActivity {
                         Intent AddressEditIntent = new Intent(getApplicationContext(),ProfileAddressEdit.class);
                         AddressEditIntent.putExtra("address",MyProfileAddress.getText().toString());
                         startActivity(AddressEditIntent);
-
+                        finish();
                     }
 
                 });
@@ -291,7 +294,7 @@ public class ProfileEdit extends AppCompatActivity {
 
                         Intent DOBEditIntent = new Intent(getApplicationContext(),ProfileDobEdit.class);
                         startActivity(DOBEditIntent);
-
+                        finish();
                     }
 
                 });
@@ -306,7 +309,7 @@ public class ProfileEdit extends AppCompatActivity {
 
                         Intent BloodEditIntent = new Intent(getApplicationContext(),ProfileBloodGroupEdit.class);
                         startActivity(BloodEditIntent);
-
+                        finish();
                     }
 
                 });
@@ -319,8 +322,7 @@ public class ProfileEdit extends AppCompatActivity {
 
 
 
-            }else{
-                Toast.makeText(getApplicationContext(), "No restaurant found or network not available", Toast.LENGTH_LONG).show();
+
             }
         }
 

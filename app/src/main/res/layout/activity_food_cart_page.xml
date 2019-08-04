@@ -7,18 +7,23 @@
     android:orientation="vertical"
     tools:context=".FoodCartPage">
 
-
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Place Order "
-        android:gravity="center"
-        android:theme="@style/AppTheme2"
-        android:id="@+id/foodtoolbar"
-        android:background="#8B8B07">
+        android:elevation="10dp">
 
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            app:title="P-PEEP"
+            app:titleTextColor="#ffcc00"
+            android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+            app:popupTheme="@style/Theme.AppCompat.Light"
+            android:id="@+id/foodtoolbar"
+            android:elevation="10dp"
+            />
 
-    </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.card.MaterialCardView>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -386,6 +391,8 @@
         android:text="Pre-Order"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="#0A0909"
 
         />
     <Button
@@ -394,8 +401,10 @@
         android:layout_height="wrap_content"
         android:layout_width="180dp"
         android:text="Apply Promo"
-        android:layout_margin="10dp"
+        android:backgroundTint="@color/colorPrimary"
         android:textColor="#0A0909"
+        android:layout_margin="10dp"
+
 />
 
 </LinearLayout>
@@ -408,7 +417,8 @@
                 android:gravity="center"
                android:layout_marginBottom="2dp"
                 android:layout_marginTop="5dp"
-                android:background="#EB0707"
+                android:backgroundTint="#247027"
+                android:textColor="#0A0909"
                 />
         </LinearLayout>
 </RelativeLayout>

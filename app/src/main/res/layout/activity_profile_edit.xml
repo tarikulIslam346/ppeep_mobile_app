@@ -65,6 +65,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="96dp"
                         android:layout_marginEnd="-22dp"
+                        android:backgroundTint="@color/colorPrimary"
                         android:src="@drawable/cameraicon" />
 
                 </RelativeLayout>

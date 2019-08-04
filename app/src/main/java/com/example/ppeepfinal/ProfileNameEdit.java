@@ -163,7 +163,10 @@ public class ProfileNameEdit extends AppCompatActivity {
     public void SwithToProfile(){
 
         Intent updateintent=new Intent(getApplicationContext(),ProfileEdit.class);
-        startActivity(updateintent);
+        updateintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(updateintent);
+        finish();
+
 
     }
 }
