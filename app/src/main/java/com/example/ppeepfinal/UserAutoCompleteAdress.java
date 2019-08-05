@@ -41,14 +41,17 @@ import com.dingi.dingisdk.geometry.LatLng;
 import com.dingi.dingisdk.maps.DingiMap;
 import com.dingi.dingisdk.maps.MapView;
 import com.dingi.dingisdk.maps.OnMapReadyCallback;
+import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.model.SearchResult;
 import com.example.ppeepfinal.utilities.Api;
 import com.example.ppeepfinal.utilities.MyLocation;
+import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.example.ppeepfinal.utilities.VolleyRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,7 +69,7 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
         private DingiMap mMap;
         Button mConfirm;
         String lat,lng;
-    String address = null;
+        String address = null;
 
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         public static <T, E> String getKeysByValue(Map<T, E> map, E value) {
@@ -106,7 +109,12 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
 
         mapView = findViewById(R.id.dingi_map);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(dingiMap -> dingiMap.setStyleUrl(Style.DINGI_ENGLISH));
+       // mapView.getMapAsync(dingiMap -> dingiMap.setStyleUrl(Style.DINGI_ENGLISH));
+
+            mapView.getMapAsync(this);
+
+
+
         searchResults = new ArrayList<>();
         edSearch = ((AutoCompleteTextView) findViewById(R.id.address));
         edSearch.addTextChangedListener(new TextWatcher() {
@@ -282,15 +290,29 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
 
         @Override
         public void onMapReady(@NonNull DingiMap dingiMap) {
+            dingiMap.setStyleUrl(Style.DINGI_ENGLISH);
         mMap = dingiMap;
 
         MyLocation myLocation = new MyLocation(UserAutoCompleteAdress.this);
         myLocation.setListener(new MyLocation.MyLocationListener() {
             @Override
             public void onLocationFound(Location location) {
+                //Toast.makeText(UserAutoCompleteAdress.this, "ok", Toast.LENGTH_SHORT).show();
 
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18);
                 mMap.animateCamera(cameraUpdate);
+                mMap.addOnCameraMoveListener(new DingiMap.OnCameraMoveListener() {
+                    @Override
+                    public void onCameraMove() {
+                        //mConfirm.setVisibility(View.INVISIBLE);
+                        LatLng center = mMap.getCameraPosition().target;
+                        callAPI(center);
+                        //Log.d("Location",""+center.getLongitude());
+                        //searchResults.get(j).setAddress(address);
+                         //Toast.makeText(UserAutoCompleteAdress.this, ""+center.getLongitude(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
 
 
             }
