@@ -84,7 +84,8 @@ tools:context=".UserAutoCompleteAdress">
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                
+                android:src="@drawable/gpsicon"
+                android:backgroundTint="#ffffff"
                 android:layout_margin="10dp"
 />
 <com.google.android.material.card.MaterialCardView
