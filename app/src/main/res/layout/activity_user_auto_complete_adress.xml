@@ -8,19 +8,23 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".UserAutoCompleteAdress">
 
-<com.google.android.material.appbar.AppBarLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:theme="@style/AppTheme.AppBarOverlay">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        android:layout_height="wrap_content"
+        android:elevation="10dp">
 
-</com.google.android.material.appbar.AppBarLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            app:title="ADDRESS SEARCH"
+            app:titleTextColor="#ffcc00"
+            android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+            app:popupTheme="@style/Theme.AppCompat.Light"
+            android:id="@+id/toolbar"
+            android:elevation="10dp"
+            />
+
+    </com.google.android.material.card.MaterialCardView>
 
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
@@ -60,17 +64,17 @@ tools:context=".UserAutoCompleteAdress">
         android:layout_width="match_parent"
         android:layout_height="match_parent"></com.dingi.dingisdk.maps.MapView>
     <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_gravity="center"
-        android:src="@drawable/deliverymapicon"
+        android:src="@drawable/mapiconpointer"
         />
 
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
 
         <LinearLayout
@@ -90,18 +94,24 @@ tools:context=".UserAutoCompleteAdress">
 />
 <com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    >
+
             <TextView
                 android:id="@+id/text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:textColor="#474530" />
+                android:padding="5dp"
 
+android:layout_margin="10dp"
+                android:textColor="#474530" />
+</com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                >
             <Button
                 android:id="@+id/btn_address_confirm"
                 android:layout_width="match_parent"
@@ -110,10 +120,11 @@ tools:context=".UserAutoCompleteAdress">
                 android:backgroundTint="@color/colorPrimary"
                 android:text="CONFIRM"
                 android:textColor="#090808" />
+
+            </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
-</com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
+
 
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
