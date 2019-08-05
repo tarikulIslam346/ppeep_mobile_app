@@ -47,6 +47,7 @@ import com.example.ppeepfinal.utilities.Api;
 import com.example.ppeepfinal.utilities.MyLocation;
 import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.example.ppeepfinal.utilities.VolleyRequest;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -57,6 +58,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapReadyCallback {
 
@@ -70,6 +73,7 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
         Button mConfirm;
         String lat,lng;
         String address = null;
+        FloatingActionButton currentLocation;
 
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         public static <T, E> String getKeysByValue(Map<T, E> map, E value) {
@@ -93,6 +97,7 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
 
         mConfirm  = (Button) findViewById(R.id.btn_address_confirm);
         mConfirm.setVisibility(View.INVISIBLE);
+        currentLocation = (FloatingActionButton)findViewById(R.id.current_location_fab);
 
         toolbar.setTitle("PPEEP FOOD ADDRESS SEARCH");
 
@@ -105,6 +110,17 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
                 finish();
             }
         });
+        currentLocation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = getIntent();
+                    overridePendingTransition(0, 0);
+                    intent.setFlags(FLAG_ACTIVITY_NO_ANIMATION);
+                    finish();
+                    overridePendingTransition(0, 0);
+                    startActivity(intent );
+                }
+            });
 
 
         mapView = findViewById(R.id.dingi_map);
