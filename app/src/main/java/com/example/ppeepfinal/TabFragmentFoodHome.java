@@ -200,7 +200,7 @@ public class TabFragmentFoodHome extends Fragment {
         URL restaurantUrl = NetworkUtils.buildRecommendedRestaurantUrl();
 
         if(user.size() !=0){
-             Toast.makeText(getContext()," " + String.valueOf(user.get(0).getLat()), Toast.LENGTH_LONG).show();
+            // Toast.makeText(getContext()," " + String.valueOf(user.get(0).getLat()), Toast.LENGTH_LONG).show();
             lat  = String.valueOf(user.get(0).getLat());
             lng = String.valueOf(user.get(0).getLng());
             new RestaurantListTask().execute(restaurantUrl);

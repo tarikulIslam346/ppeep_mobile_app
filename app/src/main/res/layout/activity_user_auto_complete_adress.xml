@@ -62,10 +62,12 @@ tools:context=".UserAutoCompleteAdress">
     <com.dingi.dingisdk.maps.MapView
         android:id="@+id/dingi_map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.dingi.dingisdk.maps.MapView>
+        android:layout_height="match_parent">
+
+    </com.dingi.dingisdk.maps.MapView>
     <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:src="@drawable/mapiconpointer"
         />
