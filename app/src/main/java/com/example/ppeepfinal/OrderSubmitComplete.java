@@ -155,6 +155,13 @@ public class OrderSubmitComplete extends AppCompatActivity {
                             driverName.setVisibility(View.VISIBLE);
                             driverContact.setVisibility(View.VISIBLE);
                             driverFound.setVisibility(View.VISIBLE);
+                            // Initialize an intent to open dialer app with specified phone number
+                            // It open the dialer app and allow user to call the number manually
+                            Intent intent = new Intent(Intent.ACTION_DIAL);
+                            // Send phone number to intent as data
+                            intent.setData(Uri.parse("tel:" + "contact"));
+                            // Start the dialer app activity with number
+                            startActivity(intent);
 
 
                         }
