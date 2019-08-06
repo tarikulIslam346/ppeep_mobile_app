@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="15dp"
-    tools:context=".ProfileDobEdit">
+    tools:context=".ProfileDobEdit"
+    android:id="@+id/sb_for_dob">
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -15,7 +16,7 @@
     android:orientation="horizontal">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userIDTextInputLayout"
+        android:id="@+id/userDobDayTextInput"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="100dp"
         android:layout_marginLeft="10dp"
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/userIDTextInputEditText"
+            android:id="@+id/userDobDayTextInputField"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -33,7 +34,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userIDTextInputLayout2"
+        android:id="@+id/userDobMonthTextInput"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="100dp"
         android:layout_marginLeft="10dp"
@@ -43,7 +44,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/userIDTextInputEditText2"
+            android:id="@+id/userDobMonthTextInputField"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -52,7 +53,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userIDTextInputLayout3"
+        android:id="@+id/userDobYearTextInput"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="100dp"
         android:layout_marginLeft="10dp"
@@ -62,7 +63,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/userIDTextInputEditText3"
+            android:id="@+id/userDobYearTextInputField"
             android:layout_width="100dp"
             android:inputType="number"
             android:layout_height="wrap_content"
@@ -76,6 +77,7 @@
         android:layout_margin="5dp"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/cancelButton"
             android:layout_width="200dp"
             android:padding="5dp"
             android:layout_margin="5dp"
@@ -85,6 +87,7 @@
             android:textColor="@android:color/black"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/userDobUpdate"
             android:layout_width="200dp"
             android:padding="5dp"
             android:layout_margin="5dp"

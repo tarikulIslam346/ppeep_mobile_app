@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 /*import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;*/
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -286,6 +287,7 @@ public class ProfileEdit extends AppCompatActivity {
 
 
                 ImageView DOBEdit = findViewById(R.id.dobEditID);
+
                 DOBEdit.setOnClickListener(new View.OnClickListener() {
 
                     @Override
@@ -293,6 +295,14 @@ public class ProfileEdit extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Intent DOBEditIntent = new Intent(getApplicationContext(),ProfileDobEdit.class);
+                        String str = myProfileDetaildob.getText().toString();
+                        String arr[] = str.split("/");
+                        Log.d("DOB : Day ", arr[0]);
+                        Log.d("DOB : Month ", arr[1]);
+                        Log.d("DOB : Year ", arr[2]);
+                        DOBEditIntent.putExtra("day",arr[0]);
+                        DOBEditIntent.putExtra("month",arr[1]);
+                        DOBEditIntent.putExtra("year",arr[2]);
                         startActivity(DOBEditIntent);
                         finish();
                     }
@@ -308,6 +318,7 @@ public class ProfileEdit extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Intent BloodEditIntent = new Intent(getApplicationContext(),ProfileBloodGroupEdit.class);
+
                         startActivity(BloodEditIntent);
                         finish();
                     }

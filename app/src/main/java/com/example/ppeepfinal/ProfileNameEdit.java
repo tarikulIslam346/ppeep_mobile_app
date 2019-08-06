@@ -43,7 +43,7 @@ public class ProfileNameEdit extends AppCompatActivity {
         List<UserModel> user =  mdb.userDAO().loadPhone();//select all data form room database user table
         userNameTextInput = (EditText) findViewById(R.id.userNameTextInputEditText);
         userNameUpdate = (Button) findViewById(R.id.userNameUpdateButton);
-      final Button  cancelButton = (Button) findViewById(R.id.cancelButton);
+        final Button  cancelButton = (Button) findViewById(R.id.cancelButton);
         progressBar = (ProgressBar) findViewById(R.id.pv_edit_profile_name);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
