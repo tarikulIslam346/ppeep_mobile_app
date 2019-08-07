@@ -27,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +59,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
@@ -105,8 +107,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         mdb = UserDatabase.getInstance(getApplicationContext());//call database here
 
-        //Load user info
-         user = mdb.userDAO().loadPhone();
+        user = mdb.userDAO().loadPhone();
 
         setUserLocation();
 
@@ -122,27 +123,16 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                             return;
                         }
 
-                        // Get new Instance ID token
                         String token = task.getResult().getToken();
                         fcm = token;
                         URL fcmUrl = NetworkUtils.buildUpdateUserFCMInfoUrl();
                         new UpdateFcmTask().execute(fcmUrl);
-
-
-                        // Log and toast
-                       // String msg = getString(R.string.msg_token_fmt, token);
                         Log.d(TAG, "Token "+ token);
                        // Toast.makeText(HomePage.this,"Token : "+token, Toast.LENGTH_LONG).show();
                     }
                 });
 
-
-
-
-
-
         NavigationView navigationView = findViewById(R.id.NavigationId2);
-        // navigationView.setNavigationItemSelectedListener(this);
         navigationView.setNavigationItemSelectedListener(this);
 
         tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
@@ -193,11 +183,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         viewPagerId = (ViewPager) findViewById(R.id.viewPagerId);
         tabLayoutId.setupWithViewPager(viewPagerId);
 
-    /*    tabLayout.getTabAt(0).setIcon(R.drawable.icon_homelogo);
-
-        tabLayout.getTabAt(1).setIcon(R.drawable.groupicon);
-        tabLayout.getTabAt(2).setIcon(R.drawable.notificationicon);
-        tabLayout.getTabAt(3).setIcon(R.drawable.myprofileicon);*/
 
         viewPagerId.setAdapter(adapter);
 
@@ -219,14 +204,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             phoneNo = user.get(0).getPhone();
         }
     }
-/*    @Override
-    public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }*/
 
 
  @Override
@@ -311,7 +288,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
                         }
 
-
                     }
 
                     @Override
@@ -358,6 +334,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 String json = updateLocationResults;
                 JSONObject userLocationUpdate = null;
                 String  message=null,error=null;
+                //dialog.dismiss();
                 try {
                     userLocationUpdate = new JSONObject(json);
                     message = userLocationUpdate.getString("message");
@@ -372,6 +349,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                dialog.dismiss();
                 if(message!=null)Log.d(TAG,message);
                 if(error!=null)Log.d(TAG,error);
 
@@ -420,12 +398,13 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                dialog.dismiss();
                 if(message!=null)Log.d(TAG,message);
                 if(error!=null)Log.d(TAG,error);
 
 
             }else{
-                //dialog.dismiss();
+                dialog.dismiss();
                 Toast.makeText(getApplicationContext(), "Server Not found", Toast.LENGTH_SHORT).show();
             }
         }
@@ -433,41 +412,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
 
 
-   /* @Override
-    public boolean onNavigationItemSelected(MenuItem menuItem) {
-     Intent intent;
-        if (menuItem.getItemId()==R.id.profile)
-        {
-           *//* intent=new Intent(this,ProfileEdit.class);
-            startActivity(intent);*//*
-            Toast.makeText(this, "Camera", Toast.LENGTH_SHORT).show();
-        }
-
-        else if (menuItem.getItemId()==R.id.history)
-        {
-            intent=new Intent(this,HistoryPage.class);
-            startActivity(intent);
-
-        }
-
-        else if (menuItem.getItemId()==R.id.settings)
-        {
-            intent=new Intent(this,PromotionPage.class);
-            startActivity(intent);
-
-        }
-
-        else if (menuItem.getItemId()==R.id.help)
-        {
-            intent=new Intent(this,HelpPage.class);
-            startActivity(intent);
-
-        }
-
-        Toast.makeText(this, "Camera", Toast.LENGTH_SHORT).show();
-
-        return false;
-    }*/
 
  @Override
     public void onBackPressed() {

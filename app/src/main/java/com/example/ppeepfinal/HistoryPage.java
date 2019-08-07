@@ -57,7 +57,7 @@ public class HistoryPage extends AppCompatActivity {
 
             phoneNo = user.get(0).getPhone();
 
-            ShowLoder("Loading .. ..");
+            ShowLoder("Loading History.. ..");
 
             URL currentOrderInfoUrl = NetworkUtils.buildAllOrderInfoUrl();
 
@@ -174,6 +174,7 @@ public class HistoryPage extends AppCompatActivity {
 
 
             }else{
+                dialog.dismiss();
                 Toast.makeText(getApplicationContext(), "No network not available", Toast.LENGTH_SHORT).show();
             }
         }

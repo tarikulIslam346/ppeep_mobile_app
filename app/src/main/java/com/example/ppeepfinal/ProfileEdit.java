@@ -149,7 +149,7 @@ public class ProfileEdit extends AppCompatActivity {
     }
 
     public  void loadUserFromServer(){
-        ShowLoder("Loading...");
+        ShowLoder("Loading Profile...");
         URL profileDetailUrl = NetworkUtils.buildProfileDetailInfoUrl();
         new ProfileDetailTask().execute(profileDetailUrl);
     }

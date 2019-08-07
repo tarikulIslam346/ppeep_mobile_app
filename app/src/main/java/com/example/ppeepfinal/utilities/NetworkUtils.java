@@ -26,54 +26,54 @@ import java.util.Scanner;
 public class NetworkUtils {
 
     final static String BASE_URL ="https://foodexpress.com.bd/ppeep/public/api/api/";
-    
+
     final public static  String LOGO_URL = "https://foodexpress.com.bd/upload/";
 
-    final static String REGISTER_BASE_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/register";
+    final static String REGISTER_BASE_URL = BASE_URL+"user/register";
 
-    final static String PHONE_CHECK_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/checkPhoneNo";
+    final static String PHONE_CHECK_URL = BASE_URL+"user/checkPhoneNo";
 
-    final static String RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/nearby/restaurnats";
+    final static String RESTAURANT_URL = BASE_URL+"nearby/restaurnats";
 
-    final static String NEARBY_RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/getnearby/restaurnats";
+    final static String NEARBY_RESTAURANT_URL = BASE_URL+"getnearby/restaurnats";
 
-    final static String POPULAR_RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/getPopular/restaurnats";
+    final static String POPULAR_RESTAURANT_URL = BASE_URL+"getPopular/restaurnats";
 
-    final static String FREE_DELIVERY_RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/getFreeDelivery/restaurnats";
+    final static String FREE_DELIVERY_RESTAURANT_URL = BASE_URL+"getFreeDelivery/restaurnats";
 
-    final static String RECOMMENDED_RESTAURANT_URL ="https://foodexpress.com.bd/ppeep/public/api/api/recomanded/restaurnats";
+    final static String RECOMMENDED_RESTAURANT_URL = BASE_URL+"recomanded/restaurnats";
 
-    final static String RESTAURANT_MENU_URL = "https://foodexpress.com.bd/ppeep/public/api/api/categories";
+    final static String RESTAURANT_MENU_URL = BASE_URL+"categories";
 
-    final static String FRIEND_LIST_URL = "https://foodexpress.com.bd/ppeep/public/api/api/friend";
+    final static String FRIEND_LIST_URL =  BASE_URL+"friend";
 
-    final  static  String ADD_FRIEND = "https://foodexpress.com.bd/ppeep/public/api/api/add/friend";
+    final  static  String ADD_FRIEND =  BASE_URL+"add/friend";
 
-    final  static  String REMOVE_FRIEND = "https://foodexpress.com.bd/ppeep/public/api/api/remove/friend";
+    final  static  String REMOVE_FRIEND =  BASE_URL+"remove/friend";
 
-    final  static  String ORDER_CREATE_URL = "https://foodexpress.com.bd/ppeep/public/api/api/order_create";
+    final  static  String ORDER_CREATE_URL =  BASE_URL+"order_create";
 
-    final  static  String RESTAURANT_SEARCH_URL = "https://foodexpress.com.bd/ppeep/public/api/api/search/nearby/restaurnats";
+    final  static  String RESTAURANT_SEARCH_URL =  BASE_URL+"search/nearby/restaurnats";
 
-    final  static  String OFFER_URL = "https://foodexpress.com.bd/ppeep/public/api/api/offers";
+    final  static  String OFFER_URL =  BASE_URL+"offers";
 
-    final  static  String PROFILE_DETAIL = "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/phone";
+    final  static  String PROFILE_DETAIL =  BASE_URL+"userinfo/phone";
 
-    final static  String PROFILE_UPDATE= "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/update";
+    final static  String PROFILE_UPDATE=  BASE_URL+"userinfo/update";
 
     final static String DRIVER_IMAGE= "https://foodexpress.com.bd/ppeep/public/images/driver_images/";
 
-    final static String ORDER_DETAILS_URL ="https://foodexpress.com.bd/ppeep/public/api/api/getOrder";
+    final static String ORDER_DETAILS_URL =BASE_URL+"getOrder";
 
-    final static String ORDER_DELIVER_INFO = "https://foodexpress.com.bd/ppeep/public/api/api/user/orderDeliver";
+    final static String ORDER_DELIVER_INFO = BASE_URL+"user/orderDeliver";
 
-    final static  String CURRENT_ORDER_HISTORY = "https://foodexpress.com.bd/ppeep/public/api/api/order/current";
+    final static  String CURRENT_ORDER_HISTORY = BASE_URL+"order/current";
 
-    final static  String ALL_ORDER_HISTORY = "https://foodexpress.com.bd/ppeep/public/api/api/order/all";
+    final static  String ALL_ORDER_HISTORY = BASE_URL+"order/all";
 
-    final static String UPDATE_USER_LOCATION_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/currentLocation";
+    final static String UPDATE_USER_LOCATION_URL = BASE_URL+"user/currentLocation";
 
-    final static String UPDATE_USER_FCM_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/fcmToken";
+    final static String UPDATE_USER_FCM_URL = BASE_URL+"user/fcmToken";
 
     final static String UPDATE_USER_IMAGE = BASE_URL+"user/profileImage";
 
