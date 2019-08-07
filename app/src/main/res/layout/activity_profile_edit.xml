@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".ProfileEdit"
-    android:background="@color/profileBackground">
+    android:background="@color/profileBackground"
+    android:id="@+id/sb_profile_info">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -111,12 +112,7 @@
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
-    <ProgressBar
-        android:id="@+id/pv_edit_page_profile_detail"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_gravity="center"
-        android:visibility="invisible" />
+
 
     <include layout="@layout/content_profile" />
 

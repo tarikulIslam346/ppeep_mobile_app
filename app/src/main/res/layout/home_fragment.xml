@@ -5,7 +5,8 @@
     tools:context=".FragmentHome"
     android:layout_width="match_parent"
     android:layout_margin="2dp"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/sb_home_fragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -211,7 +212,7 @@
 
                             <TextView
 
-                                android:layout_width="fill_parent"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:paddingRight="16dp"
@@ -220,13 +221,11 @@
                                 android:textStyle="bold" />
 
                             <TextView
-
-
-                                android:layout_width="fill_parent"
+                                android:id="@+id/tv_home_address"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:ellipsize="end"
-
                                 android:maxLines="1"
                                 android:paddingRight="6dp"
                                 android:singleLine="true"
@@ -303,6 +302,8 @@
                                 android:textStyle="bold" />
 
                             <TextView
+
+                                android:id="@+id/tv_work_address"
 
 
                                 android:layout_width="fill_parent"

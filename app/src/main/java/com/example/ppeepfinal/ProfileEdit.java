@@ -1,6 +1,7 @@
 package com.example.ppeepfinal;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,10 +12,13 @@ import android.provider.MediaStore;
 /*import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;*/
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +30,7 @@ import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,11 +45,13 @@ import java.util.List;
 public class ProfileEdit extends AppCompatActivity {
 
     private UserDatabase mdb;
-    TextView myProfileName,myPhoneNo,myProfileDetailName,myProfileDetailGender,myProfileDetaildob,myProfileDetailemail,MyProfileAddress;
-    ProgressBar progressBar;
+    TextView myBloodGroup,myProfileName,myPhoneNo,myProfileDetailName,myProfileDetailGender,myProfileDetaildob,myProfileDetailemail,MyProfileAddress;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     FloatingActionButton floatingActionButtonImage;
     ImageView accountProfile;
+    ProgressDialog dialog;
+    Bitmap imageBitmap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +63,12 @@ public class ProfileEdit extends AppCompatActivity {
         myProfileName = (TextView) findViewById(R.id.tv_edit_page_profile_name);
 
         myPhoneNo = (TextView) findViewById(R.id.tv_edit_page_phone);
-        progressBar = (ProgressBar) findViewById(R.id.pv_edit_page_profile_detail) ;
         myProfileDetailName = (TextView) findViewById(R.id.tv_profile_detail_name) ;
         myProfileDetailGender = (TextView) findViewById(R.id.tv_profile_detail_gender);
         myProfileDetailemail = (TextView) findViewById(R.id.tv_profile_detail_email);
         myProfileDetaildob = (TextView) findViewById(R.id.tv_profile_detail_dob);
         MyProfileAddress=(TextView) findViewById(R.id.addresTextView);
+        myBloodGroup = (TextView)findViewById(R.id.myBloodGroup);
         floatingActionButtonImage = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         accountProfile = (ImageView) findViewById(R.id.imageview_account_profile);
 
@@ -113,7 +120,10 @@ public class ProfileEdit extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageBitmap = (Bitmap) extras.get("data");
+            //ShowLoder("Loading...");
+            URL profileImageUrl = NetworkUtils.buildUserImageUploadUrl();
+            new ProfileImageUploadTask().execute(profileImageUrl);
             accountProfile.setImageBitmap(imageBitmap);
         }
     }
@@ -139,8 +149,13 @@ public class ProfileEdit extends AppCompatActivity {
     }
 
     public  void loadUserFromServer(){
+        ShowLoder("Loading Profile...");
         URL profileDetailUrl = NetworkUtils.buildProfileDetailInfoUrl();
         new ProfileDetailTask().execute(profileDetailUrl);
+    }
+    public void ShowLoder(String message){
+        dialog = ProgressDialog.show(this, "",
+                message, true);
     }
 
 
@@ -172,7 +187,7 @@ public class ProfileEdit extends AppCompatActivity {
                 JSONObject userInfo = null;
                 JSONArray jsonArray=null;
 
-                String userName = null,email = null,gender =null,dob=null,address = null;
+                String userName = null,email = null,gender =null,dob=null,address = null,blood_group=null;
 
 
 
@@ -187,18 +202,14 @@ public class ProfileEdit extends AppCompatActivity {
                         gender = userProfile.getString("gender");
                         dob = userProfile.getString("dob");
                         address = userProfile.getString("address");
+                        blood_group = userProfile.getString("blood_group");
 
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                progressBar.setVisibility(View.INVISIBLE);
-                ViewGroup.LayoutParams layoutParams = progressBar.getLayoutParams();
-
-                layoutParams.height = 0;
-                layoutParams.width = 0;
-                progressBar.setLayoutParams(layoutParams);
+                dialog.dismiss();
 
                 if(userName != null ){
                     myProfileDetailName.setText(userName);
@@ -214,6 +225,9 @@ public class ProfileEdit extends AppCompatActivity {
                 }
                 if(address != null ){
                     MyProfileAddress.setText(address);
+                }
+                if(blood_group != null ){
+                    myBloodGroup.setText(blood_group);
                 }
 
                 ImageView nameEdit = findViewById(R.id.nameEditID);
@@ -286,6 +300,7 @@ public class ProfileEdit extends AppCompatActivity {
 
 
                 ImageView DOBEdit = findViewById(R.id.dobEditID);
+
                 DOBEdit.setOnClickListener(new View.OnClickListener() {
 
                     @Override
@@ -293,6 +308,14 @@ public class ProfileEdit extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Intent DOBEditIntent = new Intent(getApplicationContext(),ProfileDobEdit.class);
+                        String str = myProfileDetaildob.getText().toString();
+                        String arr[] = str.split("/");
+                        Log.d("DOB : Day ", arr[0]);
+                        Log.d("DOB : Month ", arr[1]);
+                        Log.d("DOB : Year ", arr[2]);
+                        DOBEditIntent.putExtra("day",arr[0]);
+                        DOBEditIntent.putExtra("month",arr[1]);
+                        DOBEditIntent.putExtra("year",arr[2]);
                         startActivity(DOBEditIntent);
                         finish();
                     }
@@ -308,6 +331,7 @@ public class ProfileEdit extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Intent BloodEditIntent = new Intent(getApplicationContext(),ProfileBloodGroupEdit.class);
+
                         startActivity(BloodEditIntent);
                         finish();
                     }
@@ -323,6 +347,82 @@ public class ProfileEdit extends AppCompatActivity {
 
 
 
+            }else{
+                dialog.dismiss();
+                View parentLayout = findViewById(R.id.sb_profile_info);
+                Snackbar.make(parentLayout, "Net connection error", Snackbar.LENGTH_INDEFINITE)
+                        .show();
+            }
+        }
+
+
+    }
+    public class ProfileImageUploadTask extends AsyncTask<URL, Void, String> {
+
+
+
+        @Override
+        protected String doInBackground(URL... params) {
+
+            URL searchUrl = params[0];
+            String profileImageUploadResults = null;
+            try {
+                profileImageUploadResults = NetworkUtils.getImageUploadResponseFromHttpUrl(searchUrl,myPhoneNo.getText().toString(),imageBitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return profileImageUploadResults;
+        }
+
+        // COMPLETED (3) Override onPostExecute to display the results in the TextView
+        @Override
+        protected void onPostExecute(String profileImageUploadResults) {
+            if (profileImageUploadResults != null && !profileImageUploadResults.equals("")) {
+
+
+
+                String json = profileImageUploadResults;
+                JSONObject userImage = null;
+
+                String message = null,Success = null;
+
+                try {
+                    userImage = new JSONObject(json);
+                    Success = userImage.getString("Success");
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+                try {
+                    userImage = new JSONObject(json);
+                    message = userImage.getString("Message");
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+               // dialog.dismiss();
+                View parentLayout = findViewById(R.id.sb_profile_info);
+                if(message!=null) Snackbar.make(parentLayout, ""+message, Snackbar.LENGTH_INDEFINITE).show();
+                if(Success!=null) Snackbar.make(parentLayout, ""+Success, Snackbar.LENGTH_INDEFINITE).show();
+
+
+
+
+
+
+
+
+            }else{
+                //dialog.dismiss();
+                View parentLayout = findViewById(R.id.sb_profile_info);
+                Snackbar.make(parentLayout, "Net connection error", Snackbar.LENGTH_INDEFINITE)
+                        .show();
             }
         }
 

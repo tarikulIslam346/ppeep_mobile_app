@@ -3,9 +3,11 @@ package com.example.ppeepfinal.utilities;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.util.Base64;
 import android.widget.Toast;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -22,55 +24,87 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class NetworkUtils {
-    final static String REGISTER_BASE_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/register";
 
-    final static String PHONE_CHECK_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/checkPhoneNo";
+    final static String BASE_URL ="https://foodexpress.com.bd/ppeep/public/api/api/";
 
-    final static String RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/nearby/restaurnats";
+    final public static  String LOGO_URL = "https://foodexpress.com.bd/upload/";
 
-    final static String NEARBY_RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/getnearby/restaurnats";
+    final static String REGISTER_BASE_URL = BASE_URL+"user/register";
 
-    final static String POPULAR_RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/getPopular/restaurnats";
+    final static String PHONE_CHECK_URL = BASE_URL+"user/checkPhoneNo";
 
-    final static String FREE_DELIVERY_RESTAURANT_URL = "https://foodexpress.com.bd/ppeep/public/api/api/getFreeDelivery/restaurnats";
+    final static String RESTAURANT_URL = BASE_URL+"nearby/restaurnats";
 
-    final static String RECOMMENDED_RESTAURANT_URL ="https://foodexpress.com.bd/ppeep/public/api/api/recomanded/restaurnats";
+    final static String NEARBY_RESTAURANT_URL = BASE_URL+"getnearby/restaurnats";
 
-    final static String RESTAURANT_MENU_URL = "https://foodexpress.com.bd/ppeep/public/api/api/categories";
+    final static String POPULAR_RESTAURANT_URL = BASE_URL+"getPopular/restaurnats";
 
-    final static String FRIEND_LIST_URL = "https://foodexpress.com.bd/ppeep/public/api/api/friend";
+    final static String FREE_DELIVERY_RESTAURANT_URL = BASE_URL+"getFreeDelivery/restaurnats";
 
-    final  static  String ADD_FRIEND = "https://foodexpress.com.bd/ppeep/public/api/api/add/friend";
+    final static String RECOMMENDED_RESTAURANT_URL = BASE_URL+"recomanded/restaurnats";
 
-    final  static  String REMOVE_FRIEND = "https://foodexpress.com.bd/ppeep/public/api/api/remove/friend";
+    final static String RESTAURANT_MENU_URL = BASE_URL+"categories";
 
-    final  static  String ORDER_CREATE_URL = "https://foodexpress.com.bd/ppeep/public/api/api/order_create";
+    final static String FRIEND_LIST_URL =  BASE_URL+"friend";
 
-    final  static  String RESTAURANT_SEARCH_URL = "https://foodexpress.com.bd/ppeep/public/api/api/search/nearby/restaurnats";
+    final  static  String ADD_FRIEND =  BASE_URL+"add/friend";
 
-    final  static  String OFFER_URL = "https://foodexpress.com.bd/ppeep/public/api/api/offers";
+    final  static  String REMOVE_FRIEND =  BASE_URL+"remove/friend";
 
-    final  static  String PROFILE_DETAIL = "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/phone";
+    final  static  String ORDER_CREATE_URL =  BASE_URL+"order_create";
 
-    final static  String PROFILE_UPDATE= "https://foodexpress.com.bd/ppeep/public/api/api/userinfo/update";
+    final  static  String RESTAURANT_SEARCH_URL =  BASE_URL+"search/nearby/restaurnats";
+
+    final  static  String OFFER_URL =  BASE_URL+"offers";
+
+    final  static  String PROFILE_DETAIL =  BASE_URL+"userinfo/phone";
+
+    final static  String PROFILE_UPDATE=  BASE_URL+"userinfo/update";
 
     final static String DRIVER_IMAGE= "https://foodexpress.com.bd/ppeep/public/images/driver_images/";
 
-    final static String ORDER_DETAILS_URL ="https://foodexpress.com.bd/ppeep/public/api/api/getOrder";
+    final static String ORDER_DETAILS_URL =BASE_URL+"getOrder";
 
-    final static String ORDER_DELIVER_INFO = "https://foodexpress.com.bd/ppeep/public/api/api/user/orderDeliver";
+    final static String ORDER_DELIVER_INFO = BASE_URL+"user/orderDeliver";
 
-    final static  String CURRENT_ORDER_HISTORY = "https://foodexpress.com.bd/ppeep/public/api/api/order/current";
+    final static  String CURRENT_ORDER_HISTORY = BASE_URL+"order/current";
 
-    final static  String ALL_ORDER_HISTORY = "https://foodexpress.com.bd/ppeep/public/api/api/order/all";
+    final static  String ALL_ORDER_HISTORY = BASE_URL+"order/all";
 
-    final static String UPDATE_USER_LOCATION_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/currentLocation";
+    final static String UPDATE_USER_LOCATION_URL = BASE_URL+"user/currentLocation";
 
-    final static String UPDATE_USER_FCM_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/fcmToken";
+    final static String UPDATE_USER_FCM_URL = BASE_URL+"user/fcmToken";
+
+    final static String UPDATE_USER_IMAGE = BASE_URL+"user/profileImage";
+
+
 
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
     final static String sortBy = "stars";*/
+
+    public static URL buildUserImageUploadUrl() {
+        Uri builtUri = Uri.parse(UPDATE_USER_IMAGE).buildUpon().build();
+        URL uploadUserImageurl = null;
+        try {
+            uploadUserImageurl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return uploadUserImageurl;
+    }
+
+    public static URL buildLoadIamgeUrl(String imageUrl) {
+        Uri builtUri = Uri.parse(imageUrl).buildUpon().build();
+        URL driverIamgeUrl = null;
+        try {
+            driverIamgeUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return driverIamgeUrl;
+    }
 
     public static URL buildDriverIamgeUrl(String imageUrl) {
         Uri builtUri = Uri.parse(DRIVER_IMAGE+""+imageUrl).buildUpon().build();
@@ -975,6 +1009,51 @@ public class NetworkUtils {
             urlConnection.disconnect();
         }
     }
+
+    public static String getImageUploadResponseFromHttpUrl(URL uploadUserImageurl, String phone,Bitmap image) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) uploadUserImageurl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+        urlConnection.setRequestProperty("Content-Type", "multipart/form-data");
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        //compress the image to jpg format
+        image.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        /*
+         * encode image to base64 so that it can be picked by saveImage.php file
+         * */
+        String encodeImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(),Base64.DEFAULT);
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "phone", phone);
+        param.put("profile_pic",encodeImage);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+
 
 
 

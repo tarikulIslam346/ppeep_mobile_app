@@ -48,9 +48,7 @@ public class TabFragmentNearby extends Fragment {
     String lat,lng;
 
 
-    public TabFragmentNearby(){
-
-    }
+    public TabFragmentNearby(){ }
 
 
     @Nullable

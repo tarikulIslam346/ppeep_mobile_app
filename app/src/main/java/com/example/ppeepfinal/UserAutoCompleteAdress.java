@@ -375,6 +375,15 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
                         if(activity.equals("food")){
                             foodApp = new Intent(UserAutoCompleteAdress.this, FoodApp.class);
                         }
+                        if(activity.equals("home_work_address")){
+                            foodApp = new Intent(UserAutoCompleteAdress.this, HomePage.class);
+                            if(address != null)foodApp.putExtra("work_address", address);
+                        }
+                        if(activity.equals("home_address")){
+                            foodApp = new Intent(UserAutoCompleteAdress.this, HomePage.class);
+                            if(address != null)foodApp.putExtra("home_address", address);
+                        }
+
 
 
                         if(address != null)foodApp.putExtra("address", address);

@@ -166,7 +166,7 @@ public class FragmentGroup extends Fragment {
 
                 String json = friendListResults;
 
-                JSONObject friendList = null;
+                JSONObject friendList = null,myPoint = null;
 
                 JSONArray jsonArray=null,jsonArrayOfTotalPoint=null;
 
@@ -209,9 +209,9 @@ public class FragmentGroup extends Fragment {
                 }
 
                 try {
-                    friendList = new JSONObject(json);
+                    myPoint = new JSONObject(json);
 
-                    jsonArrayOfTotalPoint = friendList.getJSONArray("total_earn_of_user");
+                    jsonArrayOfTotalPoint = myPoint.getJSONArray("total_earn_of_user");
                     for (int i=0; i<jsonArrayOfTotalPoint.length(); i++) {
 
                         JSONObject friend = jsonArrayOfTotalPoint.getJSONObject(i);
@@ -235,6 +235,7 @@ public class FragmentGroup extends Fragment {
                 layoutParams.width = 0;
 
                 mProgressbar.setLayoutParams(layoutParams);
+                if(allNames.size()!=0)Toast.makeText(getContext(),""+allNames.get(0),Toast.LENGTH_LONG).show();
 
 
 
