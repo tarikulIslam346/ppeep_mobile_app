@@ -3,9 +3,11 @@ package com.example.ppeepfinal.utilities;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.util.Base64;
 import android.widget.Toast;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -22,6 +24,11 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class NetworkUtils {
+
+    final static String BASE_URL ="https://foodexpress.com.bd/ppeep/public/api/api/";
+    
+    final public static  String LOGO_URL = "https://foodexpress.com.bd/upload/";
+
     final static String REGISTER_BASE_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/register";
 
     final static String PHONE_CHECK_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/checkPhoneNo";
@@ -68,9 +75,36 @@ public class NetworkUtils {
 
     final static String UPDATE_USER_FCM_URL = "https://foodexpress.com.bd/ppeep/public/api/api/user/fcmToken";
 
+    final static String UPDATE_USER_IMAGE = BASE_URL+"user/profileImage";
+
+
+
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
     final static String sortBy = "stars";*/
+
+    public static URL buildUserImageUploadUrl() {
+        Uri builtUri = Uri.parse(UPDATE_USER_IMAGE).buildUpon().build();
+        URL uploadUserImageurl = null;
+        try {
+            uploadUserImageurl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return uploadUserImageurl;
+    }
+
+    public static URL buildLoadIamgeUrl(String imageUrl) {
+        Uri builtUri = Uri.parse(imageUrl).buildUpon().build();
+        URL driverIamgeUrl = null;
+        try {
+            driverIamgeUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return driverIamgeUrl;
+    }
 
     public static URL buildDriverIamgeUrl(String imageUrl) {
         Uri builtUri = Uri.parse(DRIVER_IMAGE+""+imageUrl).buildUpon().build();
@@ -975,6 +1009,51 @@ public class NetworkUtils {
             urlConnection.disconnect();
         }
     }
+
+    public static String getImageUploadResponseFromHttpUrl(URL uploadUserImageurl, String phone,Bitmap image) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) uploadUserImageurl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+        urlConnection.setRequestProperty("Content-Type", "multipart/form-data");
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        //compress the image to jpg format
+        image.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        /*
+         * encode image to base64 so that it can be picked by saveImage.php file
+         * */
+        String encodeImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(),Base64.DEFAULT);
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "phone", phone);
+        param.put("profile_pic",encodeImage);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+
 
 
 

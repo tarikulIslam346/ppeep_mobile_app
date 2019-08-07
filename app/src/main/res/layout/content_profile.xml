@@ -184,6 +184,7 @@
 
             <TextView
                 android:text="B(+ve)"
+                android:id="@+id/myBloodGroup"
                 android:layout_toRightOf="@id/bloodgroupImage"
                 style="@style/profileDetailsMiniText" />
 

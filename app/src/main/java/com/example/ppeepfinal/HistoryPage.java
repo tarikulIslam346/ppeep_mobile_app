@@ -1,12 +1,13 @@
 package com.example.ppeepfinal;
 
-//import android.support.v7.app.AppCompatActivity;
+
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -14,10 +15,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.NetworkUtils;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,33 +33,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryPage extends AppCompatActivity {
-    //List<Integer> OrderId;
+
     ProgressDialog dialog;
     UserDatabase mdb;
     String phoneNo;
-    TableLayout stk;
+    private HistoryPageAdapter historyPageAdapter;
+    private RecyclerView mNumberOfHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_history_page);
+
+        mNumberOfHistory = (RecyclerView)findViewById(R.id.historyrecycle);
+
         mdb = UserDatabase.getInstance(getApplicationContext());
+
         List<UserModel> user =  mdb.userDAO().loadPhone();
-        stk = (TableLayout) findViewById(R.id.table_of_item);
+
         if(user.size()!=0){
+
             phoneNo = user.get(0).getPhone();
+
             ShowLoder("Loading .. ..");
+
             URL currentOrderInfoUrl = NetworkUtils.buildAllOrderInfoUrl();
+
             new CurrentOrderListTask().execute(currentOrderInfoUrl);
         }
-        //stk = (TableLayout) findViewById(R.id.table_of_item);
+
     }
     public void ShowLoder(String message){
-        dialog = ProgressDialog.show(this, "",
-                message, true);
+
+        dialog = ProgressDialog.show(this, "", message, true);
     }
 
-    public class  CurrentOrderListTask extends AsyncTask<URL, Void, String> {
+    public class  CurrentOrderListTask extends AsyncTask<URL, Void, String> implements   HistoryPageAdapter.ListItemClickListener {
+
+        List<String> allNames = new ArrayList<String>();
+        List<Integer> OrderId = new ArrayList<Integer>();
+        List<String> OrderDate = new ArrayList<String>();
+        List<Integer> OrderStatus = new ArrayList<Integer>();
+        List<String> Logo = new ArrayList<String>();
+
 
 
         @Override
@@ -70,10 +92,9 @@ public class HistoryPage extends AppCompatActivity {
             }
             return currentOrderResults;
         }
-
-        // COMPLETED (3) Override onPostExecute to display the results in the TextView
         @Override
         protected void onPostExecute(String currentOrderResults) {
+
             if (currentOrderResults != null && !currentOrderResults.equals("")) {
 
                 String json = currentOrderResults;
@@ -82,10 +103,10 @@ public class HistoryPage extends AppCompatActivity {
 
                 JSONArray jsonArray=null;
 
-                int orderID;
-                double total_with_discount=0.0;
-                String orderCreated=null;
-                //OrderId = new ArrayList<Integer>();
+                int orderID,order_status;
+
+                String orderCreated=null,restaurant_name=null,logo=null;
+
 
 
                 try {
@@ -94,43 +115,28 @@ public class HistoryPage extends AppCompatActivity {
 
                     for (int i=0; i<jsonArray.length(); i++) {
                         JSONObject restaurant = jsonArray.getJSONObject(i);
-                        TableRow tbrow = new TableRow(getApplicationContext());
 
-                        TextView t1v = new TextView(getApplicationContext());
+
                         orderID = restaurant.getInt("order_id");
-                        t1v.setText("# "+orderID);
-                        t1v.setTextSize(20);
-                        tbrow.addView(t1v);
-
-
-                        TextView t2v = new TextView(getApplicationContext());
-                        total_with_discount = restaurant.getDouble("total_with_discount");
-                        t2v.setText(total_with_discount+" BDT ");
-                        t2v.setTextSize(20);
-                        tbrow.addView(t2v);
-
-                        TextView t3v = new TextView(getApplicationContext());
+                        restaurant_name = restaurant.getString("restaurant_name");
                         orderCreated = restaurant.getString("created_at");
-                        t3v.setText(orderCreated);
-                        t3v.setTextSize(20);
-                        tbrow.addView(t3v);
+                        order_status = restaurant.getInt("order_status");
+                        logo = restaurant.getString("logo");
 
-                        final int order= orderID;
 
-                        tbrow.setOnClickListener(new View.OnClickListener(){
-                            @Override
-                            public void onClick(View v) {
-                                //Toast.makeText(HistoryPage.this, "Click", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(),CurrentOrderHistory.class);
-                                intent.putExtra("order_id",String.valueOf(order));
-                                startActivity(intent);
-                            }
-                        });
+                        OrderId.add(orderID);
+                        allNames.add(restaurant_name);
+                        OrderDate.add(orderCreated);
+                        OrderStatus.add(order_status);
+                        Logo.add(logo);
 
 
 
-                        stk.addView(tbrow);
-                       // OrderId.add(orderID);
+                        //Toast.makeText(HistoryPage.this, "Click", Toast.LENGTH_SHORT).show();
+                        /*Intent intent = new Intent(getApplicationContext(),CurrentOrderHistory.class);
+                        intent.putExtra("order_id",String.valueOf(order));
+                        startActivity(intent);*/
+
 
                     }
                 } catch (JSONException e) {
@@ -140,12 +146,46 @@ public class HistoryPage extends AppCompatActivity {
                 dialog.dismiss();
 
 
+               /*if(message != null ){
+                    Snackbar.make(v.findViewById(R.id.layout_nearby), " "+message, Snackbar.LENGTH_INDEFINITE)
+                            .setAction("CLOSE", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            })
+                            .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
+                            .show();
+                }*/
+
+                if(jsonArray!= null){
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                    mNumberOfHistory.setLayoutManager(layoutManager);
+
+                    mNumberOfHistory.setHasFixedSize(true);
+
+                    historyPageAdapter = new HistoryPageAdapter(OrderId,allNames,OrderDate,OrderStatus,Logo,  this);
+
+                    mNumberOfHistory.setAdapter(historyPageAdapter);
+                }
+
+
 
 
 
             }else{
                 Toast.makeText(getApplicationContext(), "No network not available", Toast.LENGTH_SHORT).show();
             }
+        }
+
+        @Override
+        public void onListItemClick(int clickedItemIndex) {
+
+            int clickedOrderId = OrderId.get(clickedItemIndex).intValue();
+            Intent intent = new Intent(getApplicationContext(),CurrentOrderHistory.class);
+            intent.putExtra("order_id",String.valueOf(clickedOrderId));
+            startActivity(intent);
+
         }
 
 

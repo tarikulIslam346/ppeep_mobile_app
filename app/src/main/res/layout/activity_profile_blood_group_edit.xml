@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="15dp"
-    tools:context=".ProfileBloodGroupEdit">
+    tools:context=".ProfileBloodGroupEdit"
+    android:id="@+id/sb_user_blood_group">
 
   <TextView
       android:layout_width="wrap_content"
@@ -26,6 +27,7 @@
         android:layout_margin="5dp"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/cancelButton"
             android:layout_width="200dp"
             android:padding="5dp"
             android:layout_margin="5dp"
@@ -35,6 +37,7 @@
             android:textColor="@android:color/black"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/updateBloodGroup"
             android:layout_width="200dp"
             android:padding="5dp"
             android:layout_margin="5dp"
