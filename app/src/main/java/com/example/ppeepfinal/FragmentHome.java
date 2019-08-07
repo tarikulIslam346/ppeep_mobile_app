@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -18,12 +19,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.google.android.material.card.MaterialCardView;
 import com.smarteist.autoimageslider.DefaultSliderView;
 import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
 import com.varunest.sparkbutton.SparkButton;
 import com.varunest.sparkbutton.SparkEventListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import at.markushi.ui.CircleButton;
 
@@ -35,7 +46,7 @@ public class FragmentHome extends Fragment {
     public static String FACEBOOK_URL = "https://www.facebook.com/YourPageName";
     public static String FACEBOOK_PAGE_ID = "YourPageName";
     View v;
-
+    List<String> imgUrl;
     CircleButton foodExpressButton;
     MaterialCardView ppeepfoodCardView,ppeepStoreCardView,facebookCardView,youtubeCardView,ppeepRideCardView;
 
@@ -51,6 +62,8 @@ public class FragmentHome extends Fragment {
 
       // foodExpressButton= v.findViewById(R.id.foodexpress_id);
 
+        URL offerListUrl = NetworkUtils.buildOfferUrl();
+        new RestaurantListOfferTask().execute(offerListUrl);
 
         ppeepfoodCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +156,7 @@ public class FragmentHome extends Fragment {
 
         sliderLayout.setScrollTimeInSec(3); //set scroll delay in seconds :
 
-        setSliderViews();
+
 
         return v;
     }
@@ -151,41 +164,40 @@ public class FragmentHome extends Fragment {
 
     private void setSliderViews() {
 
-        for (int i = 0; i <= 4; i++) {
+        for (int i = 0; i <= 3; i++) {
 
             DefaultSliderView sliderView = new DefaultSliderView(getContext());
 
+
             switch (i) {
                 case 0:
-                  sliderView.setImageDrawable(R.drawable.dashkey);
-                //  sliderView.setImageUrl("https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+                    String URL = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(0);
+                    sliderView.setImageUrl(URL);
                     break;
                 case 1:
-                    sliderView.setImageDrawable(R.drawable.alhamdulillah);
-                 // sliderView.setImageUrl("https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+                    String URL1 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(1);
+                    sliderView.setImageUrl(URL1);
 
                     break;
                 case 2:
-                    sliderView.setImageDrawable(R.drawable.dashassetkey);
-                  //  sliderView.setImageUrl("https://images.pexels.com/photos/747964/pexels-photo-747964.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
+
+                    String URL2 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(2);
+                    sliderView.setImageUrl(URL2);
                     break;
                 case 3:
-                    sliderView.setImageDrawable(R.drawable.alhamdulillah2);
-                  // sliderView.setImageUrl("https://photos.google.com/u/1/search/_tra_/photo/AF1QipM82iVT4b8z7IkgjIIHwGWL7Y1cVKUIakZjrbMg");
-                    break;
-                case 4:
-                    sliderView.setImageDrawable(R.drawable.dashkey);
-                    //sliderView.setImageUrl("https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjB4o7S7JXiAhVB4HMBHRKTABMQjRx6BAgBEAU&url=https%3A%2F%2Fsoftexpo.com.bd%2Fexhibitor%2Fp-peep%2F&psig=AOvVaw1wreEDMiJSLocTV4AtbRH9&ust=1557745577087943");
+
+                    String URL3 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(4);
+                    sliderView.setImageUrl(URL3);
                     break;
             }
 
             sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
-          //  sliderView.setDescription("setDescription " + (i + 1));
+            //  sliderView.setDescription("setDescription " + (i + 1));
             final int finalI = i;
             sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
                 @Override
                 public void onSliderClick(SliderView sliderView) {
-                      Toast.makeText(getContext(), "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -236,6 +248,69 @@ public class FragmentHome extends Fragment {
     }
 
 
+    public class RestaurantListOfferTask extends AsyncTask<URL, Void, String> {
 
+        @Override
+        protected String doInBackground(URL... params) {
+
+            URL searchUrl = params[0];
+            String offerResults = null;
+            try {
+                offerResults = NetworkUtils.getOfferFromHttpUrl(searchUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return offerResults;
+        }
+
+        @Override
+        protected void onPostExecute(String RestaurantResults) {
+
+            if (RestaurantResults != null && !RestaurantResults.equals("")) {
+
+                String json = RestaurantResults;
+
+                JSONObject restaurantList = null;
+
+                JSONArray jsonArray=null;
+
+                String imageUrl;
+
+                imgUrl = new ArrayList<String>();
+
+                try {
+                    restaurantList = new JSONObject(json);
+
+                    jsonArray = restaurantList.getJSONArray("offer_list");
+
+                    for (int i=0; i<jsonArray.length(); i++) {
+
+                        JSONObject restaurant = jsonArray.getJSONObject(i);
+
+                        imageUrl = restaurant.getString("img_url");
+
+                        imgUrl.add(imageUrl);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                // dialog.dismiss();
+
+                sliderLayout = v.findViewById(R.id.imageSlider);
+
+                sliderLayout.setScrollTimeInSec(2); //set scroll delay in seconds :
+
+                setSliderViews();
+
+
+            }else{
+                Toast.makeText(getContext(), " network not available", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+    }
 
 }

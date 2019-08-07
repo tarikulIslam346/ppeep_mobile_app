@@ -155,9 +155,9 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         mDrawerLayout = findViewById(R.id.drawerId);
 
-        Toolbar myToolbar= (Toolbar) findViewById(R.id.ppeeptoolbar);
+      Toolbar myToolbar= (Toolbar) findViewById(R.id.ppeeptoolbar);
         // TextView mTitle = (TextView) findViewById(R.id.toolbar_title);
-        setSupportActionBar(myToolbar);
+   setSupportActionBar(myToolbar);
 
 
 

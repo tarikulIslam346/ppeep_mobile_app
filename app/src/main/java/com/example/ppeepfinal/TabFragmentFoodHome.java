@@ -219,11 +219,14 @@ public class TabFragmentFoodHome extends Fragment {
                 message, true);
     }
 
+
+
     private void setSliderViews() {
 
-        for (int i = 0; i <= 2; i++) {
+        for (int i = 0; i <= 3; i++) {
 
             DefaultSliderView sliderView = new DefaultSliderView(getContext());
+
 
             switch (i) {
                 case 0:
@@ -240,7 +243,11 @@ public class TabFragmentFoodHome extends Fragment {
                     String URL2 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(2);
                     sliderView.setImageUrl(URL2);
                     break;
+                case 3:
 
+                    String URL3 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(4);
+                    sliderView.setImageUrl(URL3);
+                    break;
             }
 
             sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
