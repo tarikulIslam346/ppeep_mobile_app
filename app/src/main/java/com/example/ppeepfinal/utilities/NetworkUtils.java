@@ -77,11 +77,24 @@ public class NetworkUtils {
 
     final static String UPDATE_USER_IMAGE = BASE_URL+"user/profileImage";
 
+    final static String GET_USER_POINT = BASE_URL+"user/point";
+
 
 
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
     final static String sortBy = "stars";*/
+
+    public static URL buildUserPointUrl() {
+        Uri builtUri = Uri.parse(GET_USER_POINT).buildUpon().build();
+        URL getUserPointurl = null;
+        try {
+            getUserPointurl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return getUserPointurl;
+    }
 
     public static URL buildUserImageUploadUrl() {
         Uri builtUri = Uri.parse(UPDATE_USER_IMAGE).buildUpon().build();
@@ -948,6 +961,39 @@ public class NetworkUtils {
     public static String getDeliverOrderDetailsOfUserResponseFromHttpUrl(URL orderDeliverInfoUrl, String phone) throws IOException {
 
         HttpURLConnection urlConnection = (HttpURLConnection) orderDeliverInfoUrl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "phone", phone);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static String getUserPointFromHttpUrl(URL pointInfoUrl, String phone) throws IOException {
+
+        HttpURLConnection urlConnection = (HttpURLConnection) pointInfoUrl.openConnection();//establish connection
         urlConnection.setRequestMethod("POST");//use post method
 
         HashMap<String, String> param = new HashMap<String, String>();

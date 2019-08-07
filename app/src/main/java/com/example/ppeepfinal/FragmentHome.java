@@ -22,11 +22,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-<<<<<<< HEAD
-=======
+
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
->>>>>>> ea2a47d527396ae6c8d6007487ae6c12ec4c6d85
+
 import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
@@ -42,10 +41,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
-<<<<<<< HEAD
+
 import java.util.ArrayList;
-=======
->>>>>>> ea2a47d527396ae6c8d6007487ae6c12ec4c6d85
+
 import java.util.List;
 
 import at.markushi.ui.CircleButton;
@@ -69,13 +67,13 @@ public class FragmentHome extends Fragment {
     List<UserModel> user;
 
     View v;
-<<<<<<< HEAD
+
     List<String> imgUrl;
-=======
+
 
     TextView mHomeAddress,mWorkAddress;
 
->>>>>>> ea2a47d527396ae6c8d6007487ae6c12ec4c6d85
+
     CircleButton foodExpressButton;
 
     MaterialCardView ppeepfoodCardView,ppeepStoreCardView,facebookCardView,youtubeCardView,ppeepRideCardView;
@@ -100,10 +98,10 @@ public class FragmentHome extends Fragment {
 
         loadUserFromDb();
 
-<<<<<<< HEAD
+
         URL offerListUrl = NetworkUtils.buildOfferUrl();
         new RestaurantListOfferTask().execute(offerListUrl);
-=======
+
         loadUserAddress();
 
 
@@ -147,7 +145,7 @@ public class FragmentHome extends Fragment {
                 startActivity(deliveryMap);
             }
         });
->>>>>>> ea2a47d527396ae6c8d6007487ae6c12ec4c6d85
+
 
         ppeepfoodCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,9 +191,9 @@ public class FragmentHome extends Fragment {
 
         sliderLayout = v.findViewById(R.id.imageSlider);
 
-        sliderLayout.setScrollTimeInSec(3); //set scroll delay in seconds :
+        //sliderLayout.setScrollTimeInSec(3); //set scroll delay in seconds :
 
-        setSliderViews();
+        //setSliderViews();
 
         return v;
     }
@@ -218,11 +216,11 @@ public class FragmentHome extends Fragment {
 
 
 
-<<<<<<< HEAD
-        sliderLayout.setScrollTimeInSec(3); //set scroll delay in seconds :
+
+       // sliderLayout.setScrollTimeInSec(3); //set scroll delay in seconds :
 
 
-=======
+
     public void loadUserAddress(){
         if(myPhone !=null){
            // ShowLoder("Loading address...");
@@ -230,7 +228,7 @@ public class FragmentHome extends Fragment {
             new ProfileDetailTask().execute(profileUrl);
         }
     }
->>>>>>> ea2a47d527396ae6c8d6007487ae6c12ec4c6d85
+
 
     public void ShowLoder(String message){
          dialog = ProgressDialog.show(getContext(), "",
@@ -268,10 +266,7 @@ public class FragmentHome extends Fragment {
             }
 
             sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
-<<<<<<< HEAD
-            //  sliderView.setDescription("setDescription " + (i + 1));
-=======
->>>>>>> ea2a47d527396ae6c8d6007487ae6c12ec4c6d85
+
             final int finalI = i;
             sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
                 @Override
