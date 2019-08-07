@@ -56,10 +56,10 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     private RecyclerView mListOfCartItem;
     private FoodCartPageAdapter foodCartPageAdapter;
     private UserDatabase mdb;
-    private TextView mRestaurantName, mDeliveryCharge, mVat,mSubTotal,mTotal;
+    private TextView mRestaurantName, mDeliveryCharge, mVat,mSubTotal,mTotal,mDiscount;
     int total_price_without_vat_deliveryCharg;
     int vat,deliveryCharge;
-    float total_with_vat_delivery_chrage;
+    double total_with_vat_delivery_chrage,discount;
     TextView addressOnMap,tv_my_point;
 
     Toolbar foodToolbar;
@@ -72,6 +72,8 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     Button orderSubmit,preOrderFood,promoApply;
     ProgressDialog dialog;
     String myPhoneNo;
+    EditText mPointInput;
+    Button mAddPoint;
 
 
     @Override
@@ -79,25 +81,38 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_cart_page);
         mdb = UserDatabase.getInstance(getApplicationContext());
+        loadUserFromDb();
         mListOfCartItem = (RecyclerView)findViewById(R.id.recycler_cart);
 
 
         foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
         setSupportActionBar(foodToolbar);
-
-        loadUserFromDb();
-
+        mPointInput = (EditText)findViewById(R.id.userPointTextInputEditText) ;
+        mAddPoint = (Button)findViewById(R.id.bt_add_point) ;
         addressOnMap = (TextView) findViewById(R.id.tv_user_address_map_view);
 
         tv_my_point = (TextView) findViewById(R.id.tv_my_point) ;
+        mAddPoint.setVisibility(View.INVISIBLE);
 
-        ShowLoder("Loading Point ...");
-        URL userPointUrl = NetworkUtils.buildUserPointUrl();
-        new PointTask().execute(userPointUrl);
+        List<OrderMerchantModel> orderMerchant = mdb.orderMercahntDAO().loadOrderMerchant();
+        mRestaurantName = (TextView) findViewById(R.id.tv_restaurant_name_food_cart);
+        mDeliveryCharge = (TextView) findViewById(R.id.tv_delivery_charge);
+        mVat = (TextView) findViewById(R.id.tv_total_vat);
+        mSubTotal = (TextView) findViewById(R.id.tv_food_price);
+        mTotal = (TextView) findViewById(R.id.tv_order_item_price);
+        mDiscount = (TextView) findViewById(R.id.tv_discount_amount);
+
+        discount = 0.0;
+        //mDiscount.setVisibility(View.INVISIBLE);
+
+
+
 
 
         orderSubmit = (Button) findViewById(R.id.placeOrderId);
         orderSubmit.setVisibility(View.INVISIBLE);
+
+
 
 
         preOrderFood = (Button) findViewById(R.id.preorderfoodID);
@@ -130,12 +145,8 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
 
 
-        List<OrderMerchantModel> orderMerchant = mdb.orderMercahntDAO().loadOrderMerchant();
-        mRestaurantName = (TextView) findViewById(R.id.tv_restaurant_name_food_cart);
-        mDeliveryCharge = (TextView) findViewById(R.id.tv_delivery_charge);
-        mVat = (TextView) findViewById(R.id.tv_total_vat);
-        mSubTotal = (TextView) findViewById(R.id.tv_food_price);
-        mTotal = (TextView) findViewById(R.id.tv_order_item_price);
+
+
 
         if(orderMerchant.size() !=0){
             String restaurantName = orderMerchant.get(0).getMerchantName();
@@ -150,7 +161,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         }
 
 
-        mdb = UserDatabase.getInstance(getApplicationContext());//intantiate room database
+        //mdb = UserDatabase.getInstance(getApplicationContext());//intantiate room database
        List<OrderModel> order =  mdb.orderDAO().loadOrder();//select all data form room database user table
 
         if(order.size()!= 0){//if data exist
@@ -197,13 +208,10 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
                 orderCreateUrl = NetworkUtils.buildOrderUrl();
                 new OrderTask().execute(orderCreateUrl);
 
-               // Intent orderSubmitIntent = new Intent(getApplicationContext(),OrderSubmitComplete.class);
-              //  startActivity(orderSubmitIntent);
 
             }
 
         });
-        //Toast.makeText(getApplicationContext(), "Mercahnt Id : " + mercahntId + " ,Client phone No : "+ phoneNo + ",Order Item : " + itemId, Toast.LENGTH_LONG).show();
 
 
 
@@ -217,8 +225,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
         mListOfCartItem.setAdapter(foodCartPageAdapter);
 
-        //DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(), VERTICAL);
-       // mListOfCartItem.addItemDecoration(decoration);
+
 
         /*
          Add a touch helper to the RecyclerView to recognize when a user swipes to delete an item.
@@ -255,6 +262,13 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         }).attachToRecyclerView(mListOfCartItem);
         mdb = UserDatabase.getInstance(getApplicationContext());
 
+
+        if(myPhoneNo!=null){
+            ShowLoder("Loading Point ...");
+            URL userPointUrl = NetworkUtils.buildUserPointUrl();
+            new PointTask().execute(userPointUrl);
+        }
+
     }
 
 
@@ -289,24 +303,34 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
     private void  retriveOrder(){
         final List<OrderModel> order = mdb.orderDAO().loadOrder();
+
         foodCartPageAdapter.setmOrders(order);
+
         total_price_without_vat_deliveryCharg=0;
+
         if(order.size() != 0){
+
             total_with_vat_delivery_chrage = 0;
             for(int i =0;i<order.size();i++){
                 total_price_without_vat_deliveryCharg = total_price_without_vat_deliveryCharg + order.get(i).getItemPrice() * order.get(i).getItemAmount();
             }
+
             mSubTotal.setText(String.valueOf(total_price_without_vat_deliveryCharg));
 
-            float totalvat = (total_price_without_vat_deliveryCharg * vat)/100;
-            total_with_vat_delivery_chrage = total_price_without_vat_deliveryCharg +  totalvat +deliveryCharge;
+            double totalvat = (total_price_without_vat_deliveryCharg * vat)/100;
+
+            total_with_vat_delivery_chrage = (total_price_without_vat_deliveryCharg +  totalvat + deliveryCharge)- discount;
+
             mVat.setText(String.valueOf(totalvat));
+
             mTotal.setText(String.valueOf(total_with_vat_delivery_chrage));
+
         }else{
             mSubTotal.setText("0.0");
             mVat.setText("0.0");
             mTotal.setText("0.0");
             mDeliveryCharge.setText("0.0");
+            mDiscount.setText("0.0");
             List<OrderMerchantModel> orderMerchantModel = mdb.orderMercahntDAO().loadOrderMerchant();
             if(orderMerchantModel.size() !=0 ){
                 mdb.orderMercahntDAO().deleteOrderMerchant(orderMerchantModel.get(0));
@@ -379,7 +403,61 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
                 dialog.dismiss();
 
                 if(total_point != 0.0){
+                    final  double myPoint = total_point;
                     tv_my_point.setText("Your Available  Point : "+String.valueOf(total_point));
+                    mAddPoint.setVisibility(View.VISIBLE);
+
+                    mAddPoint.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(     mPointInput.getText()!=null
+                                    && !mPointInput.getText().equals("")
+                                    && Integer.valueOf(mPointInput.getText().toString()) <= 50
+                                    && Integer.valueOf(mPointInput.getText().toString()) > 0
+                                    && Double.valueOf(mPointInput.getText().toString()) <= myPoint
+                            ){
+
+                               // mDiscount.setVisibility(View.VISIBLE);
+                                mDiscount.setText(mPointInput.getText());
+                                tv_my_point.setText("Your Available  Point : "+(myPoint- 50));
+                                discount = Double.valueOf(mPointInput.getText().toString());
+                                retriveOrder();
+
+                            }else{
+                                if(Double.valueOf(mPointInput.getText().toString()) > myPoint){
+                                    //update from server
+                                    View parentLayout = findViewById(R.id.sb_food_cart_page);
+                                    Snackbar.make(parentLayout,  " Balance not available", Snackbar.LENGTH_INDEFINITE)
+                                            .setAction("Close", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+
+                                                }
+                                            })
+                                            .show();
+                                }
+                                if(Integer.valueOf(mPointInput.getText().toString() ) > 50){
+                                    //update from server
+                                    View parentLayout = findViewById(R.id.sb_food_cart_page);
+                                    Snackbar.make(parentLayout,  " Please Enter less Or equal 50 point", Snackbar.LENGTH_INDEFINITE)
+                                            .setAction("Close", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+
+                                                }
+                                            })
+                                            .show();
+                                }
+                                if(mPointInput.getText()==null
+                                        && !mPointInput.getText().equals("")){
+                                    View parentLayout = findViewById(R.id.sb_food_cart_page);
+                                    Snackbar.make(parentLayout,  " Please Enter point", Snackbar.LENGTH_INDEFINITE)
+                                            .show();
+                                }
+
+                            }
+                        }
+                    });
                 }
                 //  mSearchResultsTextView.setText(allNames.get(8));
             }else{
@@ -397,7 +475,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
             URL searchUrl = params[0];
             String DriverResults = null;
             try {
-                DriverResults = NetworkUtils.getFoodOrderFromHttpUrl(searchUrl,ItemIds,ItemAmounts,phoneNo,String.valueOf(merchantId),String.valueOf(lat),String.valueOf(lng), addressOnMap.getText().toString());
+                DriverResults = NetworkUtils.getFoodOrderFromHttpUrl(searchUrl,ItemIds,ItemAmounts,String.valueOf(discount),phoneNo,String.valueOf(merchantId),String.valueOf(lat),String.valueOf(lng), addressOnMap.getText().toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -766,7 +766,7 @@ public class NetworkUtils {
         }
     }
 
-    public static String getFoodOrderFromHttpUrl(URL orderUrl, String itemId,String amount,String client_phone_no,String merchant_id,String lat,String lng,String address) throws IOException {
+    public static String getFoodOrderFromHttpUrl(URL orderUrl, String itemId,String amount,String discount,String client_phone_no,String merchant_id,String lat,String lng,String address) throws IOException {
 
         HttpURLConnection urlConnection = (HttpURLConnection) orderUrl.openConnection();//establish connection
         urlConnection.setRequestMethod("POST");//use post method
@@ -776,6 +776,7 @@ public class NetworkUtils {
         HashMap<String, String> param = new HashMap<String, String>();
         param.put( "item_id", itemId);
         param.put( "amount", amount);
+        param.put("discount_amount",discount);
         param.put( "client_phone_no", client_phone_no);
         param.put( "merchant_id", merchant_id);
         param.put( "lat", lat);
