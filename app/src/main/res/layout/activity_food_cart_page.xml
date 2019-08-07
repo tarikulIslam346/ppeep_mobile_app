@@ -28,407 +28,352 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="5dp"
-            >
-<!--    <LinearLayout
-        android:id="@+id/layout_total"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-
-        android:padding="5dp"
-     >
-        <TextView android:gravity="end"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:text="Total : "
-            android:textSize="20dp">
-        </TextView>
-
-        <TextView
-            android:id="@+id/tv_total"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:text="0 Taka"
-            android:textSize="20dp">
-
-        </TextView>
-    </LinearLayout>-->
+            android:layout_height="wrap_content">
 
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:layout_margin="4dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                >
 
-                <ImageView
-                    android:id="@+id/list_icon"
-                    android:layout_width="80dp"
-                    android:layout_height="90dp"
-                    android:src="@drawable/ic_home"
-                    android:background="@drawable/rounded_shape"/>
 
-                <LinearLayout
-                    android:orientation="vertical"
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/friendlist_name_bg"
-                    android:layout_toRightOf="@+id/list_icon"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true">
+                    android:layout_height="72dp"
+                    android:layout_margin="4dp">
 
-                    <TextView
-                        android:id="@+id/tv_restaurant_name_food_cart"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:paddingRight="16dp"
-                        android:text="Restaurant name"
-                       />
+                    <ImageView
+                        android:id="@+id/list_icon"
+                        android:layout_width="80dp"
+                        android:layout_height="90dp"
+                        android:src="@drawable/ic_home"
+                        android:background="@drawable/rounded_shape"/>
 
-                   <!-- <LinearLayout
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:gravity="center_vertical"
+                        android:background="@drawable/friendlist_name_bg"
+                        android:layout_toRightOf="@+id/list_icon"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true">
 
                         <TextView
-
+                            android:id="@+id/tv_restaurant_name_food_cart"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:paddingRight="6dp"
-                            android:text="Total Earn:" />
-
-                        <TextView
-
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:paddingRight="6dp"
-                            android:text="200" />
-
-                        <TextView
-
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:textStyle="bold"
                             android:paddingRight="16dp"
-                            android:text="Points" />
+                            android:text="Restaurant name"
+                            />
 
 
-                    </LinearLayout>-->
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_cart"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp">
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="@android:color/black" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="6dp">
+
+                    <TextView
+                        android:id="@+id/tv_total_food_price"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="Sub Total" />
+                    <TextView
+                        android:id="@+id/tv_food_price"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="Price"/>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="Taka"/>
 
 
                 </LinearLayout>
 
 
-            </RelativeLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_cart"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_margin="10dp">
-    </androidx.recyclerview.widget.RecyclerView>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="5dp"
-        android:background="@android:color/black" />
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_margin="6dp">
-
-    <TextView
-        android:id="@+id/tv_total_food_price"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Sub Total" />
-    <TextView
-        android:id="@+id/tv_food_price"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="Price"/>
-
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="Taka"/>
-
-
-</LinearLayout>
 
 
 
 
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="6dp">
+
+                    <TextView
+                        android:id="@+id/tv_vat_amount"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="VAT" />
+                    <TextView
+                        android:id="@+id/tv_total_vat"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+
+                        android:text="Price"/>
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="Taka"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="6dp">
+
+                    <TextView
+
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="Delivery Charge" />
+                    <TextView
+                        android:id="@+id/tv_delivery_charge"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="Price"/>
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="Taka"/>
+
+                </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="6dp">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="6dp">
+
+                    <TextView
+
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="Discount" />
+                    <TextView
+                        android:id="@+id/tv_discount_amount"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="0.0"/>
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="Taka"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/black" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="6dp">
+
+                    <TextView
+                        android:id="@+id/tv_order_item_total_price"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="Total" />
+                    <TextView
+                        android:id="@+id/tv_order_item_price"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+
+                        android:text="Price"/>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="Taka"/>
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/tv_vat_amount"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="VAT" />
-                <TextView
-                    android:id="@+id/tv_total_vat"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-
-                    android:text="Price"/>
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="Taka"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="6dp">
-
-                <TextView
-
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Delivery Charge" />
-                <TextView
-                    android:id="@+id/tv_delivery_charge"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="Price"/>
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="Taka"/>
-
-            </LinearLayout>
-
-
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="6dp">
-
-                <TextView
-
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Discount" />
-                <TextView
-                    android:id="@+id/tv_discount_amount"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="0.0"/>
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="Taka"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/black" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="6dp">
-
-                <TextView
-                    android:id="@+id/tv_order_item_total_price"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Total" />
-                <TextView
-                    android:id="@+id/tv_order_item_price"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-
-                    android:text="Price"/>
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="Taka"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Use Point"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="10dp"
-                />
-            <TextView
-                android:id="@+id/tv_my_point"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="My point: 0.0 "
-                android:layout_marginLeft="10dp"
-                android:textSize="18sp"
-                />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <CheckBox
-                android:id="@+id/pointcheckbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/userEmailTextInputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/userEmailTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Max point use per order 50" />
-            </com.google.android.material.textfield.TextInputLayout>
-</LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Payement Type"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="40dp"
-            android:layout_marginLeft="10dp"
-            />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cash On Delivery"
-                android:checked="true"
-                android:layout_marginLeft="30dp"
-                />
+                    android:text="Use Point"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="10dp"
+                    />
+                <TextView
+                    android:id="@+id/tv_my_point"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="My Point : 0.0"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="10dp"
+                    android:gravity="center">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/userEmailTextInputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="250dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/userEmailTextInputEditText"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="80dp"
+                            android:hint="Max point use per order 50" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#36A03C"
+                        android:text="ADD +"
+                        android:textColor="#0C0C0C"
+                        />
+
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Payement Type"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="10dp"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cash On Delivery"
+                    android:checked="true"
+                    android:layout_marginLeft="30dp"
+                    />
 
 
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:textStyle="bold"
-    android:text="Delivery To:"
-    android:textSize="17sp"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textStyle="bold"
+                    android:text="Delivery To:"
+                    android:textSize="17sp"
 
-    />
-            <TextView
-                android:id="@+id/tv_user_address_map_view"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-                android:textSize="14sp"
-                android:text="c1, monallee tower, bastola"
-                android:background="@drawable/background_delivery_address"
-                />
-
-
+                    />
+                <TextView
+                    android:id="@+id/tv_user_address_map_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:textSize="14sp"
+                    android:text="c1, monallee tower, bastola"
+                    android:background="@drawable/background_delivery_address"
+                    />
 
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="30dp"
-    android:gravity="center"
-    android:orientation="horizontal"
-    android:id="@+id/snackbar_show">
 
-    <Button
-        android:id="@+id/preorderfoodID"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:text="Pre-Order"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#0A0909"
 
-        />
-    <Button
-        android:id="@+id/btn_applyPromo"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_width="180dp"
-        android:text="Apply Promo"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#0A0909"
-        android:layout_margin="10dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:id="@+id/snackbar_show">
 
-/>
+                    <Button
+                        android:id="@+id/preorderfoodID"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:text="Pre-Order"
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:textColor="#0A0909"
 
-</LinearLayout>
+                        />
+                    <Button
+                        android:id="@+id/btn_applyPromo"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_width="180dp"
+                        android:text="Apply Promo"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:textColor="#0A0909"
+                        android:layout_margin="10dp"
 
-            <Button
-                android:id="@+id/placeOrderId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Place Order"
-                android:gravity="center"
-               android:layout_marginBottom="2dp"
-                android:layout_marginTop="5dp"
-                android:backgroundTint="#247027"
-                android:textColor="#0A0909"
-                />
-        </LinearLayout>
-</RelativeLayout>
+                        />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/placeOrderId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Place Order"
+                    android:gravity="center"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="5dp"
+                    android:backgroundTint="#247027"
+                    android:textColor="#0A0909"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
-    </LinearLayout>
+</LinearLayout>

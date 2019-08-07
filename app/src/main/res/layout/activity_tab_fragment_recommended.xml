@@ -28,7 +28,7 @@
     <com.smarteist.autoimageslider.SliderLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-
+android:outlineAmbientShadowColor="@color/white"
         android:id="@+id/FoodAppimageSlider"/>
 
         </com.google.android.material.card.MaterialCardView>

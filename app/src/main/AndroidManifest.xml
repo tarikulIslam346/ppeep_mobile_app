@@ -94,7 +94,8 @@
         <activity android:name="com.facebook.accountkit.ui.AccountKitActivity" />
         <activity
             android:name=".HomePage"
-            android:theme="@style/AppTheme2.NoActionBar"
+            android:theme="@style/AppTheme"
+
 
 
          />
