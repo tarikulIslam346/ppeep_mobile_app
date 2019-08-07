@@ -307,17 +307,25 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginLeft="10dp"
                 />
+            <TextView
+                android:id="@+id/tv_my_point"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="My point: 0.0 "
+                android:layout_marginLeft="10dp"
+                android:textSize="18sp"
+                />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
             <CheckBox
                 android:id="@+id/pointcheckbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_centerHorizontal="true" />
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/userEmailTextInputLayout"
@@ -335,15 +343,15 @@
                     android:hint="Max point use per order 50" />
             </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Payement Type"
-    android:textSize="18sp"
-    android:textStyle="bold"
-    android:layout_marginTop="40dp"
-    android:layout_marginLeft="10dp"
-    />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Payement Type"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
+            />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

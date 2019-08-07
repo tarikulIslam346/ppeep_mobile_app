@@ -60,7 +60,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     int total_price_without_vat_deliveryCharg;
     int vat,deliveryCharge;
     float total_with_vat_delivery_chrage;
-    TextView addressOnMap;
+    TextView addressOnMap,tv_my_point;
 
     Toolbar foodToolbar;
     String ItemIds="",ItemAmounts="";
@@ -71,29 +71,30 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     URL orderCreateUrl;
     Button orderSubmit,preOrderFood,promoApply;
     ProgressDialog dialog;
+    String myPhoneNo;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_cart_page);
+        mdb = UserDatabase.getInstance(getApplicationContext());
         mListOfCartItem = (RecyclerView)findViewById(R.id.recycler_cart);
 
 
         foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
         setSupportActionBar(foodToolbar);
 
-
-
+        loadUserFromDb();
 
         addressOnMap = (TextView) findViewById(R.id.tv_user_address_map_view);
-        /*addressOnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mapView = new Intent(getApplicationContext(),UserMapActivity.class);;
-                startActivity(mapView);
-            }
-        });*/
+
+        tv_my_point = (TextView) findViewById(R.id.tv_my_point) ;
+
+        ShowLoder("Loading Point ...");
+        URL userPointUrl = NetworkUtils.buildUserPointUrl();
+        new PointTask().execute(userPointUrl);
+
 
         orderSubmit = (Button) findViewById(R.id.placeOrderId);
         orderSubmit.setVisibility(View.INVISIBLE);
@@ -128,7 +129,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         });
 
 
-        mdb = UserDatabase.getInstance(getApplicationContext());
+
         List<OrderMerchantModel> orderMerchant = mdb.orderMercahntDAO().loadOrderMerchant();
         mRestaurantName = (TextView) findViewById(R.id.tv_restaurant_name_food_cart);
         mDeliveryCharge = (TextView) findViewById(R.id.tv_delivery_charge);
@@ -185,61 +186,6 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
             addressOnMap.setText(address);
         }
 
-        //List<UserModel> user = mdb.userDAO().loadPhone()
-
-       // Intent foodCart = getIntent();
-        //String address = foodCart.getStringExtra("address");
-       // if(address!=null) addressOnMap.setText(address);
-       /* else{
-            MyLocation myLocation = new MyLocation(FoodCartPage.this);
-            myLocation.setListener(new MyLocation.MyLocationListener() {
-                @Override
-                public void onLocationFound(Location location) {
-
-                    lat = location.getLatitude();
-                    lng = location.getLongitude();
-                    ShowLoder("Loading..");
-                    VolleyRequest volleyRequest = new VolleyRequest(FoodCartPage.this);
-                    volleyRequest.VolleyGet(Api.reverseGeo + "demo?lat=" + lat + "&lng=" + lng + "&address_level=UPTO_THANA");
-                    volleyRequest.setListener(new VolleyRequest.MyServerListener() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-
-                            try {
-                                //((EditText) findViewById(R.id.address)).setText(response.getJSONObject("result").getString("address"));
-                                String address = response.getJSONObject("result").getString("address");
-                                addressOnMap.setText(address);
-                                dialog.dismiss();
-
-
-                            } catch (Exception e) {
-
-                            }
-
-
-                        }
-
-                        @Override
-                        public void onError(String error) {
-                            Toast.makeText(FoodCartPage.this, error, Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void responseCode(int resposeCode) {
-
-                        }
-                    });
-
-
-
-                }
-
-                @Override
-                public void onFailed() {
-
-                }
-            });
-        }*/
 
 
         orderSubmit.setOnClickListener(new View.OnClickListener() {
@@ -311,6 +257,8 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -325,6 +273,16 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     public void ShowLoder(String message){
         dialog = ProgressDialog.show(this, "",
                 message, true);
+    }
+    public  void loadUserFromDb(){
+        List<UserModel> user =  mdb.userDAO().loadPhone();//select all data form room database user table
+
+        if(user.size()!= 0){//if data exist
+
+            myPhoneNo = user.get(0).getPhone();// set phone to text view
+
+            //myProfileName.setText(user.get(0).getName());// set name to text view
+        }
     }
 
 
@@ -367,6 +325,68 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
        // Toast.makeText(getApplicationContext(),order.get(clickedItemIndex).getItemName() +"  has been deleted from cart"  ,Toast.LENGTH_SHORT).show();
 
+    }
+
+    public class PointTask extends AsyncTask<URL, Void, String> {
+
+
+        @Override
+        protected String doInBackground(URL... params) {
+            URL searchUrl = params[0];
+            String UserPointResults = null;
+            try {
+                UserPointResults = NetworkUtils.getUserPointFromHttpUrl(searchUrl,myPhoneNo);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return UserPointResults;
+        }
+
+        @Override
+        protected void onPostExecute(String UserPointResults) {
+
+            if (UserPointResults != null && !UserPointResults.equals("")) {
+
+
+                String json = UserPointResults;
+
+                JSONObject userPointInfo = null;
+
+
+                JSONArray jsonArray ;
+
+                double total_point = 0.0;
+
+                try {
+
+                    userPointInfo = new JSONObject(json);
+
+                    jsonArray = userPointInfo.getJSONArray("user_earn_point");
+
+                    for (int i=0; i<jsonArray.length(); i++) {
+
+                        JSONObject driverProfile = jsonArray.getJSONObject(i);
+
+                        total_point = driverProfile.getDouble("total_point");
+
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                dialog.dismiss();
+
+                if(total_point != 0.0){
+                    tv_my_point.setText("Your Available  Point : "+String.valueOf(total_point));
+                }
+                //  mSearchResultsTextView.setText(allNames.get(8));
+            }else{
+                dialog.dismiss();
+                Toast.makeText(getApplicationContext(), "No restaurant menu found or net connection error", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
    public class OrderTask extends AsyncTask<URL, Void, String> {
