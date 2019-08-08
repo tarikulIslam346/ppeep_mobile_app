@@ -56,11 +56,11 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     private RecyclerView mListOfCartItem;
     private FoodCartPageAdapter foodCartPageAdapter;
     private UserDatabase mdb;
-    private TextView mRestaurantName, mDeliveryCharge, mVat,mSubTotal,mTotal;
+    private TextView mRestaurantName, mDeliveryCharge, mVat,mSubTotal,mTotal,mDiscount;
     int total_price_without_vat_deliveryCharg;
     int vat,deliveryCharge;
-    float total_with_vat_delivery_chrage;
-    TextView addressOnMap;
+    double total_with_vat_delivery_chrage,discount;
+    TextView addressOnMap,tv_my_point;
 
     Toolbar foodToolbar;
     String ItemIds="",ItemAmounts="";
@@ -71,32 +71,48 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     URL orderCreateUrl;
     Button orderSubmit,preOrderFood,promoApply;
     ProgressDialog dialog;
+    String myPhoneNo;
+    EditText mPointInput;
+    Button mAddPoint;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_cart_page);
+        mdb = UserDatabase.getInstance(getApplicationContext());
+        loadUserFromDb();
         mListOfCartItem = (RecyclerView)findViewById(R.id.recycler_cart);
 
 
         foodToolbar = (Toolbar) findViewById(R.id.foodtoolbar);
         setSupportActionBar(foodToolbar);
-
-
-
-
+        mPointInput = (EditText)findViewById(R.id.userPointTextInputEditText) ;
+        mAddPoint = (Button)findViewById(R.id.bt_add_point) ;
         addressOnMap = (TextView) findViewById(R.id.tv_user_address_map_view);
-        /*addressOnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mapView = new Intent(getApplicationContext(),UserMapActivity.class);;
-                startActivity(mapView);
-            }
-        });*/
+
+        tv_my_point = (TextView) findViewById(R.id.tv_my_point) ;
+        mAddPoint.setVisibility(View.INVISIBLE);
+
+        List<OrderMerchantModel> orderMerchant = mdb.orderMercahntDAO().loadOrderMerchant();
+        mRestaurantName = (TextView) findViewById(R.id.tv_restaurant_name_food_cart);
+        mDeliveryCharge = (TextView) findViewById(R.id.tv_delivery_charge);
+        mVat = (TextView) findViewById(R.id.tv_total_vat);
+        mSubTotal = (TextView) findViewById(R.id.tv_food_price);
+        mTotal = (TextView) findViewById(R.id.tv_order_item_price);
+        mDiscount = (TextView) findViewById(R.id.tv_discount_amount);
+
+        discount = 0.0;
+        //mDiscount.setVisibility(View.INVISIBLE);
+
+
+
+
 
         orderSubmit = (Button) findViewById(R.id.placeOrderId);
         orderSubmit.setVisibility(View.INVISIBLE);
+
+
 
 
         preOrderFood = (Button) findViewById(R.id.preorderfoodID);
@@ -128,13 +144,9 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         });
 
 
-        mdb = UserDatabase.getInstance(getApplicationContext());
-        List<OrderMerchantModel> orderMerchant = mdb.orderMercahntDAO().loadOrderMerchant();
-        mRestaurantName = (TextView) findViewById(R.id.tv_restaurant_name_food_cart);
-        mDeliveryCharge = (TextView) findViewById(R.id.tv_delivery_charge);
-        mVat = (TextView) findViewById(R.id.tv_total_vat);
-        mSubTotal = (TextView) findViewById(R.id.tv_food_price);
-        mTotal = (TextView) findViewById(R.id.tv_order_item_price);
+
+
+
 
         if(orderMerchant.size() !=0){
             String restaurantName = orderMerchant.get(0).getMerchantName();
@@ -149,7 +161,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         }
 
 
-        mdb = UserDatabase.getInstance(getApplicationContext());//intantiate room database
+        //mdb = UserDatabase.getInstance(getApplicationContext());//intantiate room database
        List<OrderModel> order =  mdb.orderDAO().loadOrder();//select all data form room database user table
 
         if(order.size()!= 0){//if data exist
@@ -185,61 +197,6 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
             addressOnMap.setText(address);
         }
 
-        //List<UserModel> user = mdb.userDAO().loadPhone()
-
-       // Intent foodCart = getIntent();
-        //String address = foodCart.getStringExtra("address");
-       // if(address!=null) addressOnMap.setText(address);
-       /* else{
-            MyLocation myLocation = new MyLocation(FoodCartPage.this);
-            myLocation.setListener(new MyLocation.MyLocationListener() {
-                @Override
-                public void onLocationFound(Location location) {
-
-                    lat = location.getLatitude();
-                    lng = location.getLongitude();
-                    ShowLoder("Loading..");
-                    VolleyRequest volleyRequest = new VolleyRequest(FoodCartPage.this);
-                    volleyRequest.VolleyGet(Api.reverseGeo + "demo?lat=" + lat + "&lng=" + lng + "&address_level=UPTO_THANA");
-                    volleyRequest.setListener(new VolleyRequest.MyServerListener() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-
-                            try {
-                                //((EditText) findViewById(R.id.address)).setText(response.getJSONObject("result").getString("address"));
-                                String address = response.getJSONObject("result").getString("address");
-                                addressOnMap.setText(address);
-                                dialog.dismiss();
-
-
-                            } catch (Exception e) {
-
-                            }
-
-
-                        }
-
-                        @Override
-                        public void onError(String error) {
-                            Toast.makeText(FoodCartPage.this, error, Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void responseCode(int resposeCode) {
-
-                        }
-                    });
-
-
-
-                }
-
-                @Override
-                public void onFailed() {
-
-                }
-            });
-        }*/
 
 
         orderSubmit.setOnClickListener(new View.OnClickListener() {
@@ -251,13 +208,10 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
                 orderCreateUrl = NetworkUtils.buildOrderUrl();
                 new OrderTask().execute(orderCreateUrl);
 
-               // Intent orderSubmitIntent = new Intent(getApplicationContext(),OrderSubmitComplete.class);
-              //  startActivity(orderSubmitIntent);
 
             }
 
         });
-        //Toast.makeText(getApplicationContext(), "Mercahnt Id : " + mercahntId + " ,Client phone No : "+ phoneNo + ",Order Item : " + itemId, Toast.LENGTH_LONG).show();
 
 
 
@@ -271,8 +225,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
         mListOfCartItem.setAdapter(foodCartPageAdapter);
 
-        //DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(), VERTICAL);
-       // mListOfCartItem.addItemDecoration(decoration);
+
 
         /*
          Add a touch helper to the RecyclerView to recognize when a user swipes to delete an item.
@@ -309,7 +262,16 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         }).attachToRecyclerView(mListOfCartItem);
         mdb = UserDatabase.getInstance(getApplicationContext());
 
+
+        if(myPhoneNo!=null){
+            ShowLoder("Loading Point ...");
+            URL userPointUrl = NetworkUtils.buildUserPointUrl();
+            new PointTask().execute(userPointUrl);
+        }
+
     }
+
+
 
     @Override
     protected void onResume() {
@@ -326,29 +288,49 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         dialog = ProgressDialog.show(this, "",
                 message, true);
     }
+    public  void loadUserFromDb(){
+        List<UserModel> user =  mdb.userDAO().loadPhone();//select all data form room database user table
+
+        if(user.size()!= 0){//if data exist
+
+            myPhoneNo = user.get(0).getPhone();// set phone to text view
+
+            //myProfileName.setText(user.get(0).getName());// set name to text view
+        }
+    }
 
 
 
     private void  retriveOrder(){
         final List<OrderModel> order = mdb.orderDAO().loadOrder();
+
         foodCartPageAdapter.setmOrders(order);
+
         total_price_without_vat_deliveryCharg=0;
+
         if(order.size() != 0){
+
             total_with_vat_delivery_chrage = 0;
             for(int i =0;i<order.size();i++){
                 total_price_without_vat_deliveryCharg = total_price_without_vat_deliveryCharg + order.get(i).getItemPrice() * order.get(i).getItemAmount();
             }
+
             mSubTotal.setText(String.valueOf(total_price_without_vat_deliveryCharg));
 
-            float totalvat = (total_price_without_vat_deliveryCharg * vat)/100;
-            total_with_vat_delivery_chrage = total_price_without_vat_deliveryCharg +  totalvat +deliveryCharge;
+            double totalvat = (total_price_without_vat_deliveryCharg * vat)/100;
+
+            total_with_vat_delivery_chrage = (total_price_without_vat_deliveryCharg +  totalvat + deliveryCharge)- discount;
+
             mVat.setText(String.valueOf(totalvat));
+
             mTotal.setText(String.valueOf(total_with_vat_delivery_chrage));
+
         }else{
             mSubTotal.setText("0.0");
             mVat.setText("0.0");
             mTotal.setText("0.0");
             mDeliveryCharge.setText("0.0");
+            mDiscount.setText("0.0");
             List<OrderMerchantModel> orderMerchantModel = mdb.orderMercahntDAO().loadOrderMerchant();
             if(orderMerchantModel.size() !=0 ){
                 mdb.orderMercahntDAO().deleteOrderMerchant(orderMerchantModel.get(0));
@@ -369,6 +351,122 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
     }
 
+    public class PointTask extends AsyncTask<URL, Void, String> {
+
+
+        @Override
+        protected String doInBackground(URL... params) {
+            URL searchUrl = params[0];
+            String UserPointResults = null;
+            try {
+                UserPointResults = NetworkUtils.getUserPointFromHttpUrl(searchUrl,myPhoneNo);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return UserPointResults;
+        }
+
+        @Override
+        protected void onPostExecute(String UserPointResults) {
+
+            if (UserPointResults != null && !UserPointResults.equals("")) {
+
+
+                String json = UserPointResults;
+
+                JSONObject userPointInfo = null;
+
+
+                JSONArray jsonArray ;
+
+                double total_point = 0.0;
+
+                try {
+
+                    userPointInfo = new JSONObject(json);
+
+                    jsonArray = userPointInfo.getJSONArray("user_earn_point");
+
+                    for (int i=0; i<jsonArray.length(); i++) {
+
+                        JSONObject driverProfile = jsonArray.getJSONObject(i);
+
+                        total_point = driverProfile.getDouble("total_point");
+
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                dialog.dismiss();
+
+                if(total_point != 0.0){
+                    final  double myPoint = total_point;
+                    tv_my_point.setText("Your Available  Point : "+String.valueOf(total_point));
+                    mAddPoint.setVisibility(View.VISIBLE);
+
+                    mAddPoint.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(     mPointInput.getText()!=null
+                                    && !mPointInput.getText().equals("")
+                                    && Integer.valueOf(mPointInput.getText().toString()) <= 50
+                                    && Integer.valueOf(mPointInput.getText().toString()) > 0
+                                    && Double.valueOf(mPointInput.getText().toString()) <= myPoint
+                            ){
+
+                               // mDiscount.setVisibility(View.VISIBLE);
+                                mDiscount.setText(mPointInput.getText());
+                                tv_my_point.setText("Your Available  Point : "+(myPoint- 50));
+                                discount = Double.valueOf(mPointInput.getText().toString());
+                                retriveOrder();
+
+                            }else{
+                                if(Double.valueOf(mPointInput.getText().toString()) > myPoint){
+                                    //update from server
+                                    View parentLayout = findViewById(R.id.sb_food_cart_page);
+                                    Snackbar.make(parentLayout,  " Balance not available", Snackbar.LENGTH_INDEFINITE)
+                                            .setAction("Close", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+
+                                                }
+                                            })
+                                            .show();
+                                }
+                                if(Integer.valueOf(mPointInput.getText().toString() ) > 50){
+                                    //update from server
+                                    View parentLayout = findViewById(R.id.sb_food_cart_page);
+                                    Snackbar.make(parentLayout,  " Please Enter less Or equal 50 point", Snackbar.LENGTH_INDEFINITE)
+                                            .setAction("Close", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+
+                                                }
+                                            })
+                                            .show();
+                                }
+                                if(mPointInput.getText()==null
+                                        && !mPointInput.getText().equals("")){
+                                    View parentLayout = findViewById(R.id.sb_food_cart_page);
+                                    Snackbar.make(parentLayout,  " Please Enter point", Snackbar.LENGTH_INDEFINITE)
+                                            .show();
+                                }
+
+                            }
+                        }
+                    });
+                }
+                //  mSearchResultsTextView.setText(allNames.get(8));
+            }else{
+                dialog.dismiss();
+                Toast.makeText(getApplicationContext(), "No restaurant menu found or net connection error", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
    public class OrderTask extends AsyncTask<URL, Void, String> {
 
         // COMPLETED (2) Override the doInBackground method to perform the query. Return the results. (Hint: You've already written the code to perform the query)
@@ -377,7 +475,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
             URL searchUrl = params[0];
             String DriverResults = null;
             try {
-                DriverResults = NetworkUtils.getFoodOrderFromHttpUrl(searchUrl,ItemIds,ItemAmounts,phoneNo,String.valueOf(merchantId),String.valueOf(lat),String.valueOf(lng), addressOnMap.getText().toString());
+                DriverResults = NetworkUtils.getFoodOrderFromHttpUrl(searchUrl,ItemIds,ItemAmounts,String.valueOf(discount),phoneNo,String.valueOf(merchantId),String.valueOf(lat),String.valueOf(lng), addressOnMap.getText().toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -102,13 +102,13 @@
             app:bubbleTab_image2="@drawable/recommendedicon2"
             app:bubbleTab_image3="@drawable/freedeliveryicon" />
 
-        <androidx.viewpager.widget.ViewPager
+        <!--<androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/viewPagerId">
 
-        </androidx.viewpager.widget.ViewPager>
-      <!--  <com.sothree.slidinguppanel.SlidingUpPanelLayout
+        </androidx.viewpager.widget.ViewPager>-->
+   <com.sothree.slidinguppanel.SlidingUpPanelLayout
             xmlns:sothree="http://schemas.android.com/apk/res-auto"
             android:id="@+id/sliding_layout"
             android:layout_width="match_parent"
@@ -246,8 +246,18 @@
 
 
     </LinearLayout>
+
+  <!--  <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <include layout="@layout/foodapp_bottom_sheet" />
+
+
+    </android.support.v4.widget.NestedScrollView>-->
     <!-- include bottom sheet -->
-    <include layout="@layout/foodapp_bottom_sheet" />
+
 
 </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

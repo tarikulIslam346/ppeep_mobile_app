@@ -42,21 +42,34 @@
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_restaurant_name"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:padding="5dp"
-                    android:paddingRight="16dp"
-                    android:text="Congratulation!!"
-                    android:textColor="#4CAF50"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:singleLine="true"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    />
+
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_restaurant_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="80dp"
+                        android:padding="5dp"
+                        android:paddingRight="16dp"
+                        android:text="Congratulation!!"
+                        android:textColor="#4CAF50"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/crossicon"/>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_order_status"
