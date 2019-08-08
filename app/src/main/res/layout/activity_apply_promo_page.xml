@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp"
     android:orientation="vertical"
-    tools:context=".ApplyPromoPage">
+    tools:context=".ApplyPromoPage"
+    android:id="@+id/sb_promo_page">
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,7 +20,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userIDTextInputLayout"
+        android:id="@+id/promoInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
@@ -31,7 +32,7 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/userIDTextInputEditText"
+            android:id="@+id/promoInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Promo Code" />
@@ -44,6 +45,7 @@
         android:layout_margin="5dp"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/bt_cancel"
             android:layout_width="200dp"
             android:padding="5dp"
             android:layout_margin="5dp"
@@ -54,14 +56,123 @@
             android:textColor="@android:color/black"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/bt_apply_promo"
             android:layout_width="200dp"
             android:padding="5dp"
             android:layout_margin="5dp"
-            android:text="APPLY"
+            android:text="ADD"
             android:textStyle="bold"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:id="@+id/card_layout_promo_code">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Promocode : "
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="#4CAF50"/>
+                <TextView
+                    android:id="@+id/tv_promo_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XXXXXX"
+                    android:textSize="24sp"/>
+             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Discount Percentage (%): "
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="#4CAF50"/>
+                <TextView
+                    android:id="@+id/tv_promocode_percentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20"
+                    android:textSize="24sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Available For : "
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="#4CAF50"/>
+                <TextView
+                    android:id="@+id/tv_promocode_order_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2 order"
+                    android:textSize="24sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Max Discount Amount : "
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="#4CAF50"/>
+                <TextView
+                    android:id="@+id/tv_promocode_max_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="200 BDT"
+                    android:textSize="24sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Validity: "
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="#4CAF50"/>
+                <TextView
+                    android:id="@+id/tv_promocode_validity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2019-10-12"
+                    android:textSize="24sp"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/bt_accept_promo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Confirm"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 
 </LinearLayout>

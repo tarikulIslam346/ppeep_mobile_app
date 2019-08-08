@@ -41,6 +41,7 @@ import com.google.android.material.snackbar.Snackbar;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,8 +60,8 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     private TextView mRestaurantName, mDeliveryCharge, mVat,mSubTotal,mTotal,mDiscount;
     int total_price_without_vat_deliveryCharg;
     int vat,deliveryCharge;
-    double total_with_vat_delivery_chrage,discount;
-    TextView addressOnMap,tv_my_point;
+    double total_with_vat_delivery_chrage,discount,promoDiscount,promoMaxDiscountAmount;
+    TextView addressOnMap,tv_my_point,mPromoPercentageTextView,mPromoCodeDiscount;
 
     Toolbar foodToolbar;
     String ItemIds="",ItemAmounts="";
@@ -74,6 +75,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     String myPhoneNo;
     EditText mPointInput;
     Button mAddPoint;
+    String promoCode,promoPercentage,promocodeMaxDiscount;
 
 
     @Override
@@ -101,8 +103,12 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         mSubTotal = (TextView) findViewById(R.id.tv_food_price);
         mTotal = (TextView) findViewById(R.id.tv_order_item_price);
         mDiscount = (TextView) findViewById(R.id.tv_discount_amount);
+        mPromoPercentageTextView = (TextView)findViewById(R.id.tv_discount_amount_promo_code) ;
+        mPromoCodeDiscount = (TextView)findViewById(R.id.tv_discount_amount_promo_code_cash);
 
         discount = 0.0;
+        promoDiscount = 0.0;
+        promoMaxDiscountAmount=0.0;
         //mDiscount.setVisibility(View.INVISIBLE);
 
 
@@ -111,6 +117,21 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
         orderSubmit = (Button) findViewById(R.id.placeOrderId);
         orderSubmit.setVisibility(View.INVISIBLE);
+
+
+        Intent promoIntent = getIntent();
+        promoCode = promoIntent.getStringExtra("promo_code");
+        promoPercentage = promoIntent.getStringExtra("percentage");
+        promocodeMaxDiscount = promoIntent.getStringExtra("max_discount");
+
+        if(promoCode!=null){
+
+        }
+        if(promoCode!=null && promoPercentage!=null & promocodeMaxDiscount!=null){
+            promoMaxDiscountAmount = Double.valueOf(promocodeMaxDiscount);
+            promoDiscount = Double.valueOf(promoPercentage);
+            mPromoPercentageTextView.setText("Discount(" +promoPercentage +"%)");
+        }
 
 
 
@@ -137,6 +158,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
             public void onClick(View v) {
 
                 Intent PromoApplyIntent = new Intent(getApplicationContext(),ApplyPromoPage.class);
+                finish();
                 startActivity(PromoApplyIntent);
 
             }
@@ -319,7 +341,24 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
             double totalvat = (total_price_without_vat_deliveryCharg * vat)/100;
 
-            total_with_vat_delivery_chrage = (total_price_without_vat_deliveryCharg +  totalvat + deliveryCharge)- discount;
+            double promoDiscountAmount = (total_price_without_vat_deliveryCharg * promoDiscount)/100;
+
+            if(promoDiscount!=0.0){
+                if(promoMaxDiscountAmount==0.0){
+                    mPromoCodeDiscount.setText(String.valueOf(promoDiscountAmount));
+                }else{
+                    if(promoMaxDiscountAmount < promoDiscountAmount){
+                        promoDiscountAmount = promoMaxDiscountAmount;
+                        mPromoCodeDiscount.setText(String.valueOf(promoMaxDiscountAmount));
+                    }else{
+                        mPromoCodeDiscount.setText(String.valueOf(promoDiscountAmount));
+                    }
+
+                }
+
+            }
+
+            total_with_vat_delivery_chrage = (total_price_without_vat_deliveryCharg +  totalvat + deliveryCharge)- (discount+promoDiscountAmount);
 
             mVat.setText(String.valueOf(totalvat));
 

@@ -81,11 +81,25 @@ public class NetworkUtils {
 
     final static  String GET_USER_NOTIFICATION = BASE_URL+"user/notification";
 
+    final static  String GET_PROMO_CODE = BASE_URL+"user/getpromo";
+
+
 
 
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
     final static String sortBy = "stars";*/
+
+    public static URL buildUserGetPromoUrl() {
+        Uri builtUri = Uri.parse(GET_PROMO_CODE).buildUpon().build();
+        URL getPromoCodeurl = null;
+        try {
+            getPromoCodeurl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return getPromoCodeurl;
+    }
 
     public static URL buildUserNotificationUrl() {
         Uri builtUri = Uri.parse(GET_USER_NOTIFICATION).buildUpon().build();
@@ -1103,8 +1117,42 @@ public class NetworkUtils {
         }
     }
 
-    public static String getImageUploadResponseFromHttpUrl(URL uploadUserImageurl, String phone,Bitmap image) throws IOException {
+    public static String getPromoCodeResponseFromHttpUrl(URL userPromoCodeUrl, String phone, String code) throws IOException {
 
+        HttpURLConnection urlConnection = (HttpURLConnection) userPromoCodeUrl.openConnection();//establish connection
+        urlConnection.setRequestMethod("POST");//use post method
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "phone", phone);
+        param.put( "code", code);
+
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(param));
+        writer.flush();
+        writer.close();
+        os.close();
+        urlConnection.connect();
+
+        try {
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static String getImageUploadResponseFromHttpUrl(URL uploadUserImageurl, String phone,Bitmap image) throws IOException {
+//Incmomplete
         HttpURLConnection urlConnection = (HttpURLConnection) uploadUserImageurl.openConnection();//establish connection
         urlConnection.setRequestMethod("POST");//use post method
         urlConnection.setRequestProperty("Content-Type", "multipart/form-data");

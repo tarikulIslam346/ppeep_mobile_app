@@ -195,9 +195,33 @@
 
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:text="Discount" />
+                        android:text="Discount(Point)" />
                     <TextView
                         android:id="@+id/tv_discount_amount"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="0.0"/>
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="Taka"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="6dp">
+
+                    <TextView
+                        android:id="@+id/tv_discount_amount_promo_code"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="Discount(%)" />
+                    <TextView
+                        android:id="@+id/tv_discount_amount_promo_code_cash"
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
