@@ -12,9 +12,9 @@
 
 
 <ImageView
-    android:layout_width="160dp"
-    android:layout_height="160dp"
-    android:src="@drawable/notification_not_avaiable"
+    android:layout_width="260dp"
+    android:layout_height="260dp"
+    android:src="@drawable/notification_design"
     android:layout_marginBottom="30dp"/>
 
     <TextView

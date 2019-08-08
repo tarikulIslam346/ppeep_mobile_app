@@ -114,7 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom"
-            sothree:umanoPanelHeight="68dp"
+            sothree:umanoPanelHeight="30dp"
             sothree:umanoShadowHeight="4dp">
 
                 <androidx.viewpager.widget.ViewPager
@@ -124,52 +124,12 @@
 
                 </androidx.viewpager.widget.ViewPager>
 
-            <LinearLayout
+         <!--   <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="600dp"
                 android:orientation="vertical">
 
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.7"
-                        android:orientation="horizontal">
-
-                        <SeekBar android:id="@+id/seekBar1"
-                            android:layout_width="0dp"
-                            android:layout_weight=".25"
-                            android:layout_height="wrap_content"
-                            android:max="100"
-                            android:layout_margin="0dp"
-                            android:indeterminate="true"
-                            android:progress="0"
-                            />
-                        <SeekBar android:id="@+id/seekBar2"
-                            android:layout_width="0dp"
-                            android:layout_weight=".25"
-                            android:layout_height="wrap_content"
-                            android:max="100"
-                            android:layout_margin="0dp"
-                            android:indeterminate="true"
-                            android:progress="0" />
-                        <SeekBar android:id="@+id/seekBar3"
-                            android:layout_width="0dp"
-                            android:layout_weight=".25"
-                            android:layout_height="wrap_content"
-                            android:max="100"
-                            android:layout_margin="0dp"
-                            android:indeterminate="true"
-                            android:progress="0" />
-                        <SeekBar android:id="@+id/seekBar4"
-                            android:layout_width="0dp"
-                            android:layout_weight=".25"
-                            android:layout_height="wrap_content"
-                            android:max="100"
-                            android:layout_margin="0dp"
-                            android:indeterminate="true"
-                            android:progress="0" />
-                    </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -236,9 +196,10 @@
 
 
 
-            </LinearLayout>
+            </LinearLayout>-->
 
 
+       <include layout="@layout/foodapp_bottom_sheet" />
 
         </com.sothree.slidinguppanel.SlidingUpPanelLayout>-->
 
