@@ -114,7 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom"
-            sothree:umanoPanelHeight="30dp"
+            sothree:umanoPanelHeight="45dp"
             sothree:umanoShadowHeight="4dp">
 
                 <androidx.viewpager.widget.ViewPager

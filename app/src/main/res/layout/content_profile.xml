@@ -129,7 +129,10 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:layout_toRightOf="@id/addressImageView"
-                android:text="Monalee Tower, Bastola, Dhaka, Bangladesh" />
+                android:text="Monalee Tower, Bastola, Dhaka, Bangladesh"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:maxLines="1"/>
 
             <ImageView
                 android:id="@+id/AddressEditID"
