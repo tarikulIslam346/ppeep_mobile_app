@@ -72,7 +72,7 @@ public class FragmentNotification extends Fragment {
 
             phoneNo = user.get(0).getPhone();
 
-            ShowLoder("Loading History.. ..");
+            ShowLoder("Loading Notification....","Notification");
 
             URL userNotificationUrl = NetworkUtils.buildUserNotificationUrl();
 
@@ -82,9 +82,9 @@ public class FragmentNotification extends Fragment {
 
         return v;
     }
-    public void ShowLoder(String message){
+    public void ShowLoder(String message,String title){
 
-        dialog = ProgressDialog.show(getContext(), "", message, true);
+        dialog = ProgressDialog.show(getContext(), title, message, true);
     }
 
     public class  NotificationListTask extends AsyncTask<URL, Void, String> implements   FragmentNotificationAdapter.ListItemClickListener {
