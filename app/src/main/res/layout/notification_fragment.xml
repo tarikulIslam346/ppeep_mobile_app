@@ -7,17 +7,26 @@
     android:background="#ffff"
     android:gravity="center"
     android:layout_marginBottom="70dp"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:id="@+id/rv_notification">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
-<ImageView
-    android:layout_width="160dp"
-    android:layout_height="160dp"
-    android:src="@drawable/notification_not_avaiable"
-    android:layout_marginBottom="30dp"/>
+    <ImageView
+        android:id="@+id/no_notification_img"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:src="@drawable/notification_not_avaiable"
+        android:layout_marginBottom="30dp"/>
 
     <TextView
+        android:id="@+id/no_notification_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
