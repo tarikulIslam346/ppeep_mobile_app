@@ -24,14 +24,14 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="100dp">
-        <com.github.vipulasri.timelineview.TimelineView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:markerSize="20dp"
-            app:lineWidth="3dp"
-            app:startLineColor="@color/white"
-            app:endLineColor="@color/green"
-            app:lineStyle="normal"/>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+
+            android:layout_marginTop="5dp"
+            android:visibility="visible"
+            app:srcCompat="@drawable/animated_check" />
 
         <ImageView
             android:layout_width="52dp"
@@ -71,15 +71,14 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="100dp">
-            <com.github.vipulasri.timelineview.TimelineView
+            <ImageView
 
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:markerSize="20dp"
-                app:lineWidth="3dp"
-                app:startLineColor="#4CAF50"
-                app:endLineColor="#4CAF50"
-                app:lineStyle="dash"/>
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+
+                android:layout_marginTop="5dp"
+                android:visibility="visible"
+                app:srcCompat="@drawable/animated_check" />
             <ImageView
                 android:layout_width="52dp"
                 android:layout_height="52dp"
@@ -117,16 +116,14 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="100dp">
-            <com.github.vipulasri.timelineview.TimelineView
+            <ImageView
 
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:markerSize="20dp"
-                app:lineWidth="3dp"
-                app:startLineColor="#4CAF50"
-                app:endLineColor="#4CAF50"
-                app:lineStyle="dash"/>
+                android:layout_width="35dp"
+                android:layout_height="35dp"
 
+                android:layout_marginTop="5dp"
+                android:visibility="visible"
+                app:srcCompat="@drawable/animated_check" />
             <ImageView
                 android:layout_width="52dp"
                 android:layout_height="52dp"
@@ -142,7 +139,7 @@
                     android:textColor="@color/blackTextColor"
                     android:textSize="20dp"
                     android:paddingLeft="20dp"
-                    android:text="Order On The Way"
+                    android:text="Food On The Way"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -164,15 +161,14 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="100dp">
-            <com.github.vipulasri.timelineview.TimelineView
-                android:id="@+id/timeline"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:markerSize="20dp"
-                app:lineWidth="3dp"
-                app:startLineColor="#4CAF50"
-                app:endLineColor="#ffff"
-                app:lineStyle="dash"/>
+            <ImageView
+
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+
+                android:layout_marginTop="5dp"
+                android:visibility="visible"
+                app:srcCompat="@drawable/animated_check" />
 
             <ImageView
                 android:layout_width="52dp"
