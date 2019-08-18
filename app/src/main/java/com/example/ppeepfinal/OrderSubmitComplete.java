@@ -51,7 +51,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
     TextView driverName,driverContact;
 
-    ImageView driverImage;
+    ImageView driverImage,driverCallIcon;
 
     ProgressBar orderConfirmProgressbar;
 
@@ -99,6 +99,8 @@ public class OrderSubmitComplete extends AppCompatActivity {
         driverContact = (TextView) findViewById(R.id.tv_contact);
 
         driverImage = (ImageView) findViewById(R.id.iv_driver_image);
+
+        driverCallIcon = (ImageView) findViewById(R.id.callDriverId);
          driverFound = (TextView) findViewById(R.id.tv_driver_found);
          driverFound.setVisibility(View.INVISIBLE);
 
@@ -118,18 +120,13 @@ public class OrderSubmitComplete extends AppCompatActivity {
         String imageUrl = orderSubmitInten.getStringExtra("profile_pic");
 
 
-        //https://foodexpress.com.bd/ppeep/public/broadcasting/auth
-       // HttpAuthorizer authorizer = new HttpAuthorizer("https://foodexpress.com.bd/ppeep/public/broadcasting/auth");
-       // Toast.makeText(getApplicationContext(), ""+authorizer, Toast.LENGTH_SHORT).show();
-       // PusherOptions options = new PusherOptions().setAuthorizer(authorizer);
-
 
         PusherOptions options = new PusherOptions();
         options.setCluster("mt1");
         Pusher pusher = new Pusher("6211c9a7cfb062fa410d", options);
 
 
-        Channel channel = pusher.subscribe("my-channel");
+        Channel channel = pusher.subscribe("ppeep-order."+orderId);
 
        // PrivateChannel channel2 = pusher.subscribePrivate("private-orderConfirm."+orderId);
 
@@ -143,7 +140,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
                     public void run() {
                         addNotification("Your order has been accepted");
 
-                                Toast.makeText(getApplicationContext()," Order confirm : ",Toast.LENGTH_LONG).show();
+                               // Toast.makeText(getApplicationContext()," Order confirm : ",Toast.LENGTH_LONG).show();
                         if(imageUrl != null){
                             URL getimageUrl = NetworkUtils.buildDriverIamgeUrl(imageUrl);
 
@@ -157,11 +154,17 @@ public class OrderSubmitComplete extends AppCompatActivity {
                             driverFound.setVisibility(View.VISIBLE);
                             // Initialize an intent to open dialer app with specified phone number
                             // It open the dialer app and allow user to call the number manually
-                            Intent intent = new Intent(Intent.ACTION_DIAL);
-                            // Send phone number to intent as data
-                            intent.setData(Uri.parse("tel:" + "contact"));
-                            // Start the dialer app activity with number
-                            startActivity(intent);
+                            driverCallIcon.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                                    // Send phone number to intent as data
+                                    intent.setData(Uri.parse("tel:" + "contact"));
+                                    // Start the dialer app activity with number
+                                    startActivity(intent);
+                                }
+                            });
+
 
 
                         }
@@ -193,14 +196,14 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
 
                         Toast.makeText(getApplicationContext()," Order confirm By driver ",Toast.LENGTH_LONG).show();
-                        Intent homePageIntent = new Intent(OrderSubmitComplete.this,FoodApp.class);
+                        //Intent homePageIntent = new Intent(OrderSubmitComplete.this,FoodApp.class);
                         if(OrderId != 0) {
                             addNotification("Your order has been confirmed");
 
-                            homePageIntent.putExtra("order_id",String.valueOf(OrderId));
+                            //homePageIntent.putExtra("order_id",String.valueOf(OrderId));
                         }
-                        homePageIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
-                        startActivity(homePageIntent);
+                        //homePageIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                        //startActivity(homePageIntent);
 
 
                     }
