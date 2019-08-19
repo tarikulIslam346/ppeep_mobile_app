@@ -151,10 +151,22 @@ public class TabFragmentFoodHome extends Fragment {
         cardViewForSearchChiniseCusine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Intent intent = new Intent(getContext(),SearchRestaurant.class);
-                intent.putExtra("search","Chinese");
-                startActivity(intent);
-                //replaceFragment();
+                FragmentTransaction trans = getFragmentManager()
+                    .beginTransaction();
+                /*
+                 * IMPORTANT: We use the "root frame" defined in
+                 * "root_fragment.xml" as the reference to replace fragment
+                 */
+                trans.replace(R.id.root_frame, new TabFragmentFoodCuisineSearch());
+
+                /*
+                 * IMPORTANT: The following lines allow us to add the fragment
+                 * to the stack and return to it later, by pressing back
+                 */
+                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                trans.addToBackStack(null);
+
+                trans.commit();
 
             }
         });
@@ -162,27 +174,66 @@ public class TabFragmentFoodHome extends Fragment {
         cardViewForBakeryCusine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Intent intent = new Intent(getContext(),SearchRestaurant.class);
-                intent.putExtra("search","Bakery");
-                startActivity(intent);
+                FragmentTransaction trans = getFragmentManager()
+                        .beginTransaction();
+                /*
+                 * IMPORTANT: We use the "root frame" defined in
+                 * "root_fragment.xml" as the reference to replace fragment
+                 */
+                trans.replace(R.id.root_frame, new TabFragmentFoodCuisineSearch());
+
+                /*
+                 * IMPORTANT: The following lines allow us to add the fragment
+                 * to the stack and return to it later, by pressing back
+                 */
+                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                trans.addToBackStack(null);
+
+                trans.commit();
             }
         });
 
         cardViewForSearchBanglaCusine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Intent intent = new Intent(getContext(),SearchRestaurant.class);
-                intent.putExtra("search","Bangla");
-                startActivity(intent);
+                FragmentTransaction trans = getFragmentManager()
+                        .beginTransaction();
+                /*
+                 * IMPORTANT: We use the "root frame" defined in
+                 * "root_fragment.xml" as the reference to replace fragment
+                 */
+                trans.replace(R.id.root_frame, new TabFragmentFoodCuisineSearch());
+
+                /*
+                 * IMPORTANT: The following lines allow us to add the fragment
+                 * to the stack and return to it later, by pressing back
+                 */
+                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                trans.addToBackStack(null);
+
+                trans.commit();
             }
         });
 
         cardViewForSearchCFastFoodCusine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Intent intent = new Intent(getContext(),SearchRestaurant.class);
-                intent.putExtra("search","Fastfood");
-                startActivity(intent);
+                FragmentTransaction trans = getFragmentManager()
+                        .beginTransaction();
+                /*
+                 * IMPORTANT: We use the "root frame" defined in
+                 * "root_fragment.xml" as the reference to replace fragment
+                 */
+                trans.replace(R.id.root_frame, new TabFragmentFoodCuisineSearch());
+
+                /*
+                 * IMPORTANT: The following lines allow us to add the fragment
+                 * to the stack and return to it later, by pressing back
+                 */
+                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                trans.addToBackStack(null);
+
+                trans.commit();
             }
         });
 
