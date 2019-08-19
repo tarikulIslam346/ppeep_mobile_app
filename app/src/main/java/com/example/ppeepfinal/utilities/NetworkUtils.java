@@ -55,6 +55,9 @@ public class NetworkUtils {
 
     final  static  String RESTAURANT_SEARCH_URL =  BASE_URL+"search/nearby/restaurnats";
 
+    final  public static  String RESTAURANT_CUISINE_SEARCH_URL =  BASE_URL+"search/nearby/restaurnats/cuisine";
+
+
     final  static  String OFFER_URL =  BASE_URL+"offers";
 
     final  static  String PROFILE_DETAIL =  BASE_URL+"userinfo/phone";
@@ -89,6 +92,18 @@ public class NetworkUtils {
     // final static String PARAM_QUERY = "q";
    /* final static String PARAM_SORT = "sort";
     final static String sortBy = "stars";*/
+
+    public static URL buildUrl(String stringUrl) {
+        Uri builtUri = Uri.parse(stringUrl).buildUpon().build();
+        URL routeUrl = null;
+        try {
+            routeUrl = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return routeUrl;
+    }
 
     public static URL buildUserGetPromoUrl() {
         Uri builtUri = Uri.parse(GET_PROMO_CODE).buildUpon().build();

@@ -62,7 +62,7 @@ public class TabFragmentFoodCuisineSearch  extends Fragment {
             ShowLoder("Loding...");
             lat = String.valueOf(user.get(0).getLat());
             lng = String.valueOf(user.get(0).getLng());
-            URL restaurantSearchListUrl = NetworkUtils.buildSearchRestaurantUrl();
+            URL restaurantSearchListUrl = NetworkUtils.buildUrl(NetworkUtils.RESTAURANT_CUISINE_SEARCH_URL);
             new RestaurantListTask().execute(restaurantSearchListUrl);
             //Toast.makeText(getApplicationContext(),""+lat,Toast.LENGTH_LONG).show();
         }
