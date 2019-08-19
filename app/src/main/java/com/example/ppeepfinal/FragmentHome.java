@@ -245,22 +245,22 @@ public class FragmentHome extends Fragment {
 
             switch (i) {
                 case 0:
-                    String URL = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(0);
+                    String URL = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(2);
                     sliderView.setImageUrl(URL);
                     break;
                 case 1:
-                    String URL1 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(1);
+                    String URL1 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(3);
                     sliderView.setImageUrl(URL1);
 
                     break;
                 case 2:
 
-                    String URL2 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(2);
+                    String URL2 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(4);
                     sliderView.setImageUrl(URL2);
                     break;
                 case 3:
 
-                    String URL3 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(4);
+                    String URL3 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(0);
                     sliderView.setImageUrl(URL3);
                     break;
             }
