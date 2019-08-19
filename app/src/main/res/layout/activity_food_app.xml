@@ -208,7 +208,7 @@
 
        <include layout="@layout/foodapp_bottom_sheet" />
 
-        </com.sothree.slidinguppanel.SlidingUpPanelLayout>-->
+        </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
 
 
@@ -225,6 +225,11 @@
 
     </android.support.v4.widget.NestedScrollView>-->
     <!-- include bottom sheet -->
+    <TextView
+        android:id="@+id/tv_search_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"/>
 
 
 </LinearLayout>

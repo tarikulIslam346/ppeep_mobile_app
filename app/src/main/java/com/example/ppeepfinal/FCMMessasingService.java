@@ -24,7 +24,7 @@ public class FCMMessasingService extends FirebaseMessagingService {
     private static final String TAG = "FCMMessasingService";
 
    // public String message;
-    UserDatabase mdb;
+    //UserDatabase mdb;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {

@@ -88,6 +88,7 @@ public class TabFragmentFoodHome extends Fragment {
      FragmentManager fragmentManager;
 
 
+
     public TabFragmentFoodHome(){ }
 
     @Nullable
@@ -151,13 +152,22 @@ public class TabFragmentFoodHome extends Fragment {
         cardViewForSearchChiniseCusine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
+
+
+
                 FragmentTransaction trans = getFragmentManager()
                     .beginTransaction();
                 /*
                  * IMPORTANT: We use the "root frame" defined in
                  * "root_fragment.xml" as the reference to replace fragment
                  */
-                trans.replace(R.id.root_frame, new TabFragmentFoodCuisineSearch());
+                Bundle arguments = new Bundle();
+                arguments.putString("search", "Chinise");
+                //arguments.putInt("VALUE2", 100);
+
+                TabFragmentFoodCuisineSearch myFragment = new TabFragmentFoodCuisineSearch();
+                myFragment.setArguments(arguments);
+                trans.replace(R.id.root_frame, myFragment);
 
                 /*
                  * IMPORTANT: The following lines allow us to add the fragment
@@ -180,6 +190,12 @@ public class TabFragmentFoodHome extends Fragment {
                  * IMPORTANT: We use the "root frame" defined in
                  * "root_fragment.xml" as the reference to replace fragment
                  */
+                Bundle arguments = new Bundle();
+                arguments.putString("search", "Bakery");
+                //arguments.putInt("VALUE2", 100);
+
+                TabFragmentFoodCuisineSearch myFragment = new TabFragmentFoodCuisineSearch();
+                myFragment.setArguments(arguments);
                 trans.replace(R.id.root_frame, new TabFragmentFoodCuisineSearch());
 
                 /*
@@ -202,6 +218,12 @@ public class TabFragmentFoodHome extends Fragment {
                  * IMPORTANT: We use the "root frame" defined in
                  * "root_fragment.xml" as the reference to replace fragment
                  */
+                Bundle arguments = new Bundle();
+                arguments.putString("search", "Bangla");
+                //arguments.putInt("VALUE2", 100);
+
+                TabFragmentFoodCuisineSearch myFragment = new TabFragmentFoodCuisineSearch();
+                myFragment.setArguments(arguments);
                 trans.replace(R.id.root_frame, new TabFragmentFoodCuisineSearch());
 
                 /*
@@ -224,6 +246,12 @@ public class TabFragmentFoodHome extends Fragment {
                  * IMPORTANT: We use the "root frame" defined in
                  * "root_fragment.xml" as the reference to replace fragment
                  */
+                Bundle arguments = new Bundle();
+                arguments.putString("search", "FastFood");
+                //arguments.putInt("VALUE2", 100);
+
+                TabFragmentFoodCuisineSearch myFragment = new TabFragmentFoodCuisineSearch();
+                myFragment.setArguments(arguments);
                 trans.replace(R.id.root_frame, new TabFragmentFoodCuisineSearch());
 
                 /*
