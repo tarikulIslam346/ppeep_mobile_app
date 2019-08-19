@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -45,12 +46,18 @@ public class TabFragmentFoodCuisineSearch  extends Fragment {
         view = inflater
                 .inflate(R.layout.tab_fragment_food_cuisine_search, container, false);
         mdb = UserDatabase.getInstance(getContext());
+        TextView cuisineText=(TextView) view.findViewById(R.id.cuiseIdSearch);
+        cuisineText.setVisibility(View.INVISIBLE);
+
+
 
         Bundle bundle = this.getArguments();
 
         if(bundle != null){
             search = bundle.getString("search"); // Key, default value
 
+            cuisineText.setText(search);
+            cuisineText.setVisibility(View.VISIBLE);
            // Toast.makeText(getContext(),""+txt,Toast.LENGTH_LONG).show();
         }
        // Toast.makeText(getContext(),""+search,Toast.LENGTH_LONG).show();
