@@ -162,7 +162,7 @@ public class TabFragmentFoodHome extends Fragment {
                  * "root_fragment.xml" as the reference to replace fragment
                  */
                 Bundle arguments = new Bundle();
-                arguments.putString("search", "Chinise");
+                arguments.putString("search", "Chinese");
                 //arguments.putInt("VALUE2", 100);
 
                 TabFragmentFoodCuisineSearch myFragment = new TabFragmentFoodCuisineSearch();
