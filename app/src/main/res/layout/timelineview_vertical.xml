@@ -15,30 +15,46 @@
 
     android:layout_margin="10dp"
     android:orientation="vertical">
-<com.google.android.material.card.MaterialCardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="10dp">
+
+
 
     <LinearLayout
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+
+        android:layout_height="70dp">
+
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-
-            android:layout_marginTop="5dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:visibility="visible"
+            android:layout_marginLeft="5dp"
             app:srcCompat="@drawable/animated_check" />
 
+        <View
+            android:layout_width="50dp"
+            android:layout_height="1px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:background="#0A0909" />
+
+
         <ImageView
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:src="@drawable/orderplace_icon"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:src="@drawable/orderplaced_icon"
+
+            android:layout_marginRight="5dp"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -46,45 +62,55 @@
             android:layout_height="wrap_content">
             <TextView
                 android:textColor="@color/blackTextColor"
-                android:textSize="20dp"
-                android:paddingLeft="20dp"
+                android:textSize="16sp"
+                android:paddingLeft="10dp"
                 android:text="Order Placed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
-                android:textSize="15dp"
-                android:paddingLeft="20dp"
+                android:textSize="12sp"
+                android:paddingLeft="10dp"
                 android:text="We have received your order."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
+
 </com.google.android.material.card.MaterialCardView>
 
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="10dp">
 
         <LinearLayout
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="70dp">
             <ImageView
 
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
 
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
                 android:visibility="visible"
                 app:srcCompat="@drawable/animated_check" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="1px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:background="#0A0909" />
             <ImageView
-                android:layout_width="52dp"
-                android:layout_height="52dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 android:src="@drawable/orderconfirm_icon"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+
+                android:layout_marginRight="5dp"/>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -92,14 +118,14 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:textColor="@color/blackTextColor"
-                    android:textSize="20dp"
-                    android:paddingLeft="20dp"
+                    android:textSize="16sp"
+                    android:paddingLeft="10dp"
                     android:text="Order Confirmed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:textSize="15dp"
-                    android:paddingLeft="20dp"
+                    android:paddingLeft="10dp"
                     android:text="Your order has been confirmed."
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -109,27 +135,36 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="10dp">
 
         <LinearLayout
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="70dp">
             <ImageView
 
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
 
-                android:layout_marginTop="5dp"
+android:layout_marginLeft="5dp"
                 android:visibility="visible"
                 app:srcCompat="@drawable/animated_check" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="1px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:background="#0A0909" />
             <ImageView
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:src="@drawable/orderplace_icon"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/foodontheway_icon"
+
+                android:layout_marginRight="5dp"/>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -137,14 +172,14 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:textColor="@color/blackTextColor"
-                    android:textSize="20dp"
-                    android:paddingLeft="20dp"
+                    android:textSize="16sp"
+                    android:paddingLeft="10dp"
                     android:text="Food On The Way"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:textSize="15dp"
-                    android:paddingLeft="20dp"
+                    android:textSize="12sp"
+                    android:paddingLeft="10dp"
                     android:text="Your order is on the way."
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -154,28 +189,38 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="10dp">
 
         <LinearLayout
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+
+            android:layout_height="70dp">
             <ImageView
 
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+android:layout_marginLeft="5dp"
 
-                android:layout_marginTop="5dp"
                 android:visibility="visible"
                 app:srcCompat="@drawable/animated_check" />
 
+            <View
+                android:layout_width="50dp"
+                android:layout_height="1px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:background="#0A0909" />
+
             <ImageView
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:src="@drawable/orderplace_icon"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/orderdelivered_icon"
+
+                android:layout_marginRight="5dp"/>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -183,14 +228,14 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:textColor="@color/blackTextColor"
-                    android:textSize="20dp"
-                    android:paddingLeft="20dp"
+                    android:textSize="16sp"
+                    android:paddingLeft="10dp"
                     android:text="Order Delivered"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:textSize="15dp"
-                    android:paddingLeft="20dp"
+                    android:textSize="12sp"
+                    android:paddingLeft="10dp"
                     android:text="Your order has been delivered"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

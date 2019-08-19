@@ -87,20 +87,25 @@
 
 
 
+
         <com.github.florent37.bubbletab.BubbleTab
             android:id="@+id/tabLayoutId"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clipToPadding="true"
+
             android:background="@android:color/white"
             android:elevation="10dp"
             app:bubbleTab_circleColor="#ffcc00"
             app:bubbleTab_circleRatio="1.25"
-            android:tooltipText="Home"
             app:bubbleTab_image0="@drawable/homeicon2"
             app:bubbleTab_image1="@drawable/nearbyicon"
             app:bubbleTab_image2="@drawable/recommendedicon2"
-            app:bubbleTab_image3="@drawable/freedeliveryicon" />
+            app:bubbleTab_image3="@drawable/freedeliveryicon"
+
+       />
+
+
 
         <!--<androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
@@ -108,6 +113,8 @@
             android:id="@+id/viewPagerId">
 
         </androidx.viewpager.widget.ViewPager>-->
+
+
    <com.sothree.slidinguppanel.SlidingUpPanelLayout
             xmlns:sothree="http://schemas.android.com/apk/res-auto"
             android:id="@+id/sliding_layout"
