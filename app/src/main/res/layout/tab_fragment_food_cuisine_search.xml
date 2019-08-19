@@ -1,8 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:id="@+id/layout_snackbar">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+         android:layout_margin="5dp"
+            android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Showing Result For:"
+        android:paddingRight="15dp"
+        android:textSize="16sp"
+        android:layout_margin="5dp"
+        android:fontFamily="@font/gothic"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Chinese"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/gothic"
+        />
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_restaurant"
         android:layout_width="match_parent"
