@@ -63,7 +63,7 @@
                             android:layout_height="90dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_margin="4dp"
-                            android:src="@drawable/foodexpress_icon"
+                            android:src="@drawable/ppeepfood_open_icon"
 
                             />
 
@@ -104,7 +104,7 @@
                             android:layout_height="90dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_margin="4dp"
-                            android:src="@drawable/foodexpress_icon"
+                            android:src="@drawable/rideshare_open_icon"
 
                             />
 
@@ -146,7 +146,7 @@
                             android:layout_height="90dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_margin="4dp"
-                            android:src="@drawable/foodexpress_icon"
+                            android:src="@drawable/cart_open_icon"
 
                             />
 
