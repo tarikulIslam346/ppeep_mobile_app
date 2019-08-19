@@ -196,7 +196,7 @@ public class TabFragmentFoodHome extends Fragment {
 
                 TabFragmentFoodCuisineSearch myFragment = new TabFragmentFoodCuisineSearch();
                 myFragment.setArguments(arguments);
-                trans.replace(R.id.root_frame, new TabFragmentFoodCuisineSearch());
+                trans.replace(R.id.root_frame, myFragment);
 
                 /*
                  * IMPORTANT: The following lines allow us to add the fragment
@@ -224,7 +224,7 @@ public class TabFragmentFoodHome extends Fragment {
 
                 TabFragmentFoodCuisineSearch myFragment = new TabFragmentFoodCuisineSearch();
                 myFragment.setArguments(arguments);
-                trans.replace(R.id.root_frame, new TabFragmentFoodCuisineSearch());
+                trans.replace(R.id.root_frame, myFragment);
 
                 /*
                  * IMPORTANT: The following lines allow us to add the fragment
@@ -252,7 +252,7 @@ public class TabFragmentFoodHome extends Fragment {
 
                 TabFragmentFoodCuisineSearch myFragment = new TabFragmentFoodCuisineSearch();
                 myFragment.setArguments(arguments);
-                trans.replace(R.id.root_frame, new TabFragmentFoodCuisineSearch());
+                trans.replace(R.id.root_frame, myFragment);
 
                 /*
                  * IMPORTANT: The following lines allow us to add the fragment
