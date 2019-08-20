@@ -19,6 +19,7 @@
 
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bottomSlider_order_place"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"

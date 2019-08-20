@@ -294,6 +294,14 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                     public void onError(String error) {
                         dialog.dismiss();
                         Toast.makeText(HomePage.this, error, Toast.LENGTH_SHORT).show();
+                        Snackbar.make(findViewById(R.id.layout_home_page), ""+error, Snackbar.LENGTH_INDEFINITE)
+                                .setAction("Close", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                    }
+                                })
+                                .show();
                     }
 
                     @Override
@@ -356,7 +364,15 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
             }else{
                 dialog.dismiss();
-                Toast.makeText(getApplicationContext(), "Server Not found", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), "Server Not found", Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.layout_home_page), " Check Your Connection", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Close", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        .show();
             }
         }
     }
@@ -404,8 +420,16 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
 
             }else{
-                dialog.dismiss();
-                Toast.makeText(getApplicationContext(), "Server Not found", Toast.LENGTH_SHORT).show();
+               // dialog.dismiss();
+               // Toast.makeText(getApplicationContext(), "Server Not found", Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.layout_home_page), " Check Your Connection", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Close", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        .show();
             }
         }
     }

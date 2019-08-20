@@ -24,8 +24,16 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
 import com.github.florent37.bubbletab.BubbleTab;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+import com.pusher.client.Pusher;
+import com.pusher.client.PusherOptions;
+import com.pusher.client.channel.Channel;
+import com.pusher.client.channel.SubscriptionEventListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -42,6 +50,7 @@ Menu foodCart;
     LinearLayout addresslayout;
     String address, lat,lng;
     List<UserModel> user;
+    MaterialCardView bottomSliderCard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +66,63 @@ Menu foodCart;
        // restaurantSearchView = (SearchView)  findViewById(R.id.sv_for_restaurant);
         mAddress = (TextView) findViewById(R.id.tv_delivery_address);
         addresslayout = (LinearLayout) findViewById(R.id.layout_address);
+        bottomSliderCard = (MaterialCardView)findViewById(R.id.bottomSlider_order_place);
+        bottomSliderCard.setVisibility(View.INVISIBLE);
+
+
+        PusherOptions options = new PusherOptions();
+        options.setCluster("mt1");
+        Pusher pusher = new Pusher("6211c9a7cfb062fa410d", options);
+
+
+
+        Channel channel = pusher.subscribe("ppeep-order."+1234);
+
+
+
+        channel.bind("driver-order-confirm-event", new SubscriptionEventListener() {
+
+
+            @Override
+            public void onEvent(String channelName, String eventName, final String data) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        JSONObject driverInfo;
+                        int OrderId = 0;
+
+                        try {
+                            driverInfo = new JSONObject(data);
+                            OrderId = driverInfo.getInt("order_id");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        Toast.makeText(getApplicationContext()," Order confirm By driver ",Toast.LENGTH_LONG).show();
+                        //Intent homePageIntent = new Intent(OrderSubmitComplete.this,FoodApp.class);
+                        if(OrderId != 0) {
+                            //addNotification("Your order has been confirmed");
+
+                            //homePageIntent.putExtra("order_id",String.valueOf(OrderId));
+                        }
+                        //homePageIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                        //startActivity(homePageIntent);
+
+
+                    }
+                });
+
+            }
+        });
+
+
+
+
+
+
+        pusher.connect();
 
         addresslayout.setOnClickListener(new View.OnClickListener() {
             @Override
