@@ -603,7 +603,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
                     if(orderId!=null)orderSubmitIntent.putExtra("orderId",orderId);
                     startActivity(orderSubmitIntent);
                 }
-                if(orderId!=null){
+                if(fname == null && orderId!=null){
                     List<OrderModel> orders = foodCartPageAdapter.getmOrders();
                     if(orders.size()!=0){
                         for(int i =0;i<orders.size();i++) mdb.orderDAO().deleteOrder(orders.get(i));

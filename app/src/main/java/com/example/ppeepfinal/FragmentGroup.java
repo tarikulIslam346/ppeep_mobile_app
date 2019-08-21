@@ -56,7 +56,7 @@ public class FragmentGroup extends Fragment {
 
     private ProgressBar mProgressbar;
 
-    private TextView mProfileNameTv,mPhoneNoTv,mGropuMemberNo,mTotalPointOfUser;
+    private TextView mProfileNameTv,mPhoneNoTv,mGropuMemberNo,mTotalPointOfUser,mtotalEarn;
 
     public FragmentGroup() { }
 
@@ -79,6 +79,9 @@ public class FragmentGroup extends Fragment {
         mGropuMemberNo = (TextView) v.findViewById(R.id.tv_group_member_no);
 
         mTotalPointOfUser = (TextView) v.findViewById(R.id.tv_total_point_of_user);
+        mtotalEarn = (TextView) v.findViewById(R.id.tv_Total_earn);
+
+
 
         mTotalPointOfUser.setText("0");
 
@@ -235,13 +238,16 @@ public class FragmentGroup extends Fragment {
                 layoutParams.width = 0;
 
                 mProgressbar.setLayoutParams(layoutParams);
-                if(allNames.size()!=0)Toast.makeText(getContext(),""+allNames.get(0),Toast.LENGTH_LONG).show();
+                //if(allNames.size()!=0)Toast.makeText(getContext(),""+allNames.get(0),Toast.LENGTH_LONG).show();
 
 
 
                     mGropuMemberNo.setText(String.valueOf(jsonArray.length()));
 
-                    if(total_point_of_user!=0)mTotalPointOfUser.setText(String.valueOf(total_point_of_user));
+                    if(total_point_of_user!=0){
+                        mTotalPointOfUser.setText(String.valueOf(total_point_of_user));
+                        mtotalEarn.setText(String.valueOf(total_point_of_user));
+                    }
 
                     LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext());
 

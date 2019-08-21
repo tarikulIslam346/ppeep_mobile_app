@@ -144,30 +144,6 @@ public class OrderSubmitComplete extends AppCompatActivity {
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
 
