@@ -808,7 +808,7 @@ public class NetworkUtils {
         }
     }
 
-    public static String getFoodOrderFromHttpUrl(URL orderUrl, String itemId,String amount,String discount,String client_phone_no,String merchant_id,String lat,String lng,String address) throws IOException {
+    public static String getFoodOrderFromHttpUrl(URL orderUrl, String itemId,String amount,String discount,String client_phone_no,String merchant_id,String lat,String lng,String address,String date,String time) throws IOException {
 
         HttpURLConnection urlConnection = (HttpURLConnection) orderUrl.openConnection();//establish connection
         urlConnection.setRequestMethod("POST");//use post method
@@ -824,6 +824,12 @@ public class NetworkUtils {
         param.put( "lat", lat);
         param.put( "lng", lng);
         param.put("delivery_address",address);
+        if(date!=null && !date.equals("")){
+            param.put("order_date",date);
+        }
+        if(time!=null && !time.equals("")){
+            param.put("order_time",time);
+        }
 
 
         OutputStream os = urlConnection.getOutputStream();

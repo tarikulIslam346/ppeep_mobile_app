@@ -75,7 +75,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
     String myPhoneNo;
     EditText mPointInput;
     Button mAddPoint;
-    String promoCode,promoPercentage,promocodeMaxDiscount;
+    String promoCode,promoPercentage,promocodeMaxDiscount,preOrderDate,preOrderTime;
 
 
     @Override
@@ -119,10 +119,12 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         orderSubmit.setVisibility(View.INVISIBLE);
 
 
-        Intent promoIntent = getIntent();
-        promoCode = promoIntent.getStringExtra("promo_code");
-        promoPercentage = promoIntent.getStringExtra("percentage");
-        promocodeMaxDiscount = promoIntent.getStringExtra("max_discount");
+        Intent extraInputIntent = getIntent();
+        promoCode = extraInputIntent.getStringExtra("promo_code");
+        promoPercentage = extraInputIntent.getStringExtra("percentage");
+        promocodeMaxDiscount = extraInputIntent.getStringExtra("max_discount");
+        preOrderDate = extraInputIntent.getStringExtra("date");
+        preOrderTime = extraInputIntent.getStringExtra("time");
 
         if(promoCode!=null){
 
@@ -144,6 +146,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
             public void onClick(View v) {
 
                 Intent orderSubmitIntent = new Intent(getApplicationContext(),PreOrderTimeSelect.class);
+                finish();
                 startActivity(orderSubmitIntent);
 
             }
@@ -514,7 +517,12 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
             URL searchUrl = params[0];
             String DriverResults = null;
             try {
-                DriverResults = NetworkUtils.getFoodOrderFromHttpUrl(searchUrl,ItemIds,ItemAmounts,String.valueOf(discount),phoneNo,String.valueOf(merchantId),String.valueOf(lat),String.valueOf(lng), addressOnMap.getText().toString());
+                DriverResults = NetworkUtils.getFoodOrderFromHttpUrl(
+                        searchUrl,ItemIds,ItemAmounts,String.valueOf(discount),
+                        phoneNo,String.valueOf(merchantId),String.valueOf(lat),String.valueOf(lng),
+                        addressOnMap.getText().toString(),
+                        preOrderDate,
+                        preOrderTime);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -537,7 +545,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
                 JSONArray jsonArray ;
 
-                String fname = null,lname=null,profilePic = null,contact = null,orderId=null;
+                String fname = null,lname=null,profilePic = null,contact = null,orderId=null,message=null;
 
 
                 try {
@@ -560,6 +568,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
                     orderId = driverINfo.getString("order_data");
 
 
+
                     /*mProgressbar.setVisibility(View.INVISIBLE);// set progressbar to invisible
                     ViewGroup.LayoutParams layoutParams = mProgressbar.getLayoutParams();// instantiate  layout parameter progressbar
                     layoutParams.height = 0;// set layout height to zero
@@ -567,6 +576,14 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
                     mProgressbar.setLayoutParams(layoutParams);// set progressbar layout height & width*/
 
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try{
+                    driverINfo = new JSONObject(json);
+                    orderId = driverINfo.getString("order_data");
+                    message = driverINfo.getString("message");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -584,6 +601,18 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
                     orderSubmitIntent.putExtra("profile_pic",profilePic);
                     orderSubmitIntent.putExtra("contact",contact);
                     if(orderId!=null)orderSubmitIntent.putExtra("orderId",orderId);
+                    startActivity(orderSubmitIntent);
+                }
+                if(orderId!=null){
+                    List<OrderModel> orders = foodCartPageAdapter.getmOrders();
+                    if(orders.size()!=0){
+                        for(int i =0;i<orders.size();i++) mdb.orderDAO().deleteOrder(orders.get(i));
+                    }
+                    List<OrderMerchantModel> om = mdb.orderMercahntDAO().loadOrderMerchant();
+                    mdb.orderMercahntDAO().deleteOrderMerchant(om.get(0));
+                    Intent orderSubmitIntent = new Intent(getApplicationContext(),OrderSubmitComplete.class);
+                    orderSubmitIntent.putExtra("orderId",orderId);
+                    if(message!=null)orderSubmitIntent.putExtra("message",message);
                     startActivity(orderSubmitIntent);
                 }
                 //  mSearchResultsTextView.setText(allNames.get(8));

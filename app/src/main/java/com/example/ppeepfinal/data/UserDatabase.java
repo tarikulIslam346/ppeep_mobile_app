@@ -12,7 +12,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {UserModel.class,OrderModel.class,OrderMerchantModel.class}, version = 1, exportSchema = false)
+@Database(entities = {UserModel.class,OrderModel.class,OrderMerchantModel.class,UserCurrentOrder.class}, version = 1, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class UserDatabase extends RoomDatabase {
     private static final String LOG_TAG = UserDatabase.class.getSimpleName();
@@ -42,6 +42,8 @@ public abstract class UserDatabase extends RoomDatabase {
     public abstract OrderDAO orderDAO();
 
     public abstract OrderMercahntDAO orderMercahntDAO();
+
+    public abstract UserCurrentOrderDAO userCurrentOrderDAO();
 
 
 

@@ -21,7 +21,7 @@ public class UserCurrentOrder {
 
     }
 
-    public UserCurrentOrder(int id, String phone,String name,String address,double lat,double lng){
+    public UserCurrentOrder(int id, int orderid,int orderStatus){
         this.id = id;
         this.orderid = orderid;
         this.orderStatus = orderStatus;

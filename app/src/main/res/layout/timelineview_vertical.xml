@@ -84,7 +84,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:elevation="10dp">
+        android:elevation="10dp"
+        android:id="@+id/bottom_slider_order_confirm">
 
         <LinearLayout
             android:gravity="center"
@@ -192,7 +193,8 @@ android:layout_marginLeft="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:elevation="10dp">
+        android:elevation="10dp"
+        android:id="@+id/bottom_slider_order_deliver">
 
         <LinearLayout
             android:gravity="center"

@@ -37,6 +37,14 @@
             </intent-filter>
         </service>
 
+        <receiver android:name="OrderReciver">
+            <intent-filter>
+                <action android:name="com.example.ppeepfinal.CUSTOM_INTENT">
+                </action>
+            </intent-filter>
+
+        </receiver>
+
 
 
 
