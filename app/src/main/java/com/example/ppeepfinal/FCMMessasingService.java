@@ -10,11 +10,13 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.ppeepfinal.data.OrderMerchantModel;
+import com.example.ppeepfinal.data.UserCurrentOrder;
 import com.example.ppeepfinal.data.UserDatabase;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -24,15 +26,16 @@ public class FCMMessasingService extends FirebaseMessagingService {
     private static final String TAG = "FCMMessasingService";
 
    // public String message;
-    //UserDatabase mdb;
+    UserDatabase mdb;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
         super.onMessageReceived(remoteMessage);
-        /*mdb = UserDatabase.getInstance(getApplicationContext());
-        OrderMerchantModel orderMerchantModel = new OrderMerchantModel(7,"AR fantasia",40,100);
-        mdb.orderMercahntDAO().insertOrderMerchant(orderMerchantModel);*/
+      //  mdb = UserDatabase.getInstance(getApplicationContext());
+       // UserCurrentOrder userCurrentOrder = new UserCurrentOrder()
+       // OrderMerchantModel orderMerchantModel = new OrderMerchantModel(7,"AR fantasia",40,100);
+      //  mdb.orderMercahntDAO().insertOrderMerchant(orderMerchantModel);
         // ...
 
         // TODO(developer): Handle FCM messages here.
@@ -42,6 +45,12 @@ public class FCMMessasingService extends FirebaseMessagingService {
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            //String orderData = remoteMessage.getData().toString();
+            //Intent intent = new Intent();
+            //intent.putExtra("extra", orderData );
+            //intent.setAction("com.example.ppeepfinal.CUSTOM_INTENT");
+            //sendBroadcast(intent);
+            //Toast.makeText(getApplicationContext(), ""+remoteMessage.getData(), Toast.LENGTH_SHORT).show();
 
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use WorkManager.
@@ -57,7 +66,7 @@ public class FCMMessasingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
             //message = remoteMessage.getNotification().getBody();
-            Intent it = new Intent(this, HomePage.class);
+            Intent it = new Intent(this, OrderSubmitComplete.class);
            // Snackbar.make(R.id.layout_home_page),"Order_has",Snackbar.LENGTH_INDEFINITE).show();
             PendingIntent contentIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), it, 0);
             Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

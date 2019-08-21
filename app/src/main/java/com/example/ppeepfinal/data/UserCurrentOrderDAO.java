@@ -13,7 +13,7 @@ import java.util.List;
 public interface UserCurrentOrderDAO {
 
     @Query("SELECT * FROM `userCurrentOrder`")
-    List<OrderModel> loadOrder();
+    List<UserCurrentOrder> loadCurrentOrder();
 
     @Insert
     void insertCurrentOrder(UserCurrentOrder userCurrentOrder);
@@ -25,5 +25,5 @@ public interface UserCurrentOrderDAO {
     void updateCurrentOrder(UserCurrentOrder userCurrentOrder);
 
     @Query("SELECT * FROM `userCurrentOrder` WHERE orderid = :orderid")
-    OrderModel loadCurrentOrderById(int orderid);
+    UserCurrentOrder loadCurrentOrderById(int orderid);
 }

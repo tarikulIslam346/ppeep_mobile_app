@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Animatable;
 //import android.support.v7.app.AppCompatActivity;
 import android.media.RingtoneManager;
@@ -27,9 +28,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.ppeepfinal.data.UserCurrentOrder;
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.NetworkUtils;
+import com.google.android.material.card.MaterialCardView;
 import com.pusher.client.Pusher;
 import com.pusher.client.PusherOptions;
 import com.pusher.client.channel.Channel;
@@ -62,6 +65,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
     private  String userName,userPhoneNo;
 
     private UserDatabase mdb;
+    MaterialCardView orderConfirm,orderDeliver,orderOnTheWay;
 
 
     Button sendSMS;
@@ -110,8 +114,17 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
         orderConfirmProgressbar = (ProgressBar) findViewById(R.id.progressBar_order_confirm) ;
 
+        orderConfirm = (MaterialCardView)findViewById(R.id.order_confirm_card);
+        orderConfirm.setVisibility(View.INVISIBLE);
+        orderDeliver=(MaterialCardView)findViewById(R.id.order_deliver_card);
+        orderDeliver.setVisibility(View.INVISIBLE);
+        orderOnTheWay=(MaterialCardView)findViewById(R.id.food_on_the_way);
+        orderOnTheWay.setVisibility(View.INVISIBLE);
+
         driverName.setVisibility(View.INVISIBLE);
         driverContact.setVisibility(View.INVISIBLE);
+        driverImage.setVisibility(View.INVISIBLE);
+        driverCallIcon.setVisibility(View.INVISIBLE);
 
         Intent orderSubmitInten = getIntent();
 
@@ -119,15 +132,66 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
         String orderId = orderSubmitInten.getStringExtra("orderId");
 
+        String message = orderSubmitInten.getStringExtra("message");
+
         String contact = orderSubmitInten.getStringExtra("contact");
 
         String imageUrl = orderSubmitInten.getStringExtra("profile_pic");
 
+        if(message==null)pusherConnection( orderId,driver, imageUrl,  contact);
+        else{
+            orderConfirmProgressbar.setVisibility(View.INVISIBLE);
+        }
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+      //  OrderReciver receiver = new OrderReciver();
+
+      //  unregisterReceiver(receiver);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       // IntentFilter intentFilter = new IntentFilter();
+       // intentFilter.addAction("com.example.ppeepfinal.CUSTOM_INTENT");
+       // OrderReciver receiver = new OrderReciver();
+       // registerReceiver(receiver, intentFilter);
+    }
+
+    private  void pusherConnection( String orderId,String driver, String imageUrl, String contact){
         PusherOptions options = new PusherOptions();
         options.setCluster("mt1");
         Pusher pusher = new Pusher("6211c9a7cfb062fa410d", options);
@@ -136,7 +200,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
         Channel channel = pusher.subscribe("ppeep-order."+orderId);
 
-       // PrivateChannel channel2 = pusher.subscribePrivate("private-orderConfirm."+orderId);
+        // PrivateChannel channel2 = pusher.subscribePrivate("private-orderConfirm."+orderId);
 
 
         channel.bind("my-order-confirm-event", new SubscriptionEventListener() {
@@ -146,9 +210,21 @@ public class OrderSubmitComplete extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        addNotification("Your order has been accepted");
 
-                               // Toast.makeText(getApplicationContext()," Order confirm : ",Toast.LENGTH_LONG).show();
+
+                        JSONObject driverInfo;
+                        //int OrderId = 0;
+
+                        try {
+                            driverInfo = new JSONObject(data);
+                           // OrderId = driverInfo.getInt("order_id");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        addNotification("Your order has been accepted");
+                        UserCurrentOrder userCurrentOrder = new UserCurrentOrder(Integer.valueOf(orderId),1);
+
+                        // Toast.makeText(getApplicationContext()," Order confirm : ",Toast.LENGTH_LONG).show();
                         if(imageUrl != null){
                             URL getimageUrl = NetworkUtils.buildDriverIamgeUrl(imageUrl);
 
@@ -162,6 +238,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
                             driverFound.setVisibility(View.VISIBLE);
                             // Initialize an intent to open dialer app with specified phone number
                             // It open the dialer app and allow user to call the number manually
+                            driverCallIcon.setVisibility(View.VISIBLE);
                             driverCallIcon.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -202,6 +279,66 @@ public class OrderSubmitComplete extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
+                        if(OrderId != 0) {
+                            // UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(OrderId);
+
+                            //  userCurrentOrder.setOrderStatus(2);
+
+                            // UserCurrentOrder userCurrentOrder = new UserCurrentOrder(Integer.valueOf(orderId),1);
+                            //  mdb.userCurrentOrderDAO().updateCurrentOrder(userCurrentOrder);
+                            orderConfirm.setVisibility(View.VISIBLE);
+                        }
+
+
+                        Toast.makeText(getApplicationContext()," Order deliver By driver ",Toast.LENGTH_LONG).show();
+                        //Intent homePageIntent = new Intent(OrderSubmitComplete.this,FoodApp.class);
+                        if(OrderId != 0) {
+                            addNotification("Your order has been deliverd");
+
+                            //homePageIntent.putExtra("order_id",String.valueOf(OrderId));
+                        }
+                        //homePageIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                        //startActivity(homePageIntent);
+
+
+                    }
+                });
+
+            }
+        });
+
+        channel.bind("my-order-deliver-event", new SubscriptionEventListener() {
+
+
+            @Override
+            public void onEvent(String channelName, String eventName, final String data) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        JSONObject driverInfo;
+                        int OrderId = 0;
+
+                        try {
+                            driverInfo = new JSONObject(data);
+                            OrderId = driverInfo.getInt("order_id");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        //if(OrderId != 0) {
+                        // List<UserCurrentOrder> userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrder();
+
+                        // mdb.userCurrentOrderDAO().deleteCurrentOrder(userCurrentOrder.get(0));
+                        // UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(OrderId);
+
+                        //  userCurrentOrder.setOrderStatus(2);
+
+                        // UserCurrentOrder userCurrentOrder = new UserCurrentOrder(Integer.valueOf(orderId),1);
+                        //  mdb.userCurrentOrderDAO().updateCurrentOrder(userCurrentOrder);
+                        orderDeliver.setVisibility(View.VISIBLE);
+                        // }
+
 
                         Toast.makeText(getApplicationContext()," Order confirm By driver ",Toast.LENGTH_LONG).show();
                         //Intent homePageIntent = new Intent(OrderSubmitComplete.this,FoodApp.class);
@@ -226,46 +363,10 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
 
         pusher.connect();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        if(driver!= null){
-            driverName.setText(driver);
-        }
-        if(contact!=null){
-            driverContact.setText(contact);
-        }
-
-
-
-
     }
 
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-
-
-    }
     private void addNotification(String text) {
-        Intent it = new Intent(this, HomePage.class);
+        Intent it = new Intent(this, OrderSubmitComplete.class);
         // Snackbar.make(R.id.layout_home_page),"Order_has",Snackbar.LENGTH_INDEFINITE).show();
         PendingIntent contentIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), it, 0);
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

@@ -6,15 +6,20 @@ import android.content.Intent;
 //import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class PreOrderTimeSelect extends AppCompatActivity {
     TimePickerDialog picker;
@@ -23,19 +28,8 @@ public class PreOrderTimeSelect extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pre_order_time_select);
 
-        Button orderSubmit = (Button) findViewById(R.id.placeOrderId);
-        orderSubmit.setOnClickListener(new View.OnClickListener() {
 
-            @Override
 
-            public void onClick(View v) {
-
-                Intent orderSubmitIntent = new Intent(getApplicationContext(),PreOrderPage.class);
-                startActivity(orderSubmitIntent);
-
-            }
-
-        });
 
         Calendar calendar= Calendar.getInstance();
         String currentDate= DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
@@ -76,6 +70,38 @@ public class PreOrderTimeSelect extends AppCompatActivity {
                         }, hour, minutes, false);
                 picker.show();
             }
+        });
+
+
+
+        Button orderSubmit = (Button) findViewById(R.id.placeOrderId);
+        orderSubmit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View v) {
+
+                if( !datePicker.getText().toString().equals("") && !timePicker.getText().toString().equals("")){
+                    Intent orderSubmitIntent = new Intent(getApplicationContext(),FoodCartPage.class);
+                    orderSubmitIntent.putExtra("date",datePicker.getText().toString());
+                    orderSubmitIntent.putExtra("time",timePicker.getText().toString());
+                    finish();
+                    startActivity(orderSubmitIntent);
+                }else{
+                    Snackbar.make(findViewById(R.id.pre_order_info_layout), " Enter time properly.", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Close", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            })
+                            .show();
+                }
+
+
+
+            }
+
         });
 
     }

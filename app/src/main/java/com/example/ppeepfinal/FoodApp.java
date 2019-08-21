@@ -1,9 +1,17 @@
 package com.example.ppeepfinal;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 /*import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;*/
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 //import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -17,10 +25,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.ppeepfinal.data.UserCurrentOrder;
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
 import com.github.florent37.bubbletab.BubbleTab;
@@ -50,11 +61,12 @@ Menu foodCart;
     LinearLayout addresslayout;
     String address, lat,lng;
     List<UserModel> user;
-    MaterialCardView bottomSliderCard;
+    MaterialCardView bottomSliderCardOrderPlace,bottomSliderCardOrderConfirm,bottomSliderCardOrderDelivr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_app);
+        mdb = UserDatabase.getInstance(getApplicationContext());
         foodToolbar = (Toolbar) findViewById(R.id.foodapptoolbar);
         setSupportActionBar(foodToolbar);
 /*
@@ -66,63 +78,15 @@ Menu foodCart;
        // restaurantSearchView = (SearchView)  findViewById(R.id.sv_for_restaurant);
         mAddress = (TextView) findViewById(R.id.tv_delivery_address);
         addresslayout = (LinearLayout) findViewById(R.id.layout_address);
-        bottomSliderCard = (MaterialCardView)findViewById(R.id.bottomSlider_order_place);
-        bottomSliderCard.setVisibility(View.INVISIBLE);
+        bottomSliderCardOrderPlace = (MaterialCardView)findViewById(R.id.bottomSlider_order_place);
+        bottomSliderCardOrderPlace.setVisibility(View.INVISIBLE);
+        bottomSliderCardOrderConfirm = (MaterialCardView)findViewById(R.id.bottom_slider_order_confirm);
+        bottomSliderCardOrderConfirm.setVisibility(View.INVISIBLE);
+        bottomSliderCardOrderDelivr = (MaterialCardView)findViewById(R.id.bottom_slider_order_deliver);
+        bottomSliderCardOrderDelivr.setVisibility(View.INVISIBLE);
 
 
-        PusherOptions options = new PusherOptions();
-        options.setCluster("mt1");
-        Pusher pusher = new Pusher("6211c9a7cfb062fa410d", options);
-
-
-
-        Channel channel = pusher.subscribe("ppeep-order."+1234);
-
-
-
-        channel.bind("driver-order-confirm-event", new SubscriptionEventListener() {
-
-
-            @Override
-            public void onEvent(String channelName, String eventName, final String data) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        JSONObject driverInfo;
-                        int OrderId = 0;
-
-                        try {
-                            driverInfo = new JSONObject(data);
-                            OrderId = driverInfo.getInt("order_id");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                        Toast.makeText(getApplicationContext()," Order confirm By driver ",Toast.LENGTH_LONG).show();
-                        //Intent homePageIntent = new Intent(OrderSubmitComplete.this,FoodApp.class);
-                        if(OrderId != 0) {
-                            //addNotification("Your order has been confirmed");
-
-                            //homePageIntent.putExtra("order_id",String.valueOf(OrderId));
-                        }
-                        //homePageIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
-                        //startActivity(homePageIntent);
-
-
-                    }
-                });
-
-            }
-        });
-
-
-
-
-
-
-        pusher.connect();
+        loadOrderInfo();
 
         addresslayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +97,7 @@ Menu foodCart;
             }
         });
 
-        mdb = UserDatabase.getInstance(getApplicationContext());
+
 
         user = mdb.userDAO().loadPhone();
 
@@ -278,6 +242,208 @@ tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadOrderInfo();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        loadOrderInfo();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        loadOrderInfo();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadOrderInfo();
+    }
+
+    private void addNotification(String text) {
+        Intent it = new Intent(this, TabFragmentFoodHome.class);
+        // Snackbar.make(R.id.layout_home_page),"Order_has",Snackbar.LENGTH_INDEFINITE).show();
+        PendingIntent contentIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), it, 0);
+        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        int ico_notification = R.drawable.ic_account_circle_black_24dp;
+        int color = ContextCompat.getColor(this, R.color.colorAccent);
+
+        NotificationManager mNotificationManager = (NotificationManager)
+                this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        String CHANNEL_ID = "orderconfirm_channel";
+        CharSequence name = "Channel Order";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            mNotificationManager.createNotificationChannel(mChannel);
+        }
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this,CHANNEL_ID)
+                        .setSmallIcon(ico_notification)
+                        .setContentTitle(getString(R.string.app_name))
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText(text))
+                        .setSound(soundUri)
+                        .setColor(color)
+                        .setAutoCancel(true)
+                        .setVibrate(new long[]{1000, 1000})
+                        .setContentText(text);
+
+        mBuilder.setContentIntent(contentIntent);
+        Notification notification = mBuilder.build();
+
+        mNotificationManager.notify(0, notification);
+
+    }
+
+    public  void loadOrderInfo(){
+        List<UserCurrentOrder> userCurrentOrders = mdb.userCurrentOrderDAO().loadCurrentOrder();
+        if(userCurrentOrders.size()!=0){
+            int orderId = userCurrentOrders.get(0).getOrderid();
+            PusherOptions options = new PusherOptions();
+            options.setCluster("mt1");
+            Pusher pusher = new Pusher("6211c9a7cfb062fa410d", options);
+
+
+
+            Channel channel = pusher.subscribe("ppeep-order."+orderId);
+
+            // PrivateChannel channel2 = pusher.subscribePrivate("private-orderConfirm."+orderId);
+
+
+            channel.bind("my-order-confirm-event", new SubscriptionEventListener() {
+                @Override
+                public void onEvent(String channelName, String eventName, final String data) {
+                    //Toast.makeText(getContext(),"Event : data",Toast.LENGTH_LONG).show();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            addNotification("Your order has been accepted");
+                            UserCurrentOrder userCurrentOrder = new UserCurrentOrder(Integer.valueOf(orderId),1);
+                            bottomSliderCardOrderPlace.setVisibility(View.VISIBLE);
+
+                            // Toast.makeText(getApplicationContext()," Order confirm : ",Toast.LENGTH_LONG).show();
+
+
+                        }
+                    });
+
+                }
+            });
+
+            channel.bind("driver-order-confirm-event", new SubscriptionEventListener() {
+
+
+                @Override
+                public void onEvent(String channelName, String eventName, final String data) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            JSONObject driverInfo;
+                            int OrderId = 0;
+
+                            try {
+                                driverInfo = new JSONObject(data);
+                                OrderId = driverInfo.getInt("order_id");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            // if(OrderId != 0) {
+                            // UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(OrderId);
+
+                            //  userCurrentOrder.setOrderStatus(2);
+
+                            // UserCurrentOrder userCurrentOrder = new UserCurrentOrder(Integer.valueOf(orderId),1);
+                            //  mdb.userCurrentOrderDAO().updateCurrentOrder(userCurrentOrder);
+                            bottomSliderCardOrderConfirm.setVisibility(View.VISIBLE);
+                           //  }
+
+
+                            Toast.makeText(getApplicationContext()," Order confirm By driver ",Toast.LENGTH_LONG).show();
+                            //Intent homePageIntent = new Intent(OrderSubmitComplete.this,FoodApp.class);
+                            if(OrderId != 0) {
+                                addNotification("Your order has been confirmed");
+
+                                //homePageIntent.putExtra("order_id",String.valueOf(OrderId));
+                            }
+                            //homePageIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                            //startActivity(homePageIntent);
+
+
+                        }
+                    });
+
+                }
+            });
+
+            channel.bind("my-order-deliver-event", new SubscriptionEventListener() {
+
+
+                @Override
+                public void onEvent(String channelName, String eventName, final String data) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            JSONObject driverInfo;
+                            int OrderId = 0;
+
+                            try {
+                                driverInfo = new JSONObject(data);
+                                OrderId = driverInfo.getInt("order_id");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                           // if(OrderId != 0) {
+                               // UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(OrderId);
+
+                                //  userCurrentOrder.setOrderStatus(2);
+
+                                // UserCurrentOrder userCurrentOrder = new UserCurrentOrder(Integer.valueOf(orderId),1);
+                               // mdb.userCurrentOrderDAO().deleteCurrentOrder(userCurrentOrder);
+
+                            //}
+                            bottomSliderCardOrderDelivr.setVisibility(View.VISIBLE);
+
+
+                            Toast.makeText(getApplicationContext()," Order confirm By driver ",Toast.LENGTH_LONG).show();
+                            //Intent homePageIntent = new Intent(OrderSubmitComplete.this,FoodApp.class);
+                            if(OrderId != 0) {
+                                addNotification("Your order has been confirmed");
+
+                                //homePageIntent.putExtra("order_id",String.valueOf(OrderId));
+                            }
+                            //homePageIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                            //startActivity(homePageIntent);
+
+
+                        }
+                    });
+
+                }
+            });
+
+
+
+
+
+
+            pusher.connect();
+        }
     }
 }
 
