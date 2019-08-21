@@ -238,8 +238,10 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         else if (menuItem.getItemId()==R.id.help)
         {
-            intent=new Intent(this,HelpPage.class);
-            startActivity(intent);
+            Intent i = new Intent(getApplicationContext(), SupportPageWebView.class);
+            i.putExtra(WebViewClass.WEBSITE_ADDRESS, "http://support.ppeepbd.com/");
+            startActivity(i);
+
 
         }
 

@@ -48,7 +48,7 @@
         <activity android:name=".CurrentOrderHistory" />
         <activity android:name=".FriendHistoryDetails" />
         <activity android:name=".GroupFriendAdd" />
-        <activity android:name=".SupportPage" />
+        <activity android:name=".SupportPageWebView" />
         <activity android:name=".PreOrderTimeSelect" />
         <activity android:name=".OrderSubmitComplete" />
         <activity android:name=".ApplyPromoPage" />
