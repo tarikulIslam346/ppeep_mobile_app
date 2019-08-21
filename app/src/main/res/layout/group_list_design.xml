@@ -11,8 +11,8 @@
 
         <ImageView
             android:id="@+id/list_icon"
-            android:layout_width="80dp"
-            android:layout_height="90dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/user"
             android:background="@drawable/friendlist_icon_bg" />
 
@@ -49,17 +49,17 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:paddingRight="6dp"
-                    android:text="Total Earn:" />
+                    android:text="Available Point:" />
 
                 <TextView
                     android:id="@+id/tv_total_earn_point"
 
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:paddingRight="6dp"
                     android:text="200" />
@@ -68,11 +68,21 @@
 
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:paddingRight="16dp"
                     android:text="Points" />
 
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bt_add_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#36A03C"
+                    android:text="+ Add"
+                    android:textColor="#0C0C0C"
+                    android:textSize="12sp"
+                    />
 
             </LinearLayout>
 
