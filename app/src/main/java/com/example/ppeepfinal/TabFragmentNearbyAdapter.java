@@ -8,11 +8,16 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ppeepfinal.utilities.NetworkUtils;
+import com.squareup.picasso.Picasso;
+
+import java.net.URL;
 import java.util.List;
 
 public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNearbyAdapter.RestaurantViewHolder> {
@@ -22,6 +27,8 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
     private List<String> mOpeningTime;
     private List<String> mClosingTime;
     private List<String> mCusine;
+    private List<String> mLogo;
+    private List<String> mBanner;
     final private  ListItemClickListener mOnClickListener;
 
     public interface ListItemClickListener{
@@ -34,6 +41,8 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
             List<String> OpeningTime,
             List<String> ClosingingTime,
             List<String> Cusine,
+            List<String> Logo,
+            List<String> Banner,
             ListItemClickListener listener
     ){
        // mNumberRestaurant= numberOfRestaurant;
@@ -41,6 +50,8 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
         mOpeningTime = OpeningTime;
         mClosingTime = ClosingingTime;
         mCusine = Cusine;
+        mLogo = Logo;
+        mBanner = Banner;
         mOnClickListener = listener;
     }
 
@@ -62,8 +73,10 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
         String opening = mOpeningTime.get(position);
         String closing = mClosingTime.get(position);
         String cusine = mCusine.get(position);
+        String logo = mLogo.get(position);
+        String banner= mBanner.get(position);
 
-        restaurantViewHolder.bind(restaurant,opening,closing,cusine);
+        restaurantViewHolder.bind(restaurant,opening,closing,cusine,logo,banner);
     }
 
     @Override
@@ -76,15 +89,30 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
         TextView restaurantNameTextView;
         TextView openingClosingTextView;
         TextView cusineTextview;
+        ImageView restaurantLogo,restaurantBanner;
         public RestaurantViewHolder(View itemView){
             super(itemView);
             restaurantNameTextView = (TextView)itemView.findViewById(R.id.tv_item_number);
             openingClosingTextView = (TextView) itemView.findViewById(R.id.tv_opening_closing);
             cusineTextview = (TextView) itemView.findViewById(R.id.tv_cusine);
+            restaurantLogo = (ImageView) itemView.findViewById(R.id.image_logo_of_restaurant);
+            restaurantBanner = (ImageView) itemView.findViewById(R.id.image_banner_of_restaurant);
             itemView.setOnClickListener(this);
 
         }
-        void bind(String restaurnatName,String openTime,String closing, String cusine){
+        void bind(String restaurnatName,String openTime,String closing, String cusine,String logo,String banner){
+            if(logo !=null){
+                URL getimageUrl = NetworkUtils.buildLoadIamgeUrl(NetworkUtils.LOGO_URL+logo);
+                Picasso.get().load(getimageUrl.toString()).resize(80,90).into(restaurantLogo);
+
+            }
+            if(banner !=null){
+                URL getimageUrl = NetworkUtils.buildLoadIamgeUrl(NetworkUtils.LOGO_URL+banner);
+
+                Picasso.get().load(getimageUrl.toString()).into(restaurantBanner);
+            }
+
+
             restaurantNameTextView.setText(restaurnatName);
             openingClosingTextView.setText(openTime + " - "+closing);
             cusineTextview.setText(cusine);

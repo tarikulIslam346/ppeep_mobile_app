@@ -22,12 +22,20 @@
             android:orientation="vertical">
 
 
-            <LinearLayout
-                android:background="@drawable/burgerbackground"
-                android:layout_width="280dp"
-                android:layout_height="100dp"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/restaurant_banner"
+                    android:layout_width="280dp"
+                    android:layout_height="100dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/image_banner_of_restaurant"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:src="@drawable/burgerbackground"
+                        />
 
             </LinearLayout>
 
@@ -86,6 +94,7 @@
 
 
         <ImageView
+            android:id="@+id/image_logo_of_restaurant"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
