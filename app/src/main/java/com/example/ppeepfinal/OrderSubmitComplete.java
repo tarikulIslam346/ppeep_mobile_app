@@ -11,6 +11,7 @@ import android.graphics.drawable.Animatable;
 //import android.support.v7.app.AppCompatActivity;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,6 +46,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.CookieStore;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -126,6 +128,9 @@ public class OrderSubmitComplete extends AppCompatActivity {
         driverImage.setVisibility(View.INVISIBLE);
         driverCallIcon.setVisibility(View.INVISIBLE);
 
+
+
+
         Intent orderSubmitInten = getIntent();
 
         String driver = orderSubmitInten.getStringExtra("driver_name");
@@ -137,6 +142,10 @@ public class OrderSubmitComplete extends AppCompatActivity {
         String contact = orderSubmitInten.getStringExtra("contact");
 
         String imageUrl = orderSubmitInten.getStringExtra("profile_pic");
+
+
+        URL sendNotificationURL = NetworkUtils.buildUrl(NetworkUtils.SENT_DRIVER_NOTIFICATION);
+        new SentNotificationTask().execute(sendNotificationURL);
 
         if(message==null)pusherConnection( orderId,driver, imageUrl,  contact);
         else{
@@ -376,6 +385,33 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
         mNotificationManager.notify(0, notification);
 
+    }
+    public class SentNotificationTask extends AsyncTask<URL, Void, String> {
+
+        // COMPLETED (2) Override the doInBackground method to perform the query. Return the results. (Hint: You've already written the code to perform the query)
+        @Override
+        protected String doInBackground(URL... params) {
+            URL searchUrl = params[0];
+            String DriverResults = null;
+            try {
+                DriverResults = NetworkUtils.sentDriverNotificationFromHttpUrl(searchUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return DriverResults;
+        }
+
+        // COMPLETED (3) Override onPostExecute to display the results in the TextView
+        @Override
+        protected void onPostExecute(String DriverResults) {
+
+            if (DriverResults != null && !DriverResults.equals("")) {
+
+                //  mSearchResultsTextView.setText(allNames.get(8));
+            }else{
+                Toast.makeText(getApplicationContext(), " Net connection error", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 
