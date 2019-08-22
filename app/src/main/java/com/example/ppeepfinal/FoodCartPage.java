@@ -232,6 +232,8 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
 
                 orderCreateUrl = NetworkUtils.buildOrderUrl();
                 new OrderTask().execute(orderCreateUrl);
+                URL sendNotificationURL = NetworkUtils.buildUrl(NetworkUtils.SENT_DRIVER_NOTIFICATION);
+                new SentNotificationTask().execute(sendNotificationURL);
 
 
             }
@@ -618,6 +620,34 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
                 //  mSearchResultsTextView.setText(allNames.get(8));
             }else{
                 Toast.makeText(getApplicationContext(), "No restaurant menu found or net connection error", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public class SentNotificationTask extends AsyncTask<URL, Void, String> {
+
+        // COMPLETED (2) Override the doInBackground method to perform the query. Return the results. (Hint: You've already written the code to perform the query)
+        @Override
+        protected String doInBackground(URL... params) {
+            URL searchUrl = params[0];
+            String DriverResults = null;
+            try {
+                DriverResults = NetworkUtils.sentDriverNotificationFromHttpUrl(searchUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return DriverResults;
+        }
+
+        // COMPLETED (3) Override onPostExecute to display the results in the TextView
+        @Override
+        protected void onPostExecute(String DriverResults) {
+
+            if (DriverResults != null && !DriverResults.equals("")) {
+
+                //  mSearchResultsTextView.setText(allNames.get(8));
+            }else{
+                Toast.makeText(getApplicationContext(), " Net connection error", Toast.LENGTH_SHORT).show();
             }
         }
     }
