@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FECE00"
+    android:background="@drawable/splash_demo_background"
     android:gravity="center">
-
+<!--
     <ImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginBottom="10dp"
-        android:src="@drawable/ppeeplogo3" />
+        android:src="@drawable/ppeeplogo3" />-->
 
 </LinearLayout>
