@@ -96,7 +96,6 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
             openingClosingTextView = (TextView) itemView.findViewById(R.id.tv_opening_closing);
             cusineTextview = (TextView) itemView.findViewById(R.id.tv_cusine);
             restaurantLogo = (ImageView) itemView.findViewById(R.id.image_logo_of_restaurant);
-            restaurantLogo = (ImageView) itemView.findViewById(R.id.image_logo_of_restaurant);
             restaurantBanner = (ImageView) itemView.findViewById(R.id.image_banner_of_restaurant);
             itemView.setOnClickListener(this);
 
