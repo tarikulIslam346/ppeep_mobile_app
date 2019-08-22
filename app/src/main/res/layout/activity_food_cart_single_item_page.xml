@@ -30,7 +30,7 @@
             android:id="@+id/iv_order_item_delete"
             android:layout_width="40dp"
             android:layout_height="20dp"
-            android:src="@drawable/deleteicon2"
+            android:src="@drawable/delete_demo_icon"
             android:layout_alignParentRight="true"
             />
 

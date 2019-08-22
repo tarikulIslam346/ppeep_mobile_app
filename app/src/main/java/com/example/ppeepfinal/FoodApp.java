@@ -204,7 +204,7 @@ tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
         adapter.AddFragment(new TabFragmentFoodHomeRoot(),"Home");
         adapter.AddFragment(new TabFragmentNearby(),"Nearby");
         //  adapter.AddFragment(new FragmentNotification() ,"Promotion");
-        adapter.AddFragment(new TabFragmentPopular(),"Popular");
+        //adapter.AddFragment(new TabFragmentPopular(),"Popular");
         adapter.AddFragment(new TabFragmentOffer(),"Free Delivery");
 
 

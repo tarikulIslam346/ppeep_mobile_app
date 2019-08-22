@@ -330,22 +330,22 @@ public class TabFragmentFoodHome extends Fragment {
 
             switch (i) {
                 case 0:
-                    String URL = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(0);
+                    String URL = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(1);
                       sliderView.setImageUrl(URL);
                     break;
                 case 1:
-                    String URL1 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(1);
+                    String URL1 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(5);
                     sliderView.setImageUrl(URL1);
 
                     break;
                 case 2:
 
-                    String URL2 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(2);
+                    String URL2 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(6);
                     sliderView.setImageUrl(URL2);
                     break;
                 case 3:
 
-                    String URL3 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(4);
+                    String URL3 = "https://foodexpress.com.bd/ppeep/public/images/offers/"+imgUrl.get(7);
                     sliderView.setImageUrl(URL3);
                     break;
             }
@@ -356,7 +356,7 @@ public class TabFragmentFoodHome extends Fragment {
             sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
                 @Override
                 public void onSliderClick(SliderView sliderView) {
-                    Toast.makeText(getContext(), "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getContext(), "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
                 }
             });
 

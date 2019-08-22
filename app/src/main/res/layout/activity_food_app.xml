@@ -104,8 +104,8 @@
             app:bubbleTab_circleRatio="1.25"
             app:bubbleTab_image0="@drawable/foodhome_demo_icon2"
             app:bubbleTab_image1="@drawable/nearby_demo_icon4"
-            app:bubbleTab_image2="@drawable/popular_demo_icon2"
-            app:bubbleTab_image3="@drawable/freedelivery_demo_icon2"
+
+            app:bubbleTab_image2="@drawable/freedelivery_demo_icon2"
 
        />
 
