@@ -82,6 +82,8 @@ public class TabFragmentPopular extends Fragment {
     public class RestaurantListTask extends AsyncTask<URL, Void, String> implements   TabFragmentNearbyAdapter.ListItemClickListener {
 
         List<String> allNames = new ArrayList<String>();
+        List<String> logos = new ArrayList<String>();
+        List<String> banners = new ArrayList<String>();
         List<String> OpeningTimes = new ArrayList<String>();
         List<String> ClosingTimes = new ArrayList<String>();
         List<String> Cusines = new ArrayList<String>();
@@ -113,7 +115,7 @@ public class TabFragmentPopular extends Fragment {
                 JSONObject restaurantList = null;
                 JSONArray jsonArray=null;
 
-                String name,closingTime,openingTime,cusine,message = null;
+                String name,closingTime,openingTime,cusine,message = null,logo,banner;
                 int vatOfRestaurant,deliverChargeOfRestaurant;
                 int merchantId;
 
@@ -131,8 +133,12 @@ public class TabFragmentPopular extends Fragment {
                         merchantId = restaurant.getInt("merchant_id");
                         vatOfRestaurant = restaurant.getInt("vat");
                         deliverChargeOfRestaurant = restaurant.getInt("delivery_charges");
+                        logo = restaurant.getString("logo");
+                        banner = restaurant.getString("cover_image");
 
                         allNames.add(name);
+                        logos.add(logo);
+                        banners.add(banner);
                         OpeningTimes.add(openingTime);
                         ClosingTimes.add(closingTime);
                         Cusines.add(cusine);
@@ -171,7 +177,7 @@ public class TabFragmentPopular extends Fragment {
 
                     mNumberOfRestaurant.setHasFixedSize(true);
 
-                    tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines,  this);
+                    tabFragmentNearbyAdapter = new TabFragmentNearbyAdapter(allNames,OpeningTimes,ClosingTimes,Cusines,logos,banners,  this);
 
                     mNumberOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
                 }
