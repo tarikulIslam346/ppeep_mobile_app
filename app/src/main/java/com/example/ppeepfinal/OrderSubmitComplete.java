@@ -145,11 +145,11 @@ public class OrderSubmitComplete extends AppCompatActivity {
         String imageUrl = orderSubmitInten.getStringExtra("profile_pic");
 
 
-        if(orderId !=null){
+        //if(orderId !=null){
             OrderId = orderId;
             URL sendNotificationURL = NetworkUtils.buildUrl(NetworkUtils.SENT_DRIVER_NOTIFICATION);
             new SentNotificationTask().execute(sendNotificationURL);
-        }
+        //}
 
 
 
