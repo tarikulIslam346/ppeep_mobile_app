@@ -19,14 +19,14 @@ android:elevation="10dp"
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="270dp"
+            android:layout_height="280dp"
             android:orientation="vertical">
 
 
             <LinearLayout
                 android:id="@+id/restaurant_banner"
                 android:layout_width="match_parent"
-                android:layout_height="175dp"
+                android:layout_height="185dp"
                 android:layout_marginBottom="25dp"
                 android:orientation="vertical">
 
@@ -100,7 +100,7 @@ android:elevation="10dp"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="50dp"
 android:layout_marginLeft="5dp"
             android:adjustViewBounds="true"
             android:src="@drawable/foodexpress_icon" />
