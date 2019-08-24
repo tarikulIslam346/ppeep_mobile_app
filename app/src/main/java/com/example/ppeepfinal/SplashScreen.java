@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private final int SPLASH_DISPLAY_LENGTH = 2500;
+    private final int SPLASH_DISPLAY_LENGTH = 4400;
     private UserDatabase mdb;
 
     @Override

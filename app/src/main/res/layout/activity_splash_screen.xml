@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/splash_demo_background"
+    android:background="#ffcc00"
     android:gravity="center">
 <!--
     <ImageView
@@ -13,5 +13,11 @@
         android:layout_height="250dp"
         android:layout_marginBottom="10dp"
         android:src="@drawable/ppeeplogo3" />-->
+
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_animated_demo"
+        />
 
 </LinearLayout>
