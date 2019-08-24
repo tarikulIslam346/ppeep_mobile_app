@@ -41,7 +41,12 @@
                 android:layout_marginTop="5dp"
                 >
 
-
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="10dp"
+    android:layout_margin="10dp"
+    >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -52,15 +57,15 @@
                         android:id="@+id/list_icon"
                         android:layout_width="80dp"
                         android:layout_height="90dp"
-                        android:src="@drawable/ic_home"
-                        android:background="@drawable/rounded_shape"/>
+                        android:src="@drawable/logo_demo_logo"
+                       />
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:background="@drawable/friendlist_name_bg"
+
                         android:layout_toRightOf="@+id/list_icon"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
@@ -84,6 +89,14 @@
 
 
                 </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>
+
+
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="10dp"
+    android:layout_margin="10dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_cart"
@@ -91,14 +104,21 @@
                     android:layout_width="match_parent"
                     android:layout_margin="10dp">
                 </androidx.recyclerview.widget.RecyclerView>
+</com.google.android.material.card.MaterialCardView>
 
 
-                <View
+
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="5dp"
-                    android:background="@android:color/black" />
+                    android:layout_height="wrap_content"
+                    android:elevation="10dp"
+                    android:layout_margin="10dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -233,11 +253,15 @@
                         android:text="Taka"/>
 
                 </LinearLayout>
+            </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/black" />
+                </com.google.android.material.card.MaterialCardView>
+
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="10dp"
+    android:layout_margin="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -264,6 +288,19 @@
                         android:text="Taka"/>
                 </LinearLayout>
 
+</com.google.android.material.card.MaterialCardView>
+
+         <com.google.android.material.card.MaterialCardView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:elevation="10dp"
+             android:layout_margin="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp">
+
 
 
                 <TextView
@@ -272,16 +309,16 @@
                     android:text="Use Point"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="40dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
                     />
                 <TextView
                     android:id="@+id/tv_my_point"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="My Point : 0.0"
-                    android:textSize="18sp"
-                    android:layout_marginLeft="10dp"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="20dp"
                     />
 
                 <LinearLayout
@@ -303,6 +340,7 @@
                             android:layout_width="250dp"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="80dp"
+                            android:textSize="14sp"
                             android:hint="Max point use per order 50" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -310,19 +348,38 @@
                         android:id="@+id/bt_add_point"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#36A03C"
+                        android:backgroundTint="#205E23"
                         android:text="ADD +"
                         android:textColor="#0C0C0C"
                         />
 
                 </LinearLayout>
+                </LinearLayout>
+
+         </com.google.android.material.card.MaterialCardView>
+
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="10dp"
+                    android:layout_margin="10dp"
+                    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Payement Type"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="40dp"
                     android:layout_marginLeft="10dp"
                     />
                 <RadioButton
@@ -346,15 +403,19 @@
                 <TextView
                     android:id="@+id/tv_user_address_map_view"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
+                  android:padding="10dp"
                     android:layout_margin="10dp"
                     android:textSize="14sp"
+                    android:maxLines="1"
                     android:text="c1, monallee tower, bastola"
                     android:background="@drawable/background_delivery_address"
                     />
 
 
+</LinearLayout>
 
+                </com.google.android.material.card.MaterialCardView>
 
 
                 <LinearLayout
@@ -390,6 +451,8 @@
 
                 </LinearLayout>
 
+
+
                 <Button
                     android:id="@+id/placeOrderId"
                     android:layout_width="match_parent"
@@ -398,7 +461,7 @@
                     android:gravity="center"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="5dp"
-                    android:backgroundTint="#247027"
+                    android:backgroundTint="#0C520F"
                     android:textColor="#0A0909"
                     />
             </LinearLayout>

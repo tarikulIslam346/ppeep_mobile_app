@@ -35,25 +35,32 @@ tools:context=".UserAutoCompleteAdress">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+      >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            android:tint="#25C27A" />
+            android:src="@drawable/ic_search_black_24dp"
+           />
 
         <AutoCompleteTextView
             android:id="@+id/address"
             android:textSize="13dp"
+            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="55dp"
-            android:background="@android:color/transparent"
+
             android:imeOptions="actionSearch"
             android:singleLine="true"
-            android:hint="Search here"/>
+
+            android:hint="Search Address Here"/>
+
+
     </RelativeLayout>
 
 
@@ -76,7 +83,8 @@ tools:context=".UserAutoCompleteAdress">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+       >
 
 
         <LinearLayout

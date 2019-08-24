@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+        <item name="android:textViewStyle">@style/TextViewTheme</item>
     </style>
 
 
@@ -20,7 +21,9 @@
 
 
 
-
+    <style name="TextViewTheme">
+        <item name="android:textColor">@android:color/widget_edittext_dark</item>
+    </style>
 
     <style name="AppThemeHomepage" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -29,6 +32,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:textViewStyle">@style/TextViewTheme</item>
           </style>
 
     <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -37,6 +41,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+        <item name="android:textViewStyle">@style/TextViewTheme</item>
     </style>
 
     <style name="MyTabLayoutTextAppearance" parent="TextAppearance.Design.Tab">

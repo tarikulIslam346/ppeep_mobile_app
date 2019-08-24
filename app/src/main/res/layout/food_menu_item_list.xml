@@ -67,7 +67,7 @@
                 android:id="@+id/decrease"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/ic_sub"
+                android:src="@drawable/ic_remove_circle_black_24dp"
                 android:visibility="invisible"
                 android:layout_marginRight="10dp"
                 />
@@ -88,7 +88,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/ic_add"
+                android:src="@drawable/ic_add_circle_black_24dp"
                 android:visibility="invisible"
                 />
 
