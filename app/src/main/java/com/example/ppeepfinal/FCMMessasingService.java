@@ -68,6 +68,7 @@ public class FCMMessasingService extends FirebaseMessagingService {
             //message = remoteMessage.getNotification().getBody();
             Intent it = new Intent(this, OrderSubmitComplete.class);
            // Snackbar.make(R.id.layout_home_page),"Order_has",Snackbar.LENGTH_INDEFINITE).show();
+            //it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             PendingIntent contentIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), it, 0);
             Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             int ico_notification = R.drawable.ic_ajkerdeal;

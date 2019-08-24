@@ -571,8 +571,12 @@ public class NetworkUtils {
         }
     }
 
-    public static String sentDriverNotificationFromHttpUrl(URL notificationUrl) throws IOException {
+    public static String sentDriverNotificationFromHttpUrl(URL notificationUrl,String OrderId) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) notificationUrl.openConnection();
+        urlConnection.setRequestMethod("POST");//use post method
+
+        HashMap<String, String> param = new HashMap<String, String>();
+        param.put( "order_id", OrderId);
 
 
         try {

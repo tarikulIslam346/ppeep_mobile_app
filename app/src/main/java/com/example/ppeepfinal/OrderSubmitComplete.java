@@ -64,7 +64,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
     ProgressBar orderConfirmProgressbar;
 
-    private  String userName,userPhoneNo;
+    private  String userName,userPhoneNo,OrderId;
 
     private UserDatabase mdb;
     MaterialCardView orderConfirm,orderDeliver,orderOnTheWay;
@@ -111,6 +111,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
         driverImage = (ImageView) findViewById(R.id.iv_driver_image);
 
         driverCallIcon = (ImageView) findViewById(R.id.callDriverId);
+
          driverFound = (TextView) findViewById(R.id.tv_driver_found);
          driverFound.setVisibility(View.INVISIBLE);
 
@@ -144,8 +145,14 @@ public class OrderSubmitComplete extends AppCompatActivity {
         String imageUrl = orderSubmitInten.getStringExtra("profile_pic");
 
 
-        URL sendNotificationURL = NetworkUtils.buildUrl(NetworkUtils.SENT_DRIVER_NOTIFICATION);
-        new SentNotificationTask().execute(sendNotificationURL);
+        if(orderId !=null){
+            OrderId = orderId;
+            URL sendNotificationURL = NetworkUtils.buildUrl(NetworkUtils.SENT_DRIVER_NOTIFICATION);
+            new SentNotificationTask().execute(sendNotificationURL);
+        }
+
+
+
 
         if(message==null)pusherConnection( orderId,driver, imageUrl,  contact);
         else{
@@ -394,7 +401,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
             URL searchUrl = params[0];
             String DriverResults = null;
             try {
-                DriverResults = NetworkUtils.sentDriverNotificationFromHttpUrl(searchUrl);
+                DriverResults = NetworkUtils.sentDriverNotificationFromHttpUrl(searchUrl,OrderId);
             } catch (IOException e) {
                 e.printStackTrace();
             }
