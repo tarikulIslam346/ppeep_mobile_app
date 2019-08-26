@@ -57,11 +57,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             String restaurantName
     ) {
         this._context = context;
+        mdb = UserDatabase.getInstance(this._context);// create db instance
+
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
         this._listChildPriceData = listChildPriceData;
         this._listChildIdData = listChildIdData;
-        mdb = UserDatabase.getInstance(this._context);// create db instance
         this.merchantId = _merchantId;
         this.vat = vat;
         this.deliveryCharge = deliveryCharge;
@@ -90,18 +91,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     public  int ItemAddCheck( int ItemId){
 
+        /*This function checks that the item has already been existed or not */
 
         List<OrderModel> order  = mdb.orderDAO().loadOrder();
         int flag =  0;
         if(order.size()!=0){
             for(int j =0;j<order.size();j++){
                 if(order.get(j).getItemId() == ItemId){
-                    //i++;
-                    //textViewAddCart.setText( " "+String.valueOf(i)+ " ");
+                    /*If item exist then set flag 1*/
                     flag = 1;
                     return flag;
-
-
                 }
             }
             return flag;
@@ -140,23 +139,26 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 
          i =0;//intialize
+        Menu menu = RestaurantMenuPage.getThis().getMenu();
+        MenuItem  foodCart= (MenuItem) menu.findItem(R.id.action_drawer_cart);
+        final LayerDrawable icon = (LayerDrawable) foodCart.getIcon();
         increaseImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                i++;
-                textViewAddCart.setText( " "+String.valueOf(i)+ " ");
-                //Date date = new Date();
+                //i++;
+                //textViewAddCart.setText( " "+String.valueOf(i)+ " ");
                 int ItemId = _listChildIdData.get(_listDataHeader.get(groupPosition)).get(childPosition);
-                int ItemPrice = Integer.valueOf(_listChildPriceData.get(_listDataHeader.get(groupPosition)).get(childPosition));
-                String ItemName = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
 
                 int Flag = ItemAddCheck(ItemId);
                 OrderModel order =  mdb.orderDAO().loadOrderById(ItemId);
                 if(Flag == 1){
                     //Toast.makeText(_context, ItemName +" Already added ", Toast.LENGTH_SHORT).show();
                     if(order != null){
-                        order.setItemAmount(i);
-                        mdb.orderDAO().updateOrder(order);
+                            int increaseOrder = order.getItemAmount() + 1;
+                            textViewAddCart.setText( " "+String.valueOf(increaseOrder)+ " ");
+                            order.setItemAmount(order.getItemAmount() + 1);
+                            mdb.orderDAO().updateOrder(order);
+
                     }
                 }
 
@@ -166,67 +168,78 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         decreaseImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(i >1) {
-                    i--;
-                    textViewAddCart.setText( " "+String.valueOf(i)+ " ");
-                    Date date = new Date();
+                //if(i >1) {
+                    //i--;
+                    //textViewAddCart.setText( " "+String.valueOf(i)+ " ");
                     int ItemId = _listChildIdData.get(_listDataHeader.get(groupPosition)).get(childPosition);
-                    int ItemPrice = Integer.valueOf(_listChildPriceData.get(_listDataHeader.get(groupPosition)).get(childPosition));
-                    String ItemName = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
-
-
                     int Flag = ItemAddCheck(ItemId);
                     OrderModel order =  mdb.orderDAO().loadOrderById(ItemId);
                     if(Flag == 1){
-                        //Toast.makeText(_context, ItemName +" Already added ", Toast.LENGTH_SHORT).show();
                         if(order != null){
-                            order.setItemAmount(i);
-                            mdb.orderDAO().updateOrder(order);
+                            if(order.getItemAmount() >= 0){
+                                int decreaseOrder = order.getItemAmount() - 1;
+                                textViewAddCart.setText( " "+String.valueOf(decreaseOrder)+ " ");
+                                order.setItemAmount(order.getItemAmount() - 1);
+                                mdb.orderDAO().updateOrder(order);
+                                if(order.getItemAmount() == 0){
+                                    mdb.orderDAO().deleteOrder(order);
+                                    textViewAddCart.setText("Add");
+                                    increaseImage.setVisibility(View.INVISIBLE);
+                                    decreaseImage.setVisibility(View.INVISIBLE);
+                                    List<OrderModel> orders = mdb.orderDAO().loadOrder();
+                                    int count = orders.size();
+                                    Utils.setBadgeCount(_context, icon, count);
+                                    if(count == 0){
+                                        List<OrderMerchantModel> om = mdb.orderMercahntDAO().loadOrderMerchant();
+                                        mdb.orderMercahntDAO().deleteOrderMerchant(om.get(0));
+                                    }
+                                }
+                            }
                         }
                     }
-                }
+               // }
             }
         });
 
-        Menu menu = RestaurantMenuPage.getThis().getMenu();
 
-        MenuItem  foodCart= (MenuItem) menu.findItem(R.id.action_drawer_cart);
-        final LayerDrawable icon = (LayerDrawable) foodCart.getIcon();
 
 
         textViewAddCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 List<OrderMerchantModel> orderMerchantModelList =  mdb.orderMercahntDAO().loadOrderMerchant();
                 i = 1;
 
-                //add order item if order from same marchant or no add to cart select
+                /* Add order item
+                 * if order from same merchant OR
+                 * No add to cart select
+                 * */
 
-                if(orderMerchantModelList.size() ==0  || Integer.valueOf(merchantId)== orderMerchantModelList.get(0).getMerchantId() ) {
+                if(orderMerchantModelList.size() ==0 ||
+                        Integer.valueOf(merchantId)== orderMerchantModelList.get(0).getMerchantId()
+                ) {
 
                     textViewAddCart.setText( " "+String.valueOf(i)+ " ");
-
                     increaseImage.setVisibility(View.VISIBLE);
-
                     decreaseImage.setVisibility(View.VISIBLE);
 
-                    //Add to merchant list if no order merchant select
+                    /* Add to order merchant list
+                     * if no order merchant select
+                     * */
 
                     if (orderMerchantModelList.size() == 0) {
 
-                        OrderMerchantModel orderMerchantModel = new OrderMerchantModel(Integer.valueOf(merchantId), restaurantName, vat, deliveryCharge);
+                        /* Add restaurant name , merchant ID, vat, delivery charge to 'orderMerchant' table of UserDatabase */
 
+                        OrderMerchantModel orderMerchantModel = new OrderMerchantModel(Integer.valueOf(merchantId), restaurantName, vat, deliveryCharge);
                         mdb.orderMercahntDAO().insertOrderMerchant(orderMerchantModel);
                     }
 
+                    /* Retrive data from expandable adapter view */
+
                     Date date = new Date();
-
                     int ItemId = _listChildIdData.get(_listDataHeader.get(groupPosition)).get(childPosition);
-
                     int ItemPrice = Integer.valueOf(_listChildPriceData.get(_listDataHeader.get(groupPosition)).get(childPosition));
-
                     String ItemName = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
 
 
@@ -235,9 +248,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     if(Flag != 1){
 
                         OrderModel orderModel = new OrderModel(ItemId, ItemName, ItemPrice,i, date);
-
                         mdb.orderDAO().insertOrder(orderModel);
-
                         List<OrderModel> order = mdb.orderDAO().loadOrder();
 
 

@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/lblListItem"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="17dip"
         android:paddingTop="5dp"
@@ -22,8 +22,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_alignParentRight="true"
-          >
+            android:layout_alignParentRight="true">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

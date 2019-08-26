@@ -3,6 +3,13 @@ package com.example.ppeepfinal;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 /*import android.support.design.widget.Snackbar;
@@ -17,6 +24,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +38,11 @@ import com.example.ppeepfinal.data.OrderMercahntDAO;
 import com.example.ppeepfinal.data.OrderMerchantModel;
 import com.example.ppeepfinal.data.OrderModel;
 import com.example.ppeepfinal.data.UserDatabase;
+import com.example.ppeepfinal.utilities.ImageCircleOfPicasso;
 import com.example.ppeepfinal.utilities.NetworkUtils;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+import com.squareup.picasso.Transformation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,6 +65,8 @@ public class RestaurantMenuPage extends AppCompatActivity {
     HashMap<String, List<String>> listDataChild,listDataChildPrice;
     HashMap<String,List<Integer>>listDataChildId;
     TextView mRestaurantName,mCusine;
+    ImageView mRestaurnatLogo;
+     LinearLayout mRestaurantBanner;
     String merchantId;
     URL restaurantMenuListUrl;
     List<String> Menus;
@@ -73,19 +88,47 @@ public class RestaurantMenuPage extends AppCompatActivity {
         mRestaurantName = (TextView) findViewById(R.id.tv_restaurnat_name) ;
         mCusine = (TextView) findViewById(R.id.tv_cusine);
         mProgressbar = (ProgressBar)findViewById(R.id.pv_restaurant_menu_item);
+        mRestaurnatLogo = (ImageView) findViewById(R.id.restaurant_logo) ;
+        mRestaurantBanner = (LinearLayout) findViewById(R.id.restaurant_banner);
 
         Intent intent = getIntent();
         merchantId = intent.getStringExtra("mercahnt_Id");
         String restaurantName = intent.getStringExtra("restaurant_name");
         String cusine = intent.getStringExtra("cuisine");
+        String logo = intent.getStringExtra("logo");
+        String banner = intent.getStringExtra("cover_image");
         vat = Integer.valueOf(intent.getStringExtra("vat"));
         deliveryCharge = Integer.valueOf( intent.getStringExtra("deliveryCharge"));
 
 
         mdb = UserDatabase.getInstance(getApplicationContext());// create db instance
 
+
         if(restaurantName != null){
             mRestaurantName.setText(restaurantName);
+        }
+        if(logo != null){
+            URL getimageUrl = NetworkUtils.buildLoadIamgeUrl(NetworkUtils.LOGO_URL+logo);
+            Picasso.get().load(getimageUrl.toString()).transform(new ImageCircleOfPicasso()).into(mRestaurnatLogo);
+        }
+        if(banner != null){
+            URL getimageUrl = NetworkUtils.buildLoadIamgeUrl(NetworkUtils.LOGO_URL+banner);
+            Picasso.get().load(getimageUrl.toString()).into(new Target() {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    mRestaurantBanner.setBackground(new BitmapDrawable(bitmap));
+                }
+
+                @Override
+                public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                }
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                }
+            });
         }
         if(cusine !=null){
             mCusine.setText(cusine);
@@ -262,6 +305,11 @@ public class RestaurantMenuPage extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_drawer_cart:
@@ -299,6 +347,8 @@ public class RestaurantMenuPage extends AppCompatActivity {
     {
         return mThis;
     }
+
+
 
 
 }

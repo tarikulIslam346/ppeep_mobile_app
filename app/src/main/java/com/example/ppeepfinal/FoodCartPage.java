@@ -588,6 +588,8 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
                     e.printStackTrace();
                 }
 
+                if(orderId != null) Toast.makeText(getApplicationContext(),""+orderId,Toast.LENGTH_LONG).show();
+
                 if(fname != null){
                     List<OrderModel> orders = foodCartPageAdapter.getmOrders();
                     if(orders.size()!=0){

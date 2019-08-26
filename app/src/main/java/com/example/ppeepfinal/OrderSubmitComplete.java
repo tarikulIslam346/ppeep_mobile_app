@@ -64,7 +64,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
     ProgressBar orderConfirmProgressbar;
 
-    private  String userName,userPhoneNo,OrderId;
+    private  String userName,userPhoneNo,OrderId=null;
 
     private UserDatabase mdb;
     MaterialCardView orderConfirm,orderDeliver,orderOnTheWay;
@@ -145,11 +145,12 @@ public class OrderSubmitComplete extends AppCompatActivity {
         String imageUrl = orderSubmitInten.getStringExtra("profile_pic");
 
 
-        //if(orderId !=null){
+        if(orderId !=null){
+            /* Sent firebase notification to driver if order has exist*/
             OrderId = orderId;
             URL sendNotificationURL = NetworkUtils.buildUrl(NetworkUtils.SENT_DRIVER_NOTIFICATION);
             new SentNotificationTask().execute(sendNotificationURL);
-        //}
+        }
 
 
 
@@ -168,22 +169,36 @@ public class OrderSubmitComplete extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
 
-      //  OrderReciver receiver = new OrderReciver();
 
-      //  unregisterReceiver(receiver);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-       // IntentFilter intentFilter = new IntentFilter();
-       // intentFilter.addAction("com.example.ppeepfinal.CUSTOM_INTENT");
-       // OrderReciver receiver = new OrderReciver();
-       // registerReceiver(receiver, intentFilter);
+
+        /* Trying to update through broadcast receiver .
+         * Broadcast receiver unregister here */
+
+       /* IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.example.ppeepfinal.CUSTOM_INTENT");
+        OrderReciver receiver = new OrderReciver();
+        registerReceiver(receiver, intentFilter);*/
     }
 
     private  void pusherConnection( String orderId,String driver, String imageUrl, String contact){
+
+        /* Fix it
+         * This pusher connection using public channel
+         * Need to setup private channel
+         * Like this..
+
+        HttpAuthorizer authorizer = new HttpAuthorizer("https://foodexpress.com.bd/ppeep/public/broadcasting/auth");
+
+        Toast.makeText(getApplicationContext(), ""+authorizer, Toast.LENGTH_SHORT).show();
+
+        PusherOptions options = new PusherOptions().setAuthorizer(authorizer);*/
+
         PusherOptions options = new PusherOptions();
         options.setCluster("mt1");
         Pusher pusher = new Pusher("6211c9a7cfb062fa410d", options);
@@ -205,16 +220,17 @@ public class OrderSubmitComplete extends AppCompatActivity {
 
 
                         JSONObject driverInfo;
-                        //int OrderId = 0;
+                        int OrderId = 0;
 
                         try {
                             driverInfo = new JSONObject(data);
-                           // OrderId = driverInfo.getInt("order_id");
+                            OrderId = driverInfo.getInt("order_id");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         addNotification("Your order has been accepted");
-                        UserCurrentOrder userCurrentOrder = new UserCurrentOrder(Integer.valueOf(orderId),1);
+                        UserCurrentOrder userCurrentOrder = new UserCurrentOrder(OrderId,1);
+                        mdb.userCurrentOrderDAO().insertCurrentOrder(userCurrentOrder);
 
                         // Toast.makeText(getApplicationContext()," Order confirm : ",Toast.LENGTH_LONG).show();
                         if(imageUrl != null){
