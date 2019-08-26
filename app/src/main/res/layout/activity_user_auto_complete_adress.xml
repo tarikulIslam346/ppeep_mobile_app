@@ -76,7 +76,7 @@ tools:context=".UserAutoCompleteAdress">
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:src="@drawable/mapiconpointer"
+        android:src="@drawable/mapiconhome_demo"
         />
 
 

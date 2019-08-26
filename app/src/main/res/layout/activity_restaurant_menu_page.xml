@@ -36,52 +36,57 @@
             android:orientation="vertical">
 
 
-            <LinearLayout
-                android:background="@drawable/burgerbackground"
+
+
+
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_height="185dp"
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_margin="10dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tv_restaurnat_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:text="Burger King"
-                            android:textColor="#971409"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tv_cusine"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Cuisine"
-                            android:textColor="#3C1212" />
-                    </LinearLayout>
-
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-
-
+                android:src="@drawable/biriyani"/>
         </LinearLayout>
 
+        <LinearLayout
 
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_restaurnat_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="Burger King"
+                        android:textColor="#971409"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_cusine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cuisine"
+                        android:textColor="#3C1212" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
         <ImageView
             android:layout_width="60dp"

@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/login_page_demo"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:padding="20dp"
     tools:context=".MainActivity">
 
     <ImageView
-        android:layout_width="220dp"
-        android:layout_height="220dp"
-        android:layout_marginBottom="30dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginBottom="180dp"
         android:src="@drawable/ppeeplogo3" />
 
 
@@ -52,19 +52,20 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/enterletGo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-app:cornerRadius="45dp"
-        android:elevation="50dp"
-
+        app:cornerRadius="5dp"
+        android:elevation="10dp"
         style="@style/Widget.MaterialComponents.Button"
-
+        android:padding="10dp"
+        android:gravity="center"
+     android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:text="Enter with phone number"
-        android:backgroundTint="#2B8FBD"
+        android:backgroundTint="#CDDC39"
         android:textAlignment="center"
-        android:textColor="#070000"
-        android:textSize="20sp"
+        android:textColor="#ED090A0A"
+        android:textSize="16sp"
 
         />
     <ProgressBar

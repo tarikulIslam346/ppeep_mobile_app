@@ -7,6 +7,23 @@
     android:orientation="vertical"
 
     tools:context=".FriendHistoryDetails">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            app:title="Friend Details"
+            app:titleTextColor="#ffcc00"
+            android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+            app:popupTheme="@style/Theme.AppCompat.Light"
+            android:id="@+id/foodapptoolbar"
+            android:elevation="10dp"
+            />
+
+    </com.google.android.material.card.MaterialCardView>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -72,6 +89,16 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/bt_remove_friend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Delete Friend"
+                android:layout_marginRight="20dp"
+
+                android:textColor="#E91C0C"/>
+
 
         </LinearLayout>
 
@@ -83,6 +110,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/topprofile"
         android:layout_marginBottom="90dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -110,7 +143,7 @@
                 android:text="Date"
                 android:layout_margin="1dp"
                 android:layout_column="0"
-                android:background="#5DE26A"
+                android:background="#ffcc00"
                 android:textStyle="bold"
                 android:gravity="center" />
 
@@ -120,7 +153,7 @@
                 android:text="Order Ammount"
                 android:layout_margin="1dp"
                 android:layout_column="1"
-                android:background="#5DE26A"
+                android:background="#ffcc00"
                 android:gravity="center"
                 android:textStyle="bold"
                 />
@@ -131,7 +164,7 @@
 
                 android:text="Points Earned"
                 android:layout_margin="1dp"
-                android:background="#5DE26A"
+                android:background="#ffcc00"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:layout_column="2"
@@ -184,12 +217,14 @@
 
     </TableLayout>
 
+
     </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
     </ScrollView>
 
 
 
-    <Button
+    <!--<Button
         android:id="@+id/bt_remove_friend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -198,8 +233,6 @@
         android:layout_margin="10dp"
         android:backgroundTint="#F00606"
         android:padding="15dp"
-      android:layout_alignParentBottom="true"
-
-        />
+      android:layout_alignParentBottom="true"/>-->
     </RelativeLayout>
 </LinearLayout>

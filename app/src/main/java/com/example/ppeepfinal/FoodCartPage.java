@@ -94,7 +94,7 @@ public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAda
         addressOnMap = (TextView) findViewById(R.id.tv_user_address_map_view);
 
         tv_my_point = (TextView) findViewById(R.id.tv_my_point) ;
-        mAddPoint.setVisibility(View.INVISIBLE);
+      //  mAddPoint.setVisibility(View.INVISIBLE);
 
         List<OrderMerchantModel> orderMerchant = mdb.orderMercahntDAO().loadOrderMerchant();
         mRestaurantName = (TextView) findViewById(R.id.tv_restaurant_name_food_cart);

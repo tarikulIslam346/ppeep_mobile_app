@@ -4,11 +4,15 @@ import android.content.Context;
 //import android.support.annotation.NonNull;
 //import android.support.v7.widget.LinearLayoutManager;
 //import android.support.v7.widget.RecyclerView;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.net.URL;
 import java.util.List;
@@ -23,6 +28,7 @@ import java.util.List;
 public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNearbyAdapter.RestaurantViewHolder> {
 
     private int mNumberRestaurant;
+
     private List<String> mData;
     private List<String> mOpeningTime;
     private List<String> mClosingTime;
@@ -89,6 +95,7 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
         TextView restaurantNameTextView;
         TextView openingClosingTextView;
         TextView cusineTextview;
+        LinearLayout layoutBanner;
         ImageView restaurantLogo,restaurantBanner;
         public RestaurantViewHolder(View itemView){
             super(itemView);
@@ -97,6 +104,7 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
             cusineTextview = (TextView) itemView.findViewById(R.id.tv_cusine);
             restaurantLogo = (ImageView) itemView.findViewById(R.id.image_logo_of_restaurant);
             restaurantBanner = (ImageView) itemView.findViewById(R.id.image_banner_of_restaurant);
+            layoutBanner=(LinearLayout) itemView.findViewById(R.id.restaurant_banner) ;
             itemView.setOnClickListener(this);
 
         }
@@ -109,7 +117,23 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
             if(banner !=null){
                 URL getimageUrl = NetworkUtils.buildLoadIamgeUrl(NetworkUtils.LOGO_URL+banner);
 
-                Picasso.get().load(getimageUrl.toString()).into(restaurantBanner);
+                Picasso.get().load(getimageUrl.toString()).into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        layoutBanner.setBackground(new BitmapDrawable(bitmap));
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                    }
+                });
+
             }
 
 
