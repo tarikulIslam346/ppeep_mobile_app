@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.ppeepfinal.adapter.TabFragmentNearbyAdapter;
 import com.example.ppeepfinal.data.UserDatabase;
@@ -45,6 +46,7 @@ public class TabFragmentNearby extends Fragment {
     List<UserModel> user;
     private UserDatabase mdb;
     String lat,lng;
+    //ViewPager viewPager;
 
 
     public TabFragmentNearby(){ }
@@ -56,6 +58,7 @@ public class TabFragmentNearby extends Fragment {
 
 
         v=inflater.inflate(R.layout.activity_tab_fragment_nearby,container,false);
+        //viewPager = (ViewPager) getActivity().findViewById(R.id.viewPagerId) ;
         URL restaurantListUrl = NetworkUtils.buildNearByRestaurantUrl();
         mProgressbar = (ProgressBar) v.findViewById(R.id.pv_restaurant_menu) ;
         mProgressbar.setVisibility(View.VISIBLE);
@@ -169,7 +172,7 @@ public class TabFragmentNearby extends Fragment {
                 mProgressbar.setLayoutParams(layoutParams);
 
                 if(message != null ){
-                    Snackbar.make(v.findViewById(R.id.layout_nearby), " "+message, Snackbar.LENGTH_INDEFINITE)
+                    Snackbar.make(v.findViewById(R.id.layout_nearby_tab), " "+message, Snackbar.LENGTH_INDEFINITE)
                             .setAction("CLOSE", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {

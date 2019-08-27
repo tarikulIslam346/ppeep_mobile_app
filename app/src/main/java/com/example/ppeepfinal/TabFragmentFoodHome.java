@@ -87,6 +87,7 @@ public class TabFragmentFoodHome extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v=inflater.inflate(R.layout.activity_tab_fragment_recommended,container,false);
+        viewPager = (ViewPager) getActivity().findViewById(R.id.viewPagerId) ;
         mdb = UserDatabase.getInstance(getContext());
 
        /*TabFragmentRecommended fragmentHome = new TabFragmentRecommended();
@@ -100,7 +101,7 @@ public class TabFragmentFoodHome extends Fragment {
 
         mViewAll = (TextView) v.findViewById(R.id.tv_view_all);
 
-        viewPager = (ViewPager) getActivity().findViewById(R.id.viewPagerId) ;
+
 
         cardViewForSearchChiniseCusine = (CardView) v.findViewById(R.id.cv_chinise);
 

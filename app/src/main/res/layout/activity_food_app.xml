@@ -90,24 +90,48 @@
         android:orientation="vertical">
 
 
-
-
         <com.github.florent37.bubbletab.BubbleTab
             android:id="@+id/tabLayoutId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-
             android:background="@android:color/white"
             android:elevation="10dp"
             app:bubbleTab_circleColor="#ffcc00"
-            app:bubbleTab_circleRatio="1.25"
+            app:bubbleTab_circleRatio="0.7"
             app:bubbleTab_image0="@drawable/foodhome_demo_icon2"
             app:bubbleTab_image1="@drawable/nearby_demo_icon4"
+            app:bubbleTab_image2="@drawable/freedelivery_demo_icon2">
 
-            app:bubbleTab_image2="@drawable/freedelivery_demo_icon2"
 
-       />
+            <!-- <ImageView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1"
+                 android:padding="16dp"
+                 android:src="@drawable/foodhome_demo_icon2" />
+
+             <ImageView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1"
+                 android:padding="16dp"
+                 android:src="@drawable/nearby_demo_icon4" />
+
+             <ImageView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1"
+                 android:padding="16dp"
+                 android:src="@drawable/freedelivery_demo_icon2" />-->
+        </com.github.florent37.bubbletab.BubbleTab>
+
+
+
+
+
+
+
 
 
 
@@ -128,86 +152,16 @@
             sothree:umanoPanelHeight="45dp"
             sothree:umanoShadowHeight="4dp">
 
-                <androidx.viewpager.widget.ViewPager
+
+
+              <androidx.viewpager.widget.ViewPager
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/viewPagerId">
 
-                </androidx.viewpager.widget.ViewPager>
-
-         <!--   <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="600dp"
-                android:orientation="vertical">
+              </androidx.viewpager.widget.ViewPager>
 
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.7"
-                    android:orientation="vertical">
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:scaleType="fitXY"
-                                android:src="@drawable/banner" />
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:scaleType="fitXY"
-                                android:text="@string/banner_text" />
-
-                        </LinearLayout>
-
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.9"
-                    android:orientation="horizontal">
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:padding="20dp"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:scaleType="fitXY"
-                           android:text="@string/banner_text" />
-                    </com.google.android.material.card.MaterialCardView>
-
-                </LinearLayout>
-
-
-
-
-
-
-
-
-
-            </LinearLayout>-->
 
 
        <include layout="@layout/foodapp_bottom_sheet" />

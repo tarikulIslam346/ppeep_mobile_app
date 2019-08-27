@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.ppeepfinal.adapter.TabFragmentNearbyAdapter;
 import com.example.ppeepfinal.data.UserDatabase;
@@ -44,6 +45,7 @@ public class TabFragmentOffer extends Fragment {
     UserDatabase mdb;
     List<UserModel> user ;
     String lat,lng;
+    //ViewPager viewPager;
 
     public TabFragmentOffer(){
 
@@ -55,6 +57,7 @@ public class TabFragmentOffer extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v=inflater.inflate(R.layout.activity_tab_fragment_offer,container,false);
+        //viewPager = (ViewPager) getActivity().findViewById(R.id.viewPagerId) ;
 
         URL restaurantListUrl = NetworkUtils.buildFreeDeliverRestaurantUrl();
 

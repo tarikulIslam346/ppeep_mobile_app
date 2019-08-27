@@ -67,6 +67,7 @@ Menu foodCart;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_app);
+        tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
         mdb = UserDatabase.getInstance(getApplicationContext());
         foodToolbar = (Toolbar) findViewById(R.id.foodapptoolbar);
         setSupportActionBar(foodToolbar);
@@ -76,6 +77,29 @@ Menu foodCart;
 
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+
+
+
+
+
+
+        adapter.AddFragment(new TabFragmentFoodHomeRoot(),"Home");
+        adapter.AddFragment(new TabFragmentNearby(),"Nearby");
+
+        adapter.AddFragment(new TabFragmentOffer(),"Free Delivery");
+
+        viewPagerId = (ViewPager) findViewById(R.id.viewPagerId);
+        tabLayoutId.setupWithViewPager(viewPagerId);
+
+        /* Add extra tab here
+
+           adapter.AddFragment(new FragmentNotification() ,"Promotion");
+           adapter.AddFragment(new TabFragmentPopular(),"Popular");
+        */
+
+
+        viewPagerId.setAdapter(adapter);
        // restaurantSearchView = (SearchView)  findViewById(R.id.sv_for_restaurant);
         mAddress = (TextView) findViewById(R.id.tv_delivery_address);
         addresslayout = (LinearLayout) findViewById(R.id.layout_address);
@@ -192,24 +216,9 @@ Menu foodCart;
         }
 */
 
-tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
-
-
-        viewPagerId = (ViewPager) findViewById(R.id.viewPagerId);
-        tabLayoutId.setupWithViewPager(viewPagerId);
 
 
 
-
-
-        adapter.AddFragment(new TabFragmentFoodHomeRoot(),"Home");
-        adapter.AddFragment(new TabFragmentNearby(),"Nearby");
-        //  adapter.AddFragment(new FragmentNotification() ,"Promotion");
-        //adapter.AddFragment(new TabFragmentPopular(),"Popular");
-        adapter.AddFragment(new TabFragmentOffer(),"Free Delivery");
-
-
-        viewPagerId.setAdapter(adapter);
 
 
        /* tabLayoutId.getTabAt(0).setIcon(R.drawable.homeicon);
