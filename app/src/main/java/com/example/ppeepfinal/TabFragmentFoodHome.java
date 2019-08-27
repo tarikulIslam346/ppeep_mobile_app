@@ -552,6 +552,8 @@ public class TabFragmentFoodHome extends Fragment {
             int clickedRestaurnat = MerchantId.get(clickedItemIndex).intValue();
             String restaurantName = allNames.get(clickedItemIndex);
             String cusine = Cusines.get(clickedItemIndex);
+            String logo = logos.get(clickedItemIndex);
+            String banner = banners.get(clickedItemIndex);
             int vat = VatList.get(clickedItemIndex);
             int deliveryCharge = deliveryChargList.get(clickedItemIndex);
             //Toast.makeText(getContext(),"restaurant id" +clickedRestaurnat ,Toast.LENGTH_SHORT).show();
@@ -561,6 +563,8 @@ public class TabFragmentFoodHome extends Fragment {
             foodmenuIntent.putExtra("cuisine",cusine);
             foodmenuIntent.putExtra("vat",String.valueOf(vat));
             foodmenuIntent.putExtra("deliveryCharge",String.valueOf(deliveryCharge));
+            foodmenuIntent.putExtra("logo",logo);
+            foodmenuIntent.putExtra("cover_image",banner);
             startActivity(foodmenuIntent);
 
 

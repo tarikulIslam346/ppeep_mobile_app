@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 //import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -307,6 +308,8 @@ tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
 
     public  void loadOrderInfo(){
         List<UserCurrentOrder> userCurrentOrders = mdb.userCurrentOrderDAO().loadCurrentOrder();
+        Log.d("Current order: ",""+ userCurrentOrders.size());
+        if(userCurrentOrders.size()!=0)Toast.makeText(getApplicationContext(),""+userCurrentOrders.get(0).getId(),Toast.LENGTH_LONG).show();
         if(userCurrentOrders.size()!=0){
             int orderId = userCurrentOrders.get(0).getOrderid();
             PusherOptions options = new PusherOptions();

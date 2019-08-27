@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ppeepfinal.utilities.ImageCircleOfPicasso;
 import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -111,7 +112,7 @@ public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNe
         void bind(String restaurnatName,String openTime,String closing, String cusine,String logo,String banner){
             if(logo !=null){
                 URL getimageUrl = NetworkUtils.buildLoadIamgeUrl(NetworkUtils.LOGO_URL+logo);
-                Picasso.get().load(getimageUrl.toString()).resize(80,90).into(restaurantLogo);
+                Picasso.get().load(getimageUrl.toString()).transform(new ImageCircleOfPicasso()).into(restaurantLogo);
 
             }
             if(banner !=null){
