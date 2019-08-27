@@ -32,6 +32,7 @@ import androidx.core.content.ContextCompat;
 import com.example.ppeepfinal.data.UserCurrentOrder;
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
+import com.example.ppeepfinal.utilities.ImageCircleOfPicasso;
 import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.google.android.material.card.MaterialCardView;
 import com.pusher.client.Pusher;
@@ -67,7 +68,7 @@ public class OrderSubmitComplete extends AppCompatActivity {
     private  String userName,userPhoneNo,OrderId=null;
 
     private UserDatabase mdb;
-    MaterialCardView orderConfirm,orderDeliver,orderOnTheWay;
+    MaterialCardView orderConfirm,orderDeliver/*,orderOnTheWay*/;
 
 
     Button sendSMS;
@@ -121,8 +122,8 @@ public class OrderSubmitComplete extends AppCompatActivity {
         orderConfirm.setVisibility(View.INVISIBLE);
         orderDeliver=(MaterialCardView)findViewById(R.id.order_deliver_card);
         orderDeliver.setVisibility(View.INVISIBLE);
-        orderOnTheWay=(MaterialCardView)findViewById(R.id.food_on_the_way);
-        orderOnTheWay.setVisibility(View.INVISIBLE);
+        //orderOnTheWay=(MaterialCardView)findViewById(R.id.food_on_the_way);
+       // orderOnTheWay.setVisibility(View.INVISIBLE);
 
         driverName.setVisibility(View.INVISIBLE);
         driverContact.setVisibility(View.INVISIBLE);
@@ -168,9 +169,6 @@ public class OrderSubmitComplete extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-
-
     }
 
     @Override
@@ -198,6 +196,9 @@ public class OrderSubmitComplete extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), ""+authorizer, Toast.LENGTH_SHORT).show();
 
         PusherOptions options = new PusherOptions().setAuthorizer(authorizer);*/
+
+        UserCurrentOrder userCurrentOrder = new UserCurrentOrder(Integer.valueOf(orderId),0);
+        mdb.userCurrentOrderDAO().insertCurrentOrder(userCurrentOrder);
 
         PusherOptions options = new PusherOptions();
         options.setCluster("mt1");
@@ -229,14 +230,16 @@ public class OrderSubmitComplete extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         addNotification("Your order has been accepted");
-                        UserCurrentOrder userCurrentOrder = new UserCurrentOrder(OrderId,1);
-                        mdb.userCurrentOrderDAO().insertCurrentOrder(userCurrentOrder);
+                        UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(Integer.valueOf(orderId));
+                        userCurrentOrder.setOrderStatus(1);
+                        mdb.userCurrentOrderDAO().updateCurrentOrder(userCurrentOrder);
 
                         // Toast.makeText(getApplicationContext()," Order confirm : ",Toast.LENGTH_LONG).show();
                         if(imageUrl != null){
+                            driverImage.setVisibility(View.VISIBLE);
                             URL getimageUrl = NetworkUtils.buildDriverIamgeUrl(imageUrl);
 
-                            Picasso.get().load(getimageUrl.toString()).into(driverImage);
+                            Picasso.get().load(getimageUrl.toString()).transform(new ImageCircleOfPicasso()).into(driverImage);
 
                             orderConfirmProgressbar.setVisibility(View.INVISIBLE);
                             driverName.setText(driver);
@@ -288,12 +291,11 @@ public class OrderSubmitComplete extends AppCompatActivity {
                         }
 
                         if(OrderId != 0) {
-                            // UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(OrderId);
 
-                            //  userCurrentOrder.setOrderStatus(2);
+                            UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(Integer.valueOf(orderId));
+                            userCurrentOrder.setOrderStatus(2);
+                            mdb.userCurrentOrderDAO().updateCurrentOrder(userCurrentOrder);
 
-                            // UserCurrentOrder userCurrentOrder = new UserCurrentOrder(Integer.valueOf(orderId),1);
-                            //  mdb.userCurrentOrderDAO().updateCurrentOrder(userCurrentOrder);
                             orderConfirm.setVisibility(View.VISIBLE);
                         }
 
@@ -334,16 +336,9 @@ public class OrderSubmitComplete extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        //if(OrderId != 0) {
-                        // List<UserCurrentOrder> userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrder();
-
-                        // mdb.userCurrentOrderDAO().deleteCurrentOrder(userCurrentOrder.get(0));
-                        // UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(OrderId);
-
-                        //  userCurrentOrder.setOrderStatus(2);
-
-                        // UserCurrentOrder userCurrentOrder = new UserCurrentOrder(Integer.valueOf(orderId),1);
-                        //  mdb.userCurrentOrderDAO().updateCurrentOrder(userCurrentOrder);
+                        UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(Integer.valueOf(orderId));
+                       // userCurrentOrder.setOrderStatus(3);
+                        if(userCurrentOrder != null)mdb.userCurrentOrderDAO().deleteCurrentOrder(userCurrentOrder);
                         orderDeliver.setVisibility(View.VISIBLE);
                         // }
 

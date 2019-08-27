@@ -16,6 +16,19 @@
     android:layout_margin="10dp"
     android:orientation="vertical">
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:textColor="@color/colorAccent"
+            android:text="You will see your current order here."/>
+    </com.google.android.material.card.MaterialCardView>
+
 
 
     <com.google.android.material.card.MaterialCardView
@@ -141,7 +154,7 @@
         android:layout_margin="5dp"
         android:elevation="10dp">
 
-        <LinearLayout
+       <!-- <LinearLayout
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -186,7 +199,7 @@ android:layout_marginLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-        </LinearLayout>
+        </LinearLayout>-->
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView

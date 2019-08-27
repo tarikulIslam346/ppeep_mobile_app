@@ -307,11 +307,23 @@ tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
     }
 
     public  void loadOrderInfo(){
+
         List<UserCurrentOrder> userCurrentOrders = mdb.userCurrentOrderDAO().loadCurrentOrder();
-        Log.d("Current order: ",""+ userCurrentOrders.size());
-        if(userCurrentOrders.size()!=0)Toast.makeText(getApplicationContext(),""+userCurrentOrders.get(0).getId(),Toast.LENGTH_LONG).show();
+        if(userCurrentOrders.size()!=0)Log.d("Current order: ",""+ userCurrentOrders.size());
+
+        //if(userCurrentOrders.size()!=0)Toast.makeText(getApplicationContext(),""+userCurrentOrders.get(0).getId(),Toast.LENGTH_LONG).show();
         if(userCurrentOrders.size()!=0){
             int orderId = userCurrentOrders.get(0).getOrderid();
+
+            if(userCurrentOrders.get(0).getOrderStatus() == 0){
+                bottomSliderCardOrderPlace.setVisibility(View.VISIBLE);
+            }
+            if(userCurrentOrders.get(0).getOrderStatus() == 1){
+                bottomSliderCardOrderPlace.setVisibility(View.VISIBLE);
+            }
+
+
+
             PusherOptions options = new PusherOptions();
             options.setCluster("mt1");
             Pusher pusher = new Pusher("6211c9a7cfb062fa410d", options);
@@ -332,7 +344,12 @@ tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
                         @Override
                         public void run() {
                             addNotification("Your order has been accepted");
-                            UserCurrentOrder userCurrentOrder = new UserCurrentOrder(Integer.valueOf(orderId),1);
+                            UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(Integer.valueOf(orderId));
+                            if(userCurrentOrders.get(0).getOrderStatus() != 1){
+                                userCurrentOrder.setOrderStatus(1);
+                                mdb.userCurrentOrderDAO().updateCurrentOrder(userCurrentOrder);
+                            }
+
                             bottomSliderCardOrderPlace.setVisibility(View.VISIBLE);
 
                             // Toast.makeText(getApplicationContext()," Order confirm : ",Toast.LENGTH_LONG).show();
@@ -343,6 +360,10 @@ tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
 
                 }
             });
+
+            if(userCurrentOrders.get(0).getOrderStatus() == 2){
+                bottomSliderCardOrderPlace.setVisibility(View.VISIBLE);
+            }
 
             channel.bind("driver-order-confirm-event", new SubscriptionEventListener() {
 
@@ -364,15 +385,13 @@ tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
                                 e.printStackTrace();
                             }
 
-                            // if(OrderId != 0) {
-                            // UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(OrderId);
-
-                            //  userCurrentOrder.setOrderStatus(2);
-
-                            // UserCurrentOrder userCurrentOrder = new UserCurrentOrder(Integer.valueOf(orderId),1);
-                            //  mdb.userCurrentOrderDAO().updateCurrentOrder(userCurrentOrder);
+                            UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(Integer.valueOf(orderId));
+                            if(userCurrentOrders.get(0).getOrderStatus() != 2){
+                                userCurrentOrder.setOrderStatus(1);
+                                mdb.userCurrentOrderDAO().updateCurrentOrder(userCurrentOrder);
+                            }
                             bottomSliderCardOrderConfirm.setVisibility(View.VISIBLE);
-                           //  }
+
 
 
                             Toast.makeText(getApplicationContext()," Order confirm By driver ",Toast.LENGTH_LONG).show();
@@ -411,15 +430,12 @@ tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
                                 e.printStackTrace();
                             }
 
-                           // if(OrderId != 0) {
-                               // UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(OrderId);
+                            if(userCurrentOrders.size()!=0){
+                                UserCurrentOrder userCurrentOrder = mdb.userCurrentOrderDAO().loadCurrentOrderById(Integer.valueOf(orderId));
+                                if(userCurrentOrder != null) mdb.userCurrentOrderDAO().deleteCurrentOrder(userCurrentOrder);
+                            }
+                            // userCurrentOrder.setOrderStatus(3);
 
-                                //  userCurrentOrder.setOrderStatus(2);
-
-                                // UserCurrentOrder userCurrentOrder = new UserCurrentOrder(Integer.valueOf(orderId),1);
-                               // mdb.userCurrentOrderDAO().deleteCurrentOrder(userCurrentOrder);
-
-                            //}
                             bottomSliderCardOrderDelivr.setVisibility(View.VISIBLE);
 
 
