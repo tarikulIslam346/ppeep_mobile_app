@@ -1,39 +1,49 @@
-package com.example.ppeepfinal;
+package com.example.ppeepfinal.adapter;
 
 import android.content.Context;
+//import android.support.annotation.NonNull;
+//import android.support.v7.widget.LinearLayoutManager;
+//import android.support.v7.widget.RecyclerView;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ppeepfinal.R;
 import com.example.ppeepfinal.utilities.ImageCircleOfPicasso;
 import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.net.URL;
 import java.util.List;
 
-public class RecommandedRestaurantListAdapter extends RecyclerView.Adapter<RecommandedRestaurantListAdapter.RestaurantViewHolder> {
+public class TabFragmentNearbyAdapter extends RecyclerView.Adapter<TabFragmentNearbyAdapter.RestaurantViewHolder> {
 
     private int mNumberRestaurant;
+
     private List<String> mData;
     private List<String> mOpeningTime;
     private List<String> mClosingTime;
     private List<String> mCusine;
     private List<String> mLogo;
     private List<String> mBanner;
-    final private ListItemClickListener mOnClickListener;
+    final private  ListItemClickListener mOnClickListener;
 
     public interface ListItemClickListener{
         void onListItemClick(int clickedItemIndex);
     }
 
 
-    public RecommandedRestaurantListAdapter(
+    public TabFragmentNearbyAdapter(
             List<String> RestaurantList,
             List<String> OpeningTime,
             List<String> ClosingingTime,
@@ -42,7 +52,7 @@ public class RecommandedRestaurantListAdapter extends RecyclerView.Adapter<Recom
             List<String> Banner,
             ListItemClickListener listener
     ){
-        // mNumberRestaurant= numberOfRestaurant;
+       // mNumberRestaurant= numberOfRestaurant;
         mData = RestaurantList;
         mOpeningTime = OpeningTime;
         mClosingTime = ClosingingTime;
@@ -56,7 +66,7 @@ public class RecommandedRestaurantListAdapter extends RecyclerView.Adapter<Recom
     @Override
     public RestaurantViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         Context context = viewGroup.getContext();
-        int layoutItemOfRestaurant = R.layout.tab_fragment_recommanded_restaurant_list;
+        int layoutItemOfRestaurant = R.layout.tab_fragment_nearby_restaurant_list;
         LayoutInflater layoutInflater = LayoutInflater.from(context) ;
         boolean shouldAttachToParentImmediately = false;
         View view = layoutInflater.inflate(layoutItemOfRestaurant,viewGroup,shouldAttachToParentImmediately);
@@ -85,15 +95,17 @@ public class RecommandedRestaurantListAdapter extends RecyclerView.Adapter<Recom
     class RestaurantViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
         TextView restaurantNameTextView;
         TextView openingClosingTextView;
+        TextView cusineTextview;
+        LinearLayout layoutBanner;
         ImageView restaurantLogo,restaurantBanner;
-        //TextView cusineTextview;
         public RestaurantViewHolder(View itemView){
             super(itemView);
             restaurantNameTextView = (TextView)itemView.findViewById(R.id.tv_item_number);
             openingClosingTextView = (TextView) itemView.findViewById(R.id.tv_opening_closing);
+            cusineTextview = (TextView) itemView.findViewById(R.id.tv_cusine);
             restaurantLogo = (ImageView) itemView.findViewById(R.id.image_logo_of_restaurant);
             restaurantBanner = (ImageView) itemView.findViewById(R.id.image_banner_of_restaurant);
-           // cusineTextview = (TextView) itemView.findViewById(R.id.tv_cusine);
+            layoutBanner=(LinearLayout) itemView.findViewById(R.id.restaurant_banner) ;
             itemView.setOnClickListener(this);
 
         }
@@ -106,11 +118,29 @@ public class RecommandedRestaurantListAdapter extends RecyclerView.Adapter<Recom
             if(banner !=null){
                 URL getimageUrl = NetworkUtils.buildLoadIamgeUrl(NetworkUtils.LOGO_URL+banner);
 
-                Picasso.get().load(getimageUrl.toString()).into(restaurantBanner);
+                Picasso.get().load(getimageUrl.toString()).into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        layoutBanner.setBackground(new BitmapDrawable(bitmap));
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                    }
+                });
+
             }
+
+
             restaurantNameTextView.setText(restaurnatName);
             openingClosingTextView.setText(openTime + " - "+closing);
-            //cusineTextview.setText(cusine);
+            cusineTextview.setText(cusine);
         }
         public void onClick(View v){
             int clickedPosition = getAdapterPosition();

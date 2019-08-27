@@ -1,12 +1,10 @@
-package com.example.ppeepfinal;
+package com.example.ppeepfinal.adapter;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 
-import android.app.Activity;
-import android.app.ExpandableListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -14,22 +12,21 @@ import android.graphics.Typeface;
 import android.graphics.drawable.LayerDrawable;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.ppeepfinal.FoodCartPage;
+import com.example.ppeepfinal.R;
+import com.example.ppeepfinal.RestaurantMenuPage;
+import com.example.ppeepfinal.utilities.Utils;
 import com.example.ppeepfinal.data.OrderMerchantModel;
 import com.example.ppeepfinal.data.OrderModel;
 import com.example.ppeepfinal.data.UserDatabase;
 import com.google.android.material.snackbar.Snackbar;
-
-import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -269,7 +266,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                             .setAction("Go to cart", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Intent intent = new Intent(_context,FoodCartPage.class);
+                                    Intent intent = new Intent(_context, FoodCartPage.class);
 
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     _context.startActivity(intent);

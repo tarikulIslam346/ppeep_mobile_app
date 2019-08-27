@@ -1,4 +1,4 @@
-package com.example.ppeepfinal;
+package com.example.ppeepfinal.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,8 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ppeepfinal.R;
 import com.example.ppeepfinal.utilities.NetworkUtils;
-import com.google.type.Color;
 import com.squareup.picasso.Picasso;
 
 import java.net.URL;

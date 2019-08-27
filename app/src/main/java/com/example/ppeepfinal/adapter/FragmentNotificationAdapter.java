@@ -1,4 +1,4 @@
-package com.example.ppeepfinal;
+package com.example.ppeepfinal.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,18 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ppeepfinal.R;
 import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.squareup.picasso.Picasso;
 
 import java.net.URL;
 import java.util.List;
-
-import static android.graphics.Color.BLACK;
-import static android.graphics.Color.BLUE;
-import static android.graphics.Color.GREEN;
-import static android.graphics.Color.RED;
-import static android.graphics.Color.WHITE;
-import static android.graphics.Color.YELLOW;
 
 public class FragmentNotificationAdapter extends RecyclerView.Adapter<FragmentNotificationAdapter.NotificationPageViewHolder> {
 

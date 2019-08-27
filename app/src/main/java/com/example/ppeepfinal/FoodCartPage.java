@@ -1,54 +1,39 @@
 package com.example.ppeepfinal;
 
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 
-import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dingi.dingisdk.camera.CameraUpdate;
-import com.dingi.dingisdk.camera.CameraUpdateFactory;
-import com.dingi.dingisdk.geometry.LatLng;
-import com.dingi.dingisdk.maps.DingiMap;
+import com.example.ppeepfinal.adapter.FoodCartPageAdapter;
 import com.example.ppeepfinal.data.OrderMerchantModel;
 import com.example.ppeepfinal.data.OrderModel;
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
-import com.example.ppeepfinal.utilities.Api;
-import com.example.ppeepfinal.utilities.MyLocation;
 import com.example.ppeepfinal.utilities.NetworkUtils;
-import com.example.ppeepfinal.utilities.VolleyRequest;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
-
-import static android.icu.lang.UCharacter.DecompositionType.VERTICAL;
 
 //import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 

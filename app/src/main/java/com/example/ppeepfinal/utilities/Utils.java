@@ -1,8 +1,11 @@
-package com.example.ppeepfinal;
+package com.example.ppeepfinal.utilities;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+
+import com.example.ppeepfinal.R;
+import com.example.ppeepfinal.utilities.BadgeDrawable;
 
 public class Utils {
 

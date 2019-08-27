@@ -1,76 +1,51 @@
 package com.example.ppeepfinal;
 
-import android.app.Dialog;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.RingtoneManager;
-import android.net.Uri;
+import android.graphics.Color;
 import android.os.AsyncTask;
 /*import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;*/
-import android.os.Build;
 import android.os.Bundle;
 /*import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;*/
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.transition.FragmentTransitionSupport;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.ppeepfinal.data.UserCurrentOrder;
+import com.example.ppeepfinal.adapter.RecommandedRestaurantListAdapter;
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.utilities.NetworkUtils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.pusher.client.Pusher;
-import com.pusher.client.PusherOptions;
-import com.pusher.client.channel.Channel;
-import com.pusher.client.channel.SubscriptionEventListener;
 import com.smarteist.autoimageslider.DefaultSliderView;
 import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -515,17 +490,34 @@ public class TabFragmentFoodHome extends Fragment {
                     e.printStackTrace();
                 }
 
-      dialog.dismiss();
+                dialog.dismiss();
                 if(message != null ){
-                    Snackbar.make(v.findViewById(R.id.tab_offer_container), " "+message, Snackbar.LENGTH_INDEFINITE)
+                    Snackbar snackbar = Snackbar.make(v.findViewById(R.id.tab_offer_container), " "+message, Snackbar.LENGTH_INDEFINITE)
                             .setAction("CLOSE", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
 
                                 }
                             })
-                            .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
-                            .show();
+                            /* Fix it
+                            * Change Action text color
+                            * setActionTextColor(Color.RED)
+                            * */
+                            .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ));
+
+                    View sbView = snackbar.getView();
+
+                    /* Fix it
+                     * Change  text coler
+                     * */
+                    TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                    textView.setTextColor(Color.YELLOW);
+
+                    /* Fix it
+                     * Change background  color
+                     * */
+                    sbView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                    snackbar.show();
                 }
 
                 if(jsonArray!= null) {

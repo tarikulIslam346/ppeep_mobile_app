@@ -1,4 +1,4 @@
-package com.example.ppeepfinal;
+package com.example.ppeepfinal.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,14 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ppeepfinal.R;
 import com.example.ppeepfinal.data.OrderModel;
 import com.example.ppeepfinal.data.UserDatabase;
-import com.example.ppeepfinal.data.UserModel;
 
 import java.util.List;
 

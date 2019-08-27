@@ -1,4 +1,4 @@
-package com.example.ppeepfinal;
+package com.example.ppeepfinal.utilities;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,6 +9,8 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+
+import com.example.ppeepfinal.R;
 
 public class BadgeDrawable extends Drawable {
 
