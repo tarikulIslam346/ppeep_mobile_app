@@ -18,68 +18,64 @@
 
 
 
-<com.google.android.material.card.MaterialCardView
+    <com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="4dp"
-    android:layout_margin="10dp"
-    >
-    <FrameLayout
+    android:layout_margin="10dp">
+        <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:orientation="vertical">
-
-
             <LinearLayout
                 android:id="@+id/restaurant_banner"
-                android:background="@drawable/burgerbackground"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="180dp"
+                android:orientation="vertical"
+                android:background="@drawable/burgerbackground">
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
                 android:orientation="vertical"
                 android:layout_weight="1">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_margin="10dp"
                         android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/tv_restaurnat_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Burger King"
-                            android:textSize="20sp"
-                            android:textColor="#971409"
-                            android:textStyle="bold"
                             android:layout_alignParentLeft="true"
-                            />
+                            android:text="Burger King"
+                            android:textColor="#971409"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/tv_cusine"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#3C1212"
-                            android:text="Cuisine" />
+                            android:text="Cuisine"
+                            android:textColor="#3C1212" />
                     </LinearLayout>
 
 
                 </RelativeLayout>
 
             </LinearLayout>
-
-
-
-        </LinearLayout>
-
-
 
         <ImageView
             android:id="@+id/restaurant_logo"
@@ -104,6 +100,7 @@
     </FrameLayout>
 
 </com.google.android.material.card.MaterialCardView>
+
 
     <ProgressBar
         android:id="@+id/pv_restaurant_menu_item"

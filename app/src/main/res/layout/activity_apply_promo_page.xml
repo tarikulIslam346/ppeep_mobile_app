@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:id="@+id/card_layout_promo_code">
-        <LinearLayout
+  <!--      <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -141,8 +141,9 @@
                     android:textStyle="bold"
                     android:textSize="24sp"
                     android:textColor="#4CAF50"/>
+
                 <TextView
-                    android:id="@+id/tv_promocode_max_amount"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="200 BDT"
@@ -170,9 +171,56 @@
                 android:id="@+id/bt_accept_promo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:backgroundTint="#ffcc00"
+                android:text="Confirm"/>
+        </LinearLayout>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/percentage_promocode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enjoy 30% Off!!"
+                android:textColor="#ffcc00"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Details"
+                android:layout_marginBottom="10dp"
+                android:textColor="#0A0A0A"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/promotiondetailsId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enjoy 35% Off up to BDT 120 on your next two orders! Offer valid on orders above BDT 200 till 25th September."
+                android:textSize="14sp"
+                />
+
+
+            <Button
+                android:id="@+id/bt_accept_promo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="#ffcc00"
                 android:text="Confirm"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+
+
 
 
 </LinearLayout>

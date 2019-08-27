@@ -39,6 +39,8 @@ public class ApplyPromoPage extends AppCompatActivity {
     TextView mPromocode,mPromoCodePercentage,mPromocodeOrderAmount,mPromoCodeMaxDiscount,mPromoCodeValidity;
     Button mCancel,mApply,mAcceptPromo;
     EditText mPromoinput;
+    TextView promoCodeDetails;
+    TextView percentagePromocode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,21 +53,25 @@ public class ApplyPromoPage extends AppCompatActivity {
 
         mPromoCodeCard = (MaterialCardView)findViewById(R.id.card_layout_promo_code);
 
-        mPromocode = (TextView) findViewById(R.id.tv_promo_code);
+      promoCodeDetails = (TextView) findViewById(R.id.promotiondetailsId);
+
+        percentagePromocode = (TextView) findViewById(R.id.percentage_promocode);
+
+       /* mPromocode = (TextView) findViewById(R.id.tv_promo_code);
 
         mPromoCodePercentage = (TextView) findViewById(R.id.tv_promocode_percentage);
 
         mPromocodeOrderAmount = (TextView) findViewById(R.id.tv_promocode_order_amount);
 
-        mPromoCodeMaxDiscount = (TextView) findViewById(R.id.tv_promocode_max_amount);
+      //  mPromoCodeMaxDiscount = (TextView) findViewById(R.id.tv_promocode_max_amount);
 
         mPromoCodeValidity = (TextView) findViewById(R.id.tv_promocode_validity);
-
+*/
         mApply = (Button) findViewById(R.id.bt_apply_promo);
 
         mCancel = (Button) findViewById(R.id.bt_cancel);
 
-        mAcceptPromo = (Button) findViewById(R.id.bt_accept_promo);
+     mAcceptPromo = (Button) findViewById(R.id.bt_accept_promo);
 
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,11 +198,14 @@ public class ApplyPromoPage extends AppCompatActivity {
 
                 if(jsonArray!= null){
                     final int max_amount = discount_amount;
-                    mPromocode.setText(promo_code);
-                    mPromoCodeMaxDiscount.setText(String.valueOf(discount_amount)+ " BDT");
-                    mPromocodeOrderAmount.setText(String.valueOf(order_amount)+"  Order");
-                    mPromoCodePercentage.setText(String.valueOf(percentage));
-                    mPromoCodeValidity.setText(validity);
+
+                    promoCodeDetails.setText("Enjoy "+String.valueOf(percentage)+"% Off up to BDT "+String.valueOf(discount_amount)+" on your next "+String.valueOf(order_amount)+"  orders! Offer valid on orders above BDT 200 till "+validity+".");
+
+                    percentagePromocode.setText("Enjoy "+promo_code+"% Off!!");
+               //     mPromoCodeMaxDiscount.setText("Enjoy "+String.valueOf(percentage)+" Off up to BDT "+String.valueOf(discount_amount)+" on your next "+String.valueOf(order_amount)+"  orders! Offer valid on orders above BDT 200 till "+validity+".");
+                //    mPromocodeOrderAmount.setText(String.valueOf(order_amount)+"  Order");
+                  //  mPromoCodePercentage.setText(String.valueOf(percentage));
+                   // mPromoCodeValidity.setText(validity);
                     mPromoCodeCard.setVisibility(View.VISIBLE);
 
                     mAcceptPromo.setOnClickListener(new View.OnClickListener() {

@@ -2,6 +2,7 @@ package com.example.ppeepfinal;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.ProgressDialog;
@@ -16,6 +17,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -34,13 +36,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FriendHistoryDetails extends AppCompatActivity {
-
+    Toolbar foodToolbar;
     String phone;
     TextView mName,mPhone;
     ProgressDialog dialog;
-    Button mRemove;
+    TextView mRemove;
     TableLayout orderDeliverTable;
     private static final String TAG = "FriendHistoryDetails";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +51,11 @@ public class FriendHistoryDetails extends AppCompatActivity {
         setContentView(R.layout.activity_friend_history_details);
         mName = (TextView)findViewById(R.id.tv_friend_name);
         mPhone = (TextView)findViewById(R.id.tv_friend_phone);
-        mRemove = (Button) findViewById(R.id.bt_remove_friend);
+        mRemove = (TextView) findViewById(R.id.bt_remove_friend);
+
         orderDeliverTable = (TableLayout) findViewById(R.id.table_of_order_item);
+        foodToolbar = (Toolbar) findViewById(R.id.foodapptoolbar);
+        setSupportActionBar(foodToolbar);
 
         Intent friendHistoryIntent = getIntent();
         phone = friendHistoryIntent.getStringExtra("contact");
@@ -66,9 +72,26 @@ public class FriendHistoryDetails extends AppCompatActivity {
         mRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowLoder("Deleting Friend Info...");
-                callApiForRemoveFriend();
+               /* ShowLoder("Deleting Friend Info...");
+                callApiForRemoveFriend();*/
+
+                new AlertDialog.Builder(FriendHistoryDetails.this)
+                        .setTitle("Do You Really Want to Remove this Friend?")
+
+                        .setMessage("Do You Really Want to Remove this Friend?")
+                        .setMessage("Note: Removing this friend will cause you lost the points you earned from this friend")
+                        .setCancelable(false)
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                callApiForRemoveFriend();
+                            }
+                        })
+
+                        .setNegativeButton("Cancel", null)
+                        .show();
+
             }
+
         });
 
 

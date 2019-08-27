@@ -58,11 +58,16 @@
             // use src or backgroud image as per requirement
 
             <LinearLayout
-                android:background="@drawable/burgerbackground"
+
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="185dp"
                 android:orientation="vertical"
                 android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/biriyani"/>
 
             </LinearLayout>
 
