@@ -2,6 +2,7 @@ package com.example.ppeepfinal.utilities;
 
 public class Api {
     public static String baseAPI = "https://api.dingi.live/maps/v2/";
+    public static String placeGeometry = baseAPI + "place";
     public static String reverseGeo = baseAPI + "reverse/";
     public static String reverseLandmark = baseAPI + "reverselandmark";
     public static String autoCompleteSearch = baseAPI + "search";
