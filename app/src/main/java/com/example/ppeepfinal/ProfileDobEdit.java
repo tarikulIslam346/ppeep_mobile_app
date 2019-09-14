@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
@@ -99,19 +101,92 @@ public class ProfileDobEdit extends AppCompatActivity {
                     } else {
                     if(Integer.valueOf(userDobMonthTextInput.getText().toString()) >= 13 || Integer.valueOf(userDobMonthTextInput.getText().toString()) <0 ){
                         View parentLayout = findViewById(R.id.sb_for_dob);
-                        Snackbar.make(parentLayout,  " Enter Valid month", Snackbar.LENGTH_INDEFINITE)
-                                .show();
+
+                        Snackbar snackbar = Snackbar.make(parentLayout, "Enter Valid Month", Snackbar.LENGTH_LONG)
+                                .setAction("CLOSE", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                    }
+                                })
+                                /* Fix it
+                                 * Change Action text color
+                                 * setActionTextColor(Color.RED)
+                                 * */
+                                .setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+
+                        View sbView = snackbar.getView();
+
+                        /* Fix it
+                         * Change  text coler
+                         * */
+                        TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                        textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                        /* Fix it
+                         * Change background  color
+                         * */
+                        sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                        snackbar.show();
 
                     }
                     if(userDobYearTextInput.getText().length() != 4 ||  Integer.valueOf(userDobYearTextInput.getText().toString()) <1900) {
                         View parentLayout = findViewById(R.id.sb_for_dob);
-                        Snackbar.make(parentLayout, " Enter Valid Year", Snackbar.LENGTH_INDEFINITE)
-                                .show();
+                        Snackbar snackbar = Snackbar.make(parentLayout, "Enter Valid Year", Snackbar.LENGTH_LONG)
+                                .setAction("CLOSE", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                    }
+                                })
+                                /* Fix it
+                                 * Change Action text color
+                                 * setActionTextColor(Color.RED)
+                                 * */
+                                .setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+
+                        View sbView = snackbar.getView();
+
+                        /* Fix it
+                         * Change  text coler
+                         * */
+                        TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                        textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                        /* Fix it
+                         * Change background  color
+                         * */
+                        sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                        snackbar.show();
                     }
                     if(Integer.valueOf(userDobDayTextInput.getText().toString()) >= 32 || Integer.valueOf(userDobDayTextInput.getText().toString()) <0){
                             View parentLayout = findViewById(R.id.sb_for_dob);
-                            Snackbar.make(parentLayout,  " Enter Valid day", Snackbar.LENGTH_INDEFINITE)
-                                    .show();
+                        Snackbar snackbar = Snackbar.make(parentLayout, "Enter Valid Day", Snackbar.LENGTH_LONG)
+                                .setAction("CLOSE", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                    }
+                                })
+                                /* Fix it
+                                 * Change Action text color
+                                 * setActionTextColor(Color.RED)
+                                 * */
+                                .setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+
+                        View sbView = snackbar.getView();
+
+                        /* Fix it
+                         * Change  text coler
+                         * */
+                        TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                        textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                        /* Fix it
+                         * Change background  color
+                         * */
+                        sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                        snackbar.show();
 
                     }
                        /* Toast.makeText(ProfileDobEdit.this, "Please Enter Valid Date of birth", Toast.LENGTH_SHORT).show();

@@ -37,7 +37,7 @@ import java.util.List;
 
 //import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 
-public class FoodCartPage extends AppCompatActivity implements   FoodCartPageAdapter.ListItemClickListener{
+public class  FoodCartPage extends AppCompatActivity implements   FoodCartPageAdapter.ListItemClickListener{
 
     private RecyclerView mListOfCartItem;
     private FoodCartPageAdapter foodCartPageAdapter;

@@ -350,8 +350,33 @@ public class ProfileEdit extends AppCompatActivity {
             }else{
                 dialog.dismiss();
                 View parentLayout = findViewById(R.id.sb_profile_info);
-                Snackbar.make(parentLayout, "Net connection error", Snackbar.LENGTH_INDEFINITE)
-                        .show();
+
+                Snackbar snackbar = Snackbar.make(parentLayout, "Net Connection Error", Snackbar.LENGTH_LONG)
+                        .setAction("CLOSE", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        /* Fix it
+                         * Change Action text color
+                         * setActionTextColor(Color.RED)
+                         * */
+                        .setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+
+                View sbView = snackbar.getView();
+
+                /* Fix it
+                 * Change  text coler
+                 * */
+                TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                /* Fix it
+                 * Change background  color
+                 * */
+                sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                snackbar.show();
             }
         }
 
@@ -421,8 +446,32 @@ public class ProfileEdit extends AppCompatActivity {
             }else{
                 //dialog.dismiss();
                 View parentLayout = findViewById(R.id.sb_profile_info);
-                Snackbar.make(parentLayout, "Net connection error", Snackbar.LENGTH_INDEFINITE)
-                        .show();
+                Snackbar snackbar = Snackbar.make(parentLayout, "Net Connection Error", Snackbar.LENGTH_LONG)
+                        .setAction("CLOSE", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        /* Fix it
+                         * Change Action text color
+                         * setActionTextColor(Color.RED)
+                         * */
+                        .setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+
+                View sbView = snackbar.getView();
+
+                /* Fix it
+                 * Change  text coler
+                 * */
+                TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                /* Fix it
+                 * Change background  color
+                 * */
+                sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                snackbar.show();
             }
         }
 

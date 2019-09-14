@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -257,15 +258,33 @@ public class SearchRestaurant extends AppCompatActivity {
 
                     mListOfRestaurant.setAdapter(tabFragmentNearbyAdapter);
                 }else{
-                    Snackbar.make(findViewById(R.id.layout_snackbar), " "+message, Snackbar.LENGTH_INDEFINITE)
+
+                    Snackbar snackbar = Snackbar.make(findViewById(R.id.layout_snackbar), " "+message, Snackbar.LENGTH_INDEFINITE)
                             .setAction("CLOSE", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
 
                                 }
                             })
-                            .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
-                            .show();
+                            /* Fix it
+                             * Change Action text color
+                             * setActionTextColor(Color.RED)
+                             * */
+                            .setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+
+                    View sbView = snackbar.getView();
+
+                    /* Fix it
+                     * Change  text coler
+                     * */
+                    TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                    textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                    /* Fix it
+                     * Change background  color
+                     * */
+                    sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                    snackbar.show();
                 }
 
 

@@ -24,34 +24,37 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".PPeepRideWebview"></activity>
+        <activity android:name=".ShopCartPage"></activity>
+        <activity
+            android:name=".ShopItemDetails"
+            android:label="" />
+        <activity android:name=".ShopFragmentBrandShop" />
+        <activity android:name=".ShopCategoryFragment" />
+        <activity
+            android:name=".ShopFragmentSubCategory"
+            android:label="" />
+        <activity android:name=".ShopFragmentWishList" />
+        <activity android:name=".ShopFragmentHome" />
+        <activity
+            android:name=".PpeepShop"
+            android:label="" />
+        <activity android:name=".PPeepRideWebview" />
         <activity android:name=".CuisineSearchFragment" />
         <activity android:name=".UserAutoCompleteAdress" />
 
-
-        <service
-            android:name=".FCMMessasingService">
+        <service android:name=".FCMMessasingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <receiver android:name="OrderReciver">
+        <receiver android:name=".OrderReciver">
             <intent-filter>
-                <action android:name="com.example.ppeepfinal.CUSTOM_INTENT">
-                </action>
+                <action android:name="com.example.ppeepfinal.CUSTOM_INTENT" />
             </intent-filter>
-
         </receiver>
 
-
-
-
-
-
-        <activity android:name=".UserAutoCompleteAdress"></activity>
-
+        <activity android:name=".UserAutoCompleteAdress" />
         <activity android:name=".OrderOnGoingList" />
         <activity android:name=".CurrentOrderHistory" />
         <activity android:name=".FriendHistoryDetails" />
@@ -81,7 +84,9 @@
         <activity android:name=".TabFragmentNearby" />
         <activity android:name=".TabFragmentRecommended" />
         -->
-        <activity android:name=".FoodApp" />
+        <activity
+            android:name=".FoodApp"
+            android:label="" />
         <activity android:name=".WebViewClass" />
         <activity android:name=".InputDetails" />
         <activity android:name=".VerificationComplete" />
@@ -102,11 +107,7 @@
         <activity android:name="com.facebook.accountkit.ui.AccountKitActivity" />
         <activity
             android:name=".HomePage"
-            android:theme="@style/AppTheme"
-
-
-
-         />
+            android:label="" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

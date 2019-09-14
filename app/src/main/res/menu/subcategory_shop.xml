@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+
+    <item
+        android:title="Clothing"
+        android:icon="@drawable/myprofileicon">
+    <menu>
+        <group android:checkableBehavior="single"
+            android:checkable="true">
+            <item
+                android:id="@+id/subitem_1"
+                android:title="Shirt" />
+            <item
+                android:id="@+id/subitem_2"
+                android:title="Pant" />
+        </group>
+    </menu>
+    </item>
+    <item
+        android:id="@+id/history"
+        android:title="Men's Footwear"
+        android:icon="@drawable/ic_history_black_24dp"/>
+   <item
+           android:id="@+id/promotionoffer"
+           android:title="Gents Watches"
+           android:icon="@drawable/promotionicon" />
+
+       <item
+           android:id="@+id/settings"
+           android:title="Fragnances"
+           android:icon="@drawable/ic_settings_black_24dp" />
+
+
+    <item
+        android:id="@+id/help"
+        android:title="Men's Accessories"
+        android:icon="@drawable/ic_help_black_24dp"/>
+
+
+</menu>

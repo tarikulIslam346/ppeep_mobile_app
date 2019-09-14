@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.ppeepfinal.data.UserDatabase;
 import com.example.ppeepfinal.data.UserModel;
@@ -75,8 +77,32 @@ public class ProfileNameEdit extends AppCompatActivity {
                     }
                 }else{
                     View parentLayout = findViewById(R.id.sb_user_name_error);
-                    Snackbar.make(parentLayout,  " Please Enter User name", Snackbar.LENGTH_INDEFINITE)
-                            .show();
+                    Snackbar snackbar = Snackbar.make(parentLayout, "Enter User Name", Snackbar.LENGTH_LONG)
+                            .setAction("CLOSE", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            })
+                            /* Fix it
+                             * Change Action text color
+                             * setActionTextColor(Color.RED)
+                             * */
+                            .setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+
+                    View sbView = snackbar.getView();
+
+                    /* Fix it
+                     * Change  text coler
+                     * */
+                    TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                    textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                    /* Fix it
+                     * Change background  color
+                     * */
+                    sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                    snackbar.show();
                 }
             }
         });
@@ -141,15 +167,63 @@ public class ProfileNameEdit extends AppCompatActivity {
                         mdb.userDAO().updateUser(updateUser);
                     }
                     View parentLayout = findViewById(R.id.sb_user_name_error);
-                    Snackbar.make(parentLayout,  ""+success, Snackbar.LENGTH_LONG)
-                            .show();
+                    Snackbar snackbar = Snackbar.make(parentLayout, ""+success, Snackbar.LENGTH_LONG)
+                            .setAction("CLOSE", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            })
+                            /* Fix it
+                             * Change Action text color
+                             * setActionTextColor(Color.RED)
+                             * */
+                            .setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+
+                    View sbView = snackbar.getView();
+
+                    /* Fix it
+                     * Change  text coler
+                     * */
+                    TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                    textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                    /* Fix it
+                     * Change background  color
+                     * */
+                    sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                    snackbar.show();
                     SwithToProfile();
 
                 }
                 if(error  != null){
                     View parentLayout = findViewById(R.id.sb_user_name_error);
-                    Snackbar.make(parentLayout,  ""+error, Snackbar.LENGTH_LONG)
-                            .show();
+                    Snackbar snackbar = Snackbar.make(parentLayout, ""+error, Snackbar.LENGTH_LONG)
+                            .setAction("CLOSE", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            })
+                            /* Fix it
+                             * Change Action text color
+                             * setActionTextColor(Color.RED)
+                             * */
+                            .setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+
+                    View sbView = snackbar.getView();
+
+                    /* Fix it
+                     * Change  text coler
+                     * */
+                    TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                    textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                    /* Fix it
+                     * Change background  color
+                     * */
+                    sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                    snackbar.show();
                 }
 
             }else{

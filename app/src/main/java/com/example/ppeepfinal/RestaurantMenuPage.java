@@ -99,7 +99,7 @@ public class RestaurantMenuPage extends AppCompatActivity {
         }
         if(logo != null){
             URL getimageUrl = NetworkUtils.buildLoadIamgeUrl(NetworkUtils.LOGO_URL+logo);
-            Picasso.get().load(getimageUrl.toString()).transform(new ImageCircleOfPicasso()).into(mRestaurnatLogo);
+            Picasso.get().load(getimageUrl.toString()).resize(40,40).transform(new ImageCircleOfPicasso()).into(mRestaurnatLogo);
         }
         if(banner != null){
             URL getimageUrl = NetworkUtils.buildLoadIamgeUrl(NetworkUtils.LOGO_URL+banner);

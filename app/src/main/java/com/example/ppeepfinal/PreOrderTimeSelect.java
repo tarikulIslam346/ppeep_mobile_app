@@ -14,6 +14,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -88,14 +89,34 @@ public class PreOrderTimeSelect extends AppCompatActivity {
                     finish();
                     startActivity(orderSubmitIntent);
                 }else{
-                    Snackbar.make(findViewById(R.id.pre_order_info_layout), " Enter time properly.", Snackbar.LENGTH_INDEFINITE)
-                            .setAction("Close", new View.OnClickListener() {
+
+                    Snackbar snackbar = Snackbar.make(findViewById(R.id.pre_order_info_layout), " Enter Correct Time", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("CLOSE", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
 
                                 }
                             })
-                            .show();
+                            /* Fix it
+                             * Change Action text color
+                             * setActionTextColor(Color.RED)
+                             * */
+                            .setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+
+                    View sbView = snackbar.getView();
+
+                    /* Fix it
+                     * Change  text coler
+                     * */
+                    TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                    textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                    /* Fix it
+                     * Change background  color
+                     * */
+                    sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                    snackbar.show();
+
                 }
 
 

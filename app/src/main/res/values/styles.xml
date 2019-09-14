@@ -12,6 +12,7 @@
     </style>
 
 
+
     <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_up</item>
         <item name="android:activityOpenExitAnimation">@anim/no_animation</item>
@@ -20,6 +21,12 @@
     </style>
 
 
+    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/gothic</item>
+    </style>
 
     <style name="TextViewTheme">
         <item name="android:textColor">@android:color/widget_edittext_dark</item>

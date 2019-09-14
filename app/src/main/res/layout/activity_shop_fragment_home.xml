@@ -1,0 +1,1680 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".ShopFragmentHome"
+ >
+
+
+  <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+android:layout_marginTop="57dp"
+        >
+
+         <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+             >
+
+             <com.google.android.material.card.MaterialCardView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+              android:layout_margin="10dp"
+                 >
+<androidx.appcompat.widget.SearchView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+</androidx.appcompat.widget.SearchView>
+             </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            >
+            <com.smarteist.autoimageslider.SliderLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:outlineAmbientShadowColor="@color/white"
+                android:id="@+id/ShopAppimageSlider"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+             <!--<com.google.android.material.card.MaterialCardView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="10dp"
+
+                 >
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="Categories"
+                   android:layout_margin="10dp"
+                   android:gravity="center"
+                   android:textSize="16sp"/>
+
+
+             </com.google.android.material.card.MaterialCardView>-->
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="300dp"
+                 android:orientation="vertical"
+                 >
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="horizontal">
+                 <Button
+                     android:id="@+id/maincategory"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_margin="5dp"
+                     android:text="Categories"
+                     android:background="@drawable/tab_layout_selector"
+                     android:textColor="@color/black"
+                     tools:ignore="Suspicious0dp" />
+
+                 <Button
+                     android:id="@+id/brandShopid"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="Brand Shop"
+                     android:textColor="@color/black"
+                     android:layout_margin="5dp"
+                     android:background="@drawable/tab_layout_selector"
+                     android:src="@drawable/com_accountkit_get_call"
+                     tools:ignore="Suspicious0dp" />
+                 </LinearLayout>
+                 <FrameLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="280dp"
+                     android:id="@+id/shop_root_home" >
+
+                 </FrameLayout>
+
+             </LinearLayout>
+
+             <!--<androidx.core.widget.NestedScrollView
+                 android:layout_width="match_parent"
+                 android:layout_height="250dp"
+
+                 android:fillViewport="true">
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical"
+                 android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/menShopCategory"
+                            android:layout_width="95dp"
+                            android:layout_height="110dp"
+                            android:layout_margin="10dp"
+                            app:cardCornerRadius="8dp"
+                            android:elevation="8dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:layout_margin="5dp"
+                                >
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_alignParentTop="true">
+                                    <ImageView
+                                        android:layout_width="75dp"
+                                        android:layout_height="75dp"
+                                        android:src="@drawable/mencatagory_sample" />
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_alignParentBottom="true">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="0dp"
+                                        android:text="Men"
+                                        android:textAlignment="center"
+                                        android:textColor="#000"
+                                        android:textSize="13sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="95dp"
+                            android:layout_height="110dp"
+                            android:layout_margin="10dp"
+                            app:cardCornerRadius="8dp"
+                            android:elevation="8dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:layout_margin="5dp"
+                                >
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_alignParentTop="true">
+                                    <ImageView
+                                        android:layout_width="75dp"
+                                        android:layout_height="75dp"
+                                        android:src="@drawable/womencatagory_sample" />
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_alignParentBottom="true">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="0dp"
+                                        android:text="Women"
+                                        android:textAlignment="center"
+                                        android:textColor="#000"
+                                        android:textSize="13sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="95dp"
+                            android:layout_height="110dp"
+                            android:layout_margin="10dp"
+                            app:cardCornerRadius="8dp"
+                            android:elevation="8dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:layout_margin="5dp"
+                                >
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_alignParentTop="true">
+                                    <ImageView
+                                        android:layout_width="75dp"
+                                        android:layout_height="75dp"
+                                        android:src="@drawable/kidscatagory_sample" />
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_alignParentBottom="true">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="0dp"
+                                        android:text="Baby &amp; Kids"
+                                        android:textAlignment="center"
+                                        android:textColor="#000"
+                                        android:textSize="13sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                    </LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:gravity="center_horizontal"
+                     android:orientation="horizontal">
+
+                     <com.google.android.material.card.MaterialCardView
+                         android:layout_width="95dp"
+                         android:layout_height="110dp"
+                         android:layout_margin="10dp"
+                         app:cardCornerRadius="8dp"
+                         android:elevation="8dp">
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center"
+                             android:layout_margin="5dp"
+                             >
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentTop="true">
+                                 <ImageView
+                                     android:layout_width="75dp"
+                                     android:layout_height="75dp"
+                                     android:src="@drawable/mobile_sample" />
+
+                             </LinearLayout>
+
+
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentBottom="true">
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_marginBottom="0dp"
+                                     android:text="Mobile"
+                                     android:textAlignment="center"
+                                     android:textColor="#000"
+                                     android:textSize="13sp"
+                                     android:textStyle="bold" />
+                             </LinearLayout>
+
+                         </RelativeLayout>
+
+                     </com.google.android.material.card.MaterialCardView>
+                     <com.google.android.material.card.MaterialCardView
+                         android:layout_width="95dp"
+                         android:layout_height="110dp"
+                         android:layout_margin="10dp"
+                         app:cardCornerRadius="8dp"
+                         android:elevation="8dp">
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center"
+                             android:layout_margin="5dp"
+                             >
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentTop="true">
+                                 <ImageView
+                                     android:layout_width="75dp"
+                                     android:layout_height="75dp"
+
+                                     android:src="@drawable/homeliving_sample" />
+
+                             </LinearLayout>
+
+
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentBottom="true">
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+
+                                     android:layout_marginBottom="0dp"
+                                     android:text="Home &amp; Living"
+                                     android:textAlignment="center"
+                                     android:textColor="#000"
+                                     android:textSize="13sp"
+                                     android:textStyle="bold" />
+                             </LinearLayout>
+
+                         </RelativeLayout>
+
+                     </com.google.android.material.card.MaterialCardView>
+                     <com.google.android.material.card.MaterialCardView
+                         android:layout_width="95dp"
+                         android:layout_height="110dp"
+                         android:layout_margin="10dp"
+                         app:cardCornerRadius="8dp"
+                         android:elevation="8dp">
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center"
+                             android:layout_margin="5dp"
+                             >
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentTop="true">
+                                 <ImageView
+                                     android:layout_width="75dp"
+                                     android:layout_height="75dp"
+                                     android:src="@drawable/electronics_sample" />
+
+                             </LinearLayout>
+
+
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentBottom="true">
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_marginBottom="0dp"
+                                     android:text="Electronics"
+                                     android:textAlignment="center"
+                                     android:textColor="#000"
+                                     android:textSize="13sp"
+                                     android:textStyle="bold" />
+                             </LinearLayout>
+
+                         </RelativeLayout>
+
+                     </com.google.android.material.card.MaterialCardView>
+
+
+                 </LinearLayout>
+
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:gravity="center_horizontal"
+                     android:orientation="horizontal">
+
+                     <com.google.android.material.card.MaterialCardView
+                         android:layout_width="95dp"
+                         android:layout_height="110dp"
+                         android:layout_margin="10dp"
+                         app:cardCornerRadius="8dp"
+                         android:elevation="8dp">
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center"
+                             android:layout_margin="5dp"
+                             >
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentTop="true">
+                                 <ImageView
+                                     android:layout_width="75dp"
+                                     android:layout_height="75dp"
+                                     android:src="@drawable/biking_sample" />
+
+                             </LinearLayout>
+
+
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentBottom="true">
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_marginBottom="0dp"
+                                     android:text="Bike &amp; Ride"
+                                     android:textAlignment="center"
+                                     android:textColor="#000"
+                                     android:textSize="13sp"
+                                     android:textStyle="bold" />
+                             </LinearLayout>
+
+                         </RelativeLayout>
+
+                     </com.google.android.material.card.MaterialCardView>
+                     <com.google.android.material.card.MaterialCardView
+                         android:layout_width="95dp"
+                         android:layout_height="110dp"
+                         android:layout_margin="10dp"
+                         app:cardCornerRadius="8dp"
+                         android:elevation="8dp">
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center"
+                             android:layout_margin="5dp"
+                             >
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentTop="true">
+                                 <ImageView
+                                     android:layout_width="75dp"
+                                     android:layout_height="75dp"
+                                     android:src="@drawable/bookstationary_sample" />
+
+                             </LinearLayout>
+
+
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentBottom="true">
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_marginBottom="0dp"
+                                     android:text="Stationery"
+                                     android:textAlignment="center"
+                                     android:textColor="#000"
+                                     android:textSize="13sp"
+                                     android:textStyle="bold" />
+                             </LinearLayout>
+
+                         </RelativeLayout>
+
+                     </com.google.android.material.card.MaterialCardView>
+                     <com.google.android.material.card.MaterialCardView
+                         android:layout_width="95dp"
+                         android:layout_height="110dp"
+                         android:layout_margin="10dp"
+                         app:cardCornerRadius="8dp"
+                         android:elevation="8dp">
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center"
+                             android:layout_margin="5dp"
+                             >
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentTop="true">
+
+                                 <ImageView
+                                     android:layout_width="75dp"
+                                     android:layout_height="match_parent"
+                                     android:src="@drawable/dotaicon" />
+
+                             </LinearLayout>
+
+
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentBottom="true">
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_marginBottom="0dp"
+                                     android:text="More"
+                                     android:textAlignment="center"
+                                     android:textColor="#000"
+                                     android:textSize="13sp"
+                                     android:textStyle="bold" />
+                             </LinearLayout>
+
+                         </RelativeLayout>
+
+                     </com.google.android.material.card.MaterialCardView>
+
+
+                 </LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:gravity="center_horizontal"
+                     android:orientation="horizontal">
+
+                     <com.google.android.material.card.MaterialCardView
+                         android:layout_width="95dp"
+                         android:layout_height="110dp"
+                         android:layout_margin="10dp"
+                         app:cardCornerRadius="8dp"
+                         android:elevation="8dp">
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center"
+                             android:layout_margin="5dp"
+                             >
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentTop="true">
+                                 <ImageView
+                                     android:layout_width="75dp"
+                                     android:layout_height="75dp"
+                                     android:src="@drawable/mencatagory_sample" />
+
+                             </LinearLayout>
+
+
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentBottom="true">
+
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_marginBottom="0dp"
+                                     android:text="Men"
+                                     android:textAlignment="center"
+                                     android:textColor="#000"
+                                     android:textSize="13sp"
+                                     android:textStyle="bold" />
+                             </LinearLayout>
+
+                         </RelativeLayout>
+
+                     </com.google.android.material.card.MaterialCardView>
+                     <com.google.android.material.card.MaterialCardView
+                         android:layout_width="95dp"
+                         android:layout_height="110dp"
+                         android:layout_margin="10dp"
+                         app:cardCornerRadius="8dp"
+                         android:elevation="8dp">
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center"
+                             android:layout_margin="5dp"
+                             >
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentTop="true">
+                                 <ImageView
+                                     android:layout_width="75dp"
+                                     android:layout_height="75dp"
+                                     android:src="@drawable/mencatagory_sample" />
+
+                             </LinearLayout>
+
+
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentBottom="true">
+
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_marginBottom="0dp"
+                                     android:text="Men"
+                                     android:textAlignment="center"
+                                     android:textColor="#000"
+                                     android:textSize="13sp"
+                                     android:textStyle="bold" />
+                             </LinearLayout>
+
+                         </RelativeLayout>
+
+                     </com.google.android.material.card.MaterialCardView>
+                     <com.google.android.material.card.MaterialCardView
+                         android:layout_width="95dp"
+                         android:layout_height="110dp"
+                         android:layout_margin="10dp"
+                         app:cardCornerRadius="8dp"
+                         android:elevation="8dp">
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center"
+                             android:layout_margin="5dp"
+                             >
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentTop="true">
+                                 <ImageView
+                                     android:layout_width="75dp"
+                                     android:layout_height="75dp"
+                                     android:src="@drawable/mencatagory_sample" />
+
+                             </LinearLayout>
+
+
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:layout_alignParentBottom="true">
+
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_marginBottom="0dp"
+                                     android:text="Men"
+                                     android:textAlignment="center"
+                                     android:textColor="#000"
+                                     android:textSize="13sp"
+                                     android:textStyle="bold" />
+                             </LinearLayout>
+
+                         </RelativeLayout>
+
+                     </com.google.android.material.card.MaterialCardView>
+
+
+                 </LinearLayout>
+
+
+
+             </LinearLayout>
+             </androidx.core.widget.NestedScrollView>-->
+
+  <!--      <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="380dp"
+            android:layout_marginTop="10dp"
+            android:columnCount="3"
+            android:columnOrderPreserved="true"
+            android:padding="2dp"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+             app:cardElevation="8dp"
+                android:padding="15dp"
+             >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_alignParentTop="true">
+    <ImageView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/mencatagory_sample" />
+
+</LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentBottom="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:text="Men"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                android:padding="15dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentTop="true">
+                        <ImageView
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:src="@drawable/womencatagory_sample" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentBottom="true">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:text="Women"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                android:padding="15dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentTop="true">
+                        <ImageView
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:src="@drawable/kidscatagory_sample" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentBottom="true">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:text="Baby &amp; Kids"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                android:padding="15dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentTop="true">
+                        <ImageView
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:src="@drawable/mobile_sample" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentBottom="true">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:text="Mobile"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                android:padding="15dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentTop="true">
+                        <ImageView
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+
+                            android:src="@drawable/homeliving_sample" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentBottom="true">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginBottom="0dp"
+                            android:text="Home &amp; Living"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                android:padding="15dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentTop="true">
+                        <ImageView
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:src="@drawable/electronics_sample" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentBottom="true">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:text="Electronics"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                android:padding="15dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentTop="true">
+                        <ImageView
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:src="@drawable/biking_sample" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentBottom="true">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:text="Bike &amp; Ride"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                android:padding="15dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentTop="true">
+                        <ImageView
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:src="@drawable/bookstationary_sample" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentBottom="true">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:text="Stationery"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                android:padding="15dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentTop="true">
+
+                        <ImageView
+                            android:layout_width="75dp"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/dotaicon" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentBottom="true">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:text="More"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+
+        </GridLayout>-->
+
+
+             <com.google.android.material.card.MaterialCardView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="10dp"
+                 >
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:text="Products"
+                     android:layout_margin="10dp"
+                     android:gravity="center"
+                     android:textSize="16sp"/>
+
+             </com.google.android.material.card.MaterialCardView>
+             <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+             <com.google.android.material.card.MaterialCardView
+
+                 android:layout_width="170dp"
+                 android:layout_height="200dp"
+                 android:layout_margin="4dp"
+                 android:backgroundTint="#FAF9F8"
+                 android:elevation="8dp"
+                 app:cardCornerRadius="15dp">
+
+                 <RelativeLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_horizontal"
+                     android:layout_margin="5dp"
+                     android:orientation="vertical">
+
+                     <ImageView
+                         android:id="@+id/productPic1"
+                         android:layout_width="match_parent"
+                         android:layout_height="110dp"
+                         android:layout_alignParentTop="true"
+                         android:layout_gravity="center_horizontal"
+                         android:layout_margin="4dp"
+                         android:src="@drawable/product_sample"
+
+                         />
+
+                     <TextView
+                         android:id="@+id/productNameId"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center_horizontal"
+                         android:fontFamily="@font/opensans"
+                         android:padding="4dp"
+                         android:text="HP Pavilion Laptop"
+                         android:textAlignment="center"
+                         android:textColor="#000"
+                         android:textSize="15sp"
+                         android:textStyle="bold"
+                         android:layout_below="@+id/productPic1"/>
+
+                     <RelativeLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:layout_alignParentBottom="true"
+                         android:layout_below="@+id/productNameId"
+                         >
+
+                         <ImageView
+                             android:id="@+id/imageTakasign"
+                             android:layout_width="15dp"
+                             android:layout_height="15dp"
+                             android:src="@drawable/taka_sign_demo"
+                             android:layout_alignParentLeft="true"
+                             android:layout_marginRight="5dp"
+                              />
+
+                         <TextView
+                             android:id="@+id/productamount"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="1000"
+                             android:layout_toRightOf="@+id/imageTakasign"
+                          />
+
+
+                         <ImageView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:src="@drawable/ic_favorite_border_black_24dp"
+                             android:layout_alignParentRight="true"/>
+                     </RelativeLayout>
+                 </RelativeLayout>
+
+             </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+
+        android:layout_width="170dp"
+        android:layout_height="200dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="#FAF9F8"
+        android:elevation="8dp"
+        app:cardCornerRadius="15dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/productPic12"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="4dp"
+                android:src="@drawable/product_sample2"
+                />
+
+            <TextView
+                android:id="@+id/productNameId12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/opensans"
+                android:padding="4dp"
+                android:text="HP Pavilion Laptop"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/productPic12"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/productNameId12"
+                android:layout_margin="5dp"
+                >
+
+                <ImageView
+                    android:id="@+id/imageTakasign12"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/taka_sign_demo"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginRight="5dp"
+                    />
+
+                <TextView
+                    android:id="@+id/productamount12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1000"
+                    android:layout_toRightOf="@+id/imageTakasign12"
+                    />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_favorite_border_black_24dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 android:orientation="horizontal">
+
+                 <com.google.android.material.card.MaterialCardView
+
+                     android:layout_width="170dp"
+                     android:layout_height="200dp"
+                     android:layout_margin="4dp"
+                     android:backgroundTint="#FAF9F8"
+                     android:elevation="8dp"
+                     app:cardCornerRadius="15dp">
+
+                     <RelativeLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center_horizontal"
+                         android:layout_margin="5dp"
+                         android:orientation="vertical">
+
+                         <ImageView
+                             android:id="@+id/productPic3"
+                             android:layout_width="match_parent"
+                             android:layout_height="110dp"
+                             android:layout_alignParentTop="true"
+                             android:layout_gravity="center_horizontal"
+                             android:layout_margin="4dp"
+                             android:src="@drawable/product_sample"
+
+                             />
+
+                         <TextView
+                             android:id="@+id/productNameId3"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_gravity="center_horizontal"
+                             android:fontFamily="@font/opensans"
+                             android:padding="4dp"
+                             android:text="HP Pavilion Laptop"
+                             android:textAlignment="center"
+                             android:textColor="#000"
+                             android:textSize="15sp"
+                             android:textStyle="bold"
+                             android:layout_below="@+id/productPic3"/>
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center_vertical"
+                             android:layout_alignParentBottom="true"
+                             android:layout_below="@+id/productNameId3"
+                             >
+
+                             <ImageView
+                                 android:id="@+id/imageTakasign3"
+                                 android:layout_width="15dp"
+                                 android:layout_height="15dp"
+                                 android:src="@drawable/taka_sign_demo"
+                                 android:layout_alignParentLeft="true"
+                                 android:layout_marginRight="5dp"
+                                 />
+
+                             <TextView
+                                 android:id="@+id/productamount3"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="1000"
+                                 android:layout_toRightOf="@+id/imageTakasign3"
+                                 />
+
+
+                             <ImageView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:src="@drawable/ic_favorite_border_black_24dp"
+                                 android:layout_alignParentRight="true"/>
+                         </RelativeLayout>
+                     </RelativeLayout>
+
+                 </com.google.android.material.card.MaterialCardView>
+                 <com.google.android.material.card.MaterialCardView
+
+                     android:layout_width="170dp"
+                     android:layout_height="200dp"
+                     android:layout_margin="4dp"
+                     android:backgroundTint="#FAF9F8"
+                     android:elevation="8dp"
+                     app:cardCornerRadius="15dp">
+
+                     <RelativeLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center_horizontal"
+                         android:orientation="vertical">
+
+                         <ImageView
+                             android:id="@+id/productPic2"
+                             android:layout_width="match_parent"
+                             android:layout_height="110dp"
+                             android:layout_alignParentTop="true"
+                             android:layout_gravity="center_horizontal"
+                             android:layout_margin="4dp"
+                             android:src="@drawable/product_sample2"
+                             />
+
+                         <TextView
+                             android:id="@+id/productNameId2"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_gravity="center_horizontal"
+                             android:fontFamily="@font/opensans"
+                             android:padding="4dp"
+                             android:text="HP Pavilion Laptop"
+                             android:textAlignment="center"
+                             android:textColor="#000"
+                             android:textSize="15sp"
+                             android:textStyle="bold"
+                             android:layout_below="@+id/productPic2"/>
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center_vertical"
+                             android:layout_alignParentBottom="true"
+                             android:layout_below="@+id/productNameId2"
+                             android:layout_margin="5dp"
+                             >
+
+                             <ImageView
+                                 android:id="@+id/imageTakasign2"
+                                 android:layout_width="15dp"
+                                 android:layout_height="15dp"
+                                 android:src="@drawable/taka_sign_demo"
+                                 android:layout_alignParentLeft="true"
+                                 android:layout_marginRight="5dp"
+                                 />
+
+                             <TextView
+                                 android:id="@+id/productamount2"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="1000"
+                                 android:layout_toRightOf="@+id/imageTakasign2"
+                                 />
+
+
+                             <ImageView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:src="@drawable/ic_favorite_border_black_24dp"
+                                 android:layout_alignParentRight="true"/>
+                         </RelativeLayout>
+                     </RelativeLayout>
+
+                 </com.google.android.material.card.MaterialCardView>
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 android:orientation="horizontal">
+
+                 <com.google.android.material.card.MaterialCardView
+
+                     android:layout_width="170dp"
+                     android:layout_height="200dp"
+                     android:layout_margin="4dp"
+                     android:backgroundTint="#FAF9F8"
+                     android:elevation="8dp"
+                     app:cardCornerRadius="15dp">
+
+                     <RelativeLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center_horizontal"
+                         android:layout_margin="5dp"
+                         android:orientation="vertical">
+
+                         <ImageView
+                             android:id="@+id/productPic31"
+                             android:layout_width="match_parent"
+                             android:layout_height="110dp"
+                             android:layout_alignParentTop="true"
+                             android:layout_gravity="center_horizontal"
+                             android:layout_margin="4dp"
+                             android:src="@drawable/product_sample"
+
+                             />
+
+                         <TextView
+                             android:id="@+id/productNameId31"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_gravity="center_horizontal"
+                             android:fontFamily="@font/opensans"
+                             android:padding="4dp"
+                             android:text="HP Pavilion Laptop"
+                             android:textAlignment="center"
+                             android:textColor="#000"
+                             android:textSize="15sp"
+                             android:textStyle="bold"
+                             android:layout_below="@+id/productPic31"/>
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center_vertical"
+                             android:layout_alignParentBottom="true"
+                             android:layout_below="@+id/productNameId31"
+                             >
+
+                             <ImageView
+                                 android:id="@+id/imageTakasign31"
+                                 android:layout_width="15dp"
+                                 android:layout_height="15dp"
+                                 android:src="@drawable/taka_sign_demo"
+                                 android:layout_alignParentLeft="true"
+                                 android:layout_marginRight="5dp"
+                                 />
+
+                             <TextView
+                                 android:id="@+id/productamount31"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="1000"
+                                 android:layout_toRightOf="@+id/imageTakasign31"
+                                 />
+
+
+                             <ImageView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:src="@drawable/ic_favorite_border_black_24dp"
+                                 android:layout_alignParentRight="true"/>
+                         </RelativeLayout>
+                     </RelativeLayout>
+
+                 </com.google.android.material.card.MaterialCardView>
+                 <com.google.android.material.card.MaterialCardView
+
+                     android:layout_width="170dp"
+                     android:layout_height="200dp"
+                     android:layout_margin="4dp"
+                     android:backgroundTint="#FAF9F8"
+                     android:elevation="8dp"
+                     app:cardCornerRadius="15dp">
+
+                     <RelativeLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center_horizontal"
+                         android:orientation="vertical">
+
+                         <ImageView
+                             android:id="@+id/productPic32"
+                             android:layout_width="match_parent"
+                             android:layout_height="110dp"
+                             android:layout_alignParentTop="true"
+                             android:layout_gravity="center_horizontal"
+                             android:layout_margin="4dp"
+                             android:src="@drawable/product_sample2"
+                             />
+
+                         <TextView
+                             android:id="@+id/productNameId32"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_gravity="center_horizontal"
+                             android:fontFamily="@font/opensans"
+                             android:padding="4dp"
+                             android:text="HP Pavilion Laptop"
+                             android:textAlignment="center"
+                             android:textColor="#000"
+                             android:textSize="15sp"
+                             android:textStyle="bold"
+                             android:layout_below="@+id/productPic32"/>
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center_vertical"
+                             android:layout_alignParentBottom="true"
+                             android:layout_below="@+id/productNameId32"
+                             android:layout_margin="5dp"
+                             >
+
+                             <ImageView
+                                 android:id="@+id/imageTakasign32"
+                                 android:layout_width="15dp"
+                                 android:layout_height="15dp"
+                                 android:src="@drawable/taka_sign_demo"
+                                 android:layout_alignParentLeft="true"
+                                 android:layout_marginRight="5dp"
+                                 />
+
+                             <TextView
+                                 android:id="@+id/productamount32"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="1000"
+                                 android:layout_toRightOf="@+id/imageTakasign32"
+                                 />
+
+
+                             <ImageView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:src="@drawable/ic_favorite_border_black_24dp"
+                                 android:layout_alignParentRight="true"/>
+                         </RelativeLayout>
+                     </RelativeLayout>
+
+                 </com.google.android.material.card.MaterialCardView>
+             </LinearLayout>
+
+         </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

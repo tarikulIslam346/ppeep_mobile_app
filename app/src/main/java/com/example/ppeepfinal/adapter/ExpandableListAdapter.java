@@ -28,6 +28,8 @@ import com.example.ppeepfinal.data.OrderModel;
 import com.example.ppeepfinal.data.UserDatabase;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.core.content.ContextCompat;
+
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
@@ -260,9 +262,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 
 
-
-
-                    Snackbar.make(parent.findViewById(R.id.lvExp), " Item has been added to cart", Snackbar.LENGTH_INDEFINITE)
+                    Snackbar snackbar = Snackbar.make(parent.findViewById(R.id.lvExp), "Item has been added to cart ", Snackbar.LENGTH_INDEFINITE)
                             .setAction("Go to cart", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
@@ -272,13 +272,55 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                                     _context.startActivity(intent);
                                 }
                             })
-                            .show();
+                            /* Fix it
+                             * Change Action text color
+                             * setActionTextColor(Color.RED)
+                             * */
+                            .setActionTextColor(ContextCompat.getColor(_context, R.color.yellow));
 
+                    View sbView = snackbar.getView();
+
+                    /* Fix it
+                     * Change  text coler
+                     * */
+                    TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                    textView.setTextColor(_context.getResources().getColor(android.R.color.black ));
+
+                    /* Fix it
+                     * Change background  color
+                     * */
+                    sbView.setBackgroundColor(ContextCompat.getColor(_context, R.color.white));
+                    snackbar.show();
 
 
                 }else{
-                    Snackbar.make(parent.findViewById(R.id.lvExp), " Do not order from diffrent restaurant", Snackbar.LENGTH_LONG)
-                            .show();
+
+                    Snackbar snackbar = Snackbar.make(parent.findViewById(R.id.lvExp), "Do not order from diffrent restaurant", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Go to cart", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            })
+                            /* Fix it
+                             * Change Action text color
+                             * setActionTextColor(Color.RED)
+                             * */
+                            .setActionTextColor(ContextCompat.getColor(_context, R.color.yellow));
+
+                    View sbView = snackbar.getView();
+
+                    /* Fix it
+                     * Change  text coler
+                     * */
+                    TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                    textView.setTextColor(_context.getResources().getColor(android.R.color.black ));
+
+                    /* Fix it
+                     * Change background  color
+                     * */
+                    sbView.setBackgroundColor(ContextCompat.getColor(_context, R.color.white));
+                    snackbar.show();
                 }
 
             }

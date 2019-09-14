@@ -154,7 +154,11 @@ Menu foodCart;
         if(orderId != null){
            // OrderConfirmModel orderConfirmModel = new OrderConfirmModel(Integer.valueOf(orderId),1);
            // mdb.orderConfirmDAO().insertOrderConfirm(orderConfirmModel);
-            Snackbar.make(findViewById(R.id.food_app_layout), " 1 order has been placed", Snackbar.LENGTH_INDEFINITE)
+
+
+
+
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.tab_offer_container), "1 order has been placed ", Snackbar.LENGTH_INDEFINITE)
                     .setAction("See Details", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -163,7 +167,25 @@ Menu foodCart;
                             startActivity(intent);
                         }
                     })
-                    .show();
+                    /* Fix it
+                     * Change Action text color
+                     * setActionTextColor(Color.RED)
+                     * */
+                    .setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+
+            View sbView = snackbar.getView();
+
+            /* Fix it
+             * Change  text coler
+             * */
+            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+            textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+            /* Fix it
+             * Change background  color
+             * */
+            sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+            snackbar.show();
         }
 
            /* List<OrderConfirmModel> orderConfirmModel = mdb.orderConfirmDAO().loadOrderConfirm();

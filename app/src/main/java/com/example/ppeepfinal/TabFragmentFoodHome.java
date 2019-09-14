@@ -404,7 +404,7 @@ public class TabFragmentFoodHome extends Fragment {
 
 
             }else{
-                Toast.makeText(getContext(), " network not available", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), " Network not available", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -504,7 +504,7 @@ public class TabFragmentFoodHome extends Fragment {
                             * Change Action text color
                             * setActionTextColor(Color.RED)
                             * */
-                            .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ));
+                            .setActionTextColor(ContextCompat.getColor(getContext(), R.color.yellow));
 
                     View sbView = snackbar.getView();
 
@@ -512,12 +512,12 @@ public class TabFragmentFoodHome extends Fragment {
                      * Change  text coler
                      * */
                     TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
-                    textView.setTextColor(Color.YELLOW);
+                    textView.setTextColor(getResources().getColor(android.R.color.black ));
 
                     /* Fix it
                      * Change background  color
                      * */
-                    sbView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                    sbView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
                     snackbar.show();
                 }
 

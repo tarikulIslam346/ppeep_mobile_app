@@ -170,20 +170,12 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         //add fragment here
         adapter.AddFragment(new FragmentHome(),"Home");
-
         adapter.AddFragment(new FragmentGroup(),"My Group");
-
         adapter.AddFragment(new FragmentNotification(),"Notification");
-
         adapter.AddFragment(new FragmentMyProfile(),"My Profile");
-
         tabLayoutId = (BubbleTab) findViewById(R.id.tabLayoutId);
-
-
         viewPagerId = (ViewPager) findViewById(R.id.viewPagerId);
         tabLayoutId.setupWithViewPager(viewPagerId);
-
-
         viewPagerId.setAdapter(adapter);
 
     }
@@ -296,14 +288,42 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                     public void onError(String error) {
                         dialog.dismiss();
                         Toast.makeText(HomePage.this, error, Toast.LENGTH_SHORT).show();
-                        Snackbar.make(findViewById(R.id.layout_home_page), ""+error, Snackbar.LENGTH_INDEFINITE)
+                   /*     Snackbar.make(findViewById(R.id.layout_home_page), ""+error, Snackbar.LENGTH_INDEFINITE)
                                 .setAction("Close", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
 
                                     }
                                 })
-                                .show();
+                                .show();*/
+
+
+                        Snackbar snackbar = Snackbar.make(findViewById(R.id.layout_home_page), " "+error, Snackbar.LENGTH_INDEFINITE)
+                                .setAction("CLOSE", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                    }
+                                })
+                                /* Fix it
+                                 * Change Action text color
+                                 * setActionTextColor(Color.RED)
+                                 * */
+                                .setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+
+                        View sbView = snackbar.getView();
+
+                        /* Fix it
+                         * Change  text coler
+                         * */
+                        TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                        textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                        /* Fix it
+                         * Change background  color
+                         * */
+                        sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                        snackbar.show();
                     }
 
                     @Override

@@ -2,24 +2,35 @@ package com.example.ppeepfinal;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.WebView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 
@@ -48,6 +59,7 @@ import java.util.List;
 
 import at.markushi.ui.CircleButton;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
 
 public class FragmentHome extends Fragment {
@@ -59,7 +71,7 @@ public class FragmentHome extends Fragment {
     public static String FACEBOOK_PAGE_ID = "YourPageName";
 
     ProgressDialog dialog;
-
+    private LinearLayout mLinearLayout;
     private UserDatabase mdb;// declear databse
 
     private String myPhone,myWorkAddress,myHomeAddress,updateString,updateTask;
@@ -77,8 +89,8 @@ public class FragmentHome extends Fragment {
     CircleButton foodExpressButton;
 
     MaterialCardView ppeepfoodCardView,ppeepStoreCardView,facebookCardView,youtubeCardView,ppeepRideCardView;
-
-
+    private PopupWindow mPopupWindow;
+    PopupWindow popupWindow;
     public FragmentHome() { }
 
     @Nullable
@@ -88,6 +100,7 @@ public class FragmentHome extends Fragment {
         v = inflater.inflate(R.layout.home_fragment, container, false);
 
         ppeepfoodCardView=v.findViewById(R.id.ppeepfoodCard);
+        mLinearLayout =(LinearLayout) v.findViewById(R.id.sb_home_fragment);
 
         mHomeAddress = v.findViewById(R.id.tv_home_address);
 
@@ -165,14 +178,41 @@ public class FragmentHome extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(getContext(), WebViewClass.class);
+       /*   Intent i = new Intent(getContext(), WebViewClass.class);
                 i.putExtra(WebViewClass.WEBSITE_ADDRESS, "https://www.ppeepbd.com/store/");
-                startActivity(i);
+                startActivity(i);*/
+         /*  LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
+                View customView = layoutInflater.inflate(R.layout.shop_coming_soon,null);
+
+                ImageButton closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
+
+                //instantiate popup window
+                popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                //display the popup window
+                popupWindow.showAtLocation(mLinearLayout, Gravity.CENTER, 0, 0);
+
+                //close the popup window on button click
+                closeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });*/
 
 
+         Intent shopIntent=new Intent(getContext(),PpeepShop.class);
+         startActivity(shopIntent);
+
+         //       showAlertDialogButtonClicked(v);
 
             }
+
         });
+
+
+
+
 
         ppeepRideCardView=v.findViewById(R.id.ppeepRideCardView);
 
@@ -180,10 +220,11 @@ public class FragmentHome extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(getContext(), PPeepRideWebview.class);
+             /*   Intent i = new Intent(getContext(), PPeepRideWebview.class);
                 i.putExtra(PPeepRideWebview.WEBSITE_ADDRESS, "https://www.ppeepbd.com/ride/");
-                startActivity(i);
+                startActivity(i);*/
 
+                showAlertDialogRide(v);
 
 
             }
@@ -281,6 +322,63 @@ public class FragmentHome extends Fragment {
 
     }
 
+    public void showAlertDialogButtonClicked(View view) {
+        // create an alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        TextView title = new TextView(getContext());
+// You Can Customise your Title here
+        title.setText("P-PEEP Shop");
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(getResources().getColor(R.color.yellow));
+        title.setTextSize(22);
+
+        builder.setCustomTitle(title);
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.shop_coming_soon, null);
+        builder.setView(customLayout);
+        // add a button
+        builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // send data from the AlertDialog to the Activity
+
+            }
+        });
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void showAlertDialogRide(View view) {
+        // create an alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        TextView title = new TextView(getContext());
+// You Can Customise your Title here
+        title.setText("P-PEEP Ride");
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(getResources().getColor(R.color.yellow));
+        title.setTextSize(22);
+
+        builder.setCustomTitle(title);
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.ride_coming_soon, null);
+        builder.setView(customLayout);
+        // add a button
+        builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // send data from the AlertDialog to the Activity
+
+            }
+        });
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     private void goToFacebook() {
         try {
             String facebookUrl = getFacebookPageURL();
@@ -291,6 +389,8 @@ public class FragmentHome extends Fragment {
             e.printStackTrace();
         }
     }
+
+
 
     private String getFacebookPageURL() {
         String FACEBOOK_URL = "https://www.facebook.com/P-PEEP-503500450179099/";
@@ -378,14 +478,47 @@ public class FragmentHome extends Fragment {
 
             }else{
                 //dialog.dismiss();
-                View parentLayout = v.findViewById(R.id.sb_home_fragment);
+               /* View parentLayout = v.findViewById(R.id.sb_home_fragment);
                 Snackbar.make(parentLayout, "Net connection error", Snackbar.LENGTH_INDEFINITE)
-                        .show();
+                        .show();*/
+
+                View parentLayout = v.findViewById(R.id.sb_home_fragment);
+                Snackbar snackbar = Snackbar.make(parentLayout, " Net Connection Error", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("CLOSE", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        /* Fix it
+                         * Change Action text color
+                         * setActionTextColor(Color.RED)
+                         * */
+                        .setActionTextColor(ContextCompat.getColor(getContext(), R.color.yellow));
+
+                View sbView = snackbar.getView();
+
+                /* Fix it
+                 * Change  text coler
+                 * */
+                TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                /* Fix it
+                 * Change background  color
+                 * */
+                sbView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                snackbar.show();
+
+
+
             }
         }
 
 
     }
+
+
 
     public class ProfileAdressUpdateTask extends AsyncTask<URL, Void, String> {
 
@@ -433,16 +566,65 @@ public class FragmentHome extends Fragment {
                 }
                 if (error != null) {
                     View parentLayout = v.findViewById(R.id.sb_home_fragment);
-                    Snackbar.make(parentLayout, "" + error, Snackbar.LENGTH_LONG)
-                            .show();
+                    Snackbar snackbar = Snackbar.make(parentLayout, "" + error, Snackbar.LENGTH_INDEFINITE)
+                            .setAction("CLOSE", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            })
+                            /* Fix it
+                             * Change Action text color
+                             * setActionTextColor(Color.RED)
+                             * */
+                            .setActionTextColor(ContextCompat.getColor(getContext(), R.color.yellow));
+
+                    View sbView = snackbar.getView();
+
+                    /* Fix it
+                     * Change  text color
+                     * */
+                    TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                    textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                    /* Fix it
+                     * Change background  color
+                     * */
+                    sbView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                    snackbar.show();
                 }
 
             } else {
                 //Toast.makeText(getApplicationContext(), "Network not available", Toast.LENGTH_LONG).show();
                 dialog.dismiss();
                 View parentLayout = v.findViewById(R.id.sb_home_fragment);
-                Snackbar.make(parentLayout, "Network not available", Snackbar.LENGTH_LONG)
-                        .show();
+
+                Snackbar snackbar = Snackbar.make(parentLayout, " Network not available", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("CLOSE", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        /* Fix it
+                         * Change Action text color
+                         * setActionTextColor(Color.RED)
+                         * */
+                        .setActionTextColor(ContextCompat.getColor(getContext(), R.color.yellow));
+
+                View sbView = snackbar.getView();
+
+                /* Fix it
+                 * Change  text coler
+                 * */
+                TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+                textView.setTextColor(getResources().getColor(android.R.color.black ));
+
+                /* Fix it
+                 * Change background  color
+                 * */
+                sbView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                snackbar.show();
 
             }
         }

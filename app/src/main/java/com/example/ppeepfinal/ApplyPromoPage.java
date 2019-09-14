@@ -76,6 +76,9 @@ public class ApplyPromoPage extends AppCompatActivity {
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent cartPageintent = new Intent(ApplyPromoPage.this,FoodCartPage.class);
+
+                startActivity(cartPageintent);
                 finish();
             }
         });

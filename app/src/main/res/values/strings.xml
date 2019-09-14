@@ -9,7 +9,7 @@
     <string name="sign_up_text"><u>Create One</u></string>
 
 
-    <string name="app_name">ppeep-food</string>
+    <string name="app_name">P-PEEP</string>
     <string name="FACEBOOK_APP_ID">1103751376499301</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">2f1f59eb65db63118bd31db1e0d4722c</string>
 
@@ -30,5 +30,5 @@
     //Here is your X api key
     <string name="xApiKey">CxNizTHrVpKosZGRqZdZ41BpMPuktNJ2W52nyBn6</string>
     <string name="banner_text">A restaurant is a place where cooked food is sold to the public, and where people sit down to eat it. It is also a place where people go to enjoy the time and to eat a meal. Some restaurants are a chain, meaning that there are restaurants which have the same name and serve the same food.</string>
-
+    <string name="details_item">A restaurant is a place where cooked food is sold to the public, and where people sit down to eat it. It is also a place where people go to enjoy the time and to eat a meal. Some restaurants are a chain, meaning that there are restaurants which have the same name and serve the same food.</string>
 </resources>

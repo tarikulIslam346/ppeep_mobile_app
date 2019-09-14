@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ShopItemDetails">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:id="@+id/shopapptoolbar"
+            android:elevation="10dp"
+            >
+
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/yellow"
+                android:fontFamily="@font/audiwide_logo"
+                android:text="P-PEEP SHOP"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.card.MaterialCardView>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/itemdetailsViewpager"
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        android:layout_marginBottom="8dp">
+    </androidx.viewpager.widget.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/SliderDots"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Premium Dell Latitude E7440 Ultrabook 14 Inch HD Business Laptop "
+            android:textSize="16sp"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textSize="15sp"
+                android:text="Price:"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:text="44999 Taka"/>
+
+        </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:text="Description"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+     android:padding="10dp"
+        android:background="@drawable/background_textview"
+        android:text="@string/details_item"
+        />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/shopcartAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:text="Add To Cart"
+        android:textSize="16sp"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:background="#ffcc00"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Similar Product"
+        android:layout_margin="20dp"/>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/itemDetailsID"
+                android:layout_width="170dp"
+                android:layout_height="200dp"
+                android:layout_margin="4dp"
+                android:backgroundTint="#FAF9F8"
+                android:elevation="8dp"
+                app:cardCornerRadius="15dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/productPic1"
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="4dp"
+                        android:src="@drawable/product_sample"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/productNameId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/opensans"
+                        android:padding="4dp"
+                        android:text="HP Pavilion Laptop"
+                        android:textAlignment="center"
+                        android:textColor="#000"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/productPic1"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentBottom="true"
+                        android:layout_below="@+id/productNameId"
+                        >
+
+                        <ImageView
+                            android:id="@+id/imageTakasign"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:src="@drawable/taka_sign_demo"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginRight="5dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/productamount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1000"
+                            android:layout_toRightOf="@+id/imageTakasign"
+                            />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_favorite_border_black_24dp"
+                            android:layout_alignParentRight="true"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+
+                android:layout_width="170dp"
+                android:layout_height="200dp"
+                android:layout_margin="4dp"
+                android:backgroundTint="#FAF9F8"
+                android:elevation="8dp"
+                app:cardCornerRadius="15dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/productPic42"
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="4dp"
+                        android:src="@drawable/product_sample2"
+                        />
+
+                    <TextView
+                        android:id="@+id/productNameId42"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/opensans"
+                        android:padding="4dp"
+                        android:text="HP Pavilion Laptop"
+                        android:textAlignment="center"
+                        android:textColor="#000"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/productPic42"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentBottom="true"
+                        android:layout_below="@+id/productNameId42"
+                        android:layout_margin="5dp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/imageTakasign42"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:src="@drawable/taka_sign_demo"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginRight="5dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/productamount42"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1000"
+                            android:layout_toRightOf="@+id/imageTakasign42"
+                            />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_favorite_border_black_24dp"
+                            android:layout_alignParentRight="true"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+            <com.google.android.material.card.MaterialCardView
+
+                android:layout_width="170dp"
+                android:layout_height="200dp"
+                android:layout_margin="4dp"
+                android:backgroundTint="#FAF9F8"
+                android:elevation="8dp"
+                app:cardCornerRadius="15dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/productPic15"
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="4dp"
+                        android:src="@drawable/product_sample"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/productNameId15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/opensans"
+                        android:padding="4dp"
+                        android:text="HP Pavilion Laptop"
+                        android:textAlignment="center"
+                        android:textColor="#000"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/productPic15"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentBottom="true"
+                        android:layout_below="@+id/productNameId15"
+                        >
+
+                        <ImageView
+                            android:id="@+id/imageTakasign15"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:src="@drawable/taka_sign_demo"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginRight="5dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/productamount15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1000"
+                            android:layout_toRightOf="@+id/imageTakasign15"
+                            />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_favorite_border_black_24dp"
+                            android:layout_alignParentRight="true"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+
+                android:layout_width="170dp"
+                android:layout_height="200dp"
+                android:layout_margin="4dp"
+                android:backgroundTint="#FAF9F8"
+                android:elevation="8dp"
+                app:cardCornerRadius="15dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/productPic12"
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="4dp"
+                        android:src="@drawable/product_sample2"
+                        />
+
+                    <TextView
+                        android:id="@+id/productNameId12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/opensans"
+                        android:padding="4dp"
+                        android:text="HP Pavilion Laptop"
+                        android:textAlignment="center"
+                        android:textColor="#000"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/productPic12"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentBottom="true"
+                        android:layout_below="@+id/productNameId12"
+                        android:layout_margin="5dp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/imageTakasign12"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:src="@drawable/taka_sign_demo"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginRight="5dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/productamount12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1000"
+                            android:layout_toRightOf="@+id/imageTakasign12"
+                            />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_favorite_border_black_24dp"
+                            android:layout_alignParentRight="true"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</ScrollView>
+</LinearLayout>
