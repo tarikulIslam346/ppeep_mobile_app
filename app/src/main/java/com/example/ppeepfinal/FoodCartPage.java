@@ -203,6 +203,8 @@ public class  FoodCartPage extends AppCompatActivity implements   FoodCartPageAd
         List<UserModel> user = mdb.userDAO().loadPhone();
         if(user.size() != 0){
             phoneNo = user.get(0).getPhone();
+            lat = user.get(0).getLat();
+            lng = user.get(0).getLng();
             String address  =  user.get(0).getAddress();
             addressOnMap.setText(address);
         }
@@ -214,9 +216,12 @@ public class  FoodCartPage extends AppCompatActivity implements   FoodCartPageAd
             @Override
 
             public void onClick(View v) {
+                if(lat != 0.0 && lng != 0.0){
+                    orderCreateUrl = NetworkUtils.buildOrderUrl();
+                    new OrderTask().execute(orderCreateUrl);
 
-                orderCreateUrl = NetworkUtils.buildOrderUrl();
-                new OrderTask().execute(orderCreateUrl);
+                }
+
 
 
             }
