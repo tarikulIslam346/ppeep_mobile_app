@@ -41,8 +41,6 @@ import com.dingi.dingisdk.geometry.LatLng;
 import com.dingi.dingisdk.maps.DingiMap;
 import com.dingi.dingisdk.maps.MapView;
 import com.dingi.dingisdk.maps.OnMapReadyCallback;
-import com.dingi.dingisdk.style.layers.LineLayer;
-import com.dingi.dingisdk.style.sources.GeoJsonSource;
 import com.example.ppeepfinal.data.UserModel;
 import com.example.ppeepfinal.model.SearchResult;
 import com.example.ppeepfinal.utilities.Api;
@@ -76,7 +74,6 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
         String lat,lng;
         String address = null;
         FloatingActionButton currentLocation;
-    JSONObject Geometryobj;
 
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         public static <T, E> String getKeysByValue(Map<T, E> map, E value) {
@@ -307,59 +304,10 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
 
     }
 
-        private JSONObject callGeometryApi() {
-            VolleyRequest vr = new VolleyRequest(UserAutoCompleteAdress.this);
-            String id = "cb6b5edd-7833-461d-8215-7d4f3a3a228a";
-            vr.VolleyGet(Api.placeGeometry + "?id=" + id + "&source=asd&language=en");
-             Geometryobj = null;
-            vr.setListener(new VolleyRequest.MyServerListener() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    JSONArray result =  null;
-                    try {
-
-                        nameList.clear();
-                        searchResults.clear();
-                        searchResultsId.clear();
-
-                        result = response.getJSONArray("result");
-                        for (int i = 0; i < result.length(); i++) {
-                            Geometryobj = result.getJSONObject(i);
-
-                        }
-
-
-                    } catch (
-                            Exception w) {
-
-                    }
-
-                }
-
-                @Override
-                public void onError(String error) {
-
-                }
-
-                @Override
-                public void responseCode(int resposeCode) {
-
-                }
-            });
-            return  Geometryobj;
-
-    }
-
-
-
         @Override
         public void onMapReady(@NonNull DingiMap dingiMap) {
             dingiMap.setStyleUrl(Style.DINGI_ENGLISH);
-            mMap = dingiMap;
-            String geoJsonString = callGeometryApi().toString();
-            GeoJsonSource source = new GeoJsonSource("geojson", geoJsonString);
-            mMap.addSource(source);
-            mMap.addLayer(new LineLayer("geojson", "geojson"));
+        mMap = dingiMap;
 
         MyLocation myLocation = new MyLocation(UserAutoCompleteAdress.this);
         myLocation.setListener(new MyLocation.MyLocationListener() {
@@ -393,7 +341,7 @@ public class UserAutoCompleteAdress  extends FragmentActivity implements OnMapRe
     }
 
 
-        private String callAPI(LatLng latLng) {
+    private String callAPI(LatLng latLng) {
         VolleyRequest volleyRequest = new VolleyRequest(UserAutoCompleteAdress.this);
         volleyRequest.VolleyGet(Api.reverseGeo + "demo?lat=" + latLng.getLatitude() + "&lng=" + latLng.getLongitude() + "&address_level=UPTO_THANA");        volleyRequest.setListener(new VolleyRequest.MyServerListener() {
             @Override

@@ -24,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-<<<<<<< HEAD
+
         <activity android:name=".ShopCartPage"></activity>
         <activity
             android:name=".ShopItemDetails"
@@ -40,7 +40,7 @@
             android:name=".PpeepShop"
             android:label="" />
         <activity android:name=".PPeepRideWebview" />
-=======
+
         <!--android:networkSecurityConfig="@xml/network_security_config"-->
 
         <activity android:name=".PPeepRideWebview"></activity>
