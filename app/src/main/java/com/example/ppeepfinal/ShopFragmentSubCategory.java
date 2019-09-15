@@ -17,6 +17,7 @@ import android.widget.ExpandableListView;
 
 import com.example.ppeepfinal.adapter.ExpandableSubListAdapter;
 import com.example.ppeepfinal.model.ExpandedSubMenuModel;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class ShopFragmentSubCategory extends AppCompatActivity  {
     ActionBarDrawerToggle mToggle;
     ExpandableSubListAdapter mMenuAdapter;
     ExpandableListView expandableList;
+    MaterialCardView itemDetailsID;
     List<ExpandedSubMenuModel> listDataHeader;
     HashMap<ExpandedSubMenuModel, List<String>> listDataChild;
     @Override
@@ -40,7 +42,14 @@ public class ShopFragmentSubCategory extends AppCompatActivity  {
         // TextView mTitle = (TextView) findViewById(R.id.toolbar_title);
         setSupportActionBar(myToolbar);
 
-
+        itemDetailsID=(MaterialCardView) findViewById(R.id.itemDetailsID);
+        itemDetailsID.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itemdetailsintent=new Intent(getApplicationContext(),ShopItemDetails.class);
+                startActivity(itemdetailsintent);
+            }
+        });
 
         mDrawerLayout = findViewById(R.id.subCategoryDrawer);
         mDrawerLayout.postDelayed(new Runnable() {
